@@ -1,0 +1,8 @@
+class {{ service.name }}Urls {
+  {{ service.name }}Urls._();
+
+  {% for path in service.paths %}static const String {{ path.name }}{% if path.hasParameters %}{#
+  #}({% for parameter in path.parameters %}String {{ parameter.name }}{% if not forloop.last %}, {% endif %}{% endfor %}){#
+  #} =>{% else %} ={% endif %} '{{ path.path }}';{% if not forloop.last %}
+  {% endif %}{% endfor %}
+}

@@ -1,0 +1,76 @@
+import 'package:dio/dio.dart';
+import 'package:retrofit/retrofit.dart';
+import 'package:flutter_template/api/data/api_data_list.dart';
+
+import '{{ service.name|camelCaseToSnakeCase  }}_urls.dart';
+
+part '{{ service.name|camelCaseToSnakeCase  }}_api.g.dart';
+
+@RestApi()
+abstract class {{ service.name }}Api {
+    factory {{ service.name }}Api(Dio dio, {String baseUrl}) = _{{ service.name }}Api;
+    {% for path in service.paths %}{% for operation in path.operations %}{% for requestModelName in operation.requestGenerationModel.typeNames %}
+    {% for line in operation.summary|splitLines %}/// {{ line }}
+    {% endfor %}{% for line in operation.description|splitLines %}/// {{ line }}
+    {% endfor %}@{{ operation.httpMethod|uppercase }}({{ service.name }}Urls.{{ path.name }})
+    {% if operation.requstGenerationModel.encoding == "application/x-www-form-urlencoded" %}@FormUrlEncoded(){% endif %}{#
+    #}Future<{% if operation.responseGenerationModel.value %}{#
+    #}{% if operation.responseGenerationModel.value.isTypeArray %}List<{% endif %}{#
+    #}{% for responseName in operation.responseGenerationModel.value.typeNames %}{#
+            #}{% if responseName == "integer" %}int{#
+            #}{% elif responseName == "number" %}double{#
+            #}{% elif responseName == "string" %}String{#
+            #}{% elif responseName == "boolean" %}bool{#
+            #}{% else %}{{ responseName }}Data{% endif %}{% endfor %}{#
+    #}{% if operation.responseGenerationModel.value.isTypeArray %}>{% endif %}{#
+    #}{% else %}void{% endif %}> {{ operation.httpMethod }}{{ path.name|capitalizeFirstLetter }}({% for parameter in operation.pathParameters %}
+        @Path() String {{ parameter.name|snakeCaseToCamelCase }},{% endfor %}{#
+        #}{% for parameter in operation.queryParameters %}
+        @Query("{{ parameter.name }}") {#
+            #}{% if parameter.typeModel.isArray %}List<{% endif %}{#
+            #}{% if parameter.typeModel.name == "integer" or parameter.typeModel.aliasTypeName == "integer" %}int{#
+            #}{% elif parameter.typeModel.name == "number" or parameter.typeModel.aliasTypeName == "number" %}double{#
+            #}{% elif parameter.typeModel.name == "string" or parameter.typeModel.aliasTypeName == "string" %}String{#
+            #}{% elif parameter.typeModel.name == "boolean" or parameter.typeModel.aliasTypeName == "boolean" %}bool{#
+            #}{% else %}{{ parameter.typeModel.name }}Data{% endif %}{#
+            #}{% if parameter.typeModel.isArray %}>{% endif %}{#
+            #} {{ parameter.name|snakeCaseToCamelCase }},{% endfor %}
+        @Body() {% if operation.requestGenerationModel.isTypeArray %}List<{% endif %}{#
+            #}{% if requestModelName == "integer" %}int{#
+            #}{% elif requestModelName == "number" %}double{#
+            #}{% elif requestModelName == "string" %}String{#
+            #}{% elif requestModelName == "boolean" %}bool{#
+            #}{% else %}{{ requestModelName }}Data{% endif %}{#
+        #}{% if operation.requestGenerationModel.isTypeArray %}>{% endif %} {{ requestModelName|lowercaseFirstLetter }}{% if operation.requestGenerationModel.isTypeArray %}s{% endif %}
+    );
+    {% empty %}
+    {% for line in operation.summary|splitLines %}/// {{ line }}
+    {% endfor %}{% for line in operation.description|splitLines %}/// {{ line }}
+    {% endfor %}@{{ operation.httpMethod|uppercase }}({{ service.name }}Urls.{{ path.name }})
+    Future<{% if operation.responseGenerationModel.value %}{#
+    #}{% if operation.responseGenerationModel.value.isTypeArray %}List<{% endif %}{#
+    #}{% for responseName in operation.responseGenerationModel.value.typeNames %}{#
+            #}{% if responseName == "integer" %}int{#
+            #}{% elif responseName == "number" %}double{#
+            #}{% elif responseName == "string" %}String{#
+            #}{% elif responseName == "boolean" %}bool{#
+            #}{% else %}{{ responseName }}Data{% endif %}{% endfor %}{#
+    #}{% if operation.responseGenerationModel.value.isTypeArray %}>{% endif %}{#
+    #}{% else %}void{% endif %}> {{ operation.httpMethod }}{{ path.name|capitalizeFirstLetter }}({% for parameter in operation.pathParameters %}
+        @Path() String {{ parameter.name|snakeCaseToCamelCase }}{#
+        #}{% if not forloop.last or operation.queryParameters %},{% else %}
+    {% endif %}{% endfor %}{#
+        #}{% for parameter in operation.queryParameters %}
+        @Query("{{ parameter.name }}") {#
+            #}{% if parameter.typeModel.isArray %}List<{% endif %}{#
+            #}{% if parameter.typeModel.name == "integer" or parameter.typeModel.aliasTypeName == "integer" %}int{#
+            #}{% elif parameter.typeModel.name == "number" or parameter.typeModel.aliasTypeName == "number" %}double{#
+            #}{% elif parameter.typeModel.name == "string" or parameter.typeModel.aliasTypeName == "string" %}String{#
+            #}{% elif parameter.typeModel.name == "boolean" or parameter.typeModel.aliasTypeName == "boolean" %}bool{#
+            #}{% else %}{{ parameter.typeModel.name }}Data{% endif %}{#
+            #}{% if parameter.typeModel.isArray %}>{% endif %}{#
+            #} {{ parameter.name|snakeCaseToCamelCase }}{#
+            #}{% if not forloop.last %},{% else %}
+    {% endif %}{% endfor %});
+    {% endfor %}{% endfor %}{% endfor %}
+}

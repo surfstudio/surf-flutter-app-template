@@ -1,0 +1,33 @@
+templates:
+  - type: service
+    nameSuffix: Urls
+    fileExtension: dart
+    fileNameCase: snakeCase
+    templatePath: tools/api_generator/templates/urls.stencil
+    destinationPath: lib/api/service/{name}
+  - type: service
+    nameSuffix: Api
+    fileExtension: dart
+    fileNameCase: snakeCase
+    templatePath: tools/api_generator/templates/retrofit_api.stencil
+    destinationPath: lib/api/service/{name}
+  - type: model
+    fileExtension: dart
+    fileNameCase: snakeCase
+    templatePath: tools/api_generator/templates/retrofit_model.stencil
+    destinationPath: lib/api/data
+  - type: enum
+    fileExtension: dart
+    fileNameCase: snakeCase
+    templatePath: tools/api_generator/templates/enum_retrofit.stencil
+    destinationPath: lib/api/data
+  - type: model
+    fileExtension: dart
+    fileNameCase: snakeCase
+    templatePath: tools/api_generator/templates/model.stencil
+    destinationPath: lib/domain/gen
+  - type: enum
+    fileExtension: dart
+    fileNameCase: snakeCase
+    templatePath: tools/api_generator/templates/enum.stencil
+    destinationPath: lib/domain/gen

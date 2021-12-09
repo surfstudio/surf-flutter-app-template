@@ -1,0 +1,28 @@
+import 'package:json_annotation/json_annotation.dart';
+import 'package:flutter_template/api/data/api_data_list.dart';
+
+part '{{ model.name|camelCaseToSnakeCase  }}.g.dart';
+{% for line in model.description|splitLines %}
+/// {{ line }}{% endfor %}
+@JsonSerializable()
+class {{ model.name }}Data {{ '{' }}{#
+	#}{% for property in model.properties %}
+	{% for line in property.description|splitLines %}
+	/// {{ line }}{% endfor %}
+	final {% if property.typeModel.isArray %}List<{% endif %}{#
+	#}{% if property.typeModel.name == "integer" or property.typeModel.aliasTypeName == "integer" %}int{#
+    #}{% elif property.typeModel.name == "number" or property.typeModel.aliasTypeName == "number" %}double{#
+    #}{% elif property.typeModel.name == "string" or property.typeModel.aliasTypeName == "string" %}String{#
+    #}{% elif property.typeModel.name == "boolean" or property.typeModel.aliasTypeName == "boolean" %}bool{#
+    #}{% else %}{{ property.typeModel.name }}Data{% endif %}{#
+    #}{% if property.typeModel.isArray %}>{% endif %}{#
+	#}{% if property.isNullable %}?{% endif %} {{ property.name|snakeCaseToCamelCase }};{% endfor %}
+
+	{{ model.name }}Data({
+		{% for property in model.properties %}{% if property.isNullable != true %}required {% endif %}this.{{ property.name|snakeCaseToCamelCase }},{% if not forloop.last %}
+		{% endif %}{% endfor %}
+	});
+
+	factory {{ model.name }}Data.fromJson(Map<String, dynamic> json) => _${{ model.name }}DataFromJson(json);
+	Map<String, dynamic> toJson() => _${{ model.name }}DataToJson(this);
+}

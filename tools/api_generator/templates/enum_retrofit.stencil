@@ -1,0 +1,5 @@
+{% for line in enum.description|splitLines %}
+/// {{ line }}{% endfor %}
+enum {{ enum.name }}Data {
+{% for caseValue in enum.cases %}	{{ caseValue }}{% if not forloop.last %},{% endif %}
+{% endfor %}}

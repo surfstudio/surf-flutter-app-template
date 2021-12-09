@@ -1,0 +1,31 @@
+name: flutter_template
+version: "0.0.1-dev.0"
+description: a Flutter template project for development.
+publish_to: none
+
+dependencies:
+  dio: ^4.0.4
+  elementary: ^0.1.3
+  firebase_crashlytics: ^2.3.0
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  logger: ^1.1.0
+  provider: ^6.0.1
+  push_notification: ^1.1.1
+  retrofit: ^3.0.0
+  surf_logger: ^1.0.1
+
+dev_dependencies:
+  dart_code_metrics: ^4.7.0
+  elementary_test: ^0.1.2
+  flutter_test:
+    sdk: flutter
+  surf_lint_rules: ^1.4.1
+
+environment:
+  sdk: ">=2.14.0-0 <3.0.0"
+
+flutter:
+  uses-material-design: true
