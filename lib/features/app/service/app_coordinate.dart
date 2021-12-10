@@ -1,4 +1,4 @@
-import 'package:flutter_template/features/app/service/coordinate.dart';
+import 'package:flutter_template/features/app/domain/coordinate.dart';
 import 'package:flutter_template/features/debug/di/debug_screen_scope.dart';
 import 'package:flutter_template/features/debug/screen/debug_screen/debug_screen.dart';
 import 'package:flutter_template/features/temp/screen/init_screen.dart';
