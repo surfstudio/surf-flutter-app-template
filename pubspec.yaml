@@ -13,7 +13,7 @@ dependencies:
     sdk: flutter
   logger: ^1.1.0
   provider: ^6.0.1
-  push_notification: ^1.1.1
+  push_notification: 1.1.0
   surf_logger: ^1.0.1
 
 dev_dependencies:
