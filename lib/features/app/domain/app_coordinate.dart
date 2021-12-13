@@ -1,10 +1,10 @@
 import 'package:flutter_template/features/app/domain/coordinate.dart';
 import 'package:flutter_template/features/debug/screens/debug_screen/debug_screen.dart';
-import 'package:flutter_template/features/temp/screens/init_screen.dart';
+import 'package:flutter_template/features/temp/screens/temp_screen.dart';
 
 /// A set of routes for the entire app.
 class AppCoordinate implements Coordinate {
-  /// Initialization screens([InitScreen]).
+  /// Initialization screens([TempScreen]).
   static const initScreen = AppCoordinate._('temp');
 
   /// Debug screens([DebugScreen]).
@@ -23,6 +23,6 @@ class AppCoordinate implements Coordinate {
 
 /// List of main routes of the app.
 final Map<AppCoordinate, CoordinateBuilder> appCoordinates = {
-  AppCoordinate.initial: (_, __) => const InitScreen(),
+  AppCoordinate.initial: (_, __) => const TempScreen(),
   AppCoordinate.debugScreen: (_, __) => const DebugScreen(),
 };
