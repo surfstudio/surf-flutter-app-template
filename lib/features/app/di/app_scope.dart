@@ -65,7 +65,8 @@ class AppScope implements IAppScope {
     dio.interceptors.addAll(additionalInterceptors);
 
     if (Environment<Config>.instance().isDebug) {
-      dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
+      dio.interceptors
+          .add(LogInterceptor(requestBody: true, responseBody: true));
     }
 
     return dio;

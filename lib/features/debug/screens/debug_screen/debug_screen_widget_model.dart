@@ -43,7 +43,6 @@ DebugScreenWidgetModel debugScreenWidgetModelFactory(
 /// Widget Model for [DebugScreen].
 class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
     implements IDebugWidgetModel {
-
   /// Controller for TextField.
   final textEditingController = TextEditingController();
   final _debugOptionsState = StateNotifier<DebugOptions>();

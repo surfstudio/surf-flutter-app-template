@@ -13,9 +13,9 @@ class Config {
 
   /// Create an instance [Config].
   Config({
-   required this.url,
-   required this.debugOptions,
-   this.proxyUrl,
+    required this.url,
+    required this.debugOptions,
+    this.proxyUrl,
   });
 
   /// Create an instance [Config] with modified parameters.

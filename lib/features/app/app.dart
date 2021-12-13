@@ -13,7 +13,6 @@ import 'package:flutter_template/util/di_scope.dart';
 
 /// App widget.
 class App extends StatefulWidget {
-
   /// Create an instance App.
   const App({Key? key}) : super(key: key);
 
@@ -54,7 +53,8 @@ class _AppState extends State<App> {
         checkerboardOffscreenLayers:
             _getDebugConfig().checkerboardOffscreenLayers,
         showSemanticsDebugger: _getDebugConfig().showSemanticsDebugger,
-        debugShowCheckedModeBanner: _getDebugConfig().debugShowCheckedModeBanner,
+        debugShowCheckedModeBanner:
+            _getDebugConfig().debugShowCheckedModeBanner,
 
         /// This is for navigation.
         routeInformationParser: AppRouteInformationParser(),

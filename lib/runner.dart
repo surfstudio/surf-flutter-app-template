@@ -11,6 +11,7 @@ import 'package:surf_logger/surf_logger.dart';
 Future<void> run() async {
   /// It must be called so that the orientation does not fall.
   WidgetsFlutterBinding.ensureInitialized();
+
   /// Fix orientation.
   // TODO(dev): change as needed or remove.
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
