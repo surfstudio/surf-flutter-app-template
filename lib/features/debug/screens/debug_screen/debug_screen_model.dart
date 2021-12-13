@@ -5,9 +5,8 @@ import 'package:flutter_template/config/debug_options.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/config/urls.dart';
 import 'package:flutter_template/features/app/service/coordinator.dart';
-import 'package:flutter_template/features/debug/screen/debug_screen/debug_screen.dart';
-import 'package:flutter_template/features/debug/screen/debug_screen/debug_screen_widget_model.dart';
-import 'package:flutter_template/features/debug/service/debug_screen_service.dart';
+import 'package:flutter_template/features/debug/screens/debug_screen/debug_screen.dart';
+import 'package:flutter_template/features/debug/screens/debug_screen/debug_screen_widget_model.dart';
 
 // ignore_for_file: avoid_positional_boolean_parameters
 
@@ -15,9 +14,6 @@ import 'package:flutter_template/features/debug/service/debug_screen_service.dar
 class DebugScreenModel extends ElementaryModel {
   /// Interface for handle error in business logic.
   final ErrorHandler errorHandler;
-
-  /// /// Service to work with [DebugScreen].
-  final DebugScreenService debugScreenService;
 
   /// Environment configuration.
   final Environment<Config> environment;
@@ -39,7 +35,6 @@ class DebugScreenModel extends ElementaryModel {
   /// Create an instance [DebugScreenModel].
   DebugScreenModel(
     this.errorHandler,
-    this.debugScreenService,
     this.environment,
     this.applicationRebuilder,
     this.coordinator,
@@ -55,10 +50,6 @@ class DebugScreenModel extends ElementaryModel {
   void dispose() {
     environment.removeListener(_environmentChangedCallback);
   }
-
-  /// Show push notification.
-  void showDebugNotification() =>
-      debugScreenService.showDebugScreenNotification();
 
   /// Switch server.
   void switchServer(UrlType urlType) {

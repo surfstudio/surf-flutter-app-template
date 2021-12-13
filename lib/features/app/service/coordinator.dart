@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_template/features/app/domain/coordinate.dart';
-import 'package:flutter_template/features/temp/screen/init_screen.dart';
+import 'package:flutter_template/features/temp/screens/init_screen.dart';
 
 /// Class that coordinates navigation for the whole app and provides
 /// methods for navigation.
@@ -15,7 +15,7 @@ class Coordinator extends ChangeNotifier {
     ),
   ];
 
-  /// Initial screen coordinates.
+  /// Initial screens coordinates.
   Coordinate? initialCoordinate;
 
   /// Coordinate list.
@@ -24,7 +24,7 @@ class Coordinator extends ChangeNotifier {
   /// [Page]s list.
   List<Page> get pages => List.of(_pages);
 
-  /// Initial screen route.
+  /// Initial screens route.
   String? get initialRoute => _coordinates[initialCoordinate]?.path;
 
   /// Method for registering new coordinate.
@@ -75,7 +75,6 @@ class Coordinator extends ChangeNotifier {
     notifyListeners();
   }
 
-  // TODO(grafov): It is necessary to solve the problem of returning to the root
   /// Method for deleting all routes except the first.
   void popUntilRoot() {
     assert(_pages.isNotEmpty);

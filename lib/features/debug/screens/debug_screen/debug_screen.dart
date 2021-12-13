@@ -1,11 +1,11 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/assets/theme/text_style.dart';
+import 'package:flutter_template/assets/themes/text_style.dart';
 import 'package:flutter_template/config/debug_options.dart';
 import 'package:flutter_template/config/urls.dart';
-import 'package:flutter_template/features/debug/screen/debug_screen/debug_screen_widget_model.dart';
+import 'package:flutter_template/features/debug/screens/debug_screen/debug_screen_widget_model.dart';
 
-/// Debug screen.
+/// Debug screens.
 class DebugScreen extends ElementaryWidget<DebugScreenWidgetModel> {
   /// Create an instance [DebugScreen].
   const DebugScreen({

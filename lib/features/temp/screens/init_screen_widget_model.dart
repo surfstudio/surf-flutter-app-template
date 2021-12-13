@@ -1,7 +1,10 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/features/temp/screen/init_screen.dart';
-import 'package:flutter_template/features/temp/screen/init_screen_model.dart';
+import 'package:flutter_template/features/app/di/i_app_scope.dart';
+import 'package:flutter_template/features/app/domain/app_coordinate.dart';
+import 'package:flutter_template/features/temp/screens/init_screen.dart';
+import 'package:flutter_template/features/temp/screens/init_screen_model.dart';
+import 'package:provider/provider.dart';
 
 /// Factory for [InitScreenWidgetModel].
 InitScreenWidgetModel initScreenWidgetModelFactory(
@@ -16,6 +19,12 @@ class InitScreenWidgetModel extends WidgetModel<InitScreen, InitScreenModel>
     implements IDebugWidgetModel {
   /// Create an instance [InitScreenWidgetModel].
   InitScreenWidgetModel(InitScreenModel model) : super(model);
+
+  ///
+  void openDebugScreen() {
+    final appDependencies = context.read<IAppScope>();
+    appDependencies.coordinator.navigate(context, AppCoordinate.debugScreen);
+  }
 }
 
 /// Interface of [InitScreenWidgetModel].

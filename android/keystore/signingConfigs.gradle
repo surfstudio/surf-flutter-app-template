@@ -11,12 +11,5 @@ android {
             storeFile file(keystoreConfig.storeFile)
             storePassword keystoreConfig.storePassword
         }
-
-        debug {
-            storeFile file("../keystore/test.keystore")
-            storePassword "qatest"
-            keyAlias "test"
-            keyPassword "qatest"
-        }
     }
 }

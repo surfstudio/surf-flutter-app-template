@@ -5,9 +5,8 @@ import 'package:flutter_template/config/debug_options.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/config/urls.dart';
 import 'package:flutter_template/features/app/di/i_app_scope.dart';
-import 'package:flutter_template/features/debug/di/debug_screen_scope.dart';
-import 'package:flutter_template/features/debug/screen/debug_screen/debug_screen.dart';
-import 'package:flutter_template/features/debug/screen/debug_screen/debug_screen_model.dart';
+import 'package:flutter_template/features/debug/screens/debug_screen/debug_screen.dart';
+import 'package:flutter_template/features/debug/screens/debug_screen/debug_screen_model.dart';
 import 'package:provider/provider.dart';
 
 // ignore_for_file: avoid_positional_boolean_parameters
@@ -32,10 +31,8 @@ DebugScreenWidgetModel debugScreenWidgetModelFactory(
   BuildContext context,
 ) {
   final appDependencies = context.read<IAppScope>();
-  final debugScreenService = context.read<IDebugScreen>();
   final model = DebugScreenModel(
     appDependencies.errorHandler,
-    debugScreenService.debugScreenService,
     Environment<Config>.instance(),
     appDependencies.applicationRebuilder,
     appDependencies.coordinator,
@@ -94,6 +91,7 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
       model.proxyValueState.accept(emptyString);
       textEditingController.text = emptyString;
     }
+    debugOptionsState.accept(model.configNotifier.value.debugOptions);
   }
 
   @override
@@ -103,14 +101,10 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
     super.dispose();
   }
 
-  /// Method to close the debug screen.
+  /// Method to close the debug screens.
   void closeScreen() {
-    showDebugNotification();
     model.coordinator.pop();
   }
-
-  /// Show push notification.
-  void showDebugNotification() => model.debugScreenService;
 
   /// Change url.
   void urlChange(UrlType? urlType) => _urlState.accept(urlType);
@@ -142,7 +136,7 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
 
   /// Change checkerboardRasterCacheImages value in debugOptions.
   void checkerboardOffscreenLayersChange(bool? value) {
-    model.checkerboardRasterCacheImagesChange(value);
+    model.checkerboardOffscreenLayersChange(value);
   }
 
   /// Change showSemanticsDebugger value in debugOptions.

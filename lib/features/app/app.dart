@@ -5,16 +5,16 @@ import 'package:flutter_template/config/debug_options.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/app/di/i_app_scope.dart';
-import 'package:flutter_template/features/app/service/app_coordinate.dart';
-import 'package:flutter_template/features/app/service/app_route_information_parses.dart';
-import 'package:flutter_template/features/app/service/app_router_delegate.dart';
+import 'package:flutter_template/features/app/domain/app_coordinate.dart';
+import 'package:flutter_template/features/app/domain/app_route_information_parses.dart';
+import 'package:flutter_template/features/app/domain/app_router_delegate.dart';
 import 'package:flutter_template/features/app/service/coordinator.dart';
 import 'package:flutter_template/util/di_scope.dart';
 
 /// App widget.
 class App extends StatefulWidget {
 
-  /// /// Create an instance App.
+  /// Create an instance App.
   const App({Key? key}) : super(key: key);
 
   @override
@@ -67,7 +67,6 @@ class _AppState extends State<App> {
     return Environment<Config>.instance().config.debugOptions;
   }
 
-  //
   void _setupRouting(Coordinator coordinator) {
     coordinator
       ..initialCoordinate = AppCoordinate.initial
@@ -77,6 +76,7 @@ class _AppState extends State<App> {
   void _rebuildApplication() {
     setState(() {
       _scope = AppScope(applicationRebuilder: _rebuildApplication);
+      _setupRouting(_scope.coordinator);
     });
   }
 }
