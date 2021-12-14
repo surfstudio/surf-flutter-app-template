@@ -28,6 +28,7 @@ void main(List<String> arguments) {
 
     try {
       build();
+      // ignore:  avoid_catches_without_on_clauses
     } catch (_) {
       exitCode = 1;
       rethrow;

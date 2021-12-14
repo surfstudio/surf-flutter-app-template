@@ -1,7 +1,7 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/features/temp/screens/temp_screen.dart';
-import 'package:flutter_template/features/temp/screens/temp_screen_model.dart';
+import 'package:flutter_template/features/temp/screens/temp_screen/temp_screen.dart';
+import 'package:flutter_template/features/temp/screens/temp_screen/temp_screen_model.dart';
 
 /// Factory for [TempScreenWidgetModel].
 TempScreenWidgetModel initScreenWidgetModelFactory(

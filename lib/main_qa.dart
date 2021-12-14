@@ -1,6 +1,6 @@
-import 'package:flutter_template/config/build_types.dart';
-import 'package:flutter_template/config/config.dart';
+import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/debug_options.dart';
+import 'package:flutter_template/config/environment/build_types.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/config/urls.dart';
 import 'package:flutter_template/runner.dart';
@@ -9,7 +9,7 @@ import 'package:flutter_template/runner.dart';
 void main() {
   Environment.init(
     buildType: BuildType.qa,
-    config: Config(
+    config: AppConfig(
       url: Url.testUrl,
       proxyUrl: Url.qaProxyUrl,
       debugOptions: DebugOptions(

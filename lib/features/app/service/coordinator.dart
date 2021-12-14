@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_template/features/app/domain/coordinate.dart';
-import 'package:flutter_template/features/temp/screens/temp_screen.dart';
+import 'package:flutter_template/features/temp/screens/temp_screen/temp_screen.dart';
 
 /// Class that coordinates navigation for the whole app and provides
 /// methods for navigation.

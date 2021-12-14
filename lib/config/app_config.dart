@@ -1,7 +1,7 @@
 import 'package:flutter_template/config/debug_options.dart';
 
 /// Application configuration.
-class Config {
+class AppConfig {
   /// Server url.
   final String url;
 
@@ -11,20 +11,20 @@ class Config {
   /// Additional application settings in debug mode.
   final DebugOptions debugOptions;
 
-  /// Create an instance [Config].
-  Config({
+  /// Create an instance [AppConfig].
+  AppConfig({
     required this.url,
     required this.debugOptions,
     this.proxyUrl,
   });
 
-  /// Create an instance [Config] with modified parameters.
-  Config copyWith({
+  /// Create an instance [AppConfig] with modified parameters.
+  AppConfig copyWith({
     String? url,
     String? proxyUrl,
     DebugOptions? debugOptions,
   }) =>
-      Config(
+      AppConfig(
         url: url ?? this.url,
         proxyUrl: proxyUrl ?? this.proxyUrl,
         debugOptions: debugOptions ?? this.debugOptions,

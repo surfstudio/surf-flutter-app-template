@@ -6,7 +6,7 @@ import 'package:flutter_template/config/urls.dart';
 import 'package:flutter_template/features/debug/screens/debug_screen/debug_screen_widget_model.dart';
 
 /// Debug screens.
-class DebugScreen extends ElementaryWidget<DebugScreenWidgetModel> {
+class DebugScreen extends ElementaryWidget<IDebugScreenWidgetModel> {
   /// Create an instance [DebugScreen].
   const DebugScreen({
     Key? key,
@@ -14,7 +14,7 @@ class DebugScreen extends ElementaryWidget<DebugScreenWidgetModel> {
   }) : super(wmFactory, key: key);
 
   @override
-  Widget build(DebugScreenWidgetModel wm) {
+  Widget build(IDebugScreenWidgetModel wm) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -38,9 +38,8 @@ class DebugScreen extends ElementaryWidget<DebugScreenWidgetModel> {
         checkerboardOffscreenLayersChange: wm.checkerboardOffscreenLayersChange,
         showSemanticsDebuggerChange: wm.showSemanticsDebuggerChange,
         switchServer: wm.switchServer,
-        proxyValueState: wm.proxyValueState,
         setProxy: wm.setProxy,
-        proxyController: wm.textEditingController,
+        proxyController: wm.proxyEditingController,
       ),
     );
   }
@@ -57,7 +56,6 @@ class _Body extends StatelessWidget {
   final void Function(bool?) checkerboardOffscreenLayersChange;
   final void Function(bool?) showSemanticsDebuggerChange;
   final void Function(UrlType) switchServer;
-  final StateNotifier<String> proxyValueState;
   final Function() setProxy;
   final TextEditingController proxyController;
 
@@ -72,7 +70,6 @@ class _Body extends StatelessWidget {
     required this.checkerboardOffscreenLayersChange,
     required this.showSemanticsDebuggerChange,
     required this.switchServer,
-    required this.proxyValueState,
     required this.setProxy,
     required this.proxyController,
     Key? key,
@@ -103,7 +100,6 @@ class _Body extends StatelessWidget {
               switchServer: switchServer,
             ),
             _ProxyCard(
-              proxyValueState: proxyValueState,
               setProxy: setProxy,
               proxyController: proxyController,
             ),
@@ -281,12 +277,10 @@ class _ServerSwitchCard extends StatelessWidget {
 }
 
 class _ProxyCard extends StatelessWidget {
-  final StateNotifier<String> proxyValueState;
   final Function() setProxy;
   final TextEditingController proxyController;
 
   const _ProxyCard({
-    required this.proxyValueState,
     required this.setProxy,
     required this.proxyController,
     Key? key,
@@ -307,34 +301,29 @@ class _ProxyCard extends StatelessWidget {
               padding: EdgeInsets.only(bottom: 8),
               child: Text('Активирует передачу трафика через прокси сервер.'),
             ),
-            StateNotifierBuilder(
-              listenableState: proxyValueState,
-              builder: (context, proxyUrl) {
-                return Column(
-                  children: <Widget>[
-                    TextField(
-                      textInputAction: TextInputAction.done,
-                      onSubmitted: (_) {
-                        setProxy();
-                      },
-                      controller: proxyController,
-                      decoration: const InputDecoration(
-                        filled: true,
-                        border: UnderlineInputBorder(),
-                        labelText: 'Адрес прокси сервера',
-                        hintText: '192.168.0.1:8888',
-                      ),
-                    ),
-                    MaterialButton(
-                      onPressed: setProxy,
-                      child: const Text(
-                        'Переключить прокси',
-                        style: TextStyle(fontSize: 16.0),
-                      ),
-                    ),
-                  ],
-                );
-              },
+            Column(
+              children: <Widget>[
+                TextField(
+                  textInputAction: TextInputAction.done,
+                  onSubmitted: (_) {
+                    setProxy();
+                  },
+                  controller: proxyController,
+                  decoration: const InputDecoration(
+                    filled: true,
+                    border: UnderlineInputBorder(),
+                    labelText: 'Адрес прокси сервера',
+                    hintText: '192.168.0.1:8888',
+                  ),
+                ),
+                MaterialButton(
+                  onPressed: setProxy,
+                  child: const Text(
+                    'Переключить прокси',
+                    style: TextStyle(fontSize: 16.0),
+                  ),
+                ),
+              ],
             ),
           ],
         ),

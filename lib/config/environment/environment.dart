@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter_template/config/build_types.dart';
+import 'package:flutter_template/config/environment/build_types.dart';
 
 /// Environment configuration.
 class Environment<T> implements Listenable {

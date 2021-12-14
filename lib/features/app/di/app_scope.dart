@@ -3,9 +3,8 @@ import 'dart:ui';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:elementary/elementary.dart';
-import 'package:flutter_template/config/config.dart';
+import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/environment/environment.dart';
-import 'package:flutter_template/features/app/di/i_app_scope.dart';
 import 'package:flutter_template/features/app/service/coordinator.dart';
 import 'package:flutter_template/util/default_error_handler.dart';
 
@@ -32,6 +31,9 @@ class AppScope implements IAppScope {
   AppScope({
     required VoidCallback applicationRebuilder,
   }) : _applicationRebuilder = applicationRebuilder {
+    /// List interceptor. Fill in as needed.
+    final additionalInterceptors = <Interceptor>[];
+
     _dio = _initDio(additionalInterceptors);
     _errorHandler = DefaultErrorHandler();
     _coordinator = Coordinator();
@@ -43,14 +45,14 @@ class AppScope implements IAppScope {
     final dio = Dio();
 
     dio.options
-      ..baseUrl = Environment<Config>.instance().config.url
+      ..baseUrl = Environment<AppConfig>.instance().config.url
       ..connectTimeout = timeout.inMilliseconds
       ..receiveTimeout = timeout.inMilliseconds
       ..sendTimeout = timeout.inMilliseconds;
 
     (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
         (client) {
-      final proxyUrl = Environment<Config>.instance().config.proxyUrl;
+      final proxyUrl = Environment<AppConfig>.instance().config.proxyUrl;
       if (proxyUrl != null && proxyUrl.isNotEmpty) {
         client
           ..findProxy = (uri) {
@@ -64,7 +66,7 @@ class AppScope implements IAppScope {
 
     dio.interceptors.addAll(additionalInterceptors);
 
-    if (Environment<Config>.instance().isDebug) {
+    if (Environment<AppConfig>.instance().isDebug) {
       dio.interceptors
           .add(LogInterceptor(requestBody: true, responseBody: true));
     }
@@ -73,5 +75,17 @@ class AppScope implements IAppScope {
   }
 }
 
-/// List interceptor. Fill in as needed.
-List<Interceptor> additionalInterceptors = [];
+/// App dependencies.
+abstract class IAppScope {
+  /// Http client.
+  Dio get dio;
+
+  /// Interface for handle error in business logic.
+  ErrorHandler get errorHandler;
+
+  /// Callback to rebuild the whole application.
+  VoidCallback get applicationRebuilder;
+
+  /// Class that coordinates navigation for the whole app.
+  Coordinator get coordinator;
+}

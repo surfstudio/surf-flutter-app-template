@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_template/config/config.dart';
+import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/debug_options.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
-import 'package:flutter_template/features/app/di/i_app_scope.dart';
 import 'package:flutter_template/features/app/domain/app_coordinate.dart';
 import 'package:flutter_template/features/app/domain/app_route_information_parses.dart';
 import 'package:flutter_template/features/app/domain/app_router_delegate.dart';
 import 'package:flutter_template/features/app/service/coordinator.dart';
-import 'package:flutter_template/util/di_scope.dart';
+import 'package:flutter_template/features/common/widgets/di_scope/di_scope.dart';
 
 /// App widget.
 class App extends StatefulWidget {
@@ -64,7 +63,7 @@ class _AppState extends State<App> {
   }
 
   DebugOptions _getDebugConfig() {
-    return Environment<Config>.instance().config.debugOptions;
+    return Environment<AppConfig>.instance().config.debugOptions;
   }
 
   void _setupRouting(Coordinator coordinator) {
