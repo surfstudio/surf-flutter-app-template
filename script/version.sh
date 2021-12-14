@@ -1,5 +1,5 @@
 #!/usr/bin/environment bash
-FLUTTER_REQUIRED_VERSION=2.5.1
+FLUTTER_REQUIRED_VERSION=2.8.0
 #todo: maybe use version from fvm instead of hardcoding here
 
 fvm use $FLUTTER_REQUIRED_VERSION

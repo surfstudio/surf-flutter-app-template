@@ -25,7 +25,10 @@ void _runApp() {
     () async {
       runApp(const App());
     },
-    FirebaseCrashlytics.instance.recordError,
+    (exception, stack) {
+      // TODO(init-project): Инициализировать Crashlytics
+      // FirebaseCrashlytics.instance.recordError(exception, stack);
+    },
   );
 }
 
