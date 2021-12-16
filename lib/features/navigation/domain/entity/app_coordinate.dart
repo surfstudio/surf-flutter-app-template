@@ -1,5 +1,5 @@
-import 'package:flutter_template/features/app/domain/coordinate.dart';
 import 'package:flutter_template/features/debug/screens/debug_screen/debug_screen.dart';
+import 'package:flutter_template/features/navigation/domain/entity/coordinate.dart';
 import 'package:flutter_template/features/temp/screens/temp_screen/temp_screen.dart';
 
 /// A set of routes for the entire app.

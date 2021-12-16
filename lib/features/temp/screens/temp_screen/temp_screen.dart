@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_template/features/temp/screens/temp_screen/temp_screen_widget_model.dart';
 
 /// Initialization screens (this can be a HomeScreen or SplashScreen for example).
-
-/// Debug screens.
 class TempScreen extends ElementaryWidget<TempScreenWidgetModel> {
   /// Create an instance [TempScreen].
   const TempScreen({

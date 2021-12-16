@@ -4,11 +4,11 @@ import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/debug_options.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
-import 'package:flutter_template/features/app/domain/app_coordinate.dart';
-import 'package:flutter_template/features/app/domain/app_route_information_parses.dart';
-import 'package:flutter_template/features/app/domain/app_router_delegate.dart';
-import 'package:flutter_template/features/app/service/coordinator.dart';
 import 'package:flutter_template/features/common/widgets/di_scope/di_scope.dart';
+import 'package:flutter_template/features/navigation/domain/delegate/app_router_delegate.dart';
+import 'package:flutter_template/features/navigation/domain/entity/app_coordinate.dart';
+import 'package:flutter_template/features/navigation/domain/parser/app_route_information_parses.dart';
+import 'package:flutter_template/features/navigation/service/coordinator.dart';
 
 /// App widget.
 class App extends StatefulWidget {

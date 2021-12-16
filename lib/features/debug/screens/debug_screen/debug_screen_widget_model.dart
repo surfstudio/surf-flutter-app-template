@@ -5,9 +5,9 @@ import 'package:flutter_template/config/debug_options.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/config/urls.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
-import 'package:flutter_template/features/app/service/coordinator.dart';
 import 'package:flutter_template/features/debug/screens/debug_screen/debug_screen.dart';
 import 'package:flutter_template/features/debug/screens/debug_screen/debug_screen_model.dart';
+import 'package:flutter_template/features/navigation/service/coordinator.dart';
 import 'package:provider/provider.dart';
 
 // ignore_for_file: avoid_positional_boolean_parameters
