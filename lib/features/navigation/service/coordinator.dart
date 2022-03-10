@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_template/features/navigation/domain/entity/coordinate.dart';
+import 'package:flutter_template/features/navigation/domain/entity/coordinate_key.dart';
+import 'package:flutter_template/features/navigation/domain/entity/coordinate_route.dart';
+import 'package:flutter_template/features/navigation/domain/entity/coordinator_exceptions.dart';
 import 'package:flutter_template/features/temp/screens/temp_screen/temp_screen.dart';
 
 /// Class that coordinates navigation for the whole app and provides
 /// methods for navigation.
 class Coordinator extends ChangeNotifier {
-  final _coordinates = <Coordinate, _Route>{};
+  final _coordinates = <Coordinate, CoordinateRoute>{};
 
   final _pages = [
     const MaterialPage<void>(
@@ -19,7 +22,7 @@ class Coordinator extends ChangeNotifier {
   Coordinate? initialCoordinate;
 
   /// Coordinate list.
-  Map<Coordinate, _Route> get coordinates => _coordinates;
+  Map<Coordinate, CoordinateRoute> get coordinates => _coordinates;
 
   /// [Page]s list.
   List<Page> get pages => List.of(_pages);
@@ -36,7 +39,11 @@ class Coordinator extends ChangeNotifier {
       coordinates.entries.map(
         (entry) => MapEntry(
           entry.key,
-          _Route('$name${entry.key}', entry.value),
+          CoordinateRoute(
+            path: '$name${entry.key}',
+            builder: entry.value,
+            isUnique: entry.key.isUnique,
+          ),
         ),
       ),
     );
@@ -50,14 +57,21 @@ class Coordinator extends ChangeNotifier {
     bool replaceCurrentCoordinate = false,
     bool replaceRootCoordinate = false,
   }) {
-    final path = _coordinates[target]?.path;
+    final coordinateRoute = _getCoordinateRoute(target);
 
     if (replaceRootCoordinate) {
       _pages.clear();
     } else if (replaceCurrentCoordinate) {
       _pages.removeLast();
     }
-    _pages.add(_buildMaterialPage(context, target, arguments, path));
+
+    _pages.add(
+      _buildMaterialPage(
+        context,
+        coordinateRoute: coordinateRoute,
+        arguments: arguments,
+      ),
+    );
 
     debugPrint(_pages.map((e) => e.name).toList().toString());
 
@@ -94,11 +108,17 @@ class Coordinator extends ChangeNotifier {
     Object? arguments,
   }) {
     assert(_pages.isNotEmpty);
-    final path = _coordinates[target]?.path;
+    final coordinateRoute = _getCoordinateRoute(target);
 
     _pages
       ..removeRange(1, _pages.length)
-      ..add(_buildMaterialPage(context, target, arguments, path));
+      ..add(
+        _buildMaterialPage(
+          context,
+          coordinateRoute: coordinateRoute,
+          arguments: arguments,
+        ),
+      );
 
     debugPrint(_pages.map((e) => e.name).toList().toString());
 
@@ -106,30 +126,33 @@ class Coordinator extends ChangeNotifier {
   }
 
   MaterialPage<void> _buildMaterialPage(
-    BuildContext context,
-    Coordinate coordinate,
+    BuildContext context, {
+    required CoordinateRoute coordinateRoute,
     Object? arguments,
-    String? path,
-  ) {
-    final body = _coordinates[coordinate]!.builder.call(
-          context,
-          arguments,
-        );
-
+  }) {
     return MaterialPage<void>(
-      key: ValueKey(path),
-      name: path,
-      child: Scaffold(
-        body: body,
-      ),
+      key: coordinateRoute.isUnique
+          ? ValueKey(coordinateRoute.path)
+          : CoordinateKey(
+              arguments: arguments,
+              path: coordinateRoute.path,
+            ),
+      name: coordinateRoute.path,
+      child: coordinateRoute.builder(context, arguments),
       arguments: arguments,
     );
   }
-}
 
-class _Route {
-  final String path;
-  final CoordinateBuilder builder;
+  /// By coordinate, get data from the registered coordinates to build a Page
+  CoordinateRoute _getCoordinateRoute(Coordinate target) {
+    final path = _coordinates[target]?.path;
 
-  const _Route(this.path, this.builder);
+    if (path == null) {
+      throw CoordinatorExceptions(
+        'CoordinatorExceptions: The coordinate ${target.value} is not registered!',
+      );
+    }
+
+    return _coordinates[target]!;
+  }
 }
