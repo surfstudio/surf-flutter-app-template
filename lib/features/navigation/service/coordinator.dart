@@ -145,14 +145,12 @@ class Coordinator extends ChangeNotifier {
 
   /// By coordinate, get data from the registered coordinates to build a Page
   CoordinateRoute _getCoordinateRoute(Coordinate target) {
-    final path = _coordinates[target]?.path;
+    final isRegistered = _coordinates.containsKey(target);
 
-    if (path == null) {
-      throw CoordinatorExceptions(
-        'CoordinatorExceptions: The coordinate ${target.value} is not registered!',
-      );
-    }
-
-    return _coordinates[target]!;
+    return isRegistered
+        ? _coordinates[target]!
+        : throw CoordinatorExceptions(
+            'CoordinatorExceptions: The coordinate ${target.value} is not registered!',
+          );
   }
 }
