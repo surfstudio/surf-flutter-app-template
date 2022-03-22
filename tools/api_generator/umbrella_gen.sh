@@ -8,7 +8,7 @@ fileNames=()
 filter=".g.dart"
 
 # remove old umbrella file
-# to exclude it from file reading (the simpliest way)
+# to exclude it from file reading (the simplest way)
 
 rm -f $nameOfTheUmbrella
 

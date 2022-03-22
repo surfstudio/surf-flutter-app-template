@@ -22,7 +22,7 @@ into the branch to which the pull request was sent.
 
 Feel free to report any issues and bugs.
 
-1.	To report about the problem, create an issue on GithHub
+1.	To report about the problem, create an issue on GitHub
 2.	In the issue add the description of the problem
 3.	Do not forget to mention your development environment, Flutter version, libraries required for
     illustration of the problem
