@@ -147,10 +147,12 @@ class Coordinator extends ChangeNotifier {
   CoordinateRoute _getCoordinateRoute(Coordinate target) {
     final isRegistered = _coordinates.containsKey(target);
 
-    return isRegistered
-        ? _coordinates[target]!
-        : throw CoordinatorExceptions(
-            'CoordinatorExceptions: The coordinate ${target.value} is not registered!',
-          );
+    if (isRegistered == false) {
+      throw CoordinatorExceptions(
+        'CoordinatorExceptions: The coordinate ${target.value} is not registered!',
+      );
+    }
+
+    return _coordinates[target]!;
   }
 }
