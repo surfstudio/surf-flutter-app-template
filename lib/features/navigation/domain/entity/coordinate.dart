@@ -5,10 +5,14 @@ typedef CoordinateBuilder = Widget Function(BuildContext context, Object? data);
 
 /// Basic coordinate representation.
 abstract class Coordinate {
-  final String _value;
+  final String value;
+  final bool isUnique;
 
-  const Coordinate._(this._value);
+  const Coordinate({
+    required this.value,
+    required this.isUnique,
+  });
 
   @override
-  String toString() => _value;
+  String toString() => value;
 }
