@@ -7,7 +7,7 @@ import 'package:flutter_template/config/urls.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/debug/screens/debug_screen/debug_screen.dart';
 import 'package:flutter_template/features/debug/screens/debug_screen/debug_screen_model.dart';
-import 'package:flutter_template/features/navigation/service/coordinator.dart';
+import 'package:flutter_template/features/navigation/service/router.dart';
 import 'package:provider/provider.dart';
 
 // ignore_for_file: avoid_positional_boolean_parameters
@@ -22,8 +22,8 @@ DebugScreenWidgetModel debugScreenWidgetModelFactory(
     Environment<AppConfig>.instance(),
     appDependencies.applicationRebuilder,
   );
-  final coordinator = appDependencies.coordinator;
-  return DebugScreenWidgetModel(model, coordinator);
+  final router = appDependencies.router;
+  return DebugScreenWidgetModel(model, router);
 }
 
 /// Widget Model for [DebugScreen].
@@ -33,7 +33,7 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
   static const String _emptyString = '';
 
   /// Class that coordinates navigation for the whole app.
-  final Coordinator coordinator;
+  final AppRouter router;
 
   final _textEditingController = TextEditingController();
   final _debugOptionsState = StateNotifier<DebugOptions>();
@@ -57,7 +57,7 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
   /// Create an instance [DebugScreenModel].
   DebugScreenWidgetModel(
     DebugScreenModel model,
-    this.coordinator,
+    this.router,
   ) : super(model);
 
   @override
@@ -74,7 +74,7 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
 
   @override
   void closeScreen() {
-    coordinator.pop();
+    router.pop();
   }
 
   @override
