@@ -5,10 +5,6 @@ import 'package:flutter_template/config/debug_options.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/common/widgets/di_scope/di_scope.dart';
-import 'package:flutter_template/features/navigation/domain/delegate/app_router_delegate.dart';
-import 'package:flutter_template/features/navigation/domain/entity/app_coordinate.dart';
-import 'package:flutter_template/features/navigation/domain/parser/app_route_information_parses.dart';
-import 'package:flutter_template/features/navigation/service/coordinator.dart';
 
 /// App widget.
 class App extends StatefulWidget {
@@ -27,8 +23,6 @@ class _AppState extends State<App> {
     super.initState();
 
     _scope = AppScope(applicationRebuilder: _rebuildApplication);
-
-    _setupRouting(_scope.coordinator);
   }
 
   @override
@@ -56,8 +50,8 @@ class _AppState extends State<App> {
             _getDebugConfig().debugShowCheckedModeBanner,
 
         /// This is for navigation.
-        routeInformationParser: AppRouteInformationParser(),
-        routerDelegate: AppRouterDelegate(_scope.coordinator),
+        routeInformationParser: _scope.router.routeInformationParser,
+        routerDelegate:_scope.router.routerDelegate,
       ),
     );
   }
@@ -66,16 +60,9 @@ class _AppState extends State<App> {
     return Environment<AppConfig>.instance().config.debugOptions;
   }
 
-  void _setupRouting(Coordinator coordinator) {
-    coordinator
-      ..initialCoordinate = AppCoordinate.initial
-      ..registerCoordinates('/', appCoordinates);
-  }
-
   void _rebuildApplication() {
     setState(() {
       _scope = AppScope(applicationRebuilder: _rebuildApplication);
-      _setupRouting(_scope.coordinator);
     });
   }
 }
