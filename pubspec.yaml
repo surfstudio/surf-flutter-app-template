@@ -24,7 +24,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   json_serializable: ^6.2.0
-  retrofit_generator: ^4.0.1
+  retrofit_generator: ^3.0.1
   surf_lint_rules: ^1.5.0
 
 environment:
