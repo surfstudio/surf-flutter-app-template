@@ -2,7 +2,7 @@ import 'package:flutter_template/features/navigation/domain/entity/temp/temp_rou
 import 'package:go_router/go_router.dart';
 
 /// All routes of the app.
-class AppRoutes implements AppRoutesDelegate{
+class AppRoutes implements AppRoutesDelegate {
   /// List of registered routes.
   /// Fill this list with routes you want to use in your app.
   @override

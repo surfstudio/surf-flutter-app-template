@@ -41,17 +41,15 @@ class _AppState extends State<App> {
         /// Debug configuration.
         showPerformanceOverlay: _getDebugConfig().showPerformanceOverlay,
         debugShowMaterialGrid: _getDebugConfig().debugShowMaterialGrid,
-        checkerboardRasterCacheImages:
-            _getDebugConfig().checkerboardRasterCacheImages,
-        checkerboardOffscreenLayers:
-            _getDebugConfig().checkerboardOffscreenLayers,
+        checkerboardRasterCacheImages: _getDebugConfig().checkerboardRasterCacheImages,
+        checkerboardOffscreenLayers: _getDebugConfig().checkerboardOffscreenLayers,
         showSemanticsDebugger: _getDebugConfig().showSemanticsDebugger,
-        debugShowCheckedModeBanner:
-            _getDebugConfig().debugShowCheckedModeBanner,
+        debugShowCheckedModeBanner: _getDebugConfig().debugShowCheckedModeBanner,
 
         /// This is for navigation.
         routeInformationParser: _scope.router.routeInformationParser,
-        routerDelegate:_scope.router.routerDelegate,
+        routerDelegate: _scope.router.routerDelegate,
+        routeInformationProvider: _scope.router.routeInformationProvider,
       ),
     );
   }
