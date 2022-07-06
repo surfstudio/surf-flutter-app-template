@@ -75,24 +75,21 @@ class DebugScreenModel extends ElementaryModel {
   /// Change debugShowCheckedModeBanner value in debugOptions.
   void debugShowCheckedModeBannerChange(bool? value) {
     _setDebugOptionState(
-      configNotifier.value.debugOptions
-          .copyWith(debugShowCheckedModeBanner: value),
+      configNotifier.value.debugOptions.copyWith(debugShowCheckedModeBanner: value),
     );
   }
 
   /// Change checkerboardRasterCacheImages value in debugOptions.
   void checkerboardRasterCacheImagesChange(bool? value) {
     _setDebugOptionState(
-      configNotifier.value.debugOptions
-          .copyWith(checkerboardRasterCacheImages: value),
+      configNotifier.value.debugOptions.copyWith(checkerboardRasterCacheImages: value),
     );
   }
 
   /// Change checkerboardOffscreenLayers value in debugOptions.
   void checkerboardOffscreenLayersChange(bool? value) {
     _setDebugOptionState(
-      configNotifier.value.debugOptions
-          .copyWith(checkerboardOffscreenLayers: value),
+      configNotifier.value.debugOptions.copyWith(checkerboardOffscreenLayers: value),
     );
   }
 

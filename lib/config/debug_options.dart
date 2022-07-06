@@ -38,17 +38,11 @@ class DebugOptions {
     bool? debugShowCheckedModeBanner,
   }) =>
       DebugOptions(
-        showPerformanceOverlay:
-            showPerformanceOverlay ?? this.showPerformanceOverlay,
-        checkerboardOffscreenLayers:
-            checkerboardOffscreenLayers ?? this.checkerboardOffscreenLayers,
-        checkerboardRasterCacheImages:
-            checkerboardRasterCacheImages ?? this.checkerboardRasterCacheImages,
-        debugShowCheckedModeBanner:
-            debugShowCheckedModeBanner ?? this.debugShowCheckedModeBanner,
-        debugShowMaterialGrid:
-            debugShowMaterialGrid ?? this.debugShowMaterialGrid,
-        showSemanticsDebugger:
-            showSemanticsDebugger ?? this.showSemanticsDebugger,
+        showPerformanceOverlay: showPerformanceOverlay ?? this.showPerformanceOverlay,
+        checkerboardOffscreenLayers: checkerboardOffscreenLayers ?? this.checkerboardOffscreenLayers,
+        checkerboardRasterCacheImages: checkerboardRasterCacheImages ?? this.checkerboardRasterCacheImages,
+        debugShowCheckedModeBanner: debugShowCheckedModeBanner ?? this.debugShowCheckedModeBanner,
+        debugShowMaterialGrid: debugShowMaterialGrid ?? this.debugShowMaterialGrid,
+        showSemanticsDebugger: showSemanticsDebugger ?? this.showSemanticsDebugger,
       );
 }
