@@ -33,7 +33,8 @@ class DebugScreen extends ElementaryWidget<IDebugScreenWidgetModel> {
         showPerformanceOverlayChange: wm.showPerformanceOverlayChange,
         debugShowMaterialGridChange: wm.debugShowMaterialGridChange,
         debugShowCheckedModeBannerChange: wm.debugShowCheckedModeBannerChange,
-        checkerboardRasterCacheImagesChange: wm.checkerboardRasterCacheImagesChange,
+        checkerboardRasterCacheImagesChange:
+            wm.checkerboardRasterCacheImagesChange,
         checkerboardOffscreenLayersChange: wm.checkerboardOffscreenLayersChange,
         showSemanticsDebuggerChange: wm.showSemanticsDebuggerChange,
         switchServer: wm.switchServer,
@@ -85,9 +86,12 @@ class _Body extends StatelessWidget {
               debugOptionsState: debugOptionsState,
               showPerformanceOverlayChange: showPerformanceOverlayChange,
               debugShowMaterialGridChange: debugShowMaterialGridChange,
-              debugShowCheckedModeBannerChange: debugShowCheckedModeBannerChange,
-              checkerboardRasterCacheImagesChange: checkerboardRasterCacheImagesChange,
-              checkerboardOffscreenLayersChange: checkerboardOffscreenLayersChange,
+              debugShowCheckedModeBannerChange:
+                  debugShowCheckedModeBannerChange,
+              checkerboardRasterCacheImagesChange:
+                  checkerboardRasterCacheImagesChange,
+              checkerboardOffscreenLayersChange:
+                  checkerboardOffscreenLayersChange,
               showSemanticsDebuggerChange: showSemanticsDebuggerChange,
             ),
             _ServerSwitchCard(
@@ -137,11 +141,14 @@ class _PerformanceOverlayCard extends StatelessWidget {
             StateNotifierBuilder<DebugOptions>(
               listenableState: debugOptionsState,
               builder: (context, debugOptions) {
+                if (debugOptions == null) {
+                  return const SizedBox.shrink();
+                }
                 return Column(
                   children: <Widget>[
                     _SwitchTitle(
                       title: 'Включить наложение производительности',
-                      value: debugOptions!.showPerformanceOverlay,
+                      value: debugOptions.showPerformanceOverlay,
                       onChanged: showPerformanceOverlayChange,
                     ),
                     _SwitchTitle(
@@ -160,13 +167,15 @@ class _PerformanceOverlayCard extends StatelessWidget {
                       onChanged: checkerboardRasterCacheImagesChange,
                     ),
                     _SwitchTitle(
-                      title: 'Включает проверку слоев, отображаемых в закадровых '
+                      title:
+                          'Включает проверку слоев, отображаемых в закадровых '
                           'растровых изображениях.',
                       value: debugOptions.checkerboardOffscreenLayers,
                       onChanged: checkerboardOffscreenLayersChange,
                     ),
                     _SwitchTitle(
-                      title: 'Включает наложение, которое показывает информацию о '
+                      title:
+                          'Включает наложение, которое показывает информацию о '
                           'доступности, сообщаемую платформой.',
                       value: debugOptions.showSemanticsDebugger,
                       onChanged: showSemanticsDebuggerChange,
