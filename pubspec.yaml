@@ -11,7 +11,7 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  go_router: ^3.1.0
+  auto_route: ^4.2.1
   logger: ^1.1.0
   provider: ^6.0.2
   retrofit: ^3.0.1+1
@@ -26,6 +26,7 @@ dev_dependencies:
   json_serializable: ^6.2.0
   retrofit_generator: ^4.0.1
   surf_lint_rules: ^1.5.0
+  auto_route_generator: ^4.2.0
 
 environment:
   sdk: ">=2.14.0-0 <3.0.0"

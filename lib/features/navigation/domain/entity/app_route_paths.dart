@@ -8,4 +8,7 @@
 abstract class AppRoutePaths {
   /// Path to temp screen.
   static const String tempScreen = '/tempScreen';
+
+  ///Path to debug screen
+  static const String debugScreen = '/debugScreen';
 }

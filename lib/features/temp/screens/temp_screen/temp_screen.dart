@@ -12,6 +12,10 @@ class TempScreen extends ElementaryWidget<TempScreenWidgetModel> {
 
   @override
   Widget build(TempScreenWidgetModel wm) {
-    return const Scaffold();
+    return Scaffold(
+      body: Center(
+        child: ElevatedButton(onPressed: wm.navigate, child: Text('To counter')),
+      ),
+    );
   }
 }
