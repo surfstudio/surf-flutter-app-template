@@ -1,15 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/features/debug/screens/debug_screen/debug_screen.dart';
-import 'package:flutter_template/features/debug/screens/debug_screen/debug_screen_widget_model.dart';
+import 'package:flutter_template/features/debug/screens/debug_screen/debug_screen_export.dart';
 import 'package:flutter_template/features/navigation/domain/entity/debug/debug_routes.dart';
 import 'package:flutter_template/features/navigation/domain/entity/temp/temp_routes.dart';
-import 'package:flutter_template/features/temp/screens/temp_screen/temp_screen.dart';
-import 'package:flutter_template/features/temp/screens/temp_screen/temp_screen_widget_model.dart';
+import 'package:flutter_template/features/temp/screens/temp_screen/temp_screen_export.dart';
 
 part 'router.gr.dart';
 
+/// When you add route with screen don't forget add imports of screen and screen_widget_model
+
+/// All app routes
 @MaterialAutoRouter(
   replaceInRouteName: 'ScreenWidget|Screen,Route',
   routes: <AutoRoute>[
