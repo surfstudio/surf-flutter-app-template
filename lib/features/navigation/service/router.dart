@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/features/debug/screens/debug_screen/debug_screen_export.dart';
-import 'package:flutter_template/features/navigation/domain/entity/debug/debug_routes.dart';
 import 'package:flutter_template/features/navigation/domain/entity/temp/temp_routes.dart';
 import 'package:flutter_template/features/temp/screens/temp_screen/temp_screen_export.dart';
 
@@ -14,8 +13,14 @@ part 'router.gr.dart';
 @MaterialAutoRouter(
   replaceInRouteName: 'ScreenWidget|Screen,Route',
   routes: <AutoRoute>[
-    tempRoutes,
-    debugRoutes,
+    AutoRoute<dynamic>(
+      name: 'homeRoute',
+      page: EmptyRouterPage,
+      path: '/',
+      children: [
+        tempRoutes,
+      ],
+    ),
   ],
 )
 

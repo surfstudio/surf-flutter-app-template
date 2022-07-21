@@ -3,12 +3,12 @@
 /// Have to been filled with the entries like this:
 /// ```dart
 /// /// Path description.
-/// static const String screenPath = '/screenPath';
+/// static const String screenPath = 'screenPath';
 /// ```
 abstract class AppRoutePaths {
   /// Path to temp screen.
-  static const String tempScreen = '/tempScreen';
+  static const String tempScreen = 'tempScreen';
 
   ///Path to debug screen
-  static const String debugScreen = '/debugScreen';
+  static const String debugScreen = 'debugScreen';
 }
