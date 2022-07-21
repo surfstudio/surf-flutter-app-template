@@ -5,8 +5,6 @@ import 'package:dio/dio.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/environment/environment.dart';
-import 'package:flutter_template/features/navigation/domain/entity/app_route_paths.dart';
-import 'package:flutter_template/features/navigation/domain/entity/app_routes.dart';
 import 'package:flutter_template/features/navigation/service/router.dart';
 import 'package:flutter_template/util/default_error_handler.dart';
 
@@ -38,10 +36,7 @@ class AppScope implements IAppScope {
 
     _dio = _initDio(additionalInterceptors);
     _errorHandler = DefaultErrorHandler();
-    _router = AppRouter(
-      delegate: AppRoutes(),
-      initialLocation: AppRoutePaths.tempScreen,
-    );
+    _router = AppRouter.instance();
   }
 
   Dio _initDio(Iterable<Interceptor> additionalInterceptors) {
@@ -55,8 +50,7 @@ class AppScope implements IAppScope {
       ..receiveTimeout = timeout.inMilliseconds
       ..sendTimeout = timeout.inMilliseconds;
 
-    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-        (client) {
+    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) {
       final proxyUrl = Environment<AppConfig>.instance().config.proxyUrl;
       if (proxyUrl != null && proxyUrl.isNotEmpty) {
         client
@@ -74,8 +68,7 @@ class AppScope implements IAppScope {
     dio.interceptors.addAll(additionalInterceptors);
 
     if (Environment<AppConfig>.instance().isDebug) {
-      dio.interceptors
-          .add(LogInterceptor(requestBody: true, responseBody: true));
+      dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
     }
 
     return dio;

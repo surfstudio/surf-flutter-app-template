@@ -3,9 +3,12 @@
 /// Have to been filled with the entries like this:
 /// ```dart
 /// /// Name description.
-/// static const String screenName = 'screenName';
+/// static const String screenName = 'screenNameRoute';
 /// ```
 abstract class AppRouteNames {
-  /// TempScreen route name.
-  static const String tempScreen = 'tempScreen';
+  /// TempScreen route name
+  static const String tempScreen = 'tempScreenRoute';
+
+  /// DebugScreen route name
+  static const String debugScreen = 'debugScreenRoute';
 }

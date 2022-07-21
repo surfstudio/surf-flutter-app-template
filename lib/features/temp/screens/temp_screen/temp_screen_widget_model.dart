@@ -12,8 +12,7 @@ TempScreenWidgetModel initScreenWidgetModelFactory(
 }
 
 /// Widget model for [TempScreen].
-class TempScreenWidgetModel extends WidgetModel<TempScreen, TempScreenModel>
-    implements IDebugWidgetModel {
+class TempScreenWidgetModel extends WidgetModel<TempScreen, TempScreenModel> implements IDebugWidgetModel {
   /// Create an instance [TempScreenWidgetModel].
   TempScreenWidgetModel(TempScreenModel model) : super(model);
 }
