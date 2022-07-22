@@ -11,8 +11,7 @@ abstract class UIKitWm extends IWidgetModel {
 }
 
 /// WidgetModel для UIKitScreen
-class UIKitScreenWm extends WidgetModel<UIKitScreen, UIKitScreenModel>
-    implements UIKitWm {
+class UIKitScreenWm extends WidgetModel<UIKitScreen, UIKitScreenModel> implements UIKitWm {
   final StackRouter _router;
 
   /// Конструктор для инициализации

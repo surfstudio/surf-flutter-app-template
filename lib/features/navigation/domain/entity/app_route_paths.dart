@@ -9,6 +9,12 @@ abstract class AppRoutePaths {
   /// Path to temp screen.
   static const String tempScreen = 'tempScreen';
 
-  ///Path to debug screen
+  /// Path to debug screen
   static const String debugScreen = 'debugScreen';
+
+  /// Path to counter screen
+  static const String counterScreen = 'counterScreen';
+
+  /// Path to ui kit screen
+  static const String uiKitScreen = 'uiKitScreen';
 }

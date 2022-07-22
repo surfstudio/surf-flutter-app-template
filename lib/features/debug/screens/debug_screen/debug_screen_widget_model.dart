@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_template/config/app_config.dart';
@@ -7,7 +8,6 @@ import 'package:flutter_template/config/urls.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/debug/screens/debug_screen/debug_screen.dart';
 import 'package:flutter_template/features/debug/screens/debug_screen/debug_screen_model.dart';
-import 'package:flutter_template/features/navigation/service/router.dart';
 import 'package:provider/provider.dart';
 
 // ignore_for_file: avoid_positional_boolean_parameters
@@ -22,17 +22,21 @@ DebugScreenWidgetModel debugScreenWidgetModelFactory(
     Environment<AppConfig>.instance(),
     appDependencies.applicationRebuilder,
   );
-  final router = appDependencies.router;
-  return DebugScreenWidgetModel(model, router);
+  final stackRouter = context.router;
+  return DebugScreenWidgetModel(
+    model: model,
+    stackRouter: stackRouter,
+  );
 }
 
 /// Widget Model for [DebugScreen].
-class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel> implements IDebugScreenWidgetModel {
+class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
+    implements IDebugScreenWidgetModel {
   /// Empty string.
   static const String _emptyString = '';
 
-  /// Class that coordinates navigation for the whole app.
-  final AppRouter router;
+  /// Для навигации внутри стека
+  final StackRouter _stackRouter;
 
   final _textEditingController = TextEditingController();
   final _debugOptionsState = StateNotifier<DebugOptions>();
@@ -54,10 +58,11 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel> 
   late String? _proxyUrl;
 
   /// Create an instance [DebugScreenModel].
-  DebugScreenWidgetModel(
-    DebugScreenModel model,
-    this.router,
-  ) : super(model);
+  DebugScreenWidgetModel({
+    required DebugScreenModel model,
+    required StackRouter stackRouter,
+  })  : _stackRouter = stackRouter,
+        super(model);
 
   @override
   void initWidgetModel() {
@@ -73,7 +78,7 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel> 
 
   @override
   void closeScreen() {
-    router.pop();
+    _stackRouter.pop();
   }
 
   @override
@@ -118,6 +123,11 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel> 
   @override
   void setProxy() {
     model.setProxy(proxyEditingController.text);
+  }
+
+  @override
+  void openUIKit() {
+    _stackRouter.pushNamed('uiKitScreen');
   }
 
   void _updateAppConfig() {
@@ -183,6 +193,9 @@ abstract class IDebugScreenWidgetModel extends IWidgetModel {
 
   /// Change proxyUrl value.
   void setProxy() {}
+
+  /// Open UI Kit.
+  void openUIKit() {}
 }
 
 /// Ury type.

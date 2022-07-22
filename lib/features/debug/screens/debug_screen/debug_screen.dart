@@ -26,19 +26,27 @@ class DebugScreen extends ElementaryWidget<IDebugScreenWidgetModel> {
           onPressed: wm.closeScreen,
         ),
       ),
-      body: _Body(
-        debugOptionsState: wm.debugOptionsState,
-        urlState: wm.urlState,
-        urlChanged: wm.urlChange,
-        showPerformanceOverlayChange: wm.showPerformanceOverlayChange,
-        debugShowMaterialGridChange: wm.debugShowMaterialGridChange,
-        debugShowCheckedModeBannerChange: wm.debugShowCheckedModeBannerChange,
-        checkerboardRasterCacheImagesChange: wm.checkerboardRasterCacheImagesChange,
-        checkerboardOffscreenLayersChange: wm.checkerboardOffscreenLayersChange,
-        showSemanticsDebuggerChange: wm.showSemanticsDebuggerChange,
-        switchServer: wm.switchServer,
-        setProxy: wm.setProxy,
-        proxyController: wm.proxyEditingController,
+      body: Column(
+        children: [
+          ElevatedButton(
+            child: const Text('Открыть UI Kit'),
+            onPressed: wm.openUIKit,
+          ),
+          _Body(
+            debugOptionsState: wm.debugOptionsState,
+            urlState: wm.urlState,
+            urlChanged: wm.urlChange,
+            showPerformanceOverlayChange: wm.showPerformanceOverlayChange,
+            debugShowMaterialGridChange: wm.debugShowMaterialGridChange,
+            debugShowCheckedModeBannerChange: wm.debugShowCheckedModeBannerChange,
+            checkerboardRasterCacheImagesChange: wm.checkerboardRasterCacheImagesChange,
+            checkerboardOffscreenLayersChange: wm.checkerboardOffscreenLayersChange,
+            showSemanticsDebuggerChange: wm.showSemanticsDebuggerChange,
+            switchServer: wm.switchServer,
+            setProxy: wm.setProxy,
+            proxyController: wm.proxyEditingController,
+          ),
+        ],
       ),
     );
   }

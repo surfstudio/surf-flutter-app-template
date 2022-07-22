@@ -11,4 +11,10 @@ abstract class AppRouteNames {
 
   /// DebugScreen route name
   static const String debugScreen = 'debugScreenRoute';
+
+  /// CounterScreen route name
+  static const String counterScreen = 'counterScreenRoute';
+
+  /// UIKitScreen route name
+  static const String uiKitScreen = 'uiKitScreen';
 }

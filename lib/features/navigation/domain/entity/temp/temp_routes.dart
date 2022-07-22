@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_template/features/navigation/domain/entity/app_route_names.dart';
 import 'package:flutter_template/features/navigation/domain/entity/app_route_paths.dart';
+import 'package:flutter_template/features/navigation/domain/entity/counter/counter_routes.dart';
 import 'package:flutter_template/features/navigation/domain/entity/debug/debug_routes.dart';
 import 'package:flutter_template/features/temp/screens/temp_screen/temp_screen_export.dart';
 
@@ -13,7 +14,11 @@ const tempRoutes = AutoRoute<dynamic>(
   children: [
     AutoRoute<dynamic>(
       page: TempScreen,
+      path: '',
+      children: [
+        debugRoutes,
+        counterRoutes,
+      ],
     ),
-    debugRoutes,
   ],
 );

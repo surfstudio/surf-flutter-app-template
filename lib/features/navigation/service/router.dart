@@ -1,8 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_template/features/counter/screen/counter_export.dart';
 import 'package:flutter_template/features/debug/screens/debug_screen/debug_screen_export.dart';
+import 'package:flutter_template/features/debug/screens/ui_kit/ui_kit_export.dart';
+import 'package:flutter_template/features/navigation/domain/entity/counter/counter_routes.dart';
+import 'package:flutter_template/features/navigation/domain/entity/debug/debug_routes.dart';
 import 'package:flutter_template/features/navigation/domain/entity/temp/temp_routes.dart';
+import 'package:flutter_template/features/navigation/domain/entity/ui_kit/ui_kit_routes.dart';
 import 'package:flutter_template/features/temp/screens/temp_screen/temp_screen_export.dart';
 
 part 'router.gr.dart';
@@ -10,7 +15,7 @@ part 'router.gr.dart';
 /// When you add route with screen don't forget add imports of screen and screen_widget_model
 
 /// All app routes
-@MaterialAutoRouter(
+@CustomAutoRouter(
   replaceInRouteName: 'ScreenWidget|Screen,Route',
   routes: <AutoRoute>[
     AutoRoute<dynamic>(
@@ -19,6 +24,9 @@ part 'router.gr.dart';
       path: '/',
       children: [
         tempRoutes,
+        counterRoutes,
+        debugRoutes,
+        uiKitRoutes,
       ],
     ),
   ],
