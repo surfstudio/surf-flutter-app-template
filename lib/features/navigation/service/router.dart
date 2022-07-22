@@ -15,7 +15,7 @@ part 'router.gr.dart';
 /// When you add route with screen don't forget add imports of screen and screen_widget_model
 
 /// All app routes
-@CustomAutoRouter(
+@MaterialAutoRouter(
   replaceInRouteName: 'ScreenWidget|Screen,Route',
   routes: <AutoRoute>[
     AutoRoute<dynamic>(

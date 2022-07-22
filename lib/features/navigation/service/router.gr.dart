@@ -18,52 +18,33 @@ class _$AppRouter extends RootStackRouter {
   @override
   final Map<String, PageFactory> pagesMap = {
     HomeRoute.name: (routeData) {
-      return CustomPage<dynamic>(
-          routeData: routeData, child: const EmptyRouterPage(), opaque: true, barrierDismissible: false);
+      return MaterialPageX<dynamic>(routeData: routeData, child: const EmptyRouterPage());
     },
     TempScreenRoute.name: (routeData) {
-      return CustomPage<dynamic>(
-          routeData: routeData, child: const EmptyRouterPage(), opaque: true, barrierDismissible: false);
+      return MaterialPageX<dynamic>(routeData: routeData, child: const EmptyRouterPage());
     },
     CounterScreenRoute.name: (routeData) {
       final args = routeData.argsAs<CounterScreenRouteArgs>(orElse: () => const CounterScreenRouteArgs());
-      return CustomPage<dynamic>(
-          routeData: routeData,
-          child: CounterScreen(wmFactory: args.wmFactory, key: args.key),
-          opaque: true,
-          barrierDismissible: false);
+      return MaterialPageX<dynamic>(
+          routeData: routeData, child: CounterScreen(wmFactory: args.wmFactory, key: args.key));
     },
     DebugScreenRoute.name: (routeData) {
-      return CustomPage<dynamic>(
-          routeData: routeData, child: const EmptyRouterPage(), opaque: true, barrierDismissible: false);
+      return MaterialPageX<dynamic>(routeData: routeData, child: const EmptyRouterPage());
     },
     UiKitScreen.name: (routeData) {
-      return CustomPage<dynamic>(
-          routeData: routeData, child: const EmptyRouterPage(), opaque: true, barrierDismissible: false);
+      return MaterialPageX<dynamic>(routeData: routeData, child: const EmptyRouterPage());
     },
     TempRoute.name: (routeData) {
       final args = routeData.argsAs<TempRouteArgs>(orElse: () => const TempRouteArgs());
-      return CustomPage<dynamic>(
-          routeData: routeData,
-          child: TempScreen(key: args.key, wmFactory: args.wmFactory),
-          opaque: true,
-          barrierDismissible: false);
+      return MaterialPageX<dynamic>(routeData: routeData, child: TempScreen(key: args.key, wmFactory: args.wmFactory));
     },
     DebugRoute.name: (routeData) {
       final args = routeData.argsAs<DebugRouteArgs>(orElse: () => const DebugRouteArgs());
-      return CustomPage<dynamic>(
-          routeData: routeData,
-          child: DebugScreen(key: args.key, wmFactory: args.wmFactory),
-          opaque: true,
-          barrierDismissible: false);
+      return MaterialPageX<dynamic>(routeData: routeData, child: DebugScreen(key: args.key, wmFactory: args.wmFactory));
     },
     UIKitRoute.name: (routeData) {
       final args = routeData.argsAs<UIKitRouteArgs>(orElse: () => const UIKitRouteArgs());
-      return CustomPage<dynamic>(
-          routeData: routeData,
-          child: UIKitScreen(wmFactory: args.wmFactory, key: args.key),
-          opaque: true,
-          barrierDismissible: false);
+      return MaterialPageX<dynamic>(routeData: routeData, child: UIKitScreen(wmFactory: args.wmFactory, key: args.key));
     }
   };
 
