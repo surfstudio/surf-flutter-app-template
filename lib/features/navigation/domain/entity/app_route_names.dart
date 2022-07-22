@@ -7,8 +7,8 @@
 /// ```
 abstract class AppRouteNames {
   /// TempScreen route name
-  static const String tempScreen = 'tempScreenRoute';
+  static const String tempScreen = 'tempRouter';
 
   /// DebugScreen route name
-  static const String debugScreen = 'debugScreenRoute';
+  static const String debugScreen = 'debugRouter';
 }
