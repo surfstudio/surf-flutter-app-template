@@ -5,7 +5,7 @@ import 'package:flutter_template/features/navigation/domain/entity/app_route_pat
 
 /// All routes for the debug feature.
 const debugRoutes = AutoRoute<dynamic>(
-  path: AppRoutePaths.debugScreen,
+  path: AppRoutePaths.debugPath,
   name: AppRouteNames.debugScreen,
   page: DebugScreen,
 );

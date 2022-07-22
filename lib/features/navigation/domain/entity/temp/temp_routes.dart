@@ -7,7 +7,7 @@ import 'package:flutter_template/features/temp/screens/temp_screen/temp_screen_e
 /// All routes for the temp feature.
 const tempRoutes = AutoRoute<dynamic>(
   initial: true,
-  path: AppRoutePaths.tempScreen,
+  path: AppRoutePaths.tempPath,
   name: AppRouteNames.tempScreen,
   page: EmptyRouterPage,
   children: [

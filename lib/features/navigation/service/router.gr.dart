@@ -20,15 +20,15 @@ class _$AppRouter extends RootStackRouter {
     HomeRoute.name: (routeData) {
       return MaterialPageX<dynamic>(routeData: routeData, child: const EmptyRouterPage());
     },
-    TempScreenRoute.name: (routeData) {
+    TempRouter.name: (routeData) {
       return MaterialPageX<dynamic>(routeData: routeData, child: const EmptyRouterPage());
     },
     TempRoute.name: (routeData) {
       final args = routeData.argsAs<TempRouteArgs>(orElse: () => const TempRouteArgs());
       return MaterialPageX<dynamic>(routeData: routeData, child: TempScreen(key: args.key, wmFactory: args.wmFactory));
     },
-    DebugScreenRoute.name: (routeData) {
-      final args = routeData.argsAs<DebugScreenRouteArgs>(orElse: () => const DebugScreenRouteArgs());
+    DebugRouter.name: (routeData) {
+      final args = routeData.argsAs<DebugRouterArgs>(orElse: () => const DebugRouterArgs());
       return MaterialPageX<dynamic>(routeData: routeData, child: DebugScreen(key: args.key, wmFactory: args.wmFactory));
     }
   };
@@ -36,10 +36,10 @@ class _$AppRouter extends RootStackRouter {
   @override
   List<RouteConfig> get routes => [
         RouteConfig(HomeRoute.name, path: '/', children: [
-          RouteConfig('#redirect', path: '', parent: HomeRoute.name, redirectTo: 'tempScreen', fullMatch: true),
-          RouteConfig(TempScreenRoute.name, path: 'tempScreen', parent: HomeRoute.name, children: [
-            RouteConfig(TempRoute.name, path: 'temp-screen', parent: TempScreenRoute.name),
-            RouteConfig(DebugScreenRoute.name, path: 'debugScreen', parent: TempScreenRoute.name)
+          RouteConfig('#redirect', path: '', parent: HomeRoute.name, redirectTo: 'temp', fullMatch: true),
+          RouteConfig(TempRouter.name, path: 'temp', parent: HomeRoute.name, children: [
+            RouteConfig(TempRoute.name, path: 'temp-screen', parent: TempRouter.name),
+            RouteConfig(DebugRouter.name, path: 'debug', parent: TempRouter.name)
           ])
         ])
       ];
@@ -55,11 +55,10 @@ class HomeRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [EmptyRouterPage]
-class TempScreenRoute extends PageRouteInfo<void> {
-  const TempScreenRoute({List<PageRouteInfo>? children})
-      : super(TempScreenRoute.name, path: 'tempScreen', initialChildren: children);
+class TempRouter extends PageRouteInfo<void> {
+  const TempRouter({List<PageRouteInfo>? children}) : super(TempRouter.name, path: 'temp', initialChildren: children);
 
-  static const String name = 'TempScreenRoute';
+  static const String name = 'TempRouter';
 }
 
 /// generated route for
@@ -89,18 +88,18 @@ class TempRouteArgs {
 
 /// generated route for
 /// [DebugScreen]
-class DebugScreenRoute extends PageRouteInfo<DebugScreenRouteArgs> {
-  DebugScreenRoute(
+class DebugRouter extends PageRouteInfo<DebugRouterArgs> {
+  DebugRouter(
       {Key? key,
       WidgetModel<ElementaryWidget<IWidgetModel>, ElementaryModel> Function(BuildContext) wmFactory =
           debugScreenWidgetModelFactory})
-      : super(DebugScreenRoute.name, path: 'debugScreen', args: DebugScreenRouteArgs(key: key, wmFactory: wmFactory));
+      : super(DebugRouter.name, path: 'debug', args: DebugRouterArgs(key: key, wmFactory: wmFactory));
 
-  static const String name = 'DebugScreenRoute';
+  static const String name = 'DebugRouter';
 }
 
-class DebugScreenRouteArgs {
-  const DebugScreenRouteArgs({this.key, this.wmFactory = debugScreenWidgetModelFactory});
+class DebugRouterArgs {
+  const DebugRouterArgs({this.key, this.wmFactory = debugScreenWidgetModelFactory});
 
   final Key? key;
 
@@ -108,6 +107,6 @@ class DebugScreenRouteArgs {
 
   @override
   String toString() {
-    return 'DebugScreenRouteArgs{key: $key, wmFactory: $wmFactory}';
+    return 'DebugRouterArgs{key: $key, wmFactory: $wmFactory}';
   }
 }
