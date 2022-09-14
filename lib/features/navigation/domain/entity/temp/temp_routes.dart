@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:auto_route/empty_router_widgets.dart';
 import 'package:flutter_template/features/navigation/domain/entity/app_route_names.dart';
 import 'package:flutter_template/features/navigation/domain/entity/app_route_paths.dart';
 import 'package:flutter_template/features/navigation/domain/entity/debug/debug_routes.dart';
