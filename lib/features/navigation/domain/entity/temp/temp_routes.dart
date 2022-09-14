@@ -14,6 +14,7 @@ const tempRoutes = AutoRoute<dynamic>(
   children: [
     AutoRoute<dynamic>(
       page: TempScreen,
+      path: '',
     ),
     debugRoutes,
   ],
