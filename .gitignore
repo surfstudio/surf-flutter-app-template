@@ -16,7 +16,7 @@
 .idea/
 
 # Visual Studio Code related
-.vscode/
+.vscode/settings.json
 
 # Flutter/Dart/Pub related
 **/doc/api/
