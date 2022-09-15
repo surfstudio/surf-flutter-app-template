@@ -32,6 +32,20 @@ class _$AppRouter extends RootStackRouter {
           routeData: routeData,
           child: TempScreen(key: args.key, wmFactory: args.wmFactory));
     },
+    DashRouter.name: (routeData) {
+      final args = routeData.argsAs<DashRouterArgs>(
+          orElse: () => const DashRouterArgs());
+      return MaterialPageX<dynamic>(
+          routeData: routeData,
+          child: DashScreen(key: args.key, wmFactory: args.wmFactory));
+    },
+    InfoRouter.name: (routeData) {
+      final args = routeData.argsAs<InfoRouterArgs>(
+          orElse: () => const InfoRouterArgs());
+      return MaterialPageX<dynamic>(
+          routeData: routeData,
+          child: InfoScreen(key: args.key, wmFactory: args.wmFactory));
+    },
     DebugRouter.name: (routeData) {
       final args = routeData.argsAs<DebugRouterArgs>(
           orElse: () => const DebugRouterArgs());
@@ -53,9 +67,22 @@ class _$AppRouter extends RootStackRouter {
               path: 'temp',
               parent: HomeRoute.name,
               children: [
-                RouteConfig(TempRoute.name, path: '', parent: TempRouter.name),
-                RouteConfig(DebugRouter.name,
-                    path: 'debug', parent: TempRouter.name)
+                RouteConfig(TempRoute.name,
+                    path: '',
+                    parent: TempRouter.name,
+                    children: [
+                      RouteConfig('#redirect',
+                          path: '',
+                          parent: TempRoute.name,
+                          redirectTo: 'dash',
+                          fullMatch: true),
+                      RouteConfig(DashRouter.name,
+                          path: 'dash', parent: TempRoute.name),
+                      RouteConfig(InfoRouter.name,
+                          path: 'info', parent: TempRoute.name),
+                      RouteConfig(DebugRouter.name,
+                          path: 'debug', parent: TempRoute.name)
+                    ])
               ])
         ])
       ];
@@ -86,9 +113,12 @@ class TempRoute extends PageRouteInfo<TempRouteArgs> {
       {Key? key,
       WidgetModel<ElementaryWidget<IWidgetModel>, ElementaryModel> Function(
               BuildContext)
-          wmFactory = initScreenWidgetModelFactory})
+          wmFactory = initScreenWidgetModelFactory,
+      List<PageRouteInfo>? children})
       : super(TempRoute.name,
-            path: '', args: TempRouteArgs(key: key, wmFactory: wmFactory));
+            path: '',
+            args: TempRouteArgs(key: key, wmFactory: wmFactory),
+            initialChildren: children);
 
   static const String name = 'TempRoute';
 }
@@ -105,6 +135,62 @@ class TempRouteArgs {
   @override
   String toString() {
     return 'TempRouteArgs{key: $key, wmFactory: $wmFactory}';
+  }
+}
+
+/// generated route for
+/// [DashScreen]
+class DashRouter extends PageRouteInfo<DashRouterArgs> {
+  DashRouter(
+      {Key? key,
+      WidgetModel<ElementaryWidget<IWidgetModel>, ElementaryModel> Function(
+              BuildContext)
+          wmFactory = dashScreenWmFactory})
+      : super(DashRouter.name,
+            path: 'dash', args: DashRouterArgs(key: key, wmFactory: wmFactory));
+
+  static const String name = 'DashRouter';
+}
+
+class DashRouterArgs {
+  const DashRouterArgs({this.key, this.wmFactory = dashScreenWmFactory});
+
+  final Key? key;
+
+  final WidgetModel<ElementaryWidget<IWidgetModel>, ElementaryModel> Function(
+      BuildContext) wmFactory;
+
+  @override
+  String toString() {
+    return 'DashRouterArgs{key: $key, wmFactory: $wmFactory}';
+  }
+}
+
+/// generated route for
+/// [InfoScreen]
+class InfoRouter extends PageRouteInfo<InfoRouterArgs> {
+  InfoRouter(
+      {Key? key,
+      WidgetModel<ElementaryWidget<IWidgetModel>, ElementaryModel> Function(
+              BuildContext)
+          wmFactory = infoScreenWmFactory})
+      : super(InfoRouter.name,
+            path: 'info', args: InfoRouterArgs(key: key, wmFactory: wmFactory));
+
+  static const String name = 'InfoRouter';
+}
+
+class InfoRouterArgs {
+  const InfoRouterArgs({this.key, this.wmFactory = infoScreenWmFactory});
+
+  final Key? key;
+
+  final WidgetModel<ElementaryWidget<IWidgetModel>, ElementaryModel> Function(
+      BuildContext) wmFactory;
+
+  @override
+  String toString() {
+    return 'InfoRouterArgs{key: $key, wmFactory: $wmFactory}';
   }
 }
 

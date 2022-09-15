@@ -1,9 +1,10 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/features/dash/screen/dash_screen_export.dart';
+import 'package:flutter_template/features/dash/screen/dash_screen.dart';
+import 'package:flutter_template/features/dash/screen/dash_screen_model.dart';
 
 /// Factory for [DashScreenWidgetModel].
-DashScreenWidgetModel defaultDashScreenWidgetModelFactory(
+DashScreenWidgetModel dashScreenWmFactory(
   BuildContext context,
 ) {
   final model = DashScreenModel();

@@ -1,9 +1,10 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/features/info/screen/info_screen_export.dart';
+import 'package:flutter_template/features/info/screen/info_screen.dart';
+import 'package:flutter_template/features/info/screen/info_screen_model.dart';
 
 /// Factory for [InfoScreenWidgetModel].
-InfoScreenWidgetModel defaultInfoScreenWidgetModelFactory(
+InfoScreenWidgetModel infoScreenWmFactory(
   BuildContext context,
 ) {
   final model = InfoScreenModel();
