@@ -1,7 +1,6 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_template/config/app_config.dart';
-import 'package:flutter_template/config/debug_options.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/config/urls.dart';
 import 'package:flutter_template/features/debug/screens/debug_screen/debug_screen.dart';
@@ -58,48 +57,6 @@ class DebugScreenModel extends ElementaryModel {
     _refreshApp(newConfig);
   }
 
-  /// Change showPerformanceOverlay value in debugOptions.
-  void showPerformanceOverlayChange(bool? value) {
-    _setDebugOptionState(
-      configNotifier.value.debugOptions.copyWith(showPerformanceOverlay: value),
-    );
-  }
-
-  /// Change debugShowMaterialGrid value in debugOptions.
-  void debugShowMaterialGridChange(bool? value) {
-    _setDebugOptionState(
-      configNotifier.value.debugOptions.copyWith(debugShowMaterialGrid: value),
-    );
-  }
-
-  /// Change debugShowCheckedModeBanner value in debugOptions.
-  void debugShowCheckedModeBannerChange(bool? value) {
-    _setDebugOptionState(
-      configNotifier.value.debugOptions.copyWith(debugShowCheckedModeBanner: value),
-    );
-  }
-
-  /// Change checkerboardRasterCacheImages value in debugOptions.
-  void checkerboardRasterCacheImagesChange(bool? value) {
-    _setDebugOptionState(
-      configNotifier.value.debugOptions.copyWith(checkerboardRasterCacheImages: value),
-    );
-  }
-
-  /// Change checkerboardOffscreenLayers value in debugOptions.
-  void checkerboardOffscreenLayersChange(bool? value) {
-    _setDebugOptionState(
-      configNotifier.value.debugOptions.copyWith(checkerboardOffscreenLayers: value),
-    );
-  }
-
-  /// Change showSemanticsDebugger value in debugOptions.
-  void showSemanticsDebuggerChange(bool? value) {
-    _setDebugOptionState(
-      configNotifier.value.debugOptions.copyWith(showSemanticsDebugger: value),
-    );
-  }
-
   /// Change proxyUrl value.
   void setProxy(String? proxyUrl) {
     _refreshApp(
@@ -110,10 +67,6 @@ class DebugScreenModel extends ElementaryModel {
   void _refreshApp(AppConfig newConfig) {
     _setConfig(newConfig);
     applicationRebuilder();
-  }
-
-  void _setDebugOptionState(DebugOptions newOpt) {
-    _setConfig(configNotifier.value.copyWith(debugOptions: newOpt));
   }
 
   // ignore: use_setters_to_change_properties

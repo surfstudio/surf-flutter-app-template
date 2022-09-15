@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_template/config/app_config.dart';
-import 'package:flutter_template/config/debug_options.dart';
-import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/common/widgets/di_scope/di_scope.dart';
 
@@ -38,23 +35,11 @@ class _AppState extends State<App> {
         localizationsDelegates: _localizationsDelegates,
         supportedLocales: _localizations,
 
-        /// Debug configuration.
-        showPerformanceOverlay: _getDebugConfig().showPerformanceOverlay,
-        debugShowMaterialGrid: _getDebugConfig().debugShowMaterialGrid,
-        checkerboardRasterCacheImages: _getDebugConfig().checkerboardRasterCacheImages,
-        checkerboardOffscreenLayers: _getDebugConfig().checkerboardOffscreenLayers,
-        showSemanticsDebugger: _getDebugConfig().showSemanticsDebugger,
-        debugShowCheckedModeBanner: _getDebugConfig().debugShowCheckedModeBanner,
-
         /// This is for navigation.
         routeInformationParser: _scope.router.defaultRouteParser(),
         routerDelegate: _scope.router.delegate(),
       ),
     );
-  }
-
-  DebugOptions _getDebugConfig() {
-    return Environment<AppConfig>.instance().config.debugOptions;
   }
 
   void _rebuildApplication() {
