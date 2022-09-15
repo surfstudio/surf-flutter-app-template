@@ -19,8 +19,21 @@ TempScreenWidgetModel initScreenWidgetModelFactory(
 /// Widget model for [TempScreen].
 class TempScreenWidgetModel extends WidgetModel<TempScreen, ITempScreenModel>
     implements IDebugWidgetModel {
-  @override
-  bool get isDebugMode => model.isDebugMode;
+  final _defaultNavBarItems = [
+    const BottomNavigationBarItem(
+      label: 'Dash screen',
+      icon: Icon(Icons.flutter_dash),
+    ),
+    const BottomNavigationBarItem(
+      label: 'Info screen',
+      icon: Icon(Icons.info_outline),
+    ),
+  ];
+
+  final _debugNavBarItem = const BottomNavigationBarItem(
+    label: 'Debug screen',
+    icon: Icon(Icons.bug_report_outlined),
+  );
 
   @override
   List<PageRouteInfo> get routes => _routes;
@@ -29,21 +42,18 @@ class TempScreenWidgetModel extends WidgetModel<TempScreen, ITempScreenModel>
   List<BottomNavigationBarItem> get navigationBarItems => _navigationBarItems;
 
   List<PageRouteInfo> get _routes {
-    return isDebugMode ? [DebugRouter()] : [DashRouter(), InfoRouter()];
+    final defaultRoutes = <PageRouteInfo>[DashRouter(), InfoRouter()];
+    if (_isDebugMode) defaultRoutes.add(DebugRouter());
+    return defaultRoutes;
   }
 
   List<BottomNavigationBarItem> get _navigationBarItems {
-    return [
-      const BottomNavigationBarItem(
-        label: 'Dash screen',
-        icon: Icon(Icons.flutter_dash),
-      ),
-      const BottomNavigationBarItem(
-        label: 'Info screen',
-        icon: Icon(Icons.info_outline),
-      ),
-    ];
+    final navBarItems = [..._defaultNavBarItems];
+    if (_isDebugMode) navBarItems.add(_debugNavBarItem);
+    return navBarItems;
   }
+
+  bool get _isDebugMode => model.isDebugMode;
 
   /// Create an instance [TempScreenWidgetModel].
   TempScreenWidgetModel(ITempScreenModel model) : super(model);
@@ -67,9 +77,6 @@ class TempScreenWidgetModel extends WidgetModel<TempScreen, ITempScreenModel>
 
 /// Interface of [TempScreenWidgetModel].
 abstract class IDebugWidgetModel extends IWidgetModel {
-  /// Return value for app environment status.
-  bool get isDebugMode;
-
   /// Routes for [AutoTabsRouter.tabBar].
   List<PageRouteInfo<dynamic>> get routes;
 
