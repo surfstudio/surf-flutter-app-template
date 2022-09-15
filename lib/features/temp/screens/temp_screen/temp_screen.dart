@@ -22,46 +22,13 @@ class TempScreen extends ElementaryWidget<TempScreenWidgetModel> {
             title: Text(wm.appBarTitle(context.topRoute)),
           ),
           body: child,
-          bottomNavigationBar: wm.isDebugMode
-              ? const _SingleBottomNavBarItem()
-              : BottomNavigationBar(
-                  currentIndex: tabsRouter.activeIndex,
-                  onTap: tabsRouter.setActiveIndex,
-                  items: wm.navigationBarItems,
-                ),
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: tabsRouter.activeIndex,
+            onTap: tabsRouter.setActiveIndex,
+            items: wm.navigationBarItems,
+          ),
         );
       },
-    );
-  }
-}
-
-class _SingleBottomNavBarItem extends StatelessWidget {
-  const _SingleBottomNavBarItem({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      elevation: 8.0,
-      child: SafeArea(
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                Icons.bug_report_outlined,
-                color: Theme.of(context).primaryColor,
-              ),
-              Text(
-                'Debug screen',
-                style: TextStyle(color: Theme.of(context).primaryColor),
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }
