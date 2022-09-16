@@ -1,12 +1,12 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/config/urls.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/debug/screens/debug_screen/debug_screen.dart';
 import 'package:flutter_template/features/debug/screens/debug_screen/debug_screen_model.dart';
 import 'package:flutter_template/features/navigation/service/router.dart';
+import 'package:flutter_template/persistence/storage/config_storage/config_storage_impl.dart';
 import 'package:provider/provider.dart';
 
 // ignore_for_file: avoid_positional_boolean_parameters
@@ -16,10 +16,14 @@ DebugScreenWidgetModel debugScreenWidgetModelFactory(
   BuildContext context,
 ) {
   final appDependencies = context.read<IAppScope>();
+  final configStorage =
+      ConfigSettingsStorageImpl(appDependencies.sharedPreferences);
+
   final model = DebugScreenModel(
     appDependencies.errorHandler,
-    Environment<AppConfig>.instance(),
+    Environment.instance(),
     appDependencies.applicationRebuilder,
+    configStorage,
   );
   final router = appDependencies.router;
   return DebugScreenWidgetModel(model, router);
@@ -34,7 +38,9 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
   /// Class that coordinates navigation for the whole app.
   final AppRouter router;
 
-  final _textEditingController = TextEditingController();
+  late final _textEditingController = TextEditingController(
+    text: model.proxyUrl,
+  );
   final _urlState = StateNotifier<UrlType>();
 
   @override
@@ -101,7 +107,11 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
     }
 
     if (_proxyUrl != null && _proxyUrl!.isNotEmpty) {
-      proxyEditingController.text = _proxyUrl!;
+      proxyEditingController
+        ..text = _proxyUrl!
+        ..selection = TextSelection.collapsed(
+          offset: _proxyUrl!.length,
+        );
     } else {
       proxyEditingController.text = _emptyString;
     }

@@ -3,17 +3,20 @@ import 'dart:ui';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:elementary/elementary.dart';
-import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/navigation/service/router.dart';
 import 'package:flutter_template/util/default_error_handler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// Scope of dependencies which need through all app's life.
 class AppScope implements IAppScope {
   late final Dio _dio;
   late final ErrorHandler _errorHandler;
-  late final VoidCallback _applicationRebuilder;
   late final AppRouter _router;
+  final SharedPreferences _sharedPreferences;
+
+  @override
+  late VoidCallback applicationRebuilder;
 
   @override
   Dio get dio => _dio;
@@ -22,15 +25,13 @@ class AppScope implements IAppScope {
   ErrorHandler get errorHandler => _errorHandler;
 
   @override
-  VoidCallback get applicationRebuilder => _applicationRebuilder;
-
-  @override
   AppRouter get router => _router;
 
+  @override
+  SharedPreferences get sharedPreferences => _sharedPreferences;
+
   /// Create an instance [AppScope].
-  AppScope({
-    required VoidCallback applicationRebuilder,
-  }) : _applicationRebuilder = applicationRebuilder {
+  AppScope(this._sharedPreferences) {
     /// List interceptor. Fill in as needed.
     final additionalInterceptors = <Interceptor>[];
 
@@ -45,13 +46,14 @@ class AppScope implements IAppScope {
     final dio = Dio();
 
     dio.options
-      ..baseUrl = Environment<AppConfig>.instance().config.url
+      ..baseUrl = Environment.instance().config.url
       ..connectTimeout = timeout.inMilliseconds
       ..receiveTimeout = timeout.inMilliseconds
       ..sendTimeout = timeout.inMilliseconds;
 
-    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) {
-      final proxyUrl = Environment<AppConfig>.instance().config.proxyUrl;
+    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (client) {
+      final proxyUrl = Environment.instance().config.proxyUrl;
       if (proxyUrl != null && proxyUrl.isNotEmpty) {
         client
           ..findProxy = (uri) {
@@ -67,8 +69,9 @@ class AppScope implements IAppScope {
 
     dio.interceptors.addAll(additionalInterceptors);
 
-    if (Environment<AppConfig>.instance().isDebug) {
-      dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
+    if (Environment.instance().isDebug) {
+      dio.interceptors
+          .add(LogInterceptor(requestBody: true, responseBody: true));
     }
 
     return dio;
@@ -88,4 +91,7 @@ abstract class IAppScope {
 
   /// Class that coordinates navigation for the whole app.
   AppRouter get router;
+
+  /// Shared preferences.
+  SharedPreferences get sharedPreferences;
 }

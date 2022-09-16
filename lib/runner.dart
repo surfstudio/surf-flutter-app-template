@@ -4,6 +4,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_template/features/app/app.dart';
+import 'package:flutter_template/features/app/di/app_scope_register.dart';
 import 'package:flutter_template/util/crashlytics_strategy.dart';
 import 'package:surf_logger/surf_logger.dart';
 
@@ -23,7 +24,13 @@ Future<void> run() async {
 void _runApp() {
   runZonedGuarded<Future<void>>(
     () async {
-      runApp(const App());
+      final appScopeRegister = AppScopeRegister();
+      final appScope = await appScopeRegister.createScope();
+
+      runApp(App(
+        appScope: appScope,
+        appScopeRegister: appScopeRegister,
+      ));
     },
     (exception, stack) {
       // TODO(init-project): Инициализировать Crashlytics.

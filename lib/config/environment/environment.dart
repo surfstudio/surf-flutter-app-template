@@ -1,15 +1,17 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/environment/build_types.dart';
+import 'package:flutter_template/persistence/storage/config_storage/config_storage.dart';
 
 /// Environment configuration.
-class Environment<T> implements Listenable {
+class Environment implements Listenable {
   static Environment? _instance;
   final BuildType _currentBuildType;
 
   /// Configuration.
-  T get config => _config.value;
+  AppConfig get config => _config.value;
 
-  set config(T c) => _config.value = c;
+  set config(AppConfig c) => _config.value = c;
 
   /// Is this application running in debug mode.
   bool get isDebug => _currentBuildType == BuildType.debug;
@@ -20,12 +22,13 @@ class Environment<T> implements Listenable {
   /// App build type.
   BuildType get buildType => _currentBuildType;
 
-  ValueNotifier<T> _config;
+  ValueNotifier<AppConfig> _config;
 
-  Environment._(this._currentBuildType, T config) : _config = ValueNotifier(config);
+  Environment._(this._currentBuildType, AppConfig config)
+      : _config = ValueNotifier(config);
 
   /// Provides instance [Environment].
-  factory Environment.instance() => _instance as Environment<T>;
+  factory Environment.instance() => _instance as Environment;
 
   @override
   void addListener(VoidCallback listener) {
@@ -38,10 +41,22 @@ class Environment<T> implements Listenable {
   }
 
   /// Initializing the environment.
-  static void init<T>({
+  static void init({
     required BuildType buildType,
-    required T config,
+    required AppConfig config,
   }) {
-    _instance ??= Environment<T>._(buildType, config);
+    _instance ??= Environment._(buildType, config);
   }
+
+  /// Update config proxy url from storage
+  Future<void> refreshConfigProxy(IConfigSettingsStorage storage) async {
+    final savedProxy = storage.getProxyUrl();
+    if (savedProxy?.isNotEmpty ?? false) {
+      config = config.copyWith(proxyUrl: savedProxy);
+    }
+  }
+
+  /// Save config proxy url to storage
+  Future<void> saveConfigProxy(IConfigSettingsStorage storage) =>
+      storage.setProxyUrl(proxy: config.proxyUrl ?? '');
 }

@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/navigation/domain/entity/app_route_paths.dart';
 import 'package:flutter_template/features/navigation/service/router.dart';
@@ -12,7 +11,7 @@ import 'package:flutter_template/features/temp/screens/temp_screen/temp_screen_m
 TempScreenWidgetModel initScreenWidgetModelFactory(
   BuildContext context,
 ) {
-  final model = TempScreenModel(Environment<AppConfig>.instance());
+  final model = TempScreenModel(Environment.instance());
   return TempScreenWidgetModel(model);
 }
 

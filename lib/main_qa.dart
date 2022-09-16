@@ -10,7 +10,6 @@ void main() {
     buildType: BuildType.qa,
     config: AppConfig(
       url: Url.testUrl,
-      proxyUrl: Url.qaProxyUrl,
     ),
   );
 
