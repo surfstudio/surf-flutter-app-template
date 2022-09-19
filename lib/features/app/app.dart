@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_template/assets/themes/theme_data.dart';
+import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/app/di/app_scope_register.dart';
@@ -27,7 +28,7 @@ class App extends StatefulWidget {
   _AppState createState() => _AppState();
 }
 
-class _AppState extends State<App> with TickerProviderStateMixin {
+class _AppState extends State<App> {
   late IAppScope _scope;
   late IThemeService _themeService;
 
@@ -40,7 +41,7 @@ class _AppState extends State<App> with TickerProviderStateMixin {
     _themeService = _scope.themeService;
 
     final configStorage = ConfigSettingsStorageImpl(_scope.sharedPreferences);
-    final environment = Environment.instance();
+    final environment = Environment<AppConfig>.instance();
     if (!environment.isRelease) {
       environment.refreshConfigProxy(configStorage);
     }

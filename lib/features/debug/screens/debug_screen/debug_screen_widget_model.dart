@@ -1,5 +1,6 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/config/urls.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
@@ -21,7 +22,7 @@ DebugScreenWidgetModel debugScreenWidgetModelFactory(
 
   final model = DebugScreenModel(
     appDependencies.errorHandler,
-    Environment.instance(),
+    Environment<AppConfig>.instance(),
     appDependencies.applicationRebuilder,
     configStorage,
   );

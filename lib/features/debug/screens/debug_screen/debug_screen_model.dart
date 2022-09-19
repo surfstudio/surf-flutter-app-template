@@ -15,7 +15,7 @@ class DebugScreenModel extends ElementaryModel {
   final ErrorHandler errorHandler;
 
   /// Environment configuration.
-  final Environment _environment;
+  final Environment<AppConfig> _environment;
 
   /// Callback to rebuild the whole application.
   final VoidCallback _applicationRebuilder;

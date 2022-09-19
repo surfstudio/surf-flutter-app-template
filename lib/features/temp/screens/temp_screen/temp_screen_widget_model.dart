@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/assets/colors/color_scheme.dart';
+import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/navigation/domain/entity/app_route_paths.dart';
@@ -17,7 +18,7 @@ TempScreenWidgetModel initScreenWidgetModelFactory(
   final appScope = context.read<IAppScope>();
 
   final model = TempScreenModel(
-    Environment.instance(),
+    Environment<AppConfig>.instance(),
     appScope.themeService,
   );
 
