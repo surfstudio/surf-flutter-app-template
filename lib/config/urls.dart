@@ -1,3 +1,4 @@
+import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 
 /// Server urls.
@@ -12,5 +13,5 @@ abstract class Url {
   static String get devUrl => 'https://localhost:9999/food/hs/ExchangeSotr';
 
   /// Base url.
-  static String get baseUrl => Environment.instance().config.url;
+  static String get baseUrl => Environment<AppConfig>.instance().config.url;
 }
