@@ -1,18 +1,24 @@
-import 'dart:ui';
-
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:elementary/elementary.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_template/config/environment/environment.dart';
+import 'package:flutter_template/features/common/service/theme/theme_service.dart';
+import 'package:flutter_template/features/common/service/theme/theme_service_impl.dart';
 import 'package:flutter_template/features/navigation/service/router.dart';
+import 'package:flutter_template/persistence/storage/theme_storage/theme_storage.dart';
+import 'package:flutter_template/persistence/storage/theme_storage/theme_storage_impl.dart';
 import 'package:flutter_template/util/default_error_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Scope of dependencies which need through all app's life.
 class AppScope implements IAppScope {
+  static const _themeByDefault = ThemeMode.light;
+
   late final Dio _dio;
   late final ErrorHandler _errorHandler;
   late final AppRouter _router;
+  late final IThemeService _themeService;
   final SharedPreferences _sharedPreferences;
 
   @override
@@ -30,6 +36,11 @@ class AppScope implements IAppScope {
   @override
   SharedPreferences get sharedPreferences => _sharedPreferences;
 
+  @override
+  IThemeService get themeService => _themeService;
+
+  late IThemeModeStorage _themeModeStorage;
+
   /// Create an instance [AppScope].
   AppScope(this._sharedPreferences) {
     /// List interceptor. Fill in as needed.
@@ -38,6 +49,11 @@ class AppScope implements IAppScope {
     _dio = _initDio(additionalInterceptors);
     _errorHandler = DefaultErrorHandler();
     _router = AppRouter.instance();
+    _themeModeStorage = ThemeModeStorageImpl(sharedPreferences);
+    _themeService = ThemeServiceImpl(
+      ThemeModeStorageImpl(sharedPreferences).getThemeMode() ?? _themeByDefault,
+    );
+    _themeService.addListener(_onThemeModeChanged);
   }
 
   Dio _initDio(Iterable<Interceptor> additionalInterceptors) {
@@ -76,6 +92,10 @@ class AppScope implements IAppScope {
 
     return dio;
   }
+
+  Future<void> _onThemeModeChanged() async {
+    await _themeModeStorage.saveThemeMode(mode: _themeService.currentThemeMode);
+  }
 }
 
 /// App dependencies.
@@ -94,4 +114,7 @@ abstract class IAppScope {
 
   /// Shared preferences.
   SharedPreferences get sharedPreferences;
+
+  /// A service that stores and retrieves app theme mode.
+  IThemeService get themeService;
 }

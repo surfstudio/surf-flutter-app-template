@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_template/assets/themes/theme_data.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/app/di/app_scope_register.dart';
+import 'package:flutter_template/features/common/service/theme/theme_service.dart';
 import 'package:flutter_template/features/common/widgets/di_scope/di_scope.dart';
 import 'package:flutter_template/persistence/storage/config_storage/config_storage_impl.dart';
 
@@ -25,14 +27,17 @@ class App extends StatefulWidget {
   _AppState createState() => _AppState();
 }
 
-class _AppState extends State<App> {
+class _AppState extends State<App> with TickerProviderStateMixin {
   late IAppScope _scope;
+  late IThemeService _themeService;
 
   @override
   void initState() {
     super.initState();
 
     _scope = widget.appScope..applicationRebuilder = _rebuildApplication;
+
+    _themeService = _scope.themeService;
 
     final configStorage = ConfigSettingsStorageImpl(_scope.sharedPreferences);
     final environment = Environment.instance();
@@ -48,15 +53,24 @@ class _AppState extends State<App> {
       factory: () {
         return _scope;
       },
-      child: MaterialApp.router(
-        /// Localization.
-        locale: _localizations.first,
-        localizationsDelegates: _localizationsDelegates,
-        supportedLocales: _localizations,
+      child: AnimatedBuilder(
+        animation: _themeService,
+        builder: (context, child) {
+          return MaterialApp.router(
+            theme: AppThemeData.lightTheme,
+            darkTheme: AppThemeData.darkTheme,
+            themeMode: _themeService.currentThemeMode,
 
-        /// This is for navigation.
-        routeInformationParser: _scope.router.defaultRouteParser(),
-        routerDelegate: _scope.router.delegate(),
+            /// Localization.
+            locale: _localizations.first,
+            localizationsDelegates: _localizationsDelegates,
+            supportedLocales: _localizations,
+
+            /// This is for navigation.
+            routeInformationParser: _scope.router.defaultRouteParser(),
+            routerDelegate: _scope.router.delegate(),
+          );
+        },
       ),
     );
   }
