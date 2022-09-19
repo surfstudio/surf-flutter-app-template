@@ -20,12 +20,24 @@ class TempScreen extends ElementaryWidget<TempScreenWidgetModel> {
         return Scaffold(
           appBar: AppBar(
             title: Text(wm.appBarTitle(context.topRoute)),
+            actions: [
+              GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: wm.switchTheme,
+                child: const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Icon(Icons.light_mode_outlined),
+                ),
+              ),
+            ],
           ),
           body: child,
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: tabsRouter.activeIndex,
             onTap: tabsRouter.setActiveIndex,
             items: wm.navigationBarItems,
+            selectedItemColor: wm.colorScheme.selectedItem,
+            unselectedItemColor: wm.colorScheme.unselectedItem,
           ),
         );
       },

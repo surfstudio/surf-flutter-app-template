@@ -13,7 +13,7 @@ class DashScreen extends ElementaryWidget<IDashScreenWidgetModel> {
   @override
   Widget build(IDashScreenWidgetModel wm) {
     return ColoredBox(
-      color: Colors.blue.shade50,
+      color: wm.colorScheme.background,
       child: const Center(
         child: Text('Dash screen view'),
       ),

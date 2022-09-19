@@ -1,17 +1,26 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_template/assets/colors/color_scheme.dart';
 import 'package:flutter_template/config/environment/environment.dart';
+import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/navigation/domain/entity/app_route_paths.dart';
 import 'package:flutter_template/features/navigation/service/router.dart';
 import 'package:flutter_template/features/temp/screens/temp_screen/temp_screen.dart';
 import 'package:flutter_template/features/temp/screens/temp_screen/temp_screen_model.dart';
+import 'package:provider/provider.dart';
 
 /// Factory for [TempScreenWidgetModel].
 TempScreenWidgetModel initScreenWidgetModelFactory(
   BuildContext context,
 ) {
-  final model = TempScreenModel(Environment.instance());
+  final appScope = context.read<IAppScope>();
+
+  final model = TempScreenModel(
+    Environment.instance(),
+    appScope.themeService,
+  );
+
   return TempScreenWidgetModel(model);
 }
 
@@ -40,6 +49,9 @@ class TempScreenWidgetModel extends WidgetModel<TempScreen, ITempScreenModel>
   @override
   List<BottomNavigationBarItem> get navigationBarItems => _navigationBarItems;
 
+  @override
+  AppColorScheme get colorScheme => AppColorScheme.of(context);
+
   List<PageRouteInfo> get _routes {
     final defaultRoutes = <PageRouteInfo>[DashRouter(), InfoRouter()];
     if (_isDebugMode) defaultRoutes.add(DebugRouter());
@@ -59,6 +71,9 @@ class TempScreenWidgetModel extends WidgetModel<TempScreen, ITempScreenModel>
 
   @override
   String appBarTitle(RouteData topRoute) => _appBarTitle(topRoute);
+
+  @override
+  void switchTheme() => model.switchTheme();
 
   String _appBarTitle(RouteData topRoute) {
     switch (topRoute.path) {
@@ -82,6 +97,12 @@ abstract class IDebugWidgetModel extends IWidgetModel {
   /// Items for [BottomNavigationBar].
   List<BottomNavigationBarItem> get navigationBarItems;
 
+  /// App color scheme.
+  AppColorScheme get colorScheme;
+
   /// Title for appbar, depends on current selected page.
   String appBarTitle(RouteData topRoute);
+
+  /// Switch theme mode between light and dark
+  void switchTheme();
 }
