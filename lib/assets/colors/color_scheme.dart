@@ -111,7 +111,8 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
 
   /// Return color scheme for app from context
   static AppColorScheme of(BuildContext context) =>
-      Theme.of(context).extension<AppColorScheme>()!;
+      Theme.of(context).extension<AppColorScheme>() ??
+      _throwThemeExceptionFromFunc(context);
 
   /// @nodoc
   ThemeExtension<AppColorScheme> copyWith({
@@ -144,3 +145,6 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
     );
   }
 }
+
+Never _throwThemeExceptionFromFunc(BuildContext context) =>
+    throw Exception('$AppColorScheme не найдена в $context');
