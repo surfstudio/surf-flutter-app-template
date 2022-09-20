@@ -21,9 +21,7 @@ enum AppColors {
   darkGrey(Color(0xFFA7A7A7)),
   raisinBlack(Color(0xFF212121));
 
-  // can add more properties or getters/methods if needed
   final Color value;
 
-  // can use named parameters if you want
   const AppColors(this.value);
 }
