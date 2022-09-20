@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_template/assets/colors/color_scheme.dart';
+import 'package:flutter_template/assets/text/text_extention.dart';
 
 /// Class of the app themes data
 abstract class AppThemeData {
@@ -40,9 +41,10 @@ abstract class AppThemeData {
       onSurface: _darkColorScheme.onSurface,
     ),
     scaffoldBackgroundColor: _darkColorScheme.background,
-    extensions: [_darkColorScheme],
+    extensions: [_darkColorScheme, _textTheme],
   );
 
   static final _lightColorScheme = AppColorScheme.light();
   static final _darkColorScheme = AppColorScheme.dark();
+  static final _textTheme = AppTextTheme.base();
 }
