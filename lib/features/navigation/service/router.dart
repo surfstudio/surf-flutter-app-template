@@ -16,14 +16,7 @@ part 'router.gr.dart';
 @MaterialAutoRouter(
   replaceInRouteName: 'ScreenWidget|Screen,Route',
   routes: <AutoRoute>[
-    AutoRoute<dynamic>(
-      name: 'homeRoute',
-      page: EmptyRouterPage,
-      path: '/',
-      children: [
-        tempRoutes,
-      ],
-    ),
+    tempRoutes,
   ],
 )
 
