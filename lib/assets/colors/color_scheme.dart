@@ -43,34 +43,34 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
   final Color unselectedItem;
 
   /// Base light theme of the app.
-  const AppColorScheme.light()
-      : primary = AppColors.cornflowerBlue,
-        onPrimary = AppColors.white,
-        secondary = AppColors.purple,
-        onSecondary = AppColors.white,
-        surface = AppColors.white,
-        onSurface = AppColors.raisinBlack,
-        background = AppColors.solitude,
-        onBackground = AppColors.raisinBlack,
-        error = AppColors.freeSpeechRed,
-        onError = AppColors.white,
-        selectedItem = AppColors.cornflowerBlue,
-        unselectedItem = AppColors.darkGrey;
+  AppColorScheme.light()
+      : primary = AppColors.cornflowerBlue.value,
+        onPrimary = AppColors.white.value,
+        secondary = AppColors.purple.value,
+        onSecondary = AppColors.white.value,
+        surface = AppColors.white.value,
+        onSurface = AppColors.raisinBlack.value,
+        background = AppColors.solitude.value,
+        onBackground = AppColors.raisinBlack.value,
+        error = AppColors.freeSpeechRed.value,
+        onError = AppColors.white.value,
+        selectedItem = AppColors.cornflowerBlue.value,
+        unselectedItem = AppColors.darkGrey.value;
 
   /// Dark theme of the app.
-  const AppColorScheme.dark()
-      : primary = AppColors.prussianBlue,
-        onPrimary = AppColors.darkGrey,
-        secondary = AppColors.oxfordBlue,
-        onSecondary = AppColors.darkGrey,
-        surface = AppColors.oxfordBlue,
-        onSurface = AppColors.darkGrey,
-        background = AppColors.jaguar,
-        onBackground = AppColors.darkGrey,
-        error = AppColors.freeSpeechRed,
-        onError = AppColors.darkGrey,
-        selectedItem = AppColors.horizon,
-        unselectedItem = AppColors.darkGrey;
+  AppColorScheme.dark()
+      : primary = AppColors.prussianBlue.value,
+        onPrimary = AppColors.darkGrey.value,
+        secondary = AppColors.oxfordBlue.value,
+        onSecondary = AppColors.darkGrey.value,
+        surface = AppColors.oxfordBlue.value,
+        onSurface = AppColors.darkGrey.value,
+        background = AppColors.jaguar.value,
+        onBackground = AppColors.darkGrey.value,
+        error = AppColors.freeSpeechRed.value,
+        onError = AppColors.darkGrey.value,
+        selectedItem = AppColors.horizon.value,
+        unselectedItem = AppColors.darkGrey.value;
 
   const AppColorScheme._({
     required this.primary,

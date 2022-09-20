@@ -3,9 +3,6 @@ import 'package:flutter_template/assets/colors/color_scheme.dart';
 
 /// Class of the app themes data
 abstract class AppThemeData {
-  static const _lightColorScheme = AppColorScheme.light();
-  static const _darkColorScheme = AppColorScheme.dark();
-
   /// Light theme configuration.
   static final ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
@@ -23,7 +20,7 @@ abstract class AppThemeData {
       onSurface: _lightColorScheme.onSurface,
     ),
     scaffoldBackgroundColor: _lightColorScheme.background,
-    extensions: const [_lightColorScheme],
+    extensions: [_lightColorScheme],
   );
 
   /// Dark theme configuration.
@@ -43,6 +40,9 @@ abstract class AppThemeData {
       onSurface: _darkColorScheme.onSurface,
     ),
     scaffoldBackgroundColor: _darkColorScheme.background,
-    extensions: const [_darkColorScheme],
+    extensions: [_darkColorScheme],
   );
+
+  static final _lightColorScheme = AppColorScheme.light();
+  static final _darkColorScheme = AppColorScheme.dark();
 }
