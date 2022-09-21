@@ -10,20 +10,19 @@ import 'package:flutter_template/features/navigation/service/router.dart';
 import 'package:flutter_template/persistence/storage/theme_storage/theme_storage.dart';
 import 'package:flutter_template/persistence/storage/theme_storage/theme_storage_impl.dart';
 import 'package:flutter_template/util/default_error_handler.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 /// Scope of dependencies which need through all app's life.
 class AppScope implements IAppScope {
-  static const _themeByDefault = ThemeMode.light;
+  static const _themeByDefault = ThemeMode.system;
 
   late final Dio _dio;
   late final ErrorHandler _errorHandler;
+  late final VoidCallback _applicationRebuilder;
   late final AppRouter _router;
   late final IThemeService _themeService;
-  final SharedPreferences _sharedPreferences;
 
   @override
-  late VoidCallback applicationRebuilder;
+  VoidCallback get applicationRebuilder => _applicationRebuilder;
 
   @override
   Dio get dio => _dio;
@@ -35,15 +34,14 @@ class AppScope implements IAppScope {
   AppRouter get router => _router;
 
   @override
-  SharedPreferences get sharedPreferences => _sharedPreferences;
-
-  @override
   IThemeService get themeService => _themeService;
 
   late IThemeModeStorage _themeModeStorage;
 
   /// Create an instance [AppScope].
-  AppScope(this._sharedPreferences) {
+  AppScope({
+    required VoidCallback applicationRebuilder,
+  }) : _applicationRebuilder = applicationRebuilder {
     /// List interceptor. Fill in as needed.
     final additionalInterceptors = <Interceptor>[];
 
@@ -112,9 +110,6 @@ abstract class IAppScope {
 
   /// Class that coordinates navigation for the whole app.
   AppRouter get router;
-
-  /// Shared preferences.
-  SharedPreferences get sharedPreferences;
 
   /// A service that stores and retrieves app theme mode.
   IThemeService get themeService;

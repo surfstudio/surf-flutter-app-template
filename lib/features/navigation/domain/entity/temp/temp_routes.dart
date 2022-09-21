@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:auto_route/empty_router_widgets.dart';
 import 'package:flutter_template/features/navigation/domain/entity/app_route_names.dart';
 import 'package:flutter_template/features/navigation/domain/entity/app_route_paths.dart';
 import 'package:flutter_template/features/navigation/domain/entity/dash/dash_routes.dart';
@@ -12,16 +11,10 @@ const tempRoutes = AutoRoute<dynamic>(
   initial: true,
   path: AppRoutePaths.tempPath,
   name: AppRouteNames.tempScreen,
-  page: EmptyRouterPage,
+  page: TempScreen,
   children: [
-    AutoRoute<dynamic>(
-      page: TempScreen,
-      path: '',
-      children: [
-        dashRoutes,
-        infoRoutes,
-        debugRoutes,
-      ],
-    ),
+    dashRoutes,
+    infoRoutes,
+    debugRoutes,
   ],
 );

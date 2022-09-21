@@ -17,8 +17,7 @@ DebugScreenWidgetModel debugScreenWidgetModelFactory(
   BuildContext context,
 ) {
   final appDependencies = context.read<IAppScope>();
-  final configStorage =
-      ConfigSettingsStorageImpl(appDependencies.sharedPreferences);
+  final configStorage = ConfigSettingsStorageImpl();
 
   final model = DebugScreenModel(
     appDependencies.errorHandler,

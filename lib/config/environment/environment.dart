@@ -50,7 +50,7 @@ class Environment<T> implements Listenable {
 
   /// Update config proxy url from storage
   Future<void> refreshConfigProxy(IConfigSettingsStorage storage) async {
-    final savedProxy = storage.getProxyUrl();
+    final savedProxy = await storage.getProxyUrl();
     if (savedProxy?.isNotEmpty ?? false) {
       config = (config as AppConfig).copyWith(proxyUrl: savedProxy) as T;
     }
