@@ -17,4 +17,7 @@ abstract class AppRouteNames {
 
   /// InfoScreen route name
   static const String infoScreen = 'infoRouter';
+
+  /// LogHistoryScreen route name
+  static const String logHistoryScreen = 'logHistoryRouter';
 }

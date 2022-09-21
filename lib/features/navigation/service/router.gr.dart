@@ -32,6 +32,13 @@ class _$AppRouter extends RootStackRouter {
           routeData: routeData,
           child: TempScreen(key: args.key, wmFactory: args.wmFactory));
     },
+    LogHistoryRouter.name: (routeData) {
+      final args = routeData.argsAs<LogHistoryRouterArgs>(
+          orElse: () => const LogHistoryRouterArgs());
+      return MaterialPageX<dynamic>(
+          routeData: routeData,
+          child: LogHistoryScreen(key: args.key, wmFactory: args.wmFactory));
+    },
     DashRouter.name: (routeData) {
       final args = routeData.argsAs<DashRouterArgs>(
           orElse: () => const DashRouterArgs());
@@ -82,7 +89,9 @@ class _$AppRouter extends RootStackRouter {
                           path: 'info', parent: TempRoute.name),
                       RouteConfig(DebugRouter.name,
                           path: 'debug', parent: TempRoute.name)
-                    ])
+                    ]),
+                RouteConfig(LogHistoryRouter.name,
+                    path: 'logHistory', parent: TempRouter.name)
               ])
         ])
       ];
@@ -135,6 +144,36 @@ class TempRouteArgs {
   @override
   String toString() {
     return 'TempRouteArgs{key: $key, wmFactory: $wmFactory}';
+  }
+}
+
+/// generated route for
+/// [LogHistoryScreen]
+class LogHistoryRouter extends PageRouteInfo<LogHistoryRouterArgs> {
+  LogHistoryRouter(
+      {Key? key,
+      WidgetModel<ElementaryWidget<IWidgetModel>, ElementaryModel> Function(
+              BuildContext)
+          wmFactory = logHistoryScreenWmFactory})
+      : super(LogHistoryRouter.name,
+            path: 'logHistory',
+            args: LogHistoryRouterArgs(key: key, wmFactory: wmFactory));
+
+  static const String name = 'LogHistoryRouter';
+}
+
+class LogHistoryRouterArgs {
+  const LogHistoryRouterArgs(
+      {this.key, this.wmFactory = logHistoryScreenWmFactory});
+
+  final Key? key;
+
+  final WidgetModel<ElementaryWidget<IWidgetModel>, ElementaryModel> Function(
+      BuildContext) wmFactory;
+
+  @override
+  String toString() {
+    return 'LogHistoryRouterArgs{key: $key, wmFactory: $wmFactory}';
   }
 }
 
