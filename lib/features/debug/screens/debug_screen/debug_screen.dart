@@ -20,6 +20,8 @@ class DebugScreen extends ElementaryWidget<IDebugScreenWidgetModel> {
         urlChanged: wm.urlChange,
         switchServer: wm.switchServer,
         setProxy: wm.setProxy,
+        openLogsHistory: wm.openLogsHistory,
+        saveExampleLog: wm.saveExampleLog,
         proxyController: wm.proxyEditingController,
         setThemeMode: wm.setThemeMode,
       ),
@@ -34,6 +36,8 @@ class _Body extends StatelessWidget {
   final void Function(UrlType) switchServer;
   final void Function(ThemeMode?) setThemeMode;
   final Function() setProxy;
+  final VoidCallback openLogsHistory;
+  final VoidCallback saveExampleLog;
   final TextEditingController proxyController;
 
   const _Body({
@@ -43,6 +47,8 @@ class _Body extends StatelessWidget {
     required this.switchServer,
     required this.setThemeMode,
     required this.setProxy,
+    required this.openLogsHistory,
+    required this.saveExampleLog,
     required this.proxyController,
     Key? key,
   }) : super(key: key);
@@ -66,6 +72,20 @@ class _Body extends StatelessWidget {
             _ThemeCard(
               themeState: themeState,
               setThemeMode: setThemeMode,
+            ),
+            Card(
+              child: Column(
+                children: [
+                  ListTile(
+                    onTap: openLogsHistory,
+                    title: const Text('Открыть логи'),
+                  ),
+                  ListTile(
+                    onTap: saveExampleLog,
+                    title: const Text('Протестировать запись в логи'),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
