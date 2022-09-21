@@ -3,24 +3,13 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
-import 'package:flutter_template/features/app/di/app_scope_register.dart';
 import 'package:flutter_template/features/common/widgets/di_scope/di_scope.dart';
 import 'package:flutter_template/persistence/storage/config_storage/config_storage_impl.dart';
 
 /// App widget.
 class App extends StatefulWidget {
-  /// Scope of dependencies which need through all app's life.
-  final AppScope appScope;
-
-  /// Register and setup third-party dependencies for app DI scope.
-  final AppScopeRegister appScopeRegister;
-
   /// Create an instance App.
-  const App({
-    required this.appScope,
-    required this.appScopeRegister,
-    Key? key,
-  }) : super(key: key);
+  const App({Key? key}) : super(key: key);
 
   @override
   _AppState createState() => _AppState();
@@ -33,9 +22,9 @@ class _AppState extends State<App> {
   void initState() {
     super.initState();
 
-    _scope = widget.appScope..applicationRebuilder = _rebuildApplication;
+    _scope = AppScope(applicationRebuilder: _rebuildApplication);
 
-    final configStorage = ConfigSettingsStorageImpl(_scope.sharedPreferences);
+    final configStorage = ConfigSettingsStorageImpl();
     final environment = Environment<AppConfig>.instance();
     if (!environment.isRelease) {
       environment.refreshConfigProxy(configStorage);
@@ -63,10 +52,8 @@ class _AppState extends State<App> {
   }
 
   void _rebuildApplication() {
-    widget.appScopeRegister.createScope().then((value) {
-      setState(() {
-        _scope = value..applicationRebuilder = _rebuildApplication;
-      });
+    setState(() {
+      _scope = AppScope(applicationRebuilder: _rebuildApplication);
     });
   }
 }

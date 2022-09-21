@@ -7,17 +7,16 @@ import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/navigation/service/router.dart';
 import 'package:flutter_template/util/default_error_handler.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 /// Scope of dependencies which need through all app's life.
 class AppScope implements IAppScope {
   late final Dio _dio;
   late final ErrorHandler _errorHandler;
+  late final VoidCallback _applicationRebuilder;
   late final AppRouter _router;
-  final SharedPreferences _sharedPreferences;
 
   @override
-  late VoidCallback applicationRebuilder;
+  VoidCallback get applicationRebuilder => _applicationRebuilder;
 
   @override
   Dio get dio => _dio;
@@ -28,11 +27,10 @@ class AppScope implements IAppScope {
   @override
   AppRouter get router => _router;
 
-  @override
-  SharedPreferences get sharedPreferences => _sharedPreferences;
-
   /// Create an instance [AppScope].
-  AppScope(this._sharedPreferences) {
+  AppScope({
+    required VoidCallback applicationRebuilder,
+  }) : _applicationRebuilder = applicationRebuilder {
     /// List interceptor. Fill in as needed.
     final additionalInterceptors = <Interceptor>[];
 
@@ -92,7 +90,4 @@ abstract class IAppScope {
 
   /// Class that coordinates navigation for the whole app.
   AppRouter get router;
-
-  /// Shared preferences.
-  SharedPreferences get sharedPreferences;
 }
