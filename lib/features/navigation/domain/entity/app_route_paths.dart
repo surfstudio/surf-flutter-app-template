@@ -11,4 +11,10 @@ abstract class AppRoutePaths {
 
   ///Path to debug screen
   static const String debugPath = 'debug';
+
+  ///Path to dash screen
+  static const String dashPath = 'dash';
+
+  ///Path to info screen
+  static const String infoPath = 'info';
 }

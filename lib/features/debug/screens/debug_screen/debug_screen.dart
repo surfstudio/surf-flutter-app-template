@@ -1,6 +1,5 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/assets/themes/text_style.dart';
 import 'package:flutter_template/config/debug_options.dart';
 import 'package:flutter_template/config/urls.dart';
 import 'package:flutter_template/features/debug/screens/debug_screen/debug_screen_widget_model.dart';
@@ -16,16 +15,6 @@ class DebugScreen extends ElementaryWidget<IDebugScreenWidgetModel> {
   @override
   Widget build(IDebugScreenWidgetModel wm) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Экран отладки',
-          style: textMedium20,
-        ),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: wm.closeScreen,
-        ),
-      ),
       body: _Body(
         debugOptionsState: wm.debugOptionsState,
         urlState: wm.urlState,
@@ -33,7 +22,8 @@ class DebugScreen extends ElementaryWidget<IDebugScreenWidgetModel> {
         showPerformanceOverlayChange: wm.showPerformanceOverlayChange,
         debugShowMaterialGridChange: wm.debugShowMaterialGridChange,
         debugShowCheckedModeBannerChange: wm.debugShowCheckedModeBannerChange,
-        checkerboardRasterCacheImagesChange: wm.checkerboardRasterCacheImagesChange,
+        checkerboardRasterCacheImagesChange:
+            wm.checkerboardRasterCacheImagesChange,
         checkerboardOffscreenLayersChange: wm.checkerboardOffscreenLayersChange,
         showSemanticsDebuggerChange: wm.showSemanticsDebuggerChange,
         switchServer: wm.switchServer,
@@ -85,9 +75,12 @@ class _Body extends StatelessWidget {
               debugOptionsState: debugOptionsState,
               showPerformanceOverlayChange: showPerformanceOverlayChange,
               debugShowMaterialGridChange: debugShowMaterialGridChange,
-              debugShowCheckedModeBannerChange: debugShowCheckedModeBannerChange,
-              checkerboardRasterCacheImagesChange: checkerboardRasterCacheImagesChange,
-              checkerboardOffscreenLayersChange: checkerboardOffscreenLayersChange,
+              debugShowCheckedModeBannerChange:
+                  debugShowCheckedModeBannerChange,
+              checkerboardRasterCacheImagesChange:
+                  checkerboardRasterCacheImagesChange,
+              checkerboardOffscreenLayersChange:
+                  checkerboardOffscreenLayersChange,
               showSemanticsDebuggerChange: showSemanticsDebuggerChange,
             ),
             _ServerSwitchCard(
@@ -163,13 +156,15 @@ class _PerformanceOverlayCard extends StatelessWidget {
                       onChanged: checkerboardRasterCacheImagesChange,
                     ),
                     _SwitchTitle(
-                      title: 'Включает проверку слоев, отображаемых в закадровых '
+                      title:
+                          'Включает проверку слоев, отображаемых в закадровых '
                           'растровых изображениях.',
                       value: debugOptions.checkerboardOffscreenLayers,
                       onChanged: checkerboardOffscreenLayersChange,
                     ),
                     _SwitchTitle(
-                      title: 'Включает наложение, которое показывает информацию о '
+                      title:
+                          'Включает наложение, которое показывает информацию о '
                           'доступности, сообщаемую платформой.',
                       value: debugOptions.showSemanticsDebugger,
                       onChanged: showSemanticsDebuggerChange,
