@@ -1,6 +1,4 @@
 # Miscellaneous
-*.g.dart
-*.gr.dart
 *.class
 *.log
 *.pyc
