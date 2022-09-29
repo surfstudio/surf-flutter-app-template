@@ -1,7 +1,6 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_template/config/app_config.dart';
-import 'package:flutter_template/config/debug_options.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/config/urls.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
@@ -27,7 +26,8 @@ DebugScreenWidgetModel debugScreenWidgetModelFactory(
 }
 
 /// Widget Model for [DebugScreen].
-class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel> implements IDebugScreenWidgetModel {
+class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
+    implements IDebugScreenWidgetModel {
   /// Empty string.
   static const String _emptyString = '';
 
@@ -35,14 +35,10 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel> 
   final AppRouter router;
 
   final _textEditingController = TextEditingController();
-  final _debugOptionsState = StateNotifier<DebugOptions>();
   final _urlState = StateNotifier<UrlType>();
 
   @override
   TextEditingController get proxyEditingController => _textEditingController;
-
-  @override
-  ListenableState<DebugOptions> get debugOptionsState => _debugOptionsState;
 
   @override
   ListenableState<UrlType> get urlState => _urlState;
@@ -84,36 +80,6 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel> 
     model.switchServer(urlType);
   }
 
-  @override
-  void showPerformanceOverlayChange(bool? value) {
-    model.showPerformanceOverlayChange(value);
-  }
-
-  @override
-  void debugShowMaterialGridChange(bool? value) {
-    model.debugShowMaterialGridChange(value);
-  }
-
-  @override
-  void debugShowCheckedModeBannerChange(bool? value) {
-    model.debugShowCheckedModeBannerChange(value);
-  }
-
-  @override
-  void checkerboardRasterCacheImagesChange(bool? value) {
-    model.checkerboardRasterCacheImagesChange(value);
-  }
-
-  @override
-  void checkerboardOffscreenLayersChange(bool? value) {
-    model.checkerboardOffscreenLayersChange(value);
-  }
-
-  @override
-  void showSemanticsDebuggerChange(bool? value) {
-    model.showSemanticsDebuggerChange(value);
-  }
-
   /// Change proxyUrl value.
   @override
   void setProxy() {
@@ -139,7 +105,6 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel> 
     } else {
       proxyEditingController.text = _emptyString;
     }
-    _debugOptionsState.accept(config.debugOptions);
   }
 }
 
@@ -147,9 +112,6 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel> 
 abstract class IDebugScreenWidgetModel extends IWidgetModel {
   /// Text Editing Controller.
   TextEditingController get proxyEditingController;
-
-  /// Listener current state [DebugOptions].
-  ListenableState<DebugOptions> get debugOptionsState;
 
   /// Listener current state [UrlType].
   ListenableState<UrlType> get urlState;
@@ -159,24 +121,6 @@ abstract class IDebugScreenWidgetModel extends IWidgetModel {
 
   /// Change url.
   void urlChange(UrlType? urlType) {}
-
-  /// Change showPerformanceOverlay value in debugOptions.
-  void showPerformanceOverlayChange(bool? value) {}
-
-  /// Change debugShowMaterialGrid value in debugOptions.
-  void debugShowMaterialGridChange(bool? value) {}
-
-  /// Change debugShowCheckedModeBanner value in debugOptions.
-  void debugShowCheckedModeBannerChange(bool? value) {}
-
-  /// Change checkerboardRasterCacheImages value in debugOptions.
-  void checkerboardRasterCacheImagesChange(bool? value) {}
-
-  /// Change checkerboardRasterCacheImages value in debugOptions.
-  void checkerboardOffscreenLayersChange(bool? value) {}
-
-  /// Change showSemanticsDebugger value in debugOptions.
-  void showSemanticsDebuggerChange(bool? value) {}
 
   /// Switch server.
   void switchServer(UrlType urlType) {}
