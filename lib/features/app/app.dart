@@ -32,7 +32,9 @@ class _AppState extends State<App> {
     final configStorage = ConfigSettingsStorageImpl();
     final environment = Environment<AppConfig>.instance();
     if (!environment.isRelease) {
-      environment.refreshConfigProxy(configStorage);
+      environment
+        ..refreshConfigProxy(configStorage)
+        ..createLogHistoryStrategy();
     }
   }
 

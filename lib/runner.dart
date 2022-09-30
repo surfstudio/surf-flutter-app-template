@@ -33,7 +33,8 @@ void _runApp() {
 }
 
 void _initLogger() {
-  RemoteLogger.addStrategy(CrashlyticsRemoteLogStrategy());
+  // TODO(init-project): Инициализировать CrashlyticsRemoteLogStrategy.
+  // RemoteLogger.addStrategy(CrashlyticsRemoteLogStrategy());
   Logger.addStrategy(DebugLogStrategy());
   Logger.addStrategy(RemoteLogStrategy());
 }

@@ -9,6 +9,7 @@ import 'package:flutter_template/features/debug/screens/debug_screen/debug_scree
 import 'package:flutter_template/features/navigation/service/router.dart';
 import 'package:flutter_template/persistence/storage/config_storage/config_storage_impl.dart';
 import 'package:provider/provider.dart';
+import 'package:surf_logger/surf_logger.dart';
 
 // ignore_for_file: avoid_positional_boolean_parameters
 
@@ -105,6 +106,14 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
     model.setThemeMode(themeMode);
   }
 
+  @override
+  void openLogsHistory() {
+    router.push(LogHistoryRouter());
+  }
+
+  @override
+  Future<void> saveExampleLog() async => _saveExampleLog();
+
   void _updateAppConfig() {
     final config = model.configNotifier.value;
 
@@ -133,6 +142,12 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
   void _updateThemeMode() {
     _themeState.accept(model.currentThemeMode.value);
   }
+
+  void _saveExampleLog() {
+    final error = Exception('Some exception');
+    final st = StackTrace.fromString('stackTraceString');
+    Logger.e(st.toString(), error);
+  }
 }
 
 /// Interface of [DebugScreenWidgetModel].
@@ -160,6 +175,12 @@ abstract class IDebugScreenWidgetModel extends IWidgetModel {
 
   /// Set theme mode for app.
   void setThemeMode(ThemeMode? themeMode) {}
+
+  /// Navigate to log history screen.
+  void openLogsHistory();
+
+  /// Method for save example log to log history file.
+  void saveExampleLog();
 }
 
 /// Ury type.

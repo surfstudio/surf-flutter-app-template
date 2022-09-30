@@ -4,6 +4,7 @@ import 'package:flutter_template/features/navigation/domain/entity/app_route_pat
 import 'package:flutter_template/features/navigation/domain/entity/dash/dash_routes.dart';
 import 'package:flutter_template/features/navigation/domain/entity/debug/debug_routes.dart';
 import 'package:flutter_template/features/navigation/domain/entity/info/info_routes.dart';
+import 'package:flutter_template/features/navigation/domain/entity/log_history/log_history_routes.dart';
 import 'package:flutter_template/features/temp/screens/temp_screen/temp_screen_export.dart';
 
 /// All routes for the temp feature.
@@ -16,5 +17,6 @@ const tempRoutes = AutoRoute<dynamic>(
     dashRoutes,
     infoRoutes,
     debugRoutes,
+    logHistoryRoutes,
   ],
 );
