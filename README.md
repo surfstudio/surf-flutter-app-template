@@ -4,7 +4,7 @@
 
 ### Требования
 
-Версия flutter >= 2.5.0
+Версия flutter >= 3.0.0
 
 ### Инициализация
 
@@ -94,7 +94,7 @@
 ##### Подключены:
 
 - [flutter_surf_lint_rules](https://pub.dev/packages/surf_lint_rules)
-- [dart_code_metrics](https://pub.dev/packages/dart_code_metrics) ([инструкция](https://jirasurf.atlassian.net/wiki/spaces/FLUT/pages/3369500703)
+- [dart_code_metrics](https://pub.dev/packages/dart_code_metrics) ([инструкция](https://wiki.surfstudio.ru/pages/viewpage.action?pageId=2408055)
   по сбору метрик проекта, настройка проекта уже выполнена)
 
 ### Архитектура
@@ -115,10 +115,10 @@
 
 По умолчанию используем [SurfGen](https://github.com/surfstudio/SurfGen).
 
-[Руководство](https://jirasurf.atlassian.net/wiki/spaces/FLUT/pages/3387031634/SurfGen) по инициализации SurfGen на
+[Руководство](https://wiki.surfstudio.ru/pages/viewpage.action?pageId=2408072) по инициализации SurfGen на
 проекте(часть пунктов уже сделаны, проверьте их актуальность и соберите исполняемый файл(пункт 4)).
 
-[Руководство](https://jirasurf.atlassian.net/wiki/spaces/FLUT/pages/3386572866/SurfGen) по использованию SurfGen на
+[Руководство](https://wiki.surfstudio.ru/pages/viewpage.action?pageId=2408080) по использованию SurfGen на
 проекте.
 
 ### DI

@@ -17,27 +17,12 @@ class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
-    HomeRoute.name: (routeData) {
-      return MaterialPageX<dynamic>(
-          routeData: routeData, child: const EmptyRouterPage());
-    },
     TempRouter.name: (routeData) {
-      return MaterialPageX<dynamic>(
-          routeData: routeData, child: const EmptyRouterPage());
-    },
-    TempRoute.name: (routeData) {
-      final args =
-          routeData.argsAs<TempRouteArgs>(orElse: () => const TempRouteArgs());
+      final args = routeData.argsAs<TempRouterArgs>(
+          orElse: () => const TempRouterArgs());
       return MaterialPageX<dynamic>(
           routeData: routeData,
           child: TempScreen(key: args.key, wmFactory: args.wmFactory));
-    },
-    LogHistoryRouter.name: (routeData) {
-      final args = routeData.argsAs<LogHistoryRouterArgs>(
-          orElse: () => const LogHistoryRouterArgs());
-      return MaterialPageX<dynamic>(
-          routeData: routeData,
-          child: LogHistoryScreen(key: args.key, wmFactory: args.wmFactory));
     },
     DashRouter.name: (routeData) {
       final args = routeData.argsAs<DashRouterArgs>(
@@ -64,76 +49,40 @@ class _$AppRouter extends RootStackRouter {
 
   @override
   List<RouteConfig> get routes => [
-        RouteConfig(HomeRoute.name, path: '/', children: [
+        RouteConfig('/#redirect',
+            path: '/', redirectTo: 'temp', fullMatch: true),
+        RouteConfig(TempRouter.name, path: 'temp', children: [
           RouteConfig('#redirect',
               path: '',
-              parent: HomeRoute.name,
-              redirectTo: 'temp',
+              parent: TempRouter.name,
+              redirectTo: 'dash',
               fullMatch: true),
-          RouteConfig(TempRouter.name,
-              path: 'temp',
-              parent: HomeRoute.name,
-              children: [
-                RouteConfig(TempRoute.name,
-                    path: '',
-                    parent: TempRouter.name,
-                    children: [
-                      RouteConfig('#redirect',
-                          path: '',
-                          parent: TempRoute.name,
-                          redirectTo: 'dash',
-                          fullMatch: true),
-                      RouteConfig(DashRouter.name,
-                          path: 'dash', parent: TempRoute.name),
-                      RouteConfig(InfoRouter.name,
-                          path: 'info', parent: TempRoute.name),
-                      RouteConfig(DebugRouter.name,
-                          path: 'debug', parent: TempRoute.name)
-                    ]),
-                RouteConfig(LogHistoryRouter.name,
-                    path: 'logHistory', parent: TempRouter.name)
-              ])
+          RouteConfig(DashRouter.name, path: 'dash', parent: TempRouter.name),
+          RouteConfig(InfoRouter.name, path: 'info', parent: TempRouter.name),
+          RouteConfig(DebugRouter.name, path: 'debug', parent: TempRouter.name)
         ])
       ];
 }
 
 /// generated route for
-/// [EmptyRouterPage]
-class HomeRoute extends PageRouteInfo<void> {
-  const HomeRoute({List<PageRouteInfo>? children})
-      : super(HomeRoute.name, path: '/', initialChildren: children);
-
-  static const String name = 'HomeRoute';
-}
-
-/// generated route for
-/// [EmptyRouterPage]
-class TempRouter extends PageRouteInfo<void> {
-  const TempRouter({List<PageRouteInfo>? children})
-      : super(TempRouter.name, path: 'temp', initialChildren: children);
-
-  static const String name = 'TempRouter';
-}
-
-/// generated route for
 /// [TempScreen]
-class TempRoute extends PageRouteInfo<TempRouteArgs> {
-  TempRoute(
+class TempRouter extends PageRouteInfo<TempRouterArgs> {
+  TempRouter(
       {Key? key,
       WidgetModel<ElementaryWidget<IWidgetModel>, ElementaryModel> Function(
               BuildContext)
           wmFactory = initScreenWidgetModelFactory,
       List<PageRouteInfo>? children})
-      : super(TempRoute.name,
-            path: '',
-            args: TempRouteArgs(key: key, wmFactory: wmFactory),
+      : super(TempRouter.name,
+            path: 'temp',
+            args: TempRouterArgs(key: key, wmFactory: wmFactory),
             initialChildren: children);
 
-  static const String name = 'TempRoute';
+  static const String name = 'TempRouter';
 }
 
-class TempRouteArgs {
-  const TempRouteArgs(
+class TempRouterArgs {
+  const TempRouterArgs(
       {this.key, this.wmFactory = initScreenWidgetModelFactory});
 
   final Key? key;
@@ -143,37 +92,7 @@ class TempRouteArgs {
 
   @override
   String toString() {
-    return 'TempRouteArgs{key: $key, wmFactory: $wmFactory}';
-  }
-}
-
-/// generated route for
-/// [LogHistoryScreen]
-class LogHistoryRouter extends PageRouteInfo<LogHistoryRouterArgs> {
-  LogHistoryRouter(
-      {Key? key,
-      WidgetModel<ElementaryWidget<IWidgetModel>, ElementaryModel> Function(
-              BuildContext)
-          wmFactory = logHistoryScreenWmFactory})
-      : super(LogHistoryRouter.name,
-            path: 'logHistory',
-            args: LogHistoryRouterArgs(key: key, wmFactory: wmFactory));
-
-  static const String name = 'LogHistoryRouter';
-}
-
-class LogHistoryRouterArgs {
-  const LogHistoryRouterArgs(
-      {this.key, this.wmFactory = logHistoryScreenWmFactory});
-
-  final Key? key;
-
-  final WidgetModel<ElementaryWidget<IWidgetModel>, ElementaryModel> Function(
-      BuildContext) wmFactory;
-
-  @override
-  String toString() {
-    return 'LogHistoryRouterArgs{key: $key, wmFactory: $wmFactory}';
+    return 'TempRouterArgs{key: $key, wmFactory: $wmFactory}';
   }
 }
 
