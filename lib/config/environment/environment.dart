@@ -57,6 +57,11 @@ class Environment<T> implements Listenable {
   }
 
   /// Save config proxy url to storage
-  Future<void> saveConfigProxy(IConfigSettingsStorage storage) =>
-      storage.setProxyUrl(proxy: (config as AppConfig).proxyUrl ?? '');
+  Future<void> saveConfigProxy(IConfigSettingsStorage storage) {
+    final config = this.config;
+    if (config is! AppConfig) {
+      throw Exception('Unsupported config type for proxy');
+    }
+    return storage.setProxyUrl(proxy: config.proxyUrl ?? '');
+  }
 }
