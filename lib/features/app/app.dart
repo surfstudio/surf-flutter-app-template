@@ -10,8 +10,11 @@ import 'package:flutter_template/persistence/storage/config_storage/config_stora
 
 /// App widget.
 class App extends StatefulWidget {
+  /// Scope of dependencies which need through all app's life.
+  final AppScope appScope;
+
   /// Create an instance App.
-  const App({Key? key}) : super(key: key);
+  const App(this.appScope, {Key? key}) : super(key: key);
 
   @override
   _AppState createState() => _AppState();
@@ -25,8 +28,7 @@ class _AppState extends State<App> {
   void initState() {
     super.initState();
 
-    _scope = AppScope(applicationRebuilder: _rebuildApplication);
-
+    _scope = widget.appScope..applicationRebuilder = _rebuildApplication;
     _themeService = _scope.themeService;
 
     final configStorage = ConfigSettingsStorageImpl();
@@ -69,7 +71,7 @@ class _AppState extends State<App> {
 
   void _rebuildApplication() {
     setState(() {
-      _scope = AppScope(applicationRebuilder: _rebuildApplication);
+      _scope = widget.appScope..applicationRebuilder = _rebuildApplication;
     });
   }
 }

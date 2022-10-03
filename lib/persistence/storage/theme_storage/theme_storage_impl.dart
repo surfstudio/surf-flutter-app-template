@@ -9,20 +9,20 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ThemeModeStorageImpl implements IThemeModeStorage {
   static const String _themeModeKey = 'theme_mode';
 
-  final SharedPreferences _preferences;
-
   /// Create an instance [ThemeModeStorageImpl].
-  ThemeModeStorageImpl(this._preferences);
+  ThemeModeStorageImpl();
 
   @override
-  ThemeMode? getThemeMode() {
-    final themeName = _preferences.getString(_themeModeKey);
+  Future<ThemeMode?> getThemeMode() async {
+    final themeName =
+        (await SharedPreferences.getInstance()).getString(_themeModeKey);
     if (themeName?.isEmpty ?? true) return null;
     return ThemeMode.values.firstWhereOrNull((e) => e.name == themeName);
   }
 
   @override
   Future<void> saveThemeMode({required ThemeMode mode}) async {
-    await _preferences.setString(_themeModeKey, mode.name);
+    await (await SharedPreferences.getInstance())
+        .setString(_themeModeKey, mode.name);
   }
 }

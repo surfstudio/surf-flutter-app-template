@@ -17,12 +17,11 @@ class AppScope implements IAppScope {
 
   late final Dio _dio;
   late final ErrorHandler _errorHandler;
-  late final VoidCallback _applicationRebuilder;
   late final AppRouter _router;
   late final IThemeService _themeService;
 
   @override
-  VoidCallback get applicationRebuilder => _applicationRebuilder;
+  late VoidCallback applicationRebuilder;
 
   @override
   Dio get dio => _dio;
@@ -39,19 +38,21 @@ class AppScope implements IAppScope {
   late IThemeModeStorage _themeModeStorage;
 
   /// Create an instance [AppScope].
-  AppScope({
-    required VoidCallback applicationRebuilder,
-  }) : _applicationRebuilder = applicationRebuilder {
+  AppScope() {
     /// List interceptor. Fill in as needed.
     final additionalInterceptors = <Interceptor>[];
 
     _dio = _initDio(additionalInterceptors);
     _errorHandler = DefaultErrorHandler();
     _router = AppRouter.instance();
-    _themeModeStorage = ThemeModeStorageImpl(sharedPreferences);
-    _themeService = ThemeServiceImpl(
-      ThemeModeStorageImpl(sharedPreferences).getThemeMode() ?? _themeByDefault,
-    );
+    _themeModeStorage = ThemeModeStorageImpl();
+  }
+
+  @override
+  Future<void> initTheme() async {
+    final theme =
+        await ThemeModeStorageImpl().getThemeMode() ?? _themeByDefault;
+    _themeService = ThemeServiceImpl(theme);
     _themeService.addListener(_onThemeModeChanged);
   }
 
@@ -113,4 +114,7 @@ abstract class IAppScope {
 
   /// A service that stores and retrieves app theme mode.
   IThemeService get themeService;
+
+  /// Init theme service with theme from storage or default value
+  Future<void> initTheme();
 }
