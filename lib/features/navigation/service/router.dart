@@ -5,6 +5,7 @@ import 'package:flutter_template/features/dash/screen/dash_screen_export.dart';
 import 'package:flutter_template/features/debug/screens/debug_screen/debug_screen_export.dart';
 import 'package:flutter_template/features/debug/screens/log_history_screen/log_history_export.dart';
 import 'package:flutter_template/features/info/screen/info_screen_export.dart';
+import 'package:flutter_template/features/navigation/domain/entity/log_history/log_history_routes.dart';
 import 'package:flutter_template/features/navigation/domain/entity/temp/temp_routes.dart';
 import 'package:flutter_template/features/temp/screens/temp_screen/temp_screen_export.dart';
 
@@ -17,6 +18,7 @@ part 'router.gr.dart';
   replaceInRouteName: 'ScreenWidget|Screen,Route',
   routes: <AutoRoute>[
     tempRoutes,
+    logHistoryRoutes,
   ],
 )
 
