@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/assets/colors/color_scheme.dart';
 import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
+import 'package:flutter_template/features/common/mixin/theme_mixin.dart';
 import 'package:flutter_template/features/navigation/domain/entity/app_route_paths.dart';
 import 'package:flutter_template/features/navigation/service/router.dart';
 import 'package:flutter_template/features/temp/screens/temp_screen/temp_screen.dart';
@@ -27,6 +27,7 @@ TempScreenWidgetModel initScreenWidgetModelFactory(
 
 /// Widget model for [TempScreen].
 class TempScreenWidgetModel extends WidgetModel<TempScreen, ITempScreenModel>
+    with ThemeWMMixin
     implements IDebugWidgetModel {
   final _defaultNavBarItems = [
     const BottomNavigationBarItem(
@@ -49,9 +50,6 @@ class TempScreenWidgetModel extends WidgetModel<TempScreen, ITempScreenModel>
 
   @override
   List<BottomNavigationBarItem> get navigationBarItems => _navigationBarItems;
-
-  @override
-  AppColorScheme get colorScheme => AppColorScheme.of(context);
 
   List<PageRouteInfo> get _routes {
     final defaultRoutes = <PageRouteInfo>[DashRouter(), InfoRouter()];
@@ -91,15 +89,12 @@ class TempScreenWidgetModel extends WidgetModel<TempScreen, ITempScreenModel>
 }
 
 /// Interface of [TempScreenWidgetModel].
-abstract class IDebugWidgetModel extends IWidgetModel {
+abstract class IDebugWidgetModel extends IWidgetModel with ThemeIModelMixin {
   /// Routes for [AutoTabsRouter.tabBar].
   List<PageRouteInfo<dynamic>> get routes;
 
   /// Items for [BottomNavigationBar].
   List<BottomNavigationBarItem> get navigationBarItems;
-
-  /// App color scheme.
-  AppColorScheme get colorScheme;
 
   /// Title for appbar, depends on current selected page.
   String appBarTitle(RouteData topRoute);
