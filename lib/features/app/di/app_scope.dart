@@ -16,13 +16,13 @@ class AppScope implements IAppScope {
   late final AppRouter _router;
 
   @override
+  VoidCallback get applicationRebuilder => _applicationRebuilder;
+
+  @override
   Dio get dio => _dio;
 
   @override
   ErrorHandler get errorHandler => _errorHandler;
-
-  @override
-  VoidCallback get applicationRebuilder => _applicationRebuilder;
 
   @override
   AppRouter get router => _router;
@@ -50,7 +50,8 @@ class AppScope implements IAppScope {
       ..receiveTimeout = timeout.inMilliseconds
       ..sendTimeout = timeout.inMilliseconds;
 
-    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) {
+    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (client) {
       final proxyUrl = Environment<AppConfig>.instance().config.proxyUrl;
       if (proxyUrl != null && proxyUrl.isNotEmpty) {
         client
@@ -68,7 +69,8 @@ class AppScope implements IAppScope {
     dio.interceptors.addAll(additionalInterceptors);
 
     if (Environment<AppConfig>.instance().isDebug) {
-      dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
+      dio.interceptors
+          .add(LogInterceptor(requestBody: true, responseBody: true));
     }
 
     return dio;

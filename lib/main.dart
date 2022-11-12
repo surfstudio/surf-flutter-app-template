@@ -10,7 +10,6 @@ void main() {
     buildType: BuildType.debug,
     config: AppConfig(
       url: Url.testUrl,
-      proxyUrl: Url.devProxyUrl,
     ),
   );
 

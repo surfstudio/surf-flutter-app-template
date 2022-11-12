@@ -165,7 +165,6 @@ class _ProxyCard extends StatelessWidget {
                     filled: true,
                     border: UnderlineInputBorder(),
                     labelText: 'Адрес прокси сервера',
-                    hintText: '192.168.0.1:8888',
                   ),
                 ),
                 MaterialButton(

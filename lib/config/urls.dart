@@ -3,15 +3,6 @@ import 'package:flutter_template/config/environment/environment.dart';
 
 /// Server urls.
 abstract class Url {
-  /// Prod proxy url.
-  static String get prodProxyUrl => '';
-
-  /// QA proxy url.
-  static String get qaProxyUrl => '192.168.0.1';
-
-  /// Dev proxy url.
-  static String get devProxyUrl => '';
-
   /// TRest url.
   static String get testUrl => 'http://uinames.com/api/';
 
