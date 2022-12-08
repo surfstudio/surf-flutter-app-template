@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:408916197886:android:cb9a7fce044b7a857240af",
         "android_client_info": {
-          "package_name": "ru.surfstudio.flutterTemplate.dev"
+          "package_name": "dev.surf.flutter_template.dev"
         }
       },
       "oauth_client": [
