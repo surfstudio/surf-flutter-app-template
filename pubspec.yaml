@@ -4,7 +4,9 @@ description: a Flutter template project for development.
 publish_to: none
 
 dependencies:
+  analytics: 1.0.2
   auto_route: 5.0.1
+  bottom_sheet: 3.1.2 
   dio: 4.0.6
   elementary: 1.5.0
   firebase_crashlytics: 2.8.10
@@ -14,6 +16,8 @@ dependencies:
     sdk: flutter
   logger: 1.1.0
   provider: 6.0.3
+  push_notification: 1.1.1
+  render_metrics: 2.0.2
   retrofit: 3.0.1+1
   shared_preferences: 2.0.15
   surf_logger: 1.1.0
