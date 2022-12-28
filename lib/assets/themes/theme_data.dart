@@ -21,7 +21,7 @@ abstract class AppThemeData {
       onSurface: _lightColorScheme.onSurface,
     ),
     scaffoldBackgroundColor: _lightColorScheme.background,
-    extensions: [_lightColorScheme],
+    extensions: [_lightColorScheme, _textTheme],
   );
 
   /// Dark theme configuration.
