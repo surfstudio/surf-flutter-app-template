@@ -1,19 +1,19 @@
-# Шаблон
+# Template
 
-Шаблон для инициализации проекта в [Surf](https://surfstudio.ru).
+A project initialization template adopted at [Surf](https://surfstudio.ru).
 
-### Требования
+### Requirements
 
-Версия flutter >= 3.0.0
+Flutter version >= 3.0.0
 
-### Инициализация
+### Initialization
 
-При инициализации проекта нужно:
+Do the following to initialize a project:
 
-1. Найти по поиску flutter_template и в нужных местах заменить на название вашего проекта.
-2. Проинициализировать FirebaseCrashlytics(найти можно через TODO(init-project)).
+1. Search for flutter_template and replace it with the name of your project where needed.
+2. Initialize FirebaseCrashlytics (you can find that in TODO(init-project)).
 
-### Структура
+### Structure
 
 - assets
     - fonts
@@ -51,91 +51,74 @@
 
 #### assets
 
-Содержит необходимые ресурсы(картинки, шрифты, иконки).
+Contains the necessary assets (images, fonts, icons).
 
-#### lib - кодовая часть проекта, в ней есть такие папки как:
+#### lib - has the code of the project and consists of the following folders:
+  
+- api - the layer of data and interactions with the Rest API. Contains the files generated with SurfGen.
+- assets - string representation of the necessary assets, themes, colors, and strings.
+- config - project configuration, e.g., environment.
+- features - features used and implemented in the project. It’s the default location of all folders created for particular features, where each folder contains all of the files relevant to this or that feature. The “common” folder contains entities shared between several features or crucial for the entire app. Try to avoid adding files there unless absolutely necessary. The structure of features:
 
-- api - слой данных и взаимодействия с Rest API. В ней находятся файлы сгенерированные при
-  помощи  [SurfGen](https://github.com/surfstudio/SurfGen).
-- assets - строковое представление необходимых ресурсов, темы, цвета, строки.
-- config - конфигурации проекта, например окружение(environment).
-- features - фичи используемые или реализуемые в проекте. В ней создаются папки с названиями
-  фич, в которых находятся все, что к этой фиче относится. В папке common находятся сущности расшаренные между несколькими фичами или нужные всему приложению,
-  старайтесь избегать добавления туда файлов без четкой необходимости, добавляйте в нее файлы
-  только тогда, когда это действительно нужно. Структура фич:
-    - di - контейнеры внедрения зависимостей.
-    - domain - содержит:
-        - entity - бизнес модели данных.
-        - repository - репозитории, относящиеся к фиче.
-        - mappers - мапперы данные-модель и обратно.
-    - service - бизнес логика.
-    - screens - экраны, относящиеся к фиче, каждый экран добавляется в отдельную папку с
-      названием экрана, в которой отдельными файлами лежат:
+    - di - dependency injection containers.
+    - domain - contains:
+        - entity - business data models.
+        - repository - repositories relevant to the feature.
+        - mappers - data-to-model (and vice versa) mappers.
+    - service - business logic.
+    - screens - screens relevant to the feature, with each screen in a separate self-titled folder containing the following in separate files:
         - widget - ElementaryWidget.
         - wm - WidgetModel.
         - model - ElementaryModel.
-    - widgets - виджеты, относящиеся к фиче.
-- utils - необходимые утилиты.
+    - widgets - widgets relevant to the feature.
+    - utils - necessary utilities.
+
 
 #### scripts
 
-Скрипты, необходимые для сборки артефакта проекта. Часть скриптов уже добавлена.
+Scripts necessary to build the project artifact. Some scripts have already been added.
 
 #### test
 
-Тесты приложения.
+App tests.
 
 #### tools
 
-Скрипты и туллинг для разработки(например, api_generator).
+Scripts and tools for development (e.g., api_generator)
 
-### Аналитика
+### Analytics
 
-##### Подключены:
+##### Enabled:
 
 - [flutter_surf_lint_rules](https://pub.dev/packages/surf_lint_rules)
-- [dart_code_metrics](https://pub.dev/packages/dart_code_metrics) ([инструкция](https://wiki.surfstudio.ru/pages/viewpage.action?pageId=2408055)
-  по сбору метрик проекта, настройка проекта уже выполнена)
+- [dart_code_metrics](https://pub.dev/packages/dart_code_metrics) ([guide](https://wiki.surfstudio.ru/pages/viewpage.action?pageId=2408055)
+  to gathering project metrics; the project has already been configured)
 
-### Архитектура
+### Architecture
 
-Используем архитектуру выстроенную вокруг [Elementary](https://github.com/Elementary-team/flutter-elementary). Экраны,
-а так же части интерфейса с собственной логикой описываются по принципу mvvm-паттерна. Несмотря на возможность реализации
-бизнес логики непосредственно в модели, модель оставляем лишь как первую точку доступа к бизнес-логики, саму же бизнес-логику
-реализуем в сервисах. При необходимости использования менеджера состояния на уровне сервисов можем реализовать и использовать
-надежные подходы - BLoC или Redux.
+The architecture adheres to the rules of Elementary. Screens and parts of the interface having their own logic are defined according to the MVVM pattern. Even though business logic could be implemented directly in the model, the latter only serves as the first point of access to business logic, which is, in turn, implemented in services. Should state management need to be used at the service level, a rock-solid approach—BLoC or Redux—can be implemented and adopted.
 
-### Навигация
+### Navigation
 
-Навигация выстроена вокруг использования пакета [AutoRoute](https://pub.dev/packages/auto_route). Для глобальной навигации по приложению
-используются класс AppRouter и для вложенной - StackRouter. Несмотря на то что возможно обращение к StackRouter напрямую по контексту внутри WidgetModel,
-следует в явном виде передавать его в конструктор WidgetModel. Использование StackRouter из контекста позволяет получать актуальный стек навигации и управлять им рамках данного роутера. В свою очередь, AppRouter хранится в AppScope зависимостях и достается оттуда.
+Navigation is centered around the [AutoRoute](https://pub.dev/packages/auto_route) package. We use a class called AppRouter for global navigation around an app and StackRouter for nested navigation. Despite the fact that StackRouter could be referred to directly through the context in WidgetModel, it should be passed explicitly to the WidgetModel constructor. With StackRouter used in the context, an effective navigation stack can be obtained and managed in this router. AppRouter, in turn, is stored in the AppScope dependencies and recovered from there.
 
 ### ApiGen
 
-По умолчанию используем [SurfGen](https://github.com/surfstudio/SurfGen).
+[SurfGen](https://github.com/surfstudio/SurfGen) is our default choice.
 
-[Руководство](https://wiki.surfstudio.ru/pages/viewpage.action?pageId=2408072) по инициализации SurfGen на
-проекте(часть пунктов уже сделаны, проверьте их актуальность и соберите исполняемый файл(пункт 4)).
+[Guide](https://wiki.surfstudio.ru/pages/viewpage.action?pageId=2408072) to getting SurfGen up and running on your project (some of the steps have already been made for you, so check if you need to make them and then build an executable file (step 4)).
 
-[Руководство](https://wiki.surfstudio.ru/pages/viewpage.action?pageId=2408080) по использованию SurfGen на
-проекте.
+[Guide](https://wiki.surfstudio.ru/pages/viewpage.action?pageId=2408080) to using SurfGen on your project.
 
 ### DI
 
-В качестве DI используем [Provider](https://pub.dev/packages/provider).
+[Provider](https://pub.dev/packages/provider) is our choice for DI.
 
-Зависимости группируются в сущности-контейнеры с интерфейсом, описывающим набор поставляемых зависимостей. Эта сущность
-поставляется функционалу при помощи виджета [DiScope](./lib/features/common/widgets/di_scope/di_scope.dart), в который
-оборачивается соответствующий функционал.
+Dependencies are grouped into container entities with an interface describing a set of dependencies supplied. This entity is, in turn, supplied to a functionality with a [DiScope](./lib/features/common/widgets/di_scope/di_scope.dart) widget, which is used as a wrapper for a corresponding functionality.
 
-Например, [AppScope](./lib/features/app/di/app_scope.dart) - базовая сущность всего приложения, которая содержит
-зависимости, живущие все время, все приложение мы оборачиваем в DiScope<IAppScope>
-и передаем фабрику возвращающую AppScope.
+For example, [AppScope](./lib/features/app/di/app_scope.dart) is the base entity for the entire app. It contains dependencies that function through the entire lifecycle of the app. We wrap the whole app in the DiScope and pass a factory that returns the AppScope.
+If a functionality needs some dependencies specific to it only, they are isolated into a separate entity, which is to be wrapped around the functionality.
 
-Если какому-то функционалу нужны зависимости, требующиеся только ему, они выносятся в отдельную сущность, которая будет
-оборачивать этот функционал.
+### Implementation examples
 
-### Примеры реализации
-
-[Пример](https://github.com/surfstudio/surf-flutter-app-template-example) использования шаблона с навигацией
+[An example](https://github.com/surfstudio/surf-flutter-app-template-example) of using the template in navigation
