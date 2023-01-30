@@ -1,12 +1,68 @@
+## Related tasks
+<!--
+For more info https://github.com/surfstudio/flutter-roadmap/blob/main/docs/PULL_REQUEST_TEMPLATE_README.md#related-tasks
+-->
+
+
+## Dependence on other Pull Requests (optional)
+<!--
+For more info https://github.com/surfstudio/flutter-roadmap/blob/main/docs/PULL_REQUEST_TEMPLATE_README.md#dependence-on-other-pull-requests-optional
+-->
+
+## Background (optional)
+<!--
+For more info https://github.com/surfstudio/flutter-roadmap/blob/main/docs/PULL_REQUEST_TEMPLATE_README.md#background-optional
+-->
+
+## Changes
+<!--
+For more info https://github.com/surfstudio/flutter-roadmap/blob/main/docs/PULL_REQUEST_TEMPLATE_README.md#changes
+-->
+
+## Troubles (optional)
+<!--
+For more info https://github.com/surfstudio/flutter-roadmap/blob/main/docs/PULL_REQUEST_TEMPLATE_README.md#troubles-optional
+-->
+
+## Note (optional)
+<!--
+For more info https://github.com/surfstudio/flutter-roadmap/blob/main/docs/PULL_REQUEST_TEMPLATE_README.md#note-optional
+-->
+
 ## Checklist for self-check
-- [ ] Explanations have been added as to what your changes provide and why do you want them to be included.
-- [ ] This branch has been updated with the latest `main` to avoid conflicts (via merge from main or rebase).
-- [ ] Documentation has been updated _(if necessary)_.
+- [ ] Commits and PRs have been filed according to [the rules on the project](https://github.com/surfstudio/surf-flutter-app-template#template).
+- [ ] The author is marked as an assigne and assigned mandatory reviewers.
+- [ ] Specified related tasks and/or related PRs.
+- [ ] Specified Changes.
+- [ ] Attached videos/screenshots demonstrating the fix/feature.
+- [ ] All unspecified fields in the PR description deleted.
+- [ ] New code covered by tests.
 
-This merge request fixes / refers to the following issues: ...
+## Checklist for reviewers
+- [ ] CI passed successfully _(with a green check mark)_.
+- [ ] PR is atomic, by volume no more than 400 (+-) corrected lines (not including codogen).
 
-## Changes.
-### What new capabilities does this PR add or how does this PR the problem?
-<!-- The section should contain a list of the changes you want to make.
-If you have previously described the changes in detail in commit messages, you can take the text from them.
-If you think that some messages need additional explanation, you can specify important information in the form of subitems.-->
+Design:
+- [ ] System design corresponds to the agreements on structure and architecture on the project.
+- [ ] The code is decomposed into necessary and sufficient components.
+
+Functionality:
+- [ ] The code solves the problem.
+- [ ] Any changes to the user interface are reasonable and look good.
+
+Complexity:
+- [ ] The code is clear, easy to read, functions are small, no more than 50 lines.
+- [ ] The logic is not overcomplicated, there is no overengineering (no code sections that may be needed in the future, but no one knows about it).
+
+Tests:
+- [ ] Updated or added tests for mandatory components.
+- [ ] The tests are correct, helpful, and well designed/developed.
+
+Naming:
+- [ ] The naming of variables, methods, classes and other components is understandable.
+
+Comments:
+- [ ] The comments are understandable and helpful.
+
+Documentation:
+- [ ] Technical documentation updated (after approval, updates last reviewer). 
