@@ -30,7 +30,7 @@ For more info https://github.com/surfstudio/flutter-roadmap/blob/main/docs/PULL_
 -->
 
 ## Checklist for self-check
-- [ ] Commits and PRs have been filed according to [the rules on the project](https://github.com/surfstudio/surf-flutter-app-template#template).
+- [ ] Commits and PRs have been filed according to [the rules on the project](https://github.com/surfstudio/surf-flutter-app-template#workflow-in-a-repository).
 - [ ] The author is marked as an assigne and assigned mandatory reviewers.
 - [ ] Specified related tasks and/or related PRs.
 - [ ] Specified Changes.
