@@ -6,6 +6,57 @@ A project initialization template adopted at [Surf](https://surfstudio.ru).
 
 Flutter version >= 3.0.0
 
+## Workflow in a repository
+
+### Branching in a repository
+
+---
+For each task, a branch is created according to the pattern specified below.
+If you want to make changes to the code base outside the task, or if you don't want the change
+to be executed as a task, then a branch is created according to the pattern:
+
+- branch without task: `no-task <type>([context]): <description>`
+- task branch: `JIRA-<task_number>_<description>`
+
+### Commits
+
+---
+> The [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) is used to create commits.
+
+A pattern for a commit: `<type>(JIRA-<task_number>): <description>`, for example:
+
+- `feat(QWE-1): init_project`
+- `fix(XYZ-2): fix_error_state`
+- `chore(ABC-3): update CHANGELOG.md`
+
+> It is better if the commits will be atomic, then it will be easier to navigate in the history of changes and in the design of PR,
+> the text of the last commit will be automatically substituted in the name of the PR.
+
+### Merge requests (Pull Requests)
+
+---
+For description text, there is a basic template that will be automatically added to the PR description text field.
+The template is an mandatory part of the description.
+> During the creation of a PR, it is highly recommended to describe interesting and complex details, point out bottlenecks if possible, and help the reviewers understand the changes as much as possible.
+
+> If PR rules the bug, then in the changes you must additionally describe 2 points. The first is **Root cause**. It is necessary to describe the causes of the bug. The second one is **Solution**. Here you should describe the algorithm of solving this bug.
+>
+> `fix(ZXC-4): Buttons are not blocked when loading`
+>
+> ---
+> ```
+> Root cause: No UI reaction to load time
+> Soution: Wrap the screen widget tree in the AbsorbPointer widget. And change the state of this widget based on the loading state.
+> ```
+
+> If the work in the current PR is not finished yet, i.e. it does not require an early review, mark it with the flag - **WIP**(Work In Progress) or **Draft**, and remove this flag when the work is finished.
+
+A pattern for a Pull request: `<type>(JIRA-<task_number>): <description>`
+
+- `feat(QWE-1): init`
+- `fix(ASD-2): incorrect text for SocketException`
+- `docs(ZXC-2): readme update`
+
 ### Initialization
 
 Do the following to initialize a project:
