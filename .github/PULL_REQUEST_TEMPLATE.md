@@ -32,6 +32,7 @@ For more info https://github.com/surfstudio/flutter-roadmap/blob/main/docs/PULL_
 ## Checklist for self-check
 - [ ] Commits and PRs have been filed according to [the rules on the project](https://github.com/surfstudio/surf-flutter-app-template#workflow-in-a-repository).
 - [ ] The author is marked as an assigne and assigned mandatory reviewers.
+- [ ] Required labels marked
 - [ ] Specified related tasks and/or related PRs.
 - [ ] Specified Changes.
 - [ ] Attached videos/screenshots demonstrating the fix/feature.
@@ -65,4 +66,5 @@ Comments:
 - [ ] The comments are understandable and helpful.
 
 Documentation:
+- [ ] All labels are correct
 - [ ] Technical documentation updated (after approval, updates last reviewer). 
