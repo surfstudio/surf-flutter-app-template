@@ -4,7 +4,7 @@ A project initialization template adopted at [Surf](https://surfstudio.ru).
 
 ### Requirements
 
-Flutter version >= 3.0.0
+Flutter version >= 3.7.0
 
 ## Workflow in a repository
 
