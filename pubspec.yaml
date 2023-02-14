@@ -7,7 +7,7 @@ dependencies:
   auto_route: 5.0.1
   dio: 4.0.6
   elementary: 1.5.0
-  firebase_crashlytics: 2.8.10
+  firebase_crashlytics: 3.0.12
   flutter:
     sdk: flutter
   flutter_localizations:
