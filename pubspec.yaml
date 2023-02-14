@@ -13,6 +13,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   logger: 1.1.0
+  path_provider: 2.0.11
   provider: 6.0.3
   retrofit: 3.0.1+1
   shared_preferences: 2.0.15
@@ -30,7 +31,7 @@ dev_dependencies:
   surf_lint_rules: 1.5.0
 
 environment:
-  sdk: ">=2.14.0-0 <3.0.0"
+  sdk: ">=2.17.0-0 <3.0.0"
 
 flutter:
   uses-material-design: true

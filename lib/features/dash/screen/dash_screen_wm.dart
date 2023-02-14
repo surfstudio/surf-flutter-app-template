@@ -1,5 +1,6 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_template/features/common/mixin/theme_mixin.dart';
 import 'package:flutter_template/features/dash/screen/dash_screen.dart';
 import 'package:flutter_template/features/dash/screen/dash_screen_model.dart';
 
@@ -13,10 +14,12 @@ DashScreenWidgetModel dashScreenWmFactory(
 
 /// Widget model for [DashScreen].
 class DashScreenWidgetModel extends WidgetModel<DashScreen, DashScreenModel>
+    with ThemeWMMixin
     implements IDashScreenWidgetModel {
   /// Create an instance [DashScreenWidgetModel].
   DashScreenWidgetModel(DashScreenModel model) : super(model);
 }
 
 /// Interface of [IDashScreenWidgetModel].
-abstract class IDashScreenWidgetModel extends IWidgetModel {}
+abstract class IDashScreenWidgetModel extends IWidgetModel
+    with ThemeIModelMixin {}

@@ -16,10 +16,14 @@ class DebugScreen extends ElementaryWidget<IDebugScreenWidgetModel> {
     return Scaffold(
       body: _Body(
         urlState: wm.urlState,
+        themeState: wm.themeState,
         urlChanged: wm.urlChange,
         switchServer: wm.switchServer,
         setProxy: wm.setProxy,
+        openLogsHistory: wm.openLogsHistory,
+        saveExampleLog: wm.saveExampleLog,
         proxyController: wm.proxyEditingController,
+        setThemeMode: wm.setThemeMode,
       ),
     );
   }
@@ -27,16 +31,24 @@ class DebugScreen extends ElementaryWidget<IDebugScreenWidgetModel> {
 
 class _Body extends StatelessWidget {
   final ListenableState<UrlType> urlState;
+  final ListenableState<ThemeMode> themeState;
   final void Function(UrlType?) urlChanged;
   final void Function(UrlType) switchServer;
+  final void Function(ThemeMode?) setThemeMode;
   final Function() setProxy;
+  final VoidCallback openLogsHistory;
+  final VoidCallback saveExampleLog;
   final TextEditingController proxyController;
 
   const _Body({
     required this.urlState,
+    required this.themeState,
     required this.urlChanged,
     required this.switchServer,
+    required this.setThemeMode,
     required this.setProxy,
+    required this.openLogsHistory,
+    required this.saveExampleLog,
     required this.proxyController,
     Key? key,
   }) : super(key: key);
@@ -56,6 +68,24 @@ class _Body extends StatelessWidget {
             _ProxyCard(
               setProxy: setProxy,
               proxyController: proxyController,
+            ),
+            _ThemeCard(
+              themeState: themeState,
+              setThemeMode: setThemeMode,
+            ),
+            Card(
+              child: Column(
+                children: [
+                  ListTile(
+                    onTap: openLogsHistory,
+                    title: const Text('Открыть логи'),
+                  ),
+                  ListTile(
+                    onTap: saveExampleLog,
+                    title: const Text('Протестировать запись в логи'),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
@@ -177,6 +207,57 @@ class _ProxyCard extends StatelessWidget {
               ],
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ThemeCard extends StatelessWidget {
+  final ListenableState<ThemeMode> themeState;
+  final void Function(ThemeMode?) setThemeMode;
+  const _ThemeCard({
+    required this.themeState,
+    required this.setThemeMode,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: StateNotifierBuilder<ThemeMode>(
+          listenableState: themeState,
+          builder: (context, themeState) {
+            return Column(
+              children: <Widget>[
+                const Text('Выбрать тему приложения'),
+                Column(
+                  children: <Widget>[
+                    RadioListTile<ThemeMode>(
+                      groupValue: themeState,
+                      title: const Text('Light Theme'),
+                      value: ThemeMode.light,
+                      onChanged: setThemeMode,
+                    ),
+                    RadioListTile<ThemeMode>(
+                      groupValue: themeState,
+                      title: const Text('Dark Theme'),
+                      value: ThemeMode.dark,
+                      onChanged: setThemeMode,
+                    ),
+                    RadioListTile<ThemeMode>(
+                      groupValue: themeState,
+                      title: const Text('System Theme'),
+                      value: ThemeMode.system,
+                      onChanged: setThemeMode,
+                    ),
+                  ],
+                ),
+              ],
+            );
+          },
         ),
       ),
     );

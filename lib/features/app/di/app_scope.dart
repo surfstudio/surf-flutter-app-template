@@ -1,22 +1,27 @@
-import 'dart:ui';
-
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:elementary/elementary.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/environment/environment.dart';
+import 'package:flutter_template/features/common/service/theme/theme_service.dart';
+import 'package:flutter_template/features/common/service/theme/theme_service_impl.dart';
 import 'package:flutter_template/features/navigation/service/router.dart';
+import 'package:flutter_template/persistence/storage/theme_storage/theme_storage.dart';
+import 'package:flutter_template/persistence/storage/theme_storage/theme_storage_impl.dart';
 import 'package:flutter_template/util/default_error_handler.dart';
 
 /// Scope of dependencies which need through all app's life.
 class AppScope implements IAppScope {
+  static const _themeByDefault = ThemeMode.system;
+
   late final Dio _dio;
   late final ErrorHandler _errorHandler;
-  late final VoidCallback _applicationRebuilder;
   late final AppRouter _router;
+  late final IThemeService _themeService;
 
   @override
-  VoidCallback get applicationRebuilder => _applicationRebuilder;
+  late VoidCallback applicationRebuilder;
 
   @override
   Dio get dio => _dio;
@@ -27,16 +32,28 @@ class AppScope implements IAppScope {
   @override
   AppRouter get router => _router;
 
+  @override
+  IThemeService get themeService => _themeService;
+
+  late IThemeModeStorage _themeModeStorage;
+
   /// Create an instance [AppScope].
-  AppScope({
-    required VoidCallback applicationRebuilder,
-  }) : _applicationRebuilder = applicationRebuilder {
+  AppScope() {
     /// List interceptor. Fill in as needed.
     final additionalInterceptors = <Interceptor>[];
 
     _dio = _initDio(additionalInterceptors);
     _errorHandler = DefaultErrorHandler();
     _router = AppRouter.instance();
+    _themeModeStorage = ThemeModeStorageImpl();
+  }
+
+  @override
+  Future<void> initTheme() async {
+    final theme =
+        await ThemeModeStorageImpl().getThemeMode() ?? _themeByDefault;
+    _themeService = ThemeServiceImpl(theme);
+    _themeService.addListener(_onThemeModeChanged);
   }
 
   Dio _initDio(Iterable<Interceptor> additionalInterceptors) {
@@ -75,6 +92,10 @@ class AppScope implements IAppScope {
 
     return dio;
   }
+
+  Future<void> _onThemeModeChanged() async {
+    await _themeModeStorage.saveThemeMode(mode: _themeService.currentThemeMode);
+  }
 }
 
 /// App dependencies.
@@ -90,4 +111,10 @@ abstract class IAppScope {
 
   /// Class that coordinates navigation for the whole app.
   AppRouter get router;
+
+  /// A service that stores and retrieves app theme mode.
+  IThemeService get themeService;
+
+  /// Init theme service with theme from storage or default value
+  Future<void> initTheme();
 }
