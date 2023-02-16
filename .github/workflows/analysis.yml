@@ -1,0 +1,53 @@
+name: "Analysis"
+
+on: [workflow_call]
+
+jobs:
+  analysis:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          channel: "stable"
+
+      - name: Content
+        id: check_files
+        uses: andstor/file-existence-action@v1
+        with:
+          files: "LICENSE, README.md, example, CHANGELOG.md, CONTRIBUTING.md"
+
+      - name: File exists
+        if: steps.check_files.outputs.files_exists == 'true'
+        run: echo Content is ok!
+
+      - name: Check Description
+        run: echo | grep -q Description README.md ; echo $?
+
+      - name: Check Example
+        run: echo | grep -q Example README.md ; echo $?
+
+      - name: Check Installation
+        run: echo | grep -q Installation README.md ; echo $?
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run dependency validator
+        run: |
+          dart pub global activate dependency_validator
+          dart pub global run dependency_validator:dependency_validator
+      - name: Run analyzer
+        run: flutter analyze --fatal-warnings --fatal-infos .
+
+      - name: Run formatter
+        run: flutter format --set-exit-if-changed .
+
+      - name: Run package analyzer
+        uses: axel-op/dart-package-analyzer@v3
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
