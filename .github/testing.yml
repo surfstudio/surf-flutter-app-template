@@ -1,0 +1,29 @@
+name: "Testing"
+
+# так как не тянем с сервера, а запускаем с текущего репозитория, поэтому делаем триггер = пуш
+on: push
+
+jobs:
+  testing:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          channel: "stable"
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run tests
+        env:
+          # Ключ с таким же именем и рандомным значением создаем в сеттингсах репозитория в секретных ключах слева внизу в списке
+          CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
+        if: success()
+        run: |
+          flutter test --coverage
+          bash <(curl -s https://codecov.io/bash) -f coverage/lcov.info

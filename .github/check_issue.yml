@@ -1,0 +1,55 @@
+name: "Issue check"
+
+on:
+  issues:
+    types:
+      - opened
+
+jobs:
+  get-length:
+    runs-on: ubuntu-latest
+    env:
+      TITLE: ${{ github.event.ISSUE_TITLE }}
+      BODY: ${{ github.event.ISSUE_BODY }}
+    outputs:
+      title: ${{ steps.getLength.outputs.title_length }}
+      body: ${{ steps.getLength.outputs.body_length }}
+    steps:
+      - id: getLength
+        run: |
+          PREPARED_TITLE=$(echo $TITLE | sed 's/ //g; s/\[bug\]//; s/\[Bug\]//; s/\[BUG\]//')
+          echo "::set-output name=title_length::${#PREPARED_TITLE}"
+          echo "::set-output name=body_length::${#BODY}"
+  check-issue:
+    needs: get-length
+    if: "needs.get-length.outputs.title < 5 || needs.get-length.outputs.body == 0"
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Label issue
+        uses: andymckay/labeler@e6c4322d0397f3240f0e7e30a33b5c5df2d39e90
+        with:
+          add-labels: "WIP"
+
+      - name: Comment issue
+        uses: KeisukeYamashita/create-comment@v1
+        with:
+          comment:
+            Please check that the issue is described correctly. The name should reflect the meaning
+            of the issue. The body of the issue should contain a description of the problem and code
+            to reproduce it.
+
+  check_issue_body:
+    needs: get-length
+    if: "needs.get-length.outputs.title > 5 && needs.get-length.outputs.body != 0 && needs.get-length.outputs.body < 30"
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Comment issue
+        uses: KeisukeYamashita/create-comment@v1
+        with:
+          comment:
+            Please check that the issue is described correctly. The body of the issue
+            should contain a description of the problem and code to reproduce it.

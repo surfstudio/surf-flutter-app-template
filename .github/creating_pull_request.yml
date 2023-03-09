@@ -1,0 +1,34 @@
+name: "Pull request check"
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  pull_request_check_template:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Assignee auto assign
+        uses: actions-ecosystem/action-add-assignees@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          assignees: ${{ github.actor }}
+      - name: Check Related tasks
+        if: ${{ !contains(github.event.pull_request.body, 'Related tasks') }}
+        uses: actions/github-script@v3
+        with:
+          script: |
+            core.setFailed('No section Related tasks was found!')
+      - name: Changes
+        if: ${{ !contains(github.event.pull_request.body, 'Changes') }}
+        uses: actions/github-script@v3
+        with:
+          script: |
+            core.setFailed('No section Changes was found!')
+      - name: Checklist for self-check
+        if: ${{ !contains(github.event.pull_request.body, 'Checklist for self-check') }}
+        uses: actions/github-script@v3
+        with:
+          script: |
+            core.setFailed('No section Checklist for self-check!')

@@ -1,0 +1,27 @@
+name: "Build ios"
+
+on: push
+
+jobs:
+  build_ios:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+          architecture: x64
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build iOS
+        run: |
+          flutter pub run build_runner build --delete-conflicting-outputs
+          flutter clean
+          flutter pub get
+          flutter build ios --release --no-codesign
