@@ -24,6 +24,8 @@ class DebugScreen extends ElementaryWidget<IDebugScreenWidgetModel> {
         saveExampleLog: wm.saveExampleLog,
         proxyController: wm.proxyEditingController,
         setThemeMode: wm.setThemeMode,
+        changeDevicePreview: wm.changeDevicePreview,
+        changeDevicePreviewBottomMenu: wm.changeDevicePreviewBottomMenu,
       ),
     );
   }
@@ -35,6 +37,8 @@ class _Body extends StatelessWidget {
   final void Function(UrlType?) urlChanged;
   final void Function(UrlType) switchServer;
   final void Function(ThemeMode?) setThemeMode;
+  final VoidCallback changeDevicePreview;
+  final VoidCallback changeDevicePreviewBottomMenu;
   final Function() setProxy;
   final VoidCallback openLogsHistory;
   final VoidCallback saveExampleLog;
@@ -46,6 +50,8 @@ class _Body extends StatelessWidget {
     required this.urlChanged,
     required this.switchServer,
     required this.setThemeMode,
+    required this.changeDevicePreview,
+    required this.changeDevicePreviewBottomMenu,
     required this.setProxy,
     required this.openLogsHistory,
     required this.saveExampleLog,
@@ -60,6 +66,10 @@ class _Body extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: <Widget>[
+            _DevicePreviewSettings(
+              changeDevicePreview: changeDevicePreview,
+              changeDevicePreviewBottomMenu: changeDevicePreviewBottomMenu,
+            ),
             _ServerSwitchCard(
               urlState: urlState,
               urlChange: urlChanged,
@@ -86,6 +96,40 @@ class _Body extends StatelessWidget {
                   ),
                 ],
               ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _DevicePreviewSettings extends StatelessWidget {
+  final VoidCallback changeDevicePreview;
+  final VoidCallback changeDevicePreviewBottomMenu;
+  const _DevicePreviewSettings({
+    required this.changeDevicePreview,
+    required this.changeDevicePreviewBottomMenu,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: <Widget>[
+            const Text('Настройки Device Preview'),
+            ListTile(
+              leading: const Icon(Icons.phonelink_setup_outlined),
+              title: const Text('Device info on/off'),
+              onTap: changeDevicePreview,
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings_overscan_rounded),
+              title: const Text('Device info bottom menu on/off'),
+              onTap: changeDevicePreviewBottomMenu,
             ),
           ],
         ),

@@ -114,6 +114,23 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
   @override
   Future<void> saveExampleLog() async => _saveExampleLog();
 
+  @override
+  void changeDevicePreview() {
+    final debugOptions = Environment<AppConfig>.instance().config.debugOptions;
+    debugOptions.devicePreviewSettings.value = debugOptions.devicePreviewSettings.value.copyWith(
+      isDevicePreviewEnabled: !debugOptions.devicePreviewSettings.value.isDevicePreviewEnabled,
+    );
+  }
+
+  @override
+  void changeDevicePreviewBottomMenu() {
+    final debugOptions = Environment<AppConfig>.instance().config.debugOptions;
+    debugOptions.devicePreviewSettings.value = debugOptions.devicePreviewSettings.value.copyWith(
+      isDevicePreviewToolbarVisible:
+          !debugOptions.devicePreviewSettings.value.isDevicePreviewToolbarVisible,
+    );
+  }
+
   void _updateAppConfig() {
     final config = model.configNotifier.value;
 
@@ -172,6 +189,12 @@ abstract class IDebugScreenWidgetModel extends IWidgetModel {
 
   /// Change proxyUrl value.
   void setProxy() {}
+
+  /// Change device preview.
+  void changeDevicePreview();
+
+  /// Change device preview bottom menu.
+  void changeDevicePreviewBottomMenu();
 
   /// Set theme mode for app.
   void setThemeMode(ThemeMode? themeMode) {}

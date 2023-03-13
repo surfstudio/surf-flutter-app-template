@@ -1,11 +1,14 @@
 import 'dart:async';
 
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_template/config/app_config.dart';
+import 'package:flutter_template/config/debug_config.dart';
+import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/app/app.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
-import 'package:flutter_template/util/crashlytics_strategy.dart';
 import 'package:surf_logger/surf_logger.dart';
 
 /// App launch.
@@ -26,7 +29,17 @@ void _runApp() {
     () async {
       final scope = AppScope();
       await scope.initTheme();
-      runApp(App(scope));
+      runApp(ValueListenableBuilder<DevicePreviewSettings>(
+        valueListenable:
+            Environment<AppConfig>.instance().config.debugOptions.devicePreviewSettings,
+        builder: (_, snapshot, __) {
+          return DevicePreview(
+            enabled: !kReleaseMode && snapshot.isDevicePreviewEnabled,
+            isToolbarVisible: snapshot.isDevicePreviewToolbarVisible,
+            builder: (_) => App(scope),
+          );
+        },
+      ));
     },
     (exception, stack) {
       // TODO(init-project): Инициализировать Crashlytics.

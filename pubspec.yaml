@@ -5,8 +5,10 @@ publish_to: none
 
 dependencies:
   auto_route: 5.0.1
+  device_preview: ^1.1.0
   dio: 4.0.6
   elementary: 1.5.0
+  firebase_core_platform_interface: 4.5.1
   firebase_crashlytics: 2.8.10
   flutter:
     sdk: flutter
