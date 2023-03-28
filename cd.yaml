@@ -1,0 +1,87 @@
+# Наименование проекта. Если по исходникам собирается 1 приложение, то указать default. В теге можно не указывать. Пример: "4.02.10-dev".
+# Если несколько, то указать имя проекта, чья конфигурация описана в карте под ключом. Его же указывать при создании тега. Пример: "4.02.10-dev-app1".
+default:
+  # Окружение проекта. Указывать при создании тега. Пример: "4.02.10-dev".
+  dev:
+    # Путь до точки входа в приложение.
+    file_path: 'lib/main.dart'
+    ios:
+      build:
+        # Расширение сборочного файла. Не влияет на сборку ios приложения. Всегда собирается подписанный ipa файл.
+        extension: 'ipa'
+        # Указать flavor. Используется в команде сборки приложения.
+        flavor: 'dev'
+        # Дополнительные флаги при сборке приложения.
+        # В значении флага "--export-options-plist" указать путь до созданного exportOptions.plist.
+        flags: '--export-options-plist ios/exportOptions.plist --release --tree-shake-icons --split-debug-info --obfuscate'
+        # Сохранение артефакта сборки в jenkins. Не используется при сборке ios приложения.
+        save_to_jenkins: false
+      deploy:
+        # Указывает на необходимость деплоя в test_flight.
+        # Для отключения деплоя указать "test_flight: false".
+        test_flight: true
+        # Указывает на необходимость деплоя в Firebase.
+        # Для отключения деплоя указать "firebase: false" и удалить словарь по данному ключу.
+        firebase: false
+    android:
+      build:
+        # Расширение сборочного файла. Варианты: appbundle, apk.
+        extension: 'apk'
+        # Указать flavor. Используется в команде сборки приложения.
+        flavor: 'dev'
+        # Дополнительные флаги при сборке приложения.
+        flags: '--release --tree-shake-icons --split-debug-info --obfuscate'
+        # Сохранение артефакта сборки в jenkins. Не используется при сборке ios приложения.
+        save_to_jenkins: true
+      deploy:
+        # Указывает на необходимость деплоя в Firebase.
+        # Для отключения деплоя указать "firebase: false" и удалить словарь по данному ключу.
+        firebase:
+          # App ID приложения в Firebase Console.
+          firebase_app_id: ''
+          # Группа тестировщиков.
+          groups: ''
+  # Окружение проекта. Указывать при создании тега. Пример: "4.02.10-prod".
+  prod:
+    # Путь до точки входа в приложение.
+    file_path: 'lib/main-release.dart'
+    ios:
+      build:
+        # Расширение сборочного файла. Не влияет на сборку ios приложения. Всегда собирается подписанный ipa файл.
+        extension: 'ipa'
+        # Указать flavor. Используется в команде сборки приложения.
+        flavor: 'prod'
+        # Дополнительные флаги при сборке приложения.
+        # В значении флага "--export-options-plist" указать путь до созданного exportOptions.plist.
+        flags: '--export-options-plist ios/exportOptions.plist --release --tree-shake-icons --split-debug-info --obfuscate'
+        # Сохранение артефакта сборки в jenkins. Не используется при сборке ios приложения.
+        save_to_jenkins: false
+      deploy:
+        # Указывает на необходимость деплоя в test_flight.
+        # Для отключения деплоя указать "test_flight: false".
+        test_flight: true
+        # Указывает на необходимость деплоя в Firebase.
+        # Для отключения деплоя указать "firebase: false" и удалить словарь по данному ключу.
+        firebase:
+          # App ID приложения в Firebase Console.
+          firebase_app_id: ''
+          # Группа тестировщиков, которая будет добавлена при выкладке.
+          groups: ''
+    android:
+      build:
+        # Расширение сборочного файла. Варианты: appbundle, apk.
+        extension: 'apk'
+        # Указать flavor. Используется в команде сборки приложения.
+        flavor: 'prod'
+        # Дополнительные флаги при сборке приложения.
+        flags: '--release --tree-shake-icons --split-debug-info --obfuscate'
+        # Сохранение артефакта сборки в jenkins. Не используется при сборке ios приложения.
+        save_to_jenkins: true
+      deploy:
+        # Указывает на необходимость деплоя в Firebase.
+        # Для отключения деплоя указать "firebase: false" и удалить словарь по данному ключу.
+        firebase:
+          # App ID приложения в Firebase Console.
+          firebase_app_id: ''
+          # Группа тестировщиков.
+          groups: ''
