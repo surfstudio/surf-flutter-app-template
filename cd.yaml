@@ -1,87 +1,87 @@
-# Наименование проекта. Если по исходникам собирается 1 приложение, то указать default. В теге можно не указывать. Пример: "4.02.10-dev".
-# Если несколько, то указать имя проекта, чья конфигурация описана в карте под ключом. Его же указывать при создании тега. Пример: "4.02.10-dev-app1".
+# Project name. If the sources are assembled one application, specify default. You may not specify it in the tag. Example: "4.02.10-dev".
+# If several, then specify the name of the project, whose configuration is described in the map under the key. It must also be specified when creating the tag. Example: "4.02.10-dev-app1".
 default:
-  # Окружение проекта. Указывать при создании тега. Пример: "4.02.10-dev".
+  # Project environment. Specify when creating a tag. Example: "4.02.10-dev".
   dev:
-    # Путь до точки входа в приложение.
+    # The path to the entry point of the application.
     file_path: 'lib/main.dart'
     ios:
       build:
-        # Расширение сборочного файла. Не влияет на сборку ios приложения. Всегда собирается подписанный ipa файл.
+        # Extension of the build file. Does not affect the build of the ios application. Always builds a signed ipa file.
         extension: 'ipa'
-        # Указать flavor. Используется в команде сборки приложения.
+        # Specify the flavor. Used in the application build command.
         flavor: 'dev'
-        # Дополнительные флаги при сборке приложения.
-        # В значении флага "--export-options-plist" указать путь до созданного exportOptions.plist.
+        # Additional flags when building an application.
+        # Specify the path to the created exportOptions.plist in the value of "--export-options-plist" flag.
         flags: '--export-options-plist ios/exportOptions.plist --release --tree-shake-icons --split-debug-info --obfuscate'
-        # Сохранение артефакта сборки в jenkins. Не используется при сборке ios приложения.
+        # Saving the build artifact in jenkins. Not used when building an ios application.
         save_to_jenkins: false
       deploy:
-        # Указывает на необходимость деплоя в test_flight.
-        # Для отключения деплоя указать "test_flight: false".
+        # Indicates the need to deploat in test_flight.
+        # To disable the deplot, specify "test_flight: false".
         test_flight: true
-        # Указывает на необходимость деплоя в Firebase.
-        # Для отключения деплоя указать "firebase: false" и удалить словарь по данному ключу.
+        # Indicates the need to deploat in Firebase.
+        # To disable the deplot, specify "firebase: false" and delete the dictionary for this key.
         firebase: false
     android:
       build:
-        # Расширение сборочного файла. Варианты: appbundle, apk.
+        # Extension of the build file. Options: appbundle, apk.
         extension: 'apk'
-        # Указать flavor. Используется в команде сборки приложения.
+        # Specify the flavor. Used in the application build command.
         flavor: 'dev'
-        # Дополнительные флаги при сборке приложения.
+        # Additional flags when building an application.
         flags: '--release --tree-shake-icons --split-debug-info --obfuscate'
-        # Сохранение артефакта сборки в jenkins. Не используется при сборке ios приложения.
+        # Saving the build artifact in jenkins.
         save_to_jenkins: true
       deploy:
-        # Указывает на необходимость деплоя в Firebase.
-        # Для отключения деплоя указать "firebase: false" и удалить словарь по данному ключу.
+        # Indicates the need to deploat in Firebase.
+        # To disable the deplot, specify "firebase: false" and delete the dictionary for this key.
         firebase:
-          # App ID приложения в Firebase Console.
+          # App ID of the application in the Firebase Console.
           firebase_app_id: ''
-          # Группа тестировщиков.
+          # Testing Group.
           groups: ''
-  # Окружение проекта. Указывать при создании тега. Пример: "4.02.10-prod".
+  # Project environment. Specify when creating a tag. Example: "4.02.10-prod".
   prod:
-    # Путь до точки входа в приложение.
+    # The path to the entry point of the application.
     file_path: 'lib/main-release.dart'
     ios:
       build:
-        # Расширение сборочного файла. Не влияет на сборку ios приложения. Всегда собирается подписанный ipa файл.
+        # Extension of the build file. Does not affect the build of the ios application. Always builds a signed ipa file.
         extension: 'ipa'
-        # Указать flavor. Используется в команде сборки приложения.
+        # Specify the flavor. Used in the application build command.
         flavor: 'prod'
-        # Дополнительные флаги при сборке приложения.
-        # В значении флага "--export-options-plist" указать путь до созданного exportOptions.plist.
+        # Additional flags when building an application.
+        # Specify the path to the created exportOptions.plist in the value of "--export-options-plist" flag.
         flags: '--export-options-plist ios/exportOptions.plist --release --tree-shake-icons --split-debug-info --obfuscate'
-        # Сохранение артефакта сборки в jenkins. Не используется при сборке ios приложения.
+        # Saving the build artifact in jenkins. Not used when building an ios application.
         save_to_jenkins: false
       deploy:
-        # Указывает на необходимость деплоя в test_flight.
-        # Для отключения деплоя указать "test_flight: false".
+        # Indicates the need to deploat in test_flight.
+        # To disable the deplot, specify "test_flight: false".
         test_flight: true
-        # Указывает на необходимость деплоя в Firebase.
-        # Для отключения деплоя указать "firebase: false" и удалить словарь по данному ключу.
+        # Indicates the need to deploat in Firebase.
+        # To disable the deplot, specify "firebase: false" and delete the dictionary for this key.
         firebase:
-          # App ID приложения в Firebase Console.
+          # App ID of the application in the Firebase Console.
           firebase_app_id: ''
-          # Группа тестировщиков, которая будет добавлена при выкладке.
+          # Testing Group.
           groups: ''
     android:
       build:
-        # Расширение сборочного файла. Варианты: appbundle, apk.
+        # Extension of the build file. Options: appbundle, apk.
         extension: 'apk'
-        # Указать flavor. Используется в команде сборки приложения.
+        # Specify the flavor. Used in the application build command.
         flavor: 'prod'
-        # Дополнительные флаги при сборке приложения.
+        # Additional flags when building an application.
         flags: '--release --tree-shake-icons --split-debug-info --obfuscate'
-        # Сохранение артефакта сборки в jenkins. Не используется при сборке ios приложения.
+        # Saving the build artifact in jenkins.
         save_to_jenkins: true
       deploy:
-        # Указывает на необходимость деплоя в Firebase.
-        # Для отключения деплоя указать "firebase: false" и удалить словарь по данному ключу.
+        # Indicates the need to deploat in Firebase.
+        # To disable the deplot, specify "firebase: false" and delete the dictionary for this key.
         firebase:
-          # App ID приложения в Firebase Console.
+          # App ID of the application in the Firebase Console.
           firebase_app_id: ''
-          # Группа тестировщиков.
+          # Testing Group.
           groups: ''
