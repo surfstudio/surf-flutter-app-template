@@ -7,6 +7,8 @@ default:
     file_path: 'lib/main.dart'
     ios:
       build:
+        # An extension that is built when building an application. For iOS, an ipa is always built. For Android either apk or appbundle. 
+        extension: 'ipa'
         # Specify the flavor. Used in the application build command.
         flavor: 'dev'
         # Additional flags when building an application.
@@ -23,6 +25,8 @@ default:
         firebase: false
     android:
       build:
+        # An extension that is built when building an application. For iOS, an ipa is always built. For Android either apk or appbundle. 
+        extension: 'apk'
         # Specify the flavor. Used in the application build command.
         flavor: 'dev'
         # Additional flags when building an application.
@@ -46,6 +50,8 @@ default:
     file_path: 'lib/main-release.dart'
     ios:
       build:
+        # An extension that is built when building an application. For iOS, an ipa is always built. For Android either apk or appbundle. 
+        extension: 'ipa'
         # Specify the flavor. Used in the application build command.
         flavor: 'prod'
         # Additional flags when building an application.
@@ -66,6 +72,8 @@ default:
           groups: ''
     android:
       build:
+        # An extension that is built when building an application. For iOS, an ipa is always built. For Android either apk or appbundle. 
+        extension: 'appbundle'
         # Specify the flavor. Used in the application build command.
         flavor: 'prod'
         # Additional flags when building an application.
