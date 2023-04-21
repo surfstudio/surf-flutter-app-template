@@ -80,7 +80,7 @@ git push origin "$TAG"
 git push --tags
 
 echo $CHANGELOG
-export CHANGELOG=CHANGELOG
+export CHANGELOG="$CHANGELOG"
 
 echo "Stage: ${GREEN_COLOR}Build and deploy${RESET_COLOR}"
 # В этом блоке происходит сборка и развертывание проекта для Android и iOS
