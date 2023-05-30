@@ -7,7 +7,7 @@ default:
     file_path: 'lib/main.dart'
     ios:
       build:
-        # An extension that is built when building an application. For iOS, an ipa is always built. For Android either apk or appbundle. 
+        # The build artifact produced during application compilation. For iOS, it is always an ipa file. For Android, it is either an apk or an appbundle file.
         extension: 'ipa'
         # Specify the flavor. Used in the application build command.
         flavor: 'dev'
@@ -25,7 +25,7 @@ default:
         firebase: false
     android:
       build:
-        # An extension that is built when building an application. For iOS, an ipa is always built. For Android either apk or appbundle. 
+        # The build artifact produced during application compilation. For iOS, it is always an ipa file. For Android, it is either an apk or an appbundle file.
         extension: 'apk'
         # Specify the flavor. Used in the application build command.
         flavor: 'dev'
@@ -50,7 +50,7 @@ default:
     file_path: 'lib/main-release.dart'
     ios:
       build:
-        # An extension that is built when building an application. For iOS, an ipa is always built. For Android either apk or appbundle. 
+        # The build artifact produced during application compilation. For iOS, it is always an ipa file. For Android, it is either an apk or an appbundle file.
         extension: 'ipa'
         # Specify the flavor. Used in the application build command.
         flavor: 'prod'
@@ -72,7 +72,7 @@ default:
           groups: ''
     android:
       build:
-        # An extension that is built when building an application. For iOS, an ipa is always built. For Android either apk or appbundle. 
+        # The build artifact produced during application compilation. For iOS, it is always an ipa file. For Android, it is either an apk or an appbundle file.
         extension: 'appbundle'
         # Specify the flavor. Used in the application build command.
         flavor: 'prod'
