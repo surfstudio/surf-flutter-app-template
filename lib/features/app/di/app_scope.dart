@@ -1,5 +1,5 @@
-import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
+import 'package:dio/io.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/config/app_config.dart';
@@ -50,8 +50,7 @@ class AppScope implements IAppScope {
 
   @override
   Future<void> initTheme() async {
-    final theme =
-        await ThemeModeStorageImpl().getThemeMode() ?? _themeByDefault;
+    final theme = await ThemeModeStorageImpl().getThemeMode() ?? _themeByDefault;
     _themeService = ThemeServiceImpl(theme);
     _themeService.addListener(_onThemeModeChanged);
   }
@@ -63,12 +62,11 @@ class AppScope implements IAppScope {
 
     dio.options
       ..baseUrl = Environment<AppConfig>.instance().config.url
-      ..connectTimeout = timeout.inMilliseconds
-      ..receiveTimeout = timeout.inMilliseconds
-      ..sendTimeout = timeout.inMilliseconds;
+      ..connectTimeout = timeout
+      ..receiveTimeout = timeout
+      ..sendTimeout = timeout;
 
-    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-        (client) {
+    (dio.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate = (client) {
       final proxyUrl = Environment<AppConfig>.instance().config.proxyUrl;
       if (proxyUrl != null && proxyUrl.isNotEmpty) {
         client
@@ -86,8 +84,7 @@ class AppScope implements IAppScope {
     dio.interceptors.addAll(additionalInterceptors);
 
     if (Environment<AppConfig>.instance().isDebug) {
-      dio.interceptors
-          .add(LogInterceptor(requestBody: true, responseBody: true));
+      dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
     }
 
     return dio;
@@ -115,6 +112,6 @@ abstract class IAppScope {
   /// A service that stores and retrieves app theme mode.
   IThemeService get themeService;
 
-  /// Init theme service with theme from storage or default value
+  /// Init theme service with theme from storage or default value.
   Future<void> initTheme();
 }

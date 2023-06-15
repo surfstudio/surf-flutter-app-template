@@ -13,21 +13,25 @@ part 'router.gr.dart';
 
 /// When you add route with screen don't forget add imports of screen and screen_widget_model
 
-/// All app routes
-@MaterialAutoRouter(
+@AutoRouterConfig(
   replaceInRouteName: 'ScreenWidget|Screen,Route',
-  routes: <AutoRoute>[
-    tempRoutes,
-    logHistoryRoutes,
-  ],
 )
 
-/// Main point of the application navigation
+/// Main point of the application navigation.
 class AppRouter extends _$AppRouter {
   static final AppRouter _router = AppRouter._();
 
+  @override
+  RouteType get defaultRouteType => const RouteType.material();
+
+  @override
+  List<AutoRoute> get routes => [
+        tempRoutes,
+        logHistoryRoutes,
+      ];
+
   AppRouter._();
 
-  /// Singleton instance of [AppRouter]
+  /// Singleton instance of [AppRouter].
   factory AppRouter.instance() => _router;
 }

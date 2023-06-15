@@ -1,9 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_template/features/navigation/domain/entity/app_route_names.dart';
 import 'package:flutter_template/features/temp/screens/temp_screen/temp_screen_widget_model.dart';
 
 /// Initialization screens (this can be a HomeScreen or SplashScreen for example).
+@RoutePage(
+  name: AppRouteNames.tempScreen,
+)
 class TempScreen extends ElementaryWidget<TempScreenWidgetModel> {
   /// Create an instance [TempScreen].
   const TempScreen({

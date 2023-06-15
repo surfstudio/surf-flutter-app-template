@@ -6,18 +6,18 @@
 /// static const String screenName = 'screenNameRoute';
 /// ```
 abstract class AppRouteNames {
-  /// TempScreen route name
+  /// TempScreen route name.
   static const String tempScreen = 'tempRouter';
 
-  /// DebugScreen route name
+  /// DebugScreen route name.
   static const String debugScreen = 'debugRouter';
 
-  /// DashScreen route name
+  /// DashScreen route name.
   static const String dashScreen = 'dashRouter';
 
-  /// InfoScreen route name
+  /// InfoScreen route name.
   static const String infoScreen = 'infoRouter';
 
-  /// LogHistoryScreen route name
+  /// LogHistoryScreen route name.
   static const String logHistoryScreen = 'logHistoryRouter';
 }

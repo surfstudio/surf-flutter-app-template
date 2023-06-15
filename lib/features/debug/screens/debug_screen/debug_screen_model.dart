@@ -31,7 +31,7 @@ class DebugScreenModel extends ElementaryModel {
   /// Theme mode change Notifier.
   late ValueNotifier<ThemeMode> currentThemeMode;
 
-  /// Config proxy url value
+  /// Config proxy url value.
   String? get proxyUrl => _environment.config.proxyUrl;
 
   /// Create an instance [DebugScreenModel].

@@ -7,17 +7,17 @@
 /// ```
 abstract class AppRoutePaths {
   /// Path to temp screen.
-  static const String tempPath = 'temp';
+  static const String tempPath = '/temp';
 
-  ///Path to debug screen
+  /// Path to debug screen.
   static const String debugPath = 'debug';
 
-  ///Path to dash screen
+  /// Path to dash screen.
   static const String dashPath = 'dash';
 
-  ///Path to info screen
+  /// Path to info screen.
   static const String infoPath = 'info';
 
-  ///Path to logs history screen
-  static const String logHistory = 'logHistory';
+  /// Path to logs history screen.
+  static const String logHistory = '/logHistory';
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_template/assets/colors/color_scheme.dart';
 import 'package:flutter_template/assets/text/text_extention.dart';
 
-/// Class of the app themes data
+/// Class of the app themes data.
 abstract class AppThemeData {
   /// Light theme configuration.
   static final ThemeData lightTheme = ThemeData(

@@ -4,7 +4,7 @@ description: a Flutter template project for development.
 publish_to: none
 
 dependencies:
-  auto_route: 6.1.0
+  auto_route: 7.4.0
   dio: 5.1.1
   elementary: 2.0.0
   firebase_crashlytics: 3.1.0
@@ -20,7 +20,7 @@ dependencies:
   surf_logger: 1.1.0
 
 dev_dependencies:
-  auto_route_generator: 6.1.0
+  auto_route_generator: 7.1.1
   build_runner: 2.3.3
   dart_code_metrics: 5.7.2
   elementary_test: 1.1.3
