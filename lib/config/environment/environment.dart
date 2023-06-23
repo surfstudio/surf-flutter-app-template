@@ -30,8 +30,7 @@ class Environment<T> implements Listenable {
 
   ValueNotifier<T> _config;
 
-  Environment._(this._currentBuildType, T config)
-      : _config = ValueNotifier<T>(config);
+  Environment._(this._currentBuildType, T config) : _config = ValueNotifier<T>(config);
 
   /// Provides instance [Environment].
   factory Environment.instance() => _instance as Environment<T>;
@@ -54,7 +53,7 @@ class Environment<T> implements Listenable {
     _instance ??= Environment<T>._(buildType, config);
   }
 
-  /// Update config proxy url from storage
+  /// Update config proxy url from storage.
   Future<void> refreshConfigProxy(IConfigSettingsStorage storage) async {
     final savedProxy = await storage.getProxyUrl();
     if (savedProxy?.isNotEmpty ?? false) {
@@ -62,7 +61,7 @@ class Environment<T> implements Listenable {
     }
   }
 
-  /// Add strategy to logger for save logs history for qa environment
+  /// Add strategy to logger for save logs history for qa environment.
   Future<void> createLogHistoryStrategy() async {
     if (_currentBuildType == BuildType.qa) {
       final file = await const LogHistoryServiceImpl().logHistoryFile();
@@ -75,7 +74,7 @@ class Environment<T> implements Listenable {
     }
   }
 
-  /// Save config proxy url to storage
+  /// Save config proxy url to storage.
   Future<void> saveConfigProxy(IConfigSettingsStorage storage) {
     final config = this.config;
     if (config is! AppConfig) {

@@ -99,6 +99,6 @@ abstract class IDebugWidgetModel extends IWidgetModel with ThemeIModelMixin {
   /// Title for appbar, depends on current selected page.
   String appBarTitle(RouteData topRoute);
 
-  /// Switch theme mode between light and dark
+  /// Switch theme mode between light and dark.
   void switchTheme();
 }

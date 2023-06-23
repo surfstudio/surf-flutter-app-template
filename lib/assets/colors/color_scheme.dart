@@ -109,12 +109,11 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
     );
   }
 
-  /// Return color scheme for app from context
+  /// Return color scheme for app from context.
   static AppColorScheme of(BuildContext context) =>
-      Theme.of(context).extension<AppColorScheme>() ??
-      _throwThemeExceptionFromFunc(context);
+      Theme.of(context).extension<AppColorScheme>() ?? _throwThemeExceptionFromFunc(context);
 
-  /// @nodoc
+  /// @nodoc.
   ThemeExtension<AppColorScheme> copyWith({
     Color? primary,
     Color? onPrimary,

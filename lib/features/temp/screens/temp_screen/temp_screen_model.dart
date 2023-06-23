@@ -22,9 +22,9 @@ class TempScreenModel extends ElementaryModel implements ITempScreenModel {
 
 /// Interface of [TempScreenModel].
 abstract class ITempScreenModel extends ElementaryModel {
-  /// Return value for app environment status
+  /// Return value for app environment status.
   bool get isDebugMode;
 
-  /// Switch theme mode between light and dark
+  /// Switch theme mode between light and dark.
   void switchTheme();
 }

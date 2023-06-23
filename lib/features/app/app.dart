@@ -40,6 +40,12 @@ class _AppState extends State<App> {
     }
   }
 
+  void _rebuildApplication() {
+    setState(() {
+      _scope = widget.appScope..applicationRebuilder = _rebuildApplication;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return DiScope<IAppScope>(
@@ -67,12 +73,6 @@ class _AppState extends State<App> {
         },
       ),
     );
-  }
-
-  void _rebuildApplication() {
-    setState(() {
-      _scope = widget.appScope..applicationRebuilder = _rebuildApplication;
-    });
   }
 }
 
