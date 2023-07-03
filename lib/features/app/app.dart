@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_template/assets/themes/theme_data.dart';
-import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/common/service/theme/theme_service.dart';
@@ -32,7 +31,7 @@ class _AppState extends State<App> {
     _themeService = _scope.themeService;
 
     final configStorage = ConfigSettingsStorageImpl();
-    final environment = Environment<AppConfig>.instance();
+    final environment = Environment.instance();
     if (!environment.isRelease) {
       environment
         ..refreshConfigProxy(configStorage)
