@@ -8,13 +8,6 @@ import 'package:surf_logger/surf_logger.dart';
 
 /// App launch.
 Future<void> run() async {
-  /// It must be called so that the orientation does not fall.
-  WidgetsFlutterBinding.ensureInitialized();
-
-  /// Fix orientation.
-  // TODO(init-project): change as needed or remove.
-  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-
   _initLogger();
   _runApp();
 }
@@ -22,6 +15,13 @@ Future<void> run() async {
 void _runApp() {
   runZonedGuarded<Future<void>>(
     () async {
+      /// It must be called so that the orientation does not fall.
+      WidgetsFlutterBinding.ensureInitialized();
+
+      /// Fix orientation.
+      // TODO(init-project): change as needed or remove.
+      await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
       final scope = AppScope();
       await scope.initTheme();
       runApp(App(scope));

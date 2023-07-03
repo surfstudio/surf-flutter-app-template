@@ -58,12 +58,8 @@ class AppTextTheme extends ThemeExtension<AppTextTheme> {
     );
   }
 
-  /// Return text theme for app from context.
-  static AppTextTheme of(BuildContext context) {
-    return Theme.of(context).extension<AppTextTheme>() ?? _throwThemeExceptionFromFunc(context);
-  }
-
   /// @nodoc.
+  @override
   ThemeExtension<AppTextTheme> copyWith({
     TextStyle? regular14,
     TextStyle? regular16,
@@ -80,6 +76,11 @@ class AppTextTheme extends ThemeExtension<AppTextTheme> {
       bold14: bold14 ?? this.bold14,
       bold16: bold16 ?? this.bold16,
     );
+  }
+
+  /// Return text theme for app from context.
+  static AppTextTheme of(BuildContext context) {
+    return Theme.of(context).extension<AppTextTheme>() ?? _throwThemeExceptionFromFunc(context);
   }
 }
 

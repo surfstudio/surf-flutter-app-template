@@ -109,11 +109,8 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
     );
   }
 
-  /// Return color scheme for app from context.
-  static AppColorScheme of(BuildContext context) =>
-      Theme.of(context).extension<AppColorScheme>() ?? _throwThemeExceptionFromFunc(context);
-
   /// @nodoc.
+  @override
   ThemeExtension<AppColorScheme> copyWith({
     Color? primary,
     Color? onPrimary,
@@ -143,6 +140,10 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
       unselectedItem: unselectedItem ?? this.unselectedItem,
     );
   }
+
+  /// Return color scheme for app from context.
+  static AppColorScheme of(BuildContext context) =>
+      Theme.of(context).extension<AppColorScheme>() ?? _throwThemeExceptionFromFunc(context);
 }
 
 Never _throwThemeExceptionFromFunc(BuildContext context) =>
