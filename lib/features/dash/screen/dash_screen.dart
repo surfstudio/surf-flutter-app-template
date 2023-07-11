@@ -19,8 +19,16 @@ class DashScreen extends ElementaryWidget<IDashScreenWidgetModel> {
   Widget build(IDashScreenWidgetModel wm) {
     return ColoredBox(
       color: wm.colorScheme.background,
-      child: const Center(
-        child: Text('Dash screen view'),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text('Dash screen view'),
+          const SizedBox(height: 16),
+          Text('Кнопка ${wm.l10n.positiveResponse}'),
+          Text(wm.l10n.string('Username')),
+          Text(wm.l10n.thingsWithCount(1)),
+          Text(wm.l10n.date(DateTime.now())),
+        ],
       ),
     );
   }
