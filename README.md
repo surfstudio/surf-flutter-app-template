@@ -165,6 +165,11 @@ Dependencies are grouped into container entities with an interface describing a 
 For example, [AppScope](./lib/features/app/di/app_scope.dart) is the base entity for the entire app. It contains dependencies that function through the entire lifecycle of the app. We wrap the whole app in the DiScope and pass a factory that returns the AppScope.
 If a functionality needs some dependencies specific to it only, they are isolated into a separate entity, which is to be wrapped around the functionality.
 
+### Localization
+
+The basic rules and tips for working with localization are described in [README.md](./lib/l10n/README.md).
+More information on working with localization can be found here `[here](https://docs.flutter.dev/accessibility-and-localization/internationalization).
+
 ### Implementation examples
 
 [An example](https://github.com/surfstudio/surf-flutter-app-template-example) of using the template in navigation

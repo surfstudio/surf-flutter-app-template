@@ -1,0 +1,70 @@
+{
+  "@@locale": "ru",
+  "@segmentCommon": {
+    "---------": "---------",
+    "description": "Общие строки"
+  },
+  "positiveResponse": "Да",
+
+  "@segmentExamples": {
+    "---------": "---------",
+    "description": "Примеры"
+  },
+  "examplesTitle": "Примеры",
+  "examplesLocalizationTitle": "Примеры локализации",
+  "weekDay": "{date}",
+  "@weekDay": {
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "E"
+      }
+    }
+  },
+  "thingsWithCount": "{count, plural, =1{{count} штука} few{{count} штуки} many{{count} штук} other{{count} штук}}",
+  "@thingsWithCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "duration": "{duration} мин",
+  "@duration": {
+    "placeholders": {
+      "duration": {
+        "format": "int"
+      }
+    }
+  },
+  "date": "действует до {date}",
+  "@date": {
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "yMd"
+      }
+    }
+  },
+  "dateAndTime": "{date}, {time}",
+  "@dateAndTime": {
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "MMMMd"
+      },
+      "time": {
+        "type": "DateTime",
+        "format": "jm"
+      }
+    }
+  },
+  "string": "Привет, {name}!",
+  "@string": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
+}

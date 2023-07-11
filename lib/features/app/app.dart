@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_template/assets/themes/theme_data.dart';
 import 'package:flutter_template/config/app_config.dart';
@@ -76,10 +77,12 @@ class _AppState extends State<App> {
   }
 }
 
-// You need to customize for your project.
-const _localizations = [Locale('ru', 'RU')];
+const _localizations = [
+  Locale('ru', 'RU'),
+];
 
 const _localizationsDelegates = [
+  AppLocalizations.delegate,
   GlobalMaterialLocalizations.delegate,
   GlobalWidgetsLocalizations.delegate,
   GlobalCupertinoLocalizations.delegate,
