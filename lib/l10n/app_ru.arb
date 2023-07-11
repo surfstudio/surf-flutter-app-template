@@ -10,6 +10,8 @@
     "---------": "---------",
     "description": "Примеры"
   },
+  "examplesTitle": "Примеры",
+  "examplesLocalizationTitle": "Примеры локализации",
   "weekDay": "{date}",
   "@weekDay": {
     "placeholders": {

@@ -18,7 +18,6 @@ DashScreenWidgetModel dashScreenWmFactory(
 class DashScreenWidgetModel extends WidgetModel<DashScreen, DashScreenModel>
     with ThemeWMMixin
     implements IDashScreenWidgetModel {
-
   @override
   AppLocalizations get l10n => context.l10n;
 
@@ -29,7 +28,6 @@ class DashScreenWidgetModel extends WidgetModel<DashScreen, DashScreenModel>
 /// Interface of [IDashScreenWidgetModel].
 abstract class IDashScreenWidgetModel extends IWidgetModel
     with ThemeIModelMixin {
-
-  /// Localisation strings.
+  /// Localization strings.
   AppLocalizations get l10n;
 }
