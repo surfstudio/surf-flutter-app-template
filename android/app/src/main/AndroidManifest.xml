@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_rounded"
         android:label="flutter_template">
         <activity
             android:name=".MainActivity"
