@@ -27,6 +27,7 @@ dev_dependencies:
   elementary_test: 1.1.3
   flutter_test:
     sdk: flutter
+  icons_launcher: 2.1.3
   json_serializable: 6.6.1
   retrofit_generator: 6.0.0+1
   surf_lint_rules: 2.1.0
