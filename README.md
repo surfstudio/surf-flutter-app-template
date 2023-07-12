@@ -173,3 +173,7 @@ More information on working with localization can be found here `[here](https://
 ### Implementation examples
 
 [An example](https://github.com/surfstudio/surf-flutter-app-template-example) of using the template in navigation
+
+### Native splash screen
+
+Basic guidelines for creating a native splash screen [README.md](./assets/splash/README.md)
