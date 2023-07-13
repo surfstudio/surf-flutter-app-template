@@ -173,3 +173,7 @@ More information on working with localization can be found here `[here](https://
 ### Implementation examples
 
 [An example](https://github.com/surfstudio/surf-flutter-app-template-example) of using the template in navigation
+
+### Icons launcher
+
+The basic rules and tips for working with icon generation are described in the [README.md](./assets/launcher_icon/README.md).
