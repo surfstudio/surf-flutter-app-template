@@ -22,8 +22,37 @@ Basic files should be prepared by designers.
 
 ### Configuring image generation
 
+Configuration files:
+``` text
+flutter_launcher_icons.yaml // for main
+
 flutter_launcher_icons-dev.yaml
 flutter_launcher_icons-release.yaml
+```
+
+Icons will be generated in the appropriate folders:
+``` text
+Android:
+android/app/scr/dev/res/
+android/app/scr/release/res/
+
+IOS:
+ios/runner/Assets.xcassets/AppIcon-dev.appiconset
+ios/runner/Assets.xcassets/AppIcon-release.appiconset
+```
+
+Data in default folders: android/app/scr/main/res/ и
+ios/runner/Assets.xcassets/AppIcon.appiconset **won't be generated**.
+
+If you need to overwrite the icons there as well, you need to:
+1. Customize the flutter_launcher_icons.yaml file
+2. Rename files with configuration settings for flutter, for example: flutter_SKIP_launcher_icons-dev.yaml
+   and flutter_SKIP_SKIP_launcher_iconsRelease.yaml
+3. Start generation
+
+Running generation from a specific file fails. The script goes through all the configuration files, so
+we reassign the unnecessary ones.
+
 
 ```text
 flutter_launcher_icons:
