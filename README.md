@@ -170,6 +170,18 @@ If a functionality needs some dependencies specific to it only, they are isolate
 The basic rules and tips for working with localization are described in [README.md](./lib/l10n/README.md).
 More information on working with localization can be found here `[here](https://docs.flutter.dev/accessibility-and-localization/internationalization).
 
+### Assets codegen
+
+You can easily add assets to your project by following these steps:
+1. Add asset to your assets folder (make sure you specify this folder in `asset` section of your [pubspec.yaml](pubspec.yaml))
+2. Run script [`spider_build.sh`](scripts/spider_build.sh):
+   ```sh
+   sh scripts/spider_build.sh
+   ```
+
+Initially, the project has two groups of assets - [Images](lib/assets/res/images.dart) and [Svg Icons](lib/assets/res/svg_icons.dart). You can change it in spider [configuration file](spider.yaml).
+
+
 ### Implementation examples
 
 [An example](https://github.com/surfstudio/surf-flutter-app-template-example) of using the template in navigation

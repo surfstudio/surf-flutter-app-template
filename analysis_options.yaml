@@ -18,3 +18,4 @@ analyzer:
   exclude:
     - lib/**/*.g.dart
     - lib/**/*.gr.dart
+    - lib/assets/**
