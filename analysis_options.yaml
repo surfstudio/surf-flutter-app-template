@@ -19,3 +19,4 @@ analyzer:
     - lib/**/*.g.dart
     - lib/**/*.gr.dart
     - lib/assets/**
+        
