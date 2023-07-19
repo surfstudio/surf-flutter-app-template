@@ -271,7 +271,7 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
       return this;
     }
 
-    return copyWith(
+    return AppColorScheme._(
       primary: Color.lerp(primary, other.primary, t),
       onPrimary: Color.lerp(onPrimary, other.onPrimary, t),
       dangerBg: Color.lerp(dangerBg, other.dangerBg, t),

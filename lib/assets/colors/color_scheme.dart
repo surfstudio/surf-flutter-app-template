@@ -287,39 +287,43 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
       return this;
     }
 
-    return copyWith(
-      primary: Color.lerp(primary, other.primary, t),
-      onPrimary: Color.lerp(onPrimary, other.onPrimary, t),
-      secondary: Color.lerp(secondary, other.secondary, t),
-      onSecondary: Color.lerp(onSecondary, other.onSecondary, t),
-      surface: Color.lerp(surface, other.surface, t),
-      surfaceSecondary: Color.lerp(surfaceSecondary, other.surfaceSecondary, t),
-      onSurface: Color.lerp(onSurface, other.onSurface, t),
-      background: Color.lerp(background, other.background, t),
+    return AppColorScheme._(
+      primary: Color.lerp(primary, other.primary, t)!,
+      onPrimary: Color.lerp(onPrimary, other.onPrimary, t)!,
+      secondary: Color.lerp(secondary, other.secondary, t)!,
+      onSecondary: Color.lerp(onSecondary, other.onSecondary, t)!,
+      surface: Color.lerp(surface, other.surface, t)!,
+      surfaceSecondary:
+          Color.lerp(surfaceSecondary, other.surfaceSecondary, t)!,
+      onSurface: Color.lerp(onSurface, other.onSurface, t)!,
+      background: Color.lerp(background, other.background, t)!,
       backgroundSecondary:
-          Color.lerp(backgroundSecondary, other.backgroundSecondary, t),
+          Color.lerp(backgroundSecondary, other.backgroundSecondary, t)!,
       backgroundTertiary:
-          Color.lerp(backgroundTertiary, other.backgroundTertiary, t),
-      onBackground: Color.lerp(onBackground, other.onBackground, t),
+          Color.lerp(backgroundTertiary, other.backgroundTertiary, t)!,
+      onBackground: Color.lerp(onBackground, other.onBackground, t)!,
       onBackgroundSecondary:
-          Color.lerp(onBackgroundSecondary, other.onBackgroundSecondary, t),
-      danger: Color.lerp(danger, other.danger, t),
-      dangerSecondary: Color.lerp(dangerSecondary, other.dangerSecondary, t),
-      onDanger: Color.lerp(onDanger, other.onDanger, t),
-      textField: Color.lerp(textField, other.textField, t),
-      textFieldLabel: Color.lerp(textFieldLabel, other.textFieldLabel, t),
-      textFieldHelper: Color.lerp(textFieldHelper, other.textFieldHelper, t),
-      frameTextFieldSecondary:
-          Color.lerp(frameTextFieldSecondary, other.frameTextFieldSecondary, t),
-      inactive: Color.lerp(inactive, other.inactive, t),
-      positive: Color.lerp(positive, other.positive, t),
-      onPositive: Color.lerp(onPositive, other.onPositive, t),
-      skeletonPrimary: Color.lerp(skeletonPrimary, other.skeletonPrimary, t),
+          Color.lerp(onBackgroundSecondary, other.onBackgroundSecondary, t)!,
+      danger: Color.lerp(danger, other.danger, t)!,
+      dangerSecondary: Color.lerp(dangerSecondary, other.dangerSecondary, t)!,
+      onDanger: Color.lerp(onDanger, other.onDanger, t)!,
+      textField: Color.lerp(textField, other.textField, t)!,
+      textFieldLabel: Color.lerp(textFieldLabel, other.textFieldLabel, t)!,
+      textFieldHelper: Color.lerp(textFieldHelper, other.textFieldHelper, t)!,
+      frameTextFieldSecondary: Color.lerp(
+          frameTextFieldSecondary, other.frameTextFieldSecondary, t)!,
+      inactive: Color.lerp(inactive, other.inactive, t)!,
+      positive: Color.lerp(positive, other.positive, t)!,
+      onPositive: Color.lerp(onPositive, other.onPositive, t)!,
+      skeletonPrimary: Color.lerp(skeletonPrimary, other.skeletonPrimary, t)!,
       skeletonOnPrimary:
-          Color.lerp(skeletonOnPrimary, other.skeletonOnPrimary, t),
+          Color.lerp(skeletonOnPrimary, other.skeletonOnPrimary, t)!,
       skeletonSecondary:
-          Color.lerp(skeletonSecondary, other.skeletonSecondary, t),
-      skeletonTertiary: Color.lerp(skeletonTertiary, other.skeletonTertiary, t),
+          Color.lerp(skeletonSecondary, other.skeletonSecondary, t)!,
+      skeletonTertiary:
+          Color.lerp(skeletonTertiary, other.skeletonTertiary, t)!,
+      tetradicBackground:
+          Color.lerp(tetradicBackground, other.tetradicBackground, t)!,
     );
   }
 

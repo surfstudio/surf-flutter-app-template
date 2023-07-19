@@ -48,19 +48,20 @@ class AppTextTheme extends ThemeExtension<AppTextTheme> {
       return this;
     }
 
-    return copyWith(
-      regular14: TextStyle.lerp(regular14, other.regular14, t),
-      regular16: TextStyle.lerp(regular16, other.regular16, t),
-      medium14: TextStyle.lerp(medium14, other.medium14, t),
-      medium16: TextStyle.lerp(medium16, other.medium16, t),
-      bold14: TextStyle.lerp(bold14, other.bold14, t),
-      bold16: TextStyle.lerp(bold16, other.bold16, t),
+    return AppTextTheme._(
+      regular14: TextStyle.lerp(regular14, other.regular14, t)!,
+      regular16: TextStyle.lerp(regular16, other.regular16, t)!,
+      medium14: TextStyle.lerp(medium14, other.medium14, t)!,
+      medium16: TextStyle.lerp(medium16, other.medium16, t)!,
+      bold14: TextStyle.lerp(bold14, other.bold14, t)!,
+      bold16: TextStyle.lerp(bold16, other.bold16, t)!,
     );
   }
 
   /// Return text theme for app from context.
   static AppTextTheme of(BuildContext context) {
-    return Theme.of(context).extension<AppTextTheme>() ?? _throwThemeExceptionFromFunc(context);
+    return Theme.of(context).extension<AppTextTheme>() ??
+        _throwThemeExceptionFromFunc(context);
   }
 
   /// @nodoc.
