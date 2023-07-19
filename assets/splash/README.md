@@ -58,6 +58,7 @@ flutter_native_splash:
 ```
 
 ## Useful links
+
 - [Instructions on how to configure additional parameters](https://pub.dev/packages/flutter_native_splash)
 - [Splash screens Android 12](https://developer.android.com/develop/ui/views/launch/splash-screen)
 
