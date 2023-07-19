@@ -2,5 +2,7 @@
 #include "Generated.xcconfig"
 #include "common.xcconfig"
 
+app_suffix=-prod
 bundle_suffix=
 IDENTIFIER=$(identifier)$(bundle_suffix)
+APP_ICON=$(app_icon)$(app_suffix)
