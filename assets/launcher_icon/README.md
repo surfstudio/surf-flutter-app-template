@@ -24,21 +24,19 @@ Basic files should be prepared by designers.
 
 Configuration files:
 ``` text
-flutter_launcher_icons.yaml // for main
-
 flutter_launcher_icons-dev.yaml
-flutter_launcher_icons-release.yaml
+flutter_launcher_icons-prod.yaml
 ```
 
 Icons will be generated in the appropriate folders:
 ``` text
 Android:
 android/app/scr/dev/res/
-android/app/scr/release/res/
+android/app/scr/prod/res/
 
 IOS:
 ios/runner/Assets.xcassets/AppIcon-dev.appiconset
-ios/runner/Assets.xcassets/AppIcon-release.appiconset
+ios/runner/Assets.xcassets/AppIcon-prod.appiconset
 ```
 
 Data in default folders: android/app/scr/main/res/ и
