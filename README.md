@@ -59,6 +59,30 @@ Do the following to initialize a project:
 1. Search for flutter_template and replace it with the name of your project where needed.
 2. Initialize FirebaseCrashlytics (you can find that in TODO(init-project)).
 
+### FVM
+
+If you have multiple versions of Flutter installed, you can use [FVM](https://fvm.app/).<br>
+You can find installation instructions [here](https://fvm.app/docs/getting_started/installation). <br>
+To switch to the desired Flutter version, specify version in [`fvm_config.json`](.fvm/fvm_config.json) and then use the [`version.sh` script](scripts/version.sh):
+```sh
+sh script/version.sh
+```
+
+Now you need to configure FVM for your IDE:
+
+#### Configuration for VSCode
+
+Follow the [configuration guide](https://fvm.app/docs/getting_started/configuration/#vs-code)
+or 
+Run the [`fvm_vscode.sh` script](scripts/fvm_vscode.sh):
+```sh
+sh script/fvm_vscode.sh
+```
+
+#### Configuration for AndroidStudio/IDEA
+
+The configuration guide can be found [here](https://fvm.app/docs/getting_started/configuration/#android-studio).
+
 ### Structure
 
 - assets
