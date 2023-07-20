@@ -9,6 +9,8 @@ dart_code_metrics:
     number-of-methods: 10
     weight-of-class: 0.33
     maintainability-index: 50
+  rules:
+    - prefer-match-file-name: false
 
 linter:
   rules:
