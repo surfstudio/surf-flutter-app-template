@@ -7,6 +7,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 
+import 'core/utils/testing_theme.dart';
+
 const _tolerance = 0.18;
 
 const _devices = [
@@ -15,6 +17,12 @@ const _devices = [
 
   /// some custom device.
   Device(name: 'pixel 4a', size: Size(393, 851)),
+];
+
+/// List of themes used for testing.
+final themesForTesting = [
+  TestingTheme.light(),
+  TestingTheme.dark(),
 ];
 
 Future<void> testExecutable(FutureOr<void> Function() testMain) {
