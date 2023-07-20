@@ -29,6 +29,7 @@ dev_dependencies:
     sdk: flutter
   json_serializable: 6.6.1
   retrofit_generator: 6.0.0+1
+  spider: 4.2.1
   surf_lint_rules: 2.1.0
 
 environment:
