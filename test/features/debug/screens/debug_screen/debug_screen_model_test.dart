@@ -49,12 +49,6 @@ void main() {
     () {
       const proxyMock = 'proxy';
       setUp(() {
-        when(() {
-          env.config = config.copyWith(url: Url.prodUrl);
-        }).thenReturn(null);
-        when(() {
-          env.config = config.copyWith(proxyUrl: proxyMock);
-        }).thenReturn(null);
         when(() => env.saveConfigProxy(configSettingsStorage))
             .thenAnswer((_) => Future<void>.value());
       });
