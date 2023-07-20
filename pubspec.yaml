@@ -28,6 +28,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   json_serializable: 6.6.1
+  mocktail: 0.3.0
   retrofit_generator: 6.0.0+1
   surf_lint_rules: 2.1.0
 
