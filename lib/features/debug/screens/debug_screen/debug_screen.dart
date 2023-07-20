@@ -55,13 +55,12 @@ class _Body extends StatelessWidget {
     required this.openLogsHistory,
     required this.saveExampleLog,
     required this.proxyController,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8),
       child: SingleChildScrollView(
         child: Column(
           children: <Widget>[
@@ -108,14 +107,13 @@ class _ServerSwitchCard extends StatelessWidget {
     required this.urlState,
     required this.urlChange,
     required this.switchServer,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8),
         child: Column(
           children: <Widget>[
             const Text('Сервер'),
@@ -149,7 +147,7 @@ class _ServerSwitchCard extends StatelessWidget {
                       onPressed: () => switchServer(urlState!),
                       child: const Text(
                         'Переключить',
-                        style: TextStyle(fontSize: 16.0),
+                        style: TextStyle(fontSize: 16),
                       ),
                     ),
                   ],
@@ -170,14 +168,13 @@ class _ProxyCard extends StatelessWidget {
   const _ProxyCard({
     required this.setProxy,
     required this.proxyController,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8),
         child: Column(
           children: <Widget>[
             const Padding(
@@ -206,7 +203,7 @@ class _ProxyCard extends StatelessWidget {
                   onPressed: setProxy,
                   child: const Text(
                     'Переключить прокси',
-                    style: TextStyle(fontSize: 16.0),
+                    style: TextStyle(fontSize: 16),
                   ),
                 ),
               ],
@@ -221,17 +218,17 @@ class _ProxyCard extends StatelessWidget {
 class _ThemeCard extends StatelessWidget {
   final ListenableState<ThemeMode> themeState;
   final void Function(ThemeMode?) setThemeMode;
+
   const _ThemeCard({
     required this.themeState,
     required this.setThemeMode,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8),
         child: StateNotifierBuilder<ThemeMode>(
           listenableState: themeState,
           builder: (context, themeState) {

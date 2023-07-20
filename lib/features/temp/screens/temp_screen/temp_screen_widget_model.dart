@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/common/mixin/theme_mixin.dart';
@@ -18,7 +17,7 @@ TempScreenWidgetModel initScreenWidgetModelFactory(
   final appScope = context.read<IAppScope>();
 
   final model = TempScreenModel(
-    Environment<AppConfig>.instance(),
+    Environment.instance(),
     appScope.themeService,
   );
 
@@ -66,7 +65,7 @@ class TempScreenWidgetModel extends WidgetModel<TempScreen, ITempScreenModel>
   bool get _isDebugMode => model.isDebugMode;
 
   /// Create an instance [TempScreenWidgetModel].
-  TempScreenWidgetModel(ITempScreenModel model) : super(model);
+  TempScreenWidgetModel(super._model);
 
   @override
   String appBarTitle(RouteData topRoute) => _appBarTitle(topRoute);

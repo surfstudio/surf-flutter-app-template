@@ -29,7 +29,7 @@ class TempScreen extends ElementaryWidget<TempScreenWidgetModel> {
                 behavior: HitTestBehavior.opaque,
                 onTap: wm.switchTheme,
                 child: const Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(8),
                   child: Icon(Icons.light_mode_outlined),
                 ),
               ),

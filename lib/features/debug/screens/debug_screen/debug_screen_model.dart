@@ -16,7 +16,7 @@ class DebugScreenModel extends ElementaryModel {
   final ErrorHandler errorHandler;
 
   /// Environment configuration.
-  final Environment<AppConfig> _environment;
+  final Environment _environment;
 
   final IThemeService _themeService;
 
@@ -63,13 +63,10 @@ class DebugScreenModel extends ElementaryModel {
     switch (urlType) {
       case UrlType.test:
         newConfig = configNotifier.value.copyWith(url: Url.testUrl);
-        break;
       case UrlType.prod:
         newConfig = configNotifier.value.copyWith(url: Url.prodUrl);
-        break;
       default:
         newConfig = configNotifier.value.copyWith(url: Url.devUrl);
-        break;
     }
     _refreshApp(newConfig);
   }

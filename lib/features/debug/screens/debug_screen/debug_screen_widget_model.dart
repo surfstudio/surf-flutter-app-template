@@ -1,6 +1,5 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/config/urls.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
@@ -22,7 +21,7 @@ DebugScreenWidgetModel debugScreenWidgetModelFactory(
 
   final model = DebugScreenModel(
     appDependencies.errorHandler,
-    Environment<AppConfig>.instance(),
+    Environment.instance(),
     appDependencies.applicationRebuilder,
     configStorage,
     appDependencies.themeService,
@@ -63,9 +62,9 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
 
   /// Create an instance [DebugScreenModel].
   DebugScreenWidgetModel(
-    DebugScreenModel model,
+    super._model,
     this.router,
-  ) : super(model);
+  );
 
   @override
   void initWidgetModel() {
