@@ -1,17 +1,5 @@
 include: package:surf_lint_rules/analysis_options.yaml
 
-dart_code_metrics:
-  metrics:
-    cyclomatic-complexity: 20
-    maximum-nesting-level: 5
-    number-of-parameters: 4
-    source-lines-of-code: 50
-    number-of-methods: 10
-    weight-of-class: 0.33
-    maintainability-index: 50
-  rules:
-    - prefer-match-file-name: false
-
 linter:
   rules:
     public_member_api_docs: true
