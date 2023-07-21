@@ -58,6 +58,10 @@ Do the following to initialize a project:
 
 1. Search for flutter_template and replace it with the name of your project where needed.
 2. Initialize FirebaseCrashlytics (you can find that in TODO(init-project)).
+3. Run this command to get up-to-date versions of dependencies:
+   ```sh
+   flutter pub get --enforce-lockfile
+   ```
 
 ### FVM
 
