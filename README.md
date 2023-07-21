@@ -174,6 +174,10 @@ More information on working with localization can be found here `[here](https://
 
 [An example](https://github.com/surfstudio/surf-flutter-app-template-example) of using the template in navigation
 
+### Icons launcher
+
+The basic rules and tips for working with icon generation are described in the [README.md](./assets/launcher_icon/README.md).
+
 ### Native splash screen
 
 Basic guidelines for creating a native splash screen [README.md](./assets/splash/README.md)
