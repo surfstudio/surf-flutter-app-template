@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/common/service/theme/theme_service.dart';
 import 'package:flutter_template/features/common/service/theme/theme_service_impl.dart';
@@ -61,13 +60,13 @@ class AppScope implements IAppScope {
     final dio = Dio();
 
     dio.options
-      ..baseUrl = Environment<AppConfig>.instance().config.url
+      ..baseUrl = Environment.instance().config.url
       ..connectTimeout = timeout
       ..receiveTimeout = timeout
       ..sendTimeout = timeout;
 
     (dio.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate = (client) {
-      final proxyUrl = Environment<AppConfig>.instance().config.proxyUrl;
+      final proxyUrl = Environment.instance().config.proxyUrl;
       if (proxyUrl != null && proxyUrl.isNotEmpty) {
         client
           ..findProxy = (uri) {
@@ -83,7 +82,7 @@ class AppScope implements IAppScope {
 
     dio.interceptors.addAll(additionalInterceptors);
 
-    if (Environment<AppConfig>.instance().isDebug) {
+    if (Environment.instance().isDebug) {
       dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
     }
 

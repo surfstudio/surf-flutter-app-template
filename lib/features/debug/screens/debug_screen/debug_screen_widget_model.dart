@@ -1,6 +1,5 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/config/urls.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
@@ -22,7 +21,7 @@ DebugScreenWidgetModel debugScreenWidgetModelFactory(
 
   final model = DebugScreenModel(
     appDependencies.errorHandler,
-    Environment<AppConfig>.instance(),
+    Environment.instance(),
     appDependencies.applicationRebuilder,
     configStorage,
     appDependencies.themeService,
@@ -112,6 +111,11 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
   }
 
   @override
+  void openUiKit() {
+    router.push(const UiKitRouter());
+  }
+
+  @override
   Future<void> saveExampleLog() async => _saveExampleLog();
 
   void _updateAppConfig() {
@@ -181,6 +185,9 @@ abstract class IDebugScreenWidgetModel extends IWidgetModel {
 
   /// Method for save example log to log history file.
   void saveExampleLog();
+
+  /// Navigate to ui kit screen.
+  void openUiKit();
 }
 
 /// Ury type.

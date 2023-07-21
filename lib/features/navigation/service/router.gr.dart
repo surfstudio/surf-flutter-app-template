@@ -70,6 +70,12 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    UiKitRouter.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const UiKitScreen(),
+      );
+    },
   };
 }
 
@@ -272,4 +278,18 @@ class DebugRouterArgs {
   String toString() {
     return 'DebugRouterArgs{key: $key, wmFactory: $wmFactory}';
   }
+}
+
+/// generated route for
+/// [UiKitScreen]
+class UiKitRouter extends PageRouteInfo<void> {
+  const UiKitRouter({List<PageRouteInfo>? children})
+      : super(
+          UiKitRouter.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'UiKitRouter';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
