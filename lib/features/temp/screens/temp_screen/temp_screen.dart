@@ -40,8 +40,6 @@ class TempScreen extends ElementaryWidget<TempScreenWidgetModel> {
             currentIndex: tabsRouter.activeIndex,
             onTap: tabsRouter.setActiveIndex,
             items: wm.navigationBarItems,
-            selectedItemColor: wm.colorScheme.selectedItem,
-            unselectedItemColor: wm.colorScheme.unselectedItem,
           ),
         );
       },

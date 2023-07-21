@@ -12,6 +12,9 @@ abstract class AppRoutePaths {
   /// Path to debug screen.
   static const String debugPath = 'debug';
 
+  /// Path to ui kit screen.
+  static const String uiKitPath = '/ui_kit';
+
   /// Path to dash screen.
   static const String dashPath = 'dash';
 
