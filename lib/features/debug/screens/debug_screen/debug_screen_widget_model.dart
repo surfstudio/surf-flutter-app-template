@@ -111,6 +111,11 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
   }
 
   @override
+  void openUiKit() {
+    router.push(const UiKitRouter());
+  }
+
+  @override
   Future<void> saveExampleLog() async => _saveExampleLog();
 
   void _updateAppConfig() {
@@ -180,6 +185,9 @@ abstract class IDebugScreenWidgetModel extends IWidgetModel {
 
   /// Method for save example log to log history file.
   void saveExampleLog();
+
+  /// Navigate to ui kit screen.
+  void openUiKit();
 }
 
 /// Ury type.

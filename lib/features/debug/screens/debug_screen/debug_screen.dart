@@ -26,6 +26,7 @@ class DebugScreen extends ElementaryWidget<IDebugScreenWidgetModel> {
         switchServer: wm.switchServer,
         setProxy: wm.setProxy,
         openLogsHistory: wm.openLogsHistory,
+        openUiKit: wm.openUiKit,
         saveExampleLog: wm.saveExampleLog,
         proxyController: wm.proxyEditingController,
         setThemeMode: wm.setThemeMode,
@@ -42,6 +43,7 @@ class _Body extends StatelessWidget {
   final void Function(ThemeMode?) setThemeMode;
   final Function() setProxy;
   final VoidCallback openLogsHistory;
+  final VoidCallback openUiKit;
   final VoidCallback saveExampleLog;
   final TextEditingController proxyController;
 
@@ -53,6 +55,7 @@ class _Body extends StatelessWidget {
     required this.setThemeMode,
     required this.setProxy,
     required this.openLogsHistory,
+    required this.openUiKit,
     required this.saveExampleLog,
     required this.proxyController,
     Key? key,
@@ -77,6 +80,12 @@ class _Body extends StatelessWidget {
             _ThemeCard(
               themeState: themeState,
               setThemeMode: setThemeMode,
+            ),
+            Card(
+              child: ListTile(
+                onTap: openUiKit,
+                title: const Text('To ui kit screen'),
+              ),
             ),
             Card(
               child: Column(
