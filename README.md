@@ -67,9 +67,9 @@ Do the following to initialize a project:
 
 If you have multiple versions of Flutter installed, you can use [FVM](https://fvm.app/).<br>
 You can find installation instructions [here](https://fvm.app/docs/getting_started/installation). <br>
-To switch to the desired Flutter version, specify version in [`fvm_config.json`](.fvm/fvm_config.json) and then use the [`version.sh` script](scripts/version.sh):
+To switch to the desired Flutter version run:
 ```sh
-sh script/version.sh
+fvm use <desired_version> # e.g. fvm use 3.10.6
 ```
 
 Now you need to configure FVM for your IDE:
