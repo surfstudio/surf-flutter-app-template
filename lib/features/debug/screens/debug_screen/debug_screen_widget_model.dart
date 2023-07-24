@@ -62,9 +62,9 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
 
   /// Create an instance [DebugScreenModel].
   DebugScreenWidgetModel(
-    DebugScreenModel model,
+    super._model,
     this.router,
-  ) : super(model);
+  );
 
   @override
   void initWidgetModel() {

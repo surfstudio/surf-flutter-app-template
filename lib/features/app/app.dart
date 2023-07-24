@@ -14,10 +14,10 @@ class App extends StatefulWidget {
   final AppScope appScope;
 
   /// Create an instance App.
-  const App(this.appScope, {Key? key}) : super(key: key);
+  const App(this.appScope, {super.key});
 
   @override
-  _AppState createState() => _AppState();
+  State<App> createState() => _AppState();
 }
 
 class _AppState extends State<App> {

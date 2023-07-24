@@ -7,7 +7,7 @@ import 'package:surf_logger/surf_logger.dart' as surf;
 /// * used for local debugging with qa environment.
 class LogHistoryStrategy extends surf.DebugLogStrategy {
   /// Create an instance DebugLogStrategy.
-  LogHistoryStrategy(Logger logger) : super(logger);
+  LogHistoryStrategy(super.logger);
 }
 
 /// Writes the log output to a file.

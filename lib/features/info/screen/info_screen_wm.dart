@@ -17,7 +17,7 @@ class InfoScreenWidgetModel extends WidgetModel<InfoScreen, InfoScreenModel>
     with ThemeWMMixin
     implements IInfoScreenWidgetModel {
   /// Create an instance [InfoScreenWidgetModel].
-  InfoScreenWidgetModel(InfoScreenModel model) : super(model);
+  InfoScreenWidgetModel(super._model);
 }
 
 /// Interface of [InfoScreenWidgetModel].

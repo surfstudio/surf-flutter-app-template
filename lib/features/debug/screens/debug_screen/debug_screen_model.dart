@@ -63,13 +63,10 @@ class DebugScreenModel extends ElementaryModel {
     switch (urlType) {
       case UrlType.test:
         newConfig = configNotifier.value.copyWith(url: Url.testUrl);
-        break;
       case UrlType.prod:
         newConfig = configNotifier.value.copyWith(url: Url.prodUrl);
-        break;
       default:
         newConfig = configNotifier.value.copyWith(url: Url.devUrl);
-        break;
     }
     _refreshApp(newConfig);
   }

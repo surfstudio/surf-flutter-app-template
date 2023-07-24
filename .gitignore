@@ -30,6 +30,7 @@
 .pub/
 /build/
 *.lock
+!pubspec.lock
 .flutter-plugins-dependencies
 
 # Android related

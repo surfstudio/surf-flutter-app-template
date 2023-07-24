@@ -30,10 +30,11 @@ class Environment implements Listenable {
 
   ValueNotifier<AppConfig> _config;
 
-  Environment._(this._currentBuildType, AppConfig config) : _config = ValueNotifier(config);
+  Environment._(this._currentBuildType, AppConfig config)
+      : _config = ValueNotifier<AppConfig>(config);
 
   /// Provides instance [Environment].
-  factory Environment.instance() => _instance as Environment;
+  factory Environment.instance() => _instance!;
 
   @override
   void addListener(VoidCallback listener) {

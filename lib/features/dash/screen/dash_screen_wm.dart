@@ -22,7 +22,7 @@ class DashScreenWidgetModel extends WidgetModel<DashScreen, DashScreenModel>
   AppLocalizations get l10n => context.l10n;
 
   /// Create an instance [DashScreenWidgetModel].
-  DashScreenWidgetModel(DashScreenModel model) : super(model);
+  DashScreenWidgetModel(super._model);
 }
 
 /// Interface of [IDashScreenWidgetModel].
