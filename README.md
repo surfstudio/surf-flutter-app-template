@@ -181,7 +181,6 @@ You can easily add assets to your project by following these steps:
 
 Initially, the project has two groups of assets - [Images](lib/assets/res/images.dart) and [Svg Icons](lib/assets/res/svg_icons.dart). You can change it in spider [configuration file](spider.yaml).
 
-
 ### Testing
 
 #### Goldens
