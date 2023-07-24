@@ -9,6 +9,9 @@ abstract class AppRouteNames {
   /// TempScreen route name.
   static const String tempScreen = 'tempRouter';
 
+  /// TempScreen route name.
+  static const String uiKitScreen = 'uiKitRouter';
+
   /// DebugScreen route name.
   static const String debugScreen = 'debugRouter';
 
