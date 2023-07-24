@@ -7,6 +7,7 @@ dependencies:
   auto_route: 7.4.0
   dio: 5.1.1
   elementary: 2.0.0
+  firebase_core: 2.15.0
   firebase_crashlytics: 3.1.0
   flutter:
     sdk: flutter

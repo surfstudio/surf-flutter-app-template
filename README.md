@@ -59,6 +59,35 @@ Do the following to initialize a project:
 1. Search for flutter_template and replace it with the name of your project where needed.
 2. Initialize FirebaseCrashlytics (you can find that in TODO(init-project)).
 
+
+#### Firebase
+
+To use Firebase in your project, you need to do the following:
+
+1. If you haven't already, install [Firebase CLI](https://firebase.google.com/docs/cli).
+2. Log in to Firebase CLI with your Google account:
+   ```sh
+   firebase login
+   ```
+3. If you haven't already, activate the FlutterFire CLI plugin:
+   ```sh
+   dart pub global activate flutterfire_cli
+   ```
+4. Execute command to create a new project in Firebase or select existing and select supported platforms:
+   ```sh
+   flutterfire configure
+   ```
+   This command also generates `firebase_options.dart` file with Firebase options for all specified platforms.
+5. Add this lines to your [`lib/runner.dart`](lib/runner.dart) file into function `Future<void> run()`:
+   ```dart
+   await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+    );
+   ```
+
+   If you want to add another platform to your Firebase Project after the project has been created, you can do it by executing `flutterfire configure` again.
+
+
 ### Structure
 
 - assets
