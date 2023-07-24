@@ -14,7 +14,7 @@ import '../../../../mocks/callback_mock.dart';
 
 class MockErrorHandler extends Mock implements ErrorHandler {}
 
-class MockEnvironment<T> extends Mock implements Environment<T> {}
+class MockEnvironment extends Mock implements Environment {}
 
 class MockConfigSettingsStorage extends Mock
     implements IConfigSettingsStorage {}
@@ -24,7 +24,7 @@ class MockThemeService extends Mock implements IThemeService {}
 void main() {
   late DebugScreenModel model;
   final errorHandler = MockErrorHandler();
-  final env = MockEnvironment<AppConfig>();
+  final env = MockEnvironment();
   final configSettingsStorage = MockConfigSettingsStorage();
   final themeService = MockThemeService();
   final config = AppConfig(url: Url.testUrl);

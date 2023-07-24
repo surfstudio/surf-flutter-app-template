@@ -16,7 +16,7 @@ class DebugScreenModel extends ElementaryModel {
   final ErrorHandler errorHandler;
 
   /// Environment configuration.
-  final Environment<AppConfig> _environment;
+  final Environment _environment;
 
   final IThemeService _themeService;
 
