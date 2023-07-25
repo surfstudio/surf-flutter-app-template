@@ -59,6 +59,73 @@ Do the following to initialize a project:
 1. Search for flutter_template and replace it with the name of your project where needed.
 2. Initialize FirebaseCrashlytics (you can find that in TODO(init-project)).
 
+### Flavors
+
+#### Android
+
+To add a new flavor, you need to open [`android/app/build.gradle`](android/app/build.gradle) file and find the following code:
+
+```groovy       
+       flavorDimensions "release-type"
+
+       productFlavors {
+           dev {
+               dimension "release-type"
+               applicationIdSuffix ".dev"
+               versionNameSuffix "-dev"
+           }
+           prod {
+               dimension "release-type"
+           }
+       }
+   
+```
+
+You have to add your custom flavor to the `productFlavors` section. For example:
+
+```groovy
+       flavorDimensions "release-type"
+
+       productFlavors {
+           dev {
+               dimension "release-type"
+               applicationIdSuffix ".dev"
+               versionNameSuffix "-dev"
+           }
+           prod {
+               dimension "release-type"
+           }
+           qa {
+               dimension "release-type"
+               applicationIdSuffix ".qa"
+               versionNameSuffix "-qa"
+           }
+       }
+```
+
+You also can create directory for your flavor in [`android/app/src`](android/app/src) directory. For example, if you have files that are used only in your flavor (e.g. launch icons, splash, app name, etc), you can create directory `qa` in `android/app/src` and put your files there.
+
+
+#### iOS
+
+1. Open `Runner.xcworkspace` in Xcode.
+2. Create new scheme for your flavor - `Product -> Scheme -> New Scheme...`. Name of your scheme should be the same as your flavor name. In our case it is `qa`.
+   
+   <img src="assets/docs/xcode_scheme_creation.png" width="300">
+
+3. Go to `Runner -> Project -> Info` and duplicate configurations (Debug, Release, Profile (if you need it)) for your new flavor. Postfix for your new configuration should be the same as your flavor name. In our case it is `qa`. So, we'll have `Debug-qa`, `Release-qa`, `Profile-qa`:
+   
+   <img src="assets/docs/xcode_config_duplicate.png" width="500"> 
+   
+4. Go to `Product -> Scheme -> Manage Schemes...` and double click on your new scheme. Then select correct Build Configuration for each of scheme:
+   
+   <img src="assets/docs/xcode_manage_schemes.png" width="400">
+
+5. Go to `Runner -> Targets -> Runner -> Build Settings`, find 'Product Bundle Identifier' section (you can use search) and change bundle identificators of your new configurations. In the end you should have something like this:
+   
+   <img src="assets/docs/xcode_bundle_edit.png" width="400">
+   
+   
 ### Structure
 
 - assets
@@ -94,6 +161,32 @@ Do the following to initialize a project:
 - scripts
 - test
 - tools
+
+#### IDE Configuration
+
+**VSCode**:
+
+Open `.vscode/launch.json` and add following code:
+```json
+ {
+   "name": "Run qa",
+   "request": "launch",
+   "type": "dart",
+   "args": [
+      "--flavor",
+       "qa"
+    ]
+  }
+```
+
+Now you can launch app with `qa` flavor by clicking on `Run qa` in debug tab:
+![Alt text](assets/docs/vs_code_flavor_config.png)
+
+**Android Studio**:
+
+Open `Run/Debug Configurations` and add new `Flutter` configuration. In `Build flavor` field add `qa`:
+![Alt text](assets/docs/android_studio_flavor_config.png)
+
 
 #### assets
 
