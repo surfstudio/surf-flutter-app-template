@@ -125,7 +125,50 @@ You also can create directory for your flavor in [`android/app/src`](android/app
    
    <img src="assets/docs/xcode_bundle_edit.png" width="400">
    
+
+
+#### Icons configuration
+
+You also can specify different icons for each flavor. To do this, you need to create file `flutter_launcher_icons-{your_flavor_name}.yaml`. E.g. `flutter_launcher_icons-qa.yaml`. Then you can specify path to images, colors and other options for your flavor (read [more](assets/launcher_icon/README.md) about configuration).
+
+Finally you need to run this command:
+```sh
+    dart run flutter_launcher_icons
+```
+
+**iOS additional steps:**
+
+1. Open `Runner.xcworkspace` in Xcode.
+2. Go to `Runner -> Targets -> Runner -> Build Settings`, find 'Primary App Icon Set Name' section (you can use search) and change icon names of your flavor. In the end you should have something like this:
    
+   <img src="assets/docs/xcode_icons_setup.png" width="500">
+
+#### IDE Configuration
+
+**VSCode**:
+
+Open `.vscode/launch.json` and add following code:
+```json
+ {
+   "name": "Run qa",
+   "request": "launch",
+   "type": "dart",
+   "args": [
+      "--flavor",
+       "qa"
+    ]
+  }
+```
+
+Now you can launch app with `qa` flavor by clicking on `Run qa` in debug tab:
+![Alt text](assets/docs/vs_code_flavor_config.png)
+
+**Android Studio**:
+
+Open `Run/Debug Configurations` and add new `Flutter` configuration. In `Build flavor` field add `qa`:
+![Alt text](assets/docs/android_studio_flavor_config.png)
+
+
 ### Structure
 
 - assets
@@ -161,32 +204,6 @@ You also can create directory for your flavor in [`android/app/src`](android/app
 - scripts
 - test
 - tools
-
-#### IDE Configuration
-
-**VSCode**:
-
-Open `.vscode/launch.json` and add following code:
-```json
- {
-   "name": "Run qa",
-   "request": "launch",
-   "type": "dart",
-   "args": [
-      "--flavor",
-       "qa"
-    ]
-  }
-```
-
-Now you can launch app with `qa` flavor by clicking on `Run qa` in debug tab:
-![Alt text](assets/docs/vs_code_flavor_config.png)
-
-**Android Studio**:
-
-Open `Run/Debug Configurations` and add new `Flutter` configuration. In `Build flavor` field add `qa`:
-![Alt text](assets/docs/android_studio_flavor_config.png)
-
 
 #### assets
 
