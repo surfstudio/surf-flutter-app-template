@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/app/app.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:surf_logger/surf_logger.dart';
@@ -10,6 +12,12 @@ import 'package:surf_logger/surf_logger.dart';
 Future<void> run() async {
   /// It must be called so that the orientation does not fall.
   WidgetsFlutterBinding.ensureInitialized();
+
+  final fbOptions = Environment.instance().firebaseOptions;
+
+  if (fbOptions != null) {
+    await Firebase.initializeApp(options: fbOptions);
+  }
 
   /// Fix orientation.
   // TODO(init-project): change as needed or remove.
