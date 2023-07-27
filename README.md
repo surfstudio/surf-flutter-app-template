@@ -109,22 +109,41 @@ You also can create directory for your flavor in [`android/app/src`](android/app
 #### iOS
 
 1. Open `Runner.xcworkspace` in Xcode.
-2. Create new scheme for your flavor - `Product -> Scheme -> New Scheme...`. Name of your scheme should be the same as your flavor name. In our case it is `qa`.
+2. Create a new configuration file in `ios/Flutter` and name it after your flavor name:
    
-   <img src="assets/docs/xcode_scheme_creation.png" width="300">
+   <img src="assets/docs/xcode_config_file_creation_1.png" width="400">
 
-3. Go to `Runner -> Project -> Info` and duplicate configurations (Debug, Release, Profile (if you need it)) for your new flavor. Postfix for your new configuration should be the same as your flavor name. In our case it is `qa`. So, we'll have `Debug-qa`, `Release-qa`, `Profile-qa`:
-   
-   <img src="assets/docs/xcode_config_duplicate.png" width="500"> 
-   
-4. Go to `Product -> Scheme -> Manage Schemes...` and double click on your new scheme. Then select correct Build Configuration for each of scheme:
-   
-   <img src="assets/docs/xcode_manage_schemes.png" width="400">
+   Make sure that you have `Runner` target selected and your file will be placed in `Flutter` folder:
 
-5. Go to `Runner -> Targets -> Runner -> Build Settings`, find 'Product Bundle Identifier' section (you can use search) and change bundle identificators of your new configurations. In the end you should have something like this:
+   <img src="assets/docs/xcode_config_file_creation_2.png" width="400">
+<br>
+
+3. Paste the following code into your configuration file:
+
+```
+    #include "Pods/Target Support Files/Pods-Runner/Pods-Runner.qa.xcconfig"
+    #include "Generated.xcconfig"
+    #include "common.xcconfig"
+
+    app_icon_suffix=-qa
+    bundle_suffix=.qa
+    IDENTIFIER=$(identifier)$(bundle_suffix)
+    APP_ICON=$(app_icon)$(app_icon_suffix)
+```
+> Replace `qa` with your flavor name.
+
+4. Go to `Runner -> Project -> Runner -> Info` and duplicate configurations (Debug, Release, Profile (if you need it)) for your new flavor. Postfix for your new configuration should be the same as your flavor name. In our case it is `qa`. So, we'll have `Debug-qa`, `Release-qa`, `Profile-qa`. You also should set correct configuration files for each of your new configuration. In the end you should have something like this:
    
-   <img src="assets/docs/xcode_bundle_edit.png" width="400">
+   <img src="assets/docs/xcode_configuration_duplication.png" width="500">
    
+5. Go to `Product -> Scheme -> New scheme...` and create new scheme named after your flavor. Make sure that you have `Runner` target selected. In the end you should have something like this:
+   
+   <img src="assets/docs/xcode_scheme_creation.png" width="400">
+
+6. Go to `Product -> Scheme -> Edit scheme...` and select correct Build Configuration for each of scheme:
+   
+    <img src="assets/docs/xcode_scheme_editing.png" width="500">
+
 
 
 #### Icons configuration
@@ -135,13 +154,6 @@ Finally you need to run this command:
 ```sh
     dart run flutter_launcher_icons
 ```
-
-**iOS additional steps:**
-
-1. Open `Runner.xcworkspace` in Xcode.
-2. Go to `Runner -> Targets -> Runner -> Build Settings`, find 'Primary App Icon Set Name' section (you can use search) and change icon names of your flavor. In the end you should have something like this:
-   
-   <img src="assets/docs/xcode_icons_setup.png" width="500">
 
 #### IDE Configuration
 
