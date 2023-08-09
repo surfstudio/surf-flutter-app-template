@@ -1,4 +1,4 @@
-///  Repository for token refresh operation.
+/// Repository for token refresh operation.
 abstract class IRefreshTokenRepository {
   /// Returns true if a refresh token is present in the storage.
   Future<bool> get hasRefreshToken;
