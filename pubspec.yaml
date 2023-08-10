@@ -4,6 +4,7 @@ description: a Flutter template project for development.
 publish_to: none
 
 dependencies:
+  async: 2.11.0
   auto_route: 7.4.0
   collection: 1.17.1
   dio: 5.1.1
