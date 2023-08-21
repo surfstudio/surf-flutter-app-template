@@ -17,6 +17,9 @@ Future<void> run() async {
   // TODO(init-project): Initialize Crashlytics.
   // PlatformDispatcher.instance.onError = (error, stack) {
   //   FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+  //
+  //   return true;
+  // };
 
   _initLogger();
   await _runApp();
