@@ -472,7 +472,6 @@ class SomeCustomWidget extends StatelessWidget {
 }
 ```
 
-
 ### Implementation examples
 
 [An example](https://github.com/surfstudio/surf-flutter-app-template-example) of using the template in navigation
