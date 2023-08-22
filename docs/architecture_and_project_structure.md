@@ -5,6 +5,9 @@
 
 # Project structure
 
+> - directories in italics are optional and may be present in some cases
+> - in {curly braces} there is a directory/file naming pattern
+
 - [assets](#assets)
   - docs
   - fonts
@@ -13,18 +16,20 @@
   - launcher_icon
   - splash
 - [docs](#docs)
-  - [features](#features)
-- lib
+  - [_features_](#features)
+- [lib](#lib)
     - api
         - data
         - service
             - {name}
     - assets
-        - res
-        - themes
         - colors
+        - res
         - strings
+        - text
+        - themes
     - config
+      - environment
     - features
         - {name/common}
             - di
@@ -39,10 +44,19 @@
                     - wm
                     - model
             - widgets
-    - utils
-- scripts
-- test
-- tools
+    - l10n
+    - persistence
+    - util
+- [scripts](#scripts)
+- [test](#test)
+    - assets
+    - core
+    - features
+        - name
+            - screens
+            - widgets
+    - mocks
+- [tools](#tools)
 
 ## assets
 
@@ -67,34 +81,38 @@ Folder for specific features documentation.
 
 The folder has the code of the project and consists of the following folders:
 
-- api - the layer of data and interactions with the Rest API. Contains the files generated with SurfGen.
-- assets - string representation of the necessary assets, themes, colors, and strings.
-- config - project configuration, e.g., environment.
-- features - features used and implemented in the project. It’s the default location of all folders created for particular features, where each folder contains all of the files relevant to this or that feature. The “common” folder contains entities shared between several features or crucial for the entire app. Try to avoid adding files there unless absolutely necessary. The structure of features:
+- api — the layer of data and interactions with the Rest API.
+- assets — string representation of the necessary assets, themes, colors, and strings.
+- config — project configuration, e.g., environment.
+- features — features used and implemented in the project. It’s the default location of all folders created for particular features, where each folder contains all of the files relevant to this or that feature. The “common” folder contains entities shared between several features or crucial for the entire app. Try to avoid adding files there unless absolutely necessary. 
 
-    - di - dependency injection containers.
-    - domain - contains:
-        - entity - business data models.
-        - repository - repositories relevant to the feature.
-        - mappers - data-to-model (and vice versa) mappers.
-    - service - business logic.
-    - screens - screens relevant to the feature, with each screen in a separate self-titled folder containing the following in separate files:
-        - widget - ElementaryWidget.
-        - wm - WidgetModel.
-        - model - ElementaryModel.
-    - widgets - widgets relevant to the feature.
-    - utils - necessary utilities.
+  The structure of features:
 
+  - di — dependency injection containers.
+  - domain — contains:
+      - entity — business data models.
+      - repository — repositories relevant to the feature.
+      - mappers — data-to-model (and vice versa) mappers.
+  - service — business logic.
+  - screens — screens relevant to the feature, with each screen in a separate self-titled folder containing the following in separate files:
+      - widget - ElementaryWidget.
+      - wm - WidgetModel.
+      - model - ElementaryModel.
+  - widgets — widgets relevant to the feature.
+  - utils — necessary utilities.
+  
+- l10n — localization files.
+- persistence — the layer of data and interactions with the database.
+- util — utilities used in the project.
 
 #### scripts
 
-Scripts necessary to build the project artifact. Some scripts have already been added.
+Scripts which are used in the project.
+The description of the scripts is in the [README.md](/README.md#project-scripts).
 
 #### test
 
 App tests.
-
-
 
 #### tools
 
