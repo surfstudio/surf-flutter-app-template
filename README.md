@@ -13,20 +13,20 @@ Do the following to initialize a project:
 2. Search for `flutter_template` and replace it with the name of your project where needed.
 3. Initialize `FirebaseCrashlytics` (you can find that in `TODO(init-project)`).
 4. Install a needed Flutter version with FVM using the command:
-```sh
-fvm use <flutter_version>
-```
-If FVM is not installed, check [FVM workflow](#fvm-workflow).
-4. Specify the versions used in the project [here](#flutter-and-dart-fvm-versions-of-the-project).
-5. Run this command to get up-to-date versions of dependencies:
-```sh
-fvm flutter pub get --enforce-lockfile
-```
-6. Setup labels for issues and pull requests in the repository settings according to the [list](#list-of-labels-for-pr-and-issues).
+    ```sh
+    fvm use <flutter_version>
+    ```
+    If FVM is not installed, check [FVM workflow](#fvm-workflow).
+5. Specify the Flutter version used in the project [here](#flutter-and-dart-fvm-versions-of-the-project).
+6. Run this command to get up-to-date versions of dependencies:
+    ```sh
+    fvm flutter pub get --enforce-lockfile
+    ```
+7. Setup labels for issues and pull requests in the repository settings according to the [list](docs/workflow_in_repository.md#list-of-labels-for-pr-and-issues).
 
 ## Workflow in the template repository
 
-The rules for branches, commits, and pull requests are the same as for a project repository workflow and are explained below.
+The rules for branches, commits, and pull requests are the same as for a project repository workflow and explained [here](docs/workflow_in_repository.md).
 
 # Application name
 
@@ -38,7 +38,7 @@ The rules for branches, commits, and pull requests are the same as for a project
 > [!NOTE]
 > Add here basic information about the project, such as:
 > - a couple words what the project is about
-> - what technologies are used in one line (BLoC, Riverpod, something specific, etc.)
+> - briefly, what technologies are used (BLoC, Riverpod, something specific, etc.)
 > - link to Confluence space with all project documentation
 
 ## Flutter Version Management (FVM)
@@ -53,12 +53,12 @@ For installation the project version of Flutter, run the command:
 fvm install
 ```
 
-For VSCode IDE you can also run the [`fvm_vscode.sh` script](scripts/fvm_vscode.sh):
+For VSCode IDE you can also run the script [`fvm_vscode.sh`](scripts/fvm_vscode.sh):
 ```sh
 sh script/fvm_vscode.sh
 ```
 
-You need to use `flutter fvm ...` everywhere instead of just `flutter ...` when working with the project and have a different version of Flutter installed in PATH.
+You need to use `flutter fvm ...` everywhere instead of just `flutter ...` when working with the project.
 
 ### Flutter and Dart FVM versions of the project
 
@@ -122,12 +122,12 @@ The workflow includes the following:
 - [Merge requests (Pull Requests)](docs/workflow_in_repository.md#merge-requests--pull-requests-)
 - [List of labels for PR and issues](docs/workflow_in_repository.md#list-of-labels-for-pr-and-issues)
 
-### Architecture and project structure
+## Architecture and project structure
 
 Architectural decisions made on the project can be found in this [file](docs/architecture_and_project_structure.md). 
 There is also a description of the project structure.
 
-### Analytics
+## Analytics
 
 ##### Enabled:
 
@@ -135,14 +135,14 @@ There is also a description of the project structure.
 - [dart_code_metrics](https://pub.dev/packages/dart_code_metrics) ([guide](https://wiki.surfstudio.ru/pages/viewpage.action?pageId=2408055)
   to gathering project metrics; the project has already been configured)
 
-### Navigation
+## Navigation
 
 Navigation is centered around the [AutoRoute](https://pub.dev/packages/auto_route) package. 
 We use a class called AppRouter for global navigation around an app and StackRouter for nested navigation. 
 
 Despite the fact that StackRouter could be referred to directly through the context in WidgetModel, it should be passed explicitly to the WidgetModel constructor. With StackRouter used in the context, an effective navigation stack can be obtained and managed in this router. AppRouter, in turn, is stored in the AppScope dependencies and recovered from there.
 
-### DI
+## DI
 
 [Provider](https://pub.dev/packages/provider) is our choice for DI.
 
@@ -151,24 +151,24 @@ Dependencies are grouped into container entities with an interface describing a 
 For example, [AppScope](./lib/features/app/di/app_scope.dart) is the base entity for the entire app. It contains dependencies that function through the entire lifecycle of the app. We wrap the whole app in the DiScope and pass a factory that returns the AppScope.
 If a functionality needs some dependencies specific to it only, they are isolated into a separate entity, which is to be wrapped around the functionality.
 
-### Localization
+## Localization
 
 The basic rules and tips for working with localization are described in [guide](docs/localization.md).
-More information on working with localization can be found here `[here](https://docs.flutter.dev/accessibility-and-localization/internationalization).
+More information on working with localization can be found [here](https://docs.flutter.dev/accessibility-and-localization/internationalization).
 
-### Theming
+## Theming
 
 The basic rules and tips for working with theming are described in the [guide](docs/theming.md).
 
-### Icons launcher
+## Icons launcher
 
 The basic rules and tips for working with icon generation are described in the [guide](docs/icons_launcher.md).
 
-### Native splash screen
+## Native splash screen
 
 Basic guidelines for creating a native splash screen are [here](docs/splash.md).
 
-### Additional useful practices
+## Additional useful practices
 
 There are some additional useful guides in the [docs](docs) folder:
 - [Shared preferences](docs/shared_preferences.md)
