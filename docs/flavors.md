@@ -1,49 +1,49 @@
-### Flavors
+# Flavors
 
-#### Android
+## Android
 
 To add a new flavor, you need to open [`android/app/build.gradle`](android/app/build.gradle) file and find the following code:
 
 ```groovy   
-       flavorDimensions "release-type"
+ flavorDimensions "release-type"
 
-       productFlavors {
-           dev {
-               dimension "release-type"
-               applicationIdSuffix ".dev"
-               versionNameSuffix "-dev"
-           }
-           prod {
-               dimension "release-type"
-           }
-       }
+ productFlavors {
+     dev {
+         dimension "release-type"
+         applicationIdSuffix ".dev"
+         versionNameSuffix "-dev"
+     }
+     prod {
+         dimension "release-type"
+     }
+ }
 ```
 
 You have to add your custom flavor to the `productFlavors` section. For example:
 
 ```groovy
-       flavorDimensions "release-type"
+ flavorDimensions "release-type"
 
-       productFlavors {
-           dev {
-               dimension "release-type"
-               applicationIdSuffix ".dev"
-               versionNameSuffix "-dev"
-           }
-           prod {
-               dimension "release-type"
-           }
-           qa {
-               dimension "release-type"
-               applicationIdSuffix ".qa"
-               versionNameSuffix "-qa"
-           }
-       }
+ productFlavors {
+     dev {
+         dimension "release-type"
+         applicationIdSuffix ".dev"
+         versionNameSuffix "-dev"
+     }
+     prod {
+         dimension "release-type"
+     }
+     qa {
+         dimension "release-type"
+         applicationIdSuffix ".qa"
+         versionNameSuffix "-qa"
+     }
+ }
 ```
 
 You also can create directory for your flavor in [`android/app/src`](android/app/src) directory. For example, if you have files that are used only in your flavor (e.g. launch icons, splash, app name, etc), you can create directory `qa` in `android/app/src` and put your files there.
 
-#### iOS
+## iOS
 
 1. Open `Runner.xcworkspace` in Xcode.
 2. Create a new configuration file in `ios/Flutter` and name it after your flavor name:
@@ -79,32 +79,32 @@ You also can create directory for your flavor in [`android/app/src`](android/app
 
    <img src="assets/docs/xcode_scheme_editing.png" width="500">
 
-#### Icons configuration
+## Icons configuration
 
 You also can specify different icons for each flavor. To do this, you need to create file `flutter_launcher_icons-{your_flavor_name}.yaml`. E.g. `flutter_launcher_icons-qa.yaml`. Then you can specify path to images, colors and other options for your flavor (read [more](assets/launcher_icon/README.md) about configuration).
 
-Finally you need to run this command:
+Finally, you need to run this command:
 
 ```sh
     dart run flutter_launcher_icons
 ```
 
-#### IDE Configuration
+## IDE Configuration
 
 **VSCode**:
 
-Open `.vscode/launch.json` and add following code:
+Open `.vscode/launch.json` and add the following code:
 
 ```json
- {
+{
    "name": "Run qa",
    "request": "launch",
    "type": "dart",
    "args": [
       "--flavor",
        "qa"
-    ]
-  }
+   ]
+}
 ```
 
 Now you can launch app with `qa` flavor by clicking on `Run qa` in debug tab:
