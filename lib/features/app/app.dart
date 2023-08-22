@@ -31,7 +31,7 @@ class _AppState extends State<App> {
     _scope = widget.appScope..applicationRebuilder = _rebuildApplication;
     _themeService = _scope.themeService;
 
-    final configStorage = ConfigSettingsStorageImpl();
+    final configStorage = ConfigSettingsStorageImpl(_scope.sharedPreferences);
     final environment = Environment.instance();
     if (!environment.isRelease) {
       environment
