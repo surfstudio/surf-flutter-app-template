@@ -81,7 +81,7 @@ Example:
 
 ### Technical debt
 
-Current tasks on technical debt are in the Github Issues section.
+Current technical debt issues are in the Github Issues section.
 
 When creating an issue as a technical debt, be sure to leave a detailed description and a link to the code, if necessary.
 It is advisable to report the creation of an issue in the project team chat.
