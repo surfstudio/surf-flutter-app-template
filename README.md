@@ -26,7 +26,7 @@ Do the following to initialize a project:
 
 ## Workflow in the template repository
 
-The rules for branches, commits, and pull requests are the same as for a project repository workflow and explained [here](docs/workflow_in_repository.md).
+The rules for branches, commits, and pull requests are the same as for a project repository workflow and explained [below](#workflow-in-a-repository).
 
 # Application name
 
@@ -108,11 +108,57 @@ All scripts are located in the [scripts](scripts) folder, and their description 
 - [fvm_vscode.sh](scripts/fvm_vscode.sh) — script for VSCode IDE configuration for working with FVM
 - [spider_build.sh](scripts/spider_build.sh) — script for assets codegen
 
-## Certs and secrets
+## Build
+
+### Versioning
+
+> [!NOTE]
+> Explain here a versioning system used in the project.
+> Delete this alert after initialization of the template.
+
+For example, you can use this approach:
+
+Given the version number MAJOR.MINOR.PATCH, the following should be incremented:
+
+MAJOR version, based on the last number of release year 2021 -> 1, 2022 -> 2, 2023 -> 3, ...
+MINOR version, each release month 1, 2, 3 ... 12
+PATCH version, the day on which the release is made 1, 2, 3, ... 31
+Build number or versionCode, which comes after +, is added following this rule — combine all the values of the application version and add a place for version counting.
+
+```
+3.11.23+31123000 // first build for the date November 23, 2023
+3.11.23+31123001 // second build for the date November 23, 2023
+4.01.03+30103001 // second build for the date January 3, 2024
+```
+
+### Flavors
+
+The project has two flavors: `dev` and `prod`. The `dev` flavor is used by default.
+The guide to adding flavors can be found [here](docs/flavors.md).
+
+### Build guides
+
+> [!NOTE]
+> Add here guides for building the app or skip this section.
+> Delete this alert, but don't delete this section.
+
+### Certs and secrets
 
 iOS certs and profiles should be saved here: `ios/certs`.
 
 DO NOT STORE CERTIFICATES IN THE PROJECT REPOSITORY.
+
+### CI/CD
+
+> [!NOTE]
+> Add here CI/CD information or skip this section.
+> Delete this alert, but don't delete this section.
+
+## Problems and possible solutions
+
+> [!NOTE]
+> Add problems and possible solutions here as you work with the project.
+> Delete this alert, but don't delete this section.
 
 ## Workflow in a repository
 
@@ -124,8 +170,9 @@ The workflow includes the following:
 
 ## Architecture and project structure
 
-Architectural decisions made on the project can be found in this [file](docs/architecture_and_project_structure.md). 
-There is also a description of the project structure.
+The overview of the architecture and structure can be found here:
+- [Architecture](docs/architecture_and_project_structure.md#architecture)
+- [Project structure](docs/architecture_and_project_structure.md#project-structure)
 
 ## Analytics
 
