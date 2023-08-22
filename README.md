@@ -172,7 +172,7 @@ DO NOT STORE CERTIFICATES IN THE PROJECT REPOSITORY.
 The workflow includes the following:
 - [Branching in a repository](docs/workflow_in_repository.md#branching-in-a-repository)
 - [Commits](docs/workflow_in_repository.md#commits)
-- [Merge requests (Pull Requests)](docs/workflow_in_repository.md#merge-requests--pull-requests-)
+- [Pull requests](docs/workflow_in_repository.md#pull-requests)
 - [List of labels for PR and issues](docs/workflow_in_repository.md#list-of-labels-for-pr-and-issues)
 - [Change log](docs/workflow_in_repository.md#change-log)
 - [Technical debt](docs/workflow_in_repository.md#technical-debt)

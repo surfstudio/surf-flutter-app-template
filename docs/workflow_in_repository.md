@@ -26,7 +26,7 @@ For commits without a task, the pattern is `no-task-<type>: <description>`, for 
 
 It is better if the commits are atomic, then it will be easier to navigate in the history of changes and in the design of PR, the text of the last commit will be automatically substituted in the name of the PR.
 
-### Merge requests (Pull Requests)
+### Pull requests
 
 For description text, there is a basic template that will be automatically added to the PR description text field.
 The template is an mandatory part of the description.
