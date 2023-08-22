@@ -28,6 +28,11 @@ Do the following to initialize a project:
 
 The rules for branches, commits, and pull requests are the same as for a project repository workflow and explained [below](#workflow-in-a-repository).
 
+## One more thing
+
+> [!IMPORTANT]
+> If you find that some information or code in the template is outdated or found errors, do not be lazy and make a change request in the [template repository](https://github.com/surfstudio/surf-flutter-app-template). Thank you.
+
 # Application name
 
 > [!IMPORTANT]
@@ -121,11 +126,9 @@ For example, you can use this approach:
 
 Given the version number MAJOR.MINOR.PATCH, the following should be incremented:
 
-MAJOR version, based on the last number of release year 2021 -> 1, 2022 -> 2, 2023 -> 3, ...
-
-MINOR version, each release month 1, 2, 3 ... 12
-
-PATCH version, the day on which the release is made 1, 2, 3, ... 31
+- MAJOR version, based on the last number of release year 2021 -> 1, 2022 -> 2, 2023 -> 3, ...
+- MINOR version, each release month 1, 2, 3 ... 12
+- PATCH version, the day on which the release is made 1, 2, 3, ... 31
 
 Build number or versionCode, which comes after +, is added following this rule — combine all the values of the application version and add a place for version counting.
 
@@ -171,6 +174,8 @@ The workflow includes the following:
 - [Commits](docs/workflow_in_repository.md#commits)
 - [Merge requests (Pull Requests)](docs/workflow_in_repository.md#merge-requests--pull-requests-)
 - [List of labels for PR and issues](docs/workflow_in_repository.md#list-of-labels-for-pr-and-issues)
+- [Change log](docs/workflow_in_repository.md#change-log)
+- [Technical debt](docs/workflow_in_repository.md#technical-debt)
 
 ## Architecture and project structure
 
