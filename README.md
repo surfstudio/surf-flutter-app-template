@@ -114,6 +114,7 @@ All scripts are located in the [scripts](scripts) folder, and their description 
 
 > [!NOTE]
 > Explain here a versioning system used in the project.
+> 
 > Delete this alert after initialization of the template.
 
 For example, you can use this approach:
@@ -121,8 +122,11 @@ For example, you can use this approach:
 Given the version number MAJOR.MINOR.PATCH, the following should be incremented:
 
 MAJOR version, based on the last number of release year 2021 -> 1, 2022 -> 2, 2023 -> 3, ...
+
 MINOR version, each release month 1, 2, 3 ... 12
+
 PATCH version, the day on which the release is made 1, 2, 3, ... 31
+
 Build number or versionCode, which comes after +, is added following this rule â€” combine all the values of the application version and add a place for version counting.
 
 ```
@@ -133,7 +137,7 @@ Build number or versionCode, which comes after +, is added following this rule â
 
 ### Flavors
 
-The project has two flavors: `dev` and `prod`. The `dev` flavor is used by default.
+The project has two flavors: `dev`, `qa` and `prod`. The `dev` flavor is used by default.
 The guide to adding flavors can be found [here](docs/flavors.md).
 
 ### Build guides
