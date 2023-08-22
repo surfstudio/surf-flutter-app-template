@@ -6,13 +6,13 @@ Localization is implemented using the built-in localization methods in Flutter.
 
 ### Use a string assignment as a variable, not a free translation
 
-Good names: 
+Good names:
 
 - `"positiveResponse": "Да"`
 - `"settingsSubmitButton": "Подтверждаю это"`
 - `"mainTitle": "Главный экран"`
 
-Bad names: 
+Bad names:
 
 - `"yes": "Да"`
 - `"approveThis": "Подтверждаю это"`
@@ -28,7 +28,7 @@ Segments are required for visual and semantic separation of lines in the .arb fi
 
 It is also recommended to add an empty line before the segment for visual separation.
 
-For the segment, meta-names are used with @: 
+For the segment, meta-names are used with @:
 
 ```
   "@segmentCommon": {
@@ -65,7 +65,7 @@ Examples:
   ...
 ```
 
-## How to add a line? 
+## How to add a line?
 
 1. According to the rules, add a new line.
 2. Make hot reload/restart.
