@@ -113,10 +113,10 @@ Open `.vscode/launch.json` and add the following code:
 
 Now you can launch app with `qa` flavor by clicking on `Run qa` in debug tab:
 
-<img src="assets/docs/vs_code_flavor_config.png" width="600"/>
+<img src="/assets/docs/vs_code_flavor_config.png" width="600"/>
 
 **Android Studio**:
 
 Open `Run/Debug Configurations` and add new `Flutter` configuration. In `Build flavor` field add `qa`:
 
-<img src="assets/docs/android_studio_flavor_config.png" width="600"/>
+<img src="/assets/docs/android_studio_flavor_config.png" width="600"/>
