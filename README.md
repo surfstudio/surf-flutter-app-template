@@ -1,12 +1,67 @@
-# Template
+# Template information section ← *needs to be removed after template initialization*
 
 A project initialization template adopted at [Surf](https://surfstudio.ru).
 
-### Requirements
+## Requirements
 
-Flutter version >= 3.0.0
+Flutter version >=3.0.0 <4.0.0
 
-## Workflow in a repository
+## Template initialization
+
+Do the following to initialize a project:
+
+1. Search for `flutter_template` and replace it with the name of your project where needed.
+2. Initialize `FirebaseCrashlytics` (you can find that in `TODO(init-project)`).
+3. Install the actual Flutter version with FVM.
+
+## Workflow in the template repository
+
+The rules for branches, commits, and pull requests are the same as for the project repository workflow and are explained below.
+
+
+# Application name ← *put your application name here*
+
+## Flutter Version Management (FVM)
+
+### FVM workflow
+
+Installation and IDE configuration for working with FVM are described [here](https://fvm.app/docs/getting_started/installation/) and [here](https://fvm.app/docs/getting_started/configuration).
+
+The `fvm install` command will install the project version of Flutter.
+
+You need to use `flutter fvm ...` everywhere instead of just `flutter ...` when working with the project and have a different version of Flutter installed in PATH.
+
+### Flutter and Dart FVM versions of the project
+
+Flutter: ***3.10.5*** / Dart SDK: ***3.0.5*** ← *change Flutter and Dart versions here*
+
+## Code generation
+
+Basic command for code generation `fvm flutter pub run build_runner build --delete-conflicting-outputs`.
+
+Add relevant information such as:
+
+- API models and services generation
+- assets generation
+
+Or just put "No". Don't delete this section.
+
+## Requirements for running the app
+
+Add relevant information such as:
+
+- VPN settings for development
+- test/development accounts
+
+Or just put "No". Don't delete this section.
+
+## Certs and secrets
+
+iOS certs and profiles should be saved here: `ios/certs`.
+
+DO NOT STORE CERTIFICATES IN THE PROJECT REPOSITORY.
+
+Workflow in a repository
 
 ### Branching in a repository
 
