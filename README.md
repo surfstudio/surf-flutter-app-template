@@ -18,7 +18,6 @@ Do the following to initialize a project:
 
 The rules for branches, commits, and pull requests are the same as for the project repository workflow and are explained below.
 
-
 # Application name ← *put your application name here*
 
 ## Flutter Version Management (FVM)
@@ -33,7 +32,10 @@ You need to use `flutter fvm ...` everywhere instead of just `flutter ...` when 
 
 ### Flutter and Dart FVM versions of the project
 
-Flutter: ***3.10.5*** / Dart SDK: ***3.0.5*** ← *change Flutter and Dart versions here*
+> [!IMPORTANT]
+> Change Flutter and Dart versions below and delete this section.
+
+Flutter: ***3.13*** / Dart SDK: ***3.1***
 
 ## Code generation
 
@@ -106,6 +108,12 @@ A pattern for a Pull request: `<type>(JIRA-<task_number>): <description>`, for e
 - `feat(QWE-1): init`
 - `fix(ASD-2): incorrect text for SocketException`
 - `docs(ZXC-2): readme update`
+
+
+
+
+
+===================================================================================================
 
 ### Initialization
 
