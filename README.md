@@ -13,18 +13,30 @@ Do the following to initialize a project:
 1. Search for `flutter_template` and replace it with the name of your project where needed.
 2. Initialize `FirebaseCrashlytics` (you can find that in `TODO(init-project)`).
 3. Install the actual Flutter version with FVM.
+4. Run this command to get up-to-date versions of dependencies:
+```sh
+fvm flutter pub get --enforce-lockfile
+```
 
 ## Workflow in the template repository
 
-The rules for branches, commits, and pull requests are the same as for the project repository workflow and are explained below.
+The rules for branches, commits, and pull requests are the same as for a project repository workflow and are explained below.
 
-# Application name ← *put your application name here*
+> [!IMPORTANT]
+> Enter the application name below and delete this alert.
+
+# Application name
 
 ## Flutter Version Management (FVM)
 
 ### FVM workflow
 
 Installation and IDE configuration for working with FVM are described [here](https://fvm.app/docs/getting_started/installation/) and [here](https://fvm.app/docs/getting_started/configuration).
+
+For VSCode IDE you can also run the [`fvm_vscode.sh` script](scripts/fvm_vscode.sh):
+```sh
+sh script/fvm_vscode.sh
+```
 
 The `fvm install` command will install the project version of Flutter.
 
@@ -33,29 +45,48 @@ You need to use `flutter fvm ...` everywhere instead of just `flutter ...` when 
 ### Flutter and Dart FVM versions of the project
 
 > [!IMPORTANT]
-> Change Flutter and Dart versions below and delete this section.
+> Change Flutter and Dart versions below and delete this alert.
 
 Flutter: ***3.13*** / Dart SDK: ***3.1***
 
 ## Code generation
 
-Basic command for code generation `fvm flutter pub run build_runner build --delete-conflicting-outputs`.
+Basic command for code generation:
+```sh
+fvm flutter pub run build_runner build --delete-conflicting-outputs
+```
 
-Add relevant information such as:
+### Assets codegen
 
-- API models and services generation
-- assets generation
+You can easily add assets to your project by following these steps:
+1. Add asset to your assets' folder (make sure you specify this folder in `asset` section of your [pubspec.yaml](pubspec.yaml))
+2. Run script [`spider_build.sh`](scripts/spider_build.sh):
+   ```sh
+   sh scripts/spider_build.sh
+   ```
 
-Or just put "No". Don't delete this section.
+Initially, the project has two groups of assets: 
+- [Images](lib/assets/res/images.dart),
+- [Svg Icons](lib/assets/res/svg_icons.dart).
+
+You can change it in spider [configuration file](spider.yaml).
+
+> [!IMPORTANT]
+> Add relevant information such as:
+> - API models and services generation (basic info about SurfGen is [here](docs/surf_gen.md))
+> - generating something else that is necessary for work or project launch
+>
+> Delete this alert after initialization of the template.
 
 ## Requirements for running the app
 
-Add relevant information such as:
-
-- VPN settings for development
-- test/development accounts
-
-Or just put "No". Don't delete this section.
+> [!IMPORTANT]
+> Add relevant information such as:
+> - VPN settings for development
+> - test/development accounts
+>
+> Or just put "No". 
+> Delete this alert, but don't delete this section.
 
 ## Certs and secrets
 
@@ -63,16 +94,15 @@ iOS certs and profiles should be saved here: `ios/certs`.
 
 DO NOT STORE CERTIFICATES IN THE PROJECT REPOSITORY.
 
-Workflow in a repository
+## Workflow in a repository
 
 ### Branching in a repository
 
 For each task, a branch is created according to the pattern specified below.
-If you want to make changes to the code base outside the task, or if you don't want the change
-to be executed as a task, then a branch is created according to the pattern:
+- task branch: `JIRA-<task_number>_<description>` => `JIRA-1234_add_new_screen`
 
-- branch without task: `no-task <type>([context]): <description>`
-- task branch: `JIRA-<task_number>_<description>`
+If you want to make changes to the code base outside the task, or if you don't want the change to be executed as a task, then a branch is created according to the pattern:
+- branch without a task: `no-task-<type>([context])_<description>` => `no-task-fix(ABC-1)_fix_error_state`
 
 ### Commits
 
@@ -113,42 +143,11 @@ A pattern for a Pull request: `<type>(JIRA-<task_number>): <description>`, for e
 
 
 
+
+
+
+
 ===================================================================================================
-
-### Initialization
-
-Do the following to initialize a project:
-
-1. Search for flutter_template and replace it with the name of your project where needed.
-2. Initialize FirebaseCrashlytics (you can find that in TODO(init-project)).
-3. Run this command to get up-to-date versions of dependencies:
-   ```sh
-   flutter pub get --enforce-lockfile
-   ```
-
-### FVM
-
-If you have multiple versions of Flutter installed, you can use [FVM](https://fvm.app/).<br>
-You can find installation instructions [here](https://fvm.app/docs/getting_started/installation). <br>
-To switch to the desired Flutter version run:
-```sh
-fvm use <desired_version> # e.g. fvm use 3.10.6
-```
-
-Now you need to configure FVM for your IDE:
-
-#### Configuration for VSCode
-
-Follow the [configuration guide](https://fvm.app/docs/getting_started/configuration/#vs-code)
-or 
-Run the [`fvm_vscode.sh` script](scripts/fvm_vscode.sh):
-```sh
-sh script/fvm_vscode.sh
-```
-
-#### Configuration for AndroidStudio/IDEA
-
-The configuration guide can be found [here](https://fvm.app/docs/getting_started/configuration/#android-studio).
 
 ### Structure
 
@@ -239,13 +238,7 @@ The architecture adheres to the rules of Elementary. Screens and parts of the in
 
 Navigation is centered around the [AutoRoute](https://pub.dev/packages/auto_route) package. We use a class called AppRouter for global navigation around an app and StackRouter for nested navigation. Despite the fact that StackRouter could be referred to directly through the context in WidgetModel, it should be passed explicitly to the WidgetModel constructor. With StackRouter used in the context, an effective navigation stack can be obtained and managed in this router. AppRouter, in turn, is stored in the AppScope dependencies and recovered from there.
 
-### ApiGen
 
-[SurfGen](https://github.com/surfstudio/SurfGen) is our default choice.
-
-[Guide](https://wiki.surfstudio.ru/pages/viewpage.action?pageId=2408072) to getting SurfGen up and running on your project (some of the steps have already been made for you, so check if you need to make them and then build an executable file (step 4)).
-
-[Guide](https://wiki.surfstudio.ru/pages/viewpage.action?pageId=2408080) to using SurfGen on your project.
 
 ### DI
 
@@ -261,224 +254,6 @@ If a functionality needs some dependencies specific to it only, they are isolate
 The basic rules and tips for working with localization are described in [README.md](./lib/l10n/README.md).
 More information on working with localization can be found here `[here](https://docs.flutter.dev/accessibility-and-localization/internationalization).
 
-### Assets codegen
-
-You can easily add assets to your project by following these steps:
-1. Add asset to your assets folder (make sure you specify this folder in `asset` section of your [pubspec.yaml](pubspec.yaml))
-2. Run script [`spider_build.sh`](scripts/spider_build.sh):
-   ```sh
-   sh scripts/spider_build.sh
-   ```
-
-Initially, the project has two groups of assets - [Images](lib/assets/res/images.dart) and [Svg Icons](lib/assets/res/svg_icons.dart). You can change it in spider [configuration file](spider.yaml).
-
-### Testing
-
-#### Goldens
-
-To generate golden tests in the project, the [golden_toolkit](https://pub.dev/packages/golden_toolkit) library has been added.
-
-By opening the file [flutter_test_config.dart](test/flutter_test_config.dart), you can configure the strictness of golden comparisons and the set of devices for which they will be generated.
-
-To save time on writing goldens, you can use the function [testWidget](test/core/utils/test_widget.dart). This function allows you to:
-
-- Test the functionality of a widget (e.g., interactions with elements, element presence, etc.), including for `ElementaryWidget`'s.
-- Generate goldens for both light and dark themes.
-
-**IMPORTANT**: Always specify the generic type of the widget you are testing (e.g.,`testWidget<TestableScreen>`), as the golden's name generation is based on the widget class name.
-
-Example usage:
-```dart
-class MockTestableScreenWM extends Mock implements ITestableScreenWM {}
-
-void main() {
-  final mockData = MockData('test data');
-  final widget = TestableScreen(mockData);
-  final wm = MockTestableScreenWM();
-
-  testWidget<TestableScreen>(
-    'Test screen',
-    widgetBuilder: (_) => widget.build(wm),
-    setup: (theme) {
-      when(() => wm.data).thenReturn(EntityValueNotifier(mockData));
-      when(() => wm.theme).thenReturn(theme);
-      when(wm.onSubmitPressed).thenAnswer((_) => Future.value())
-      when(wm.onCancelPressed).thenReturn(null);
-    },
-    test: (tester, theme) async {
-        final submitButton = find.widgetWithText(PrimaryButton, CommonStrings.submitButton);
-        final cancelButton = find.widgetWithText(SecondaryButton, CommonStrings.cancelButton);
-        
-        expect(submitButton, findsOneWidget);
-        expect(cancelButton, findsOneWidget);
-        expect(finder, findsOneWidget);
-
-        await tester.tap(submitButton);
-        verify(wm.onSubmitPressed);
-
-        await tester.tap(cancelButton);
-        verify(wm.onCancelPressed);
-    },
-  );
-
-  /// Nothing to test, just want to generate the golden.
-  testWidget<TestableScreen>(
-    'Test screen - loading',
-    widgetBuilder: (_) => widget.build(wm),
-    /// Since we are testing a specific widget state, we fill in the [screenState] property.
-    screenState: 'loading',
-    setup: (theme) {
-      when(() => wm.data).thenReturn(EntityValueNotifier.loading());
-      when(() => wm.theme).thenReturn(theme);
-    }
-  );
-}
-```
-
-### Theming
-
-There are three layers of theme we use in our projects:
-
-#### Raw resources
-
-By raw resources we mean raw colors, fonts or assets. For example:
-
-```dart
-abstract class ColorPalette {
-    static const egyptianBlue = Color(0xFF1245AA);
-    static const venetianRed = Color(0xFFCC1512);
-    // etc...
-}
-```
-
-❗❗❗ You **should not** use these colors directly in your application. Use it in `ThemeData` or `ThemeExtension` instead.
-
-#### ThemeData
-
-This class defines app theme. With this class you can define colors, fonts, text styles, etc for material widgets.
-For example:
-
-```dart
-ThemeData(
-    primaryColor: ColorPalette.egyptianBlue,
-    accentColor: ColorPalette.venetianRed,
-    textTheme: TextTheme(
-        displayLarge: TextStyle(
-            color: ColorPalette.egyptianBlue,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-        ),
-        // etc...
-    ),
-)
-```
-
-[Read more](https://api.flutter.dev/flutter/material/ThemeData-class.html).
-
-#### ThemeExtension
-
-Meanwhile `ThemeData` defines theme only for material widgets, `ThemeExtension` allows you to define theme with custom fields for your custom widgets. 
-
-```dart
-@immutable
-class AppColorScheme extends ThemeExtension<AppColorScheme> {
-    final Color primary;
-    final Color onPrimary;
-    final Color dangerBg;
-    final Color dangerFg;
-    // etc...
-
-    AppColorScheme.light()
-      : primary = LightColorPalette.someColor,
-      : onPrimary = LightColorPalette.otherColor,
-      : dangerBg = LightColorPalette.someRed,
-      : dangerFg = LightColorPalette.white,
-      // etc.
-
-    AppColorScheme.dark()
-    : primary = DarkColorPalette.someColor,
-    : onPrimary = DarkColorPalette.otherColor,
-    : dangerBg = DarkColorPalette.someRed,
-    : dangerFg = DarkColorPalette.white,
-    // etc.
-
-
-    const AppColorScheme._({
-        required this.primary,
-        required this.onPrimary,
-        required this.dangerBg,
-        required this.dangerFg,
-    });
-
-    @override
-    ThemeExtension<AppColorScheme> copyWith({
-        Color? primary
-        Color? onPrimary
-        Color? dangerBg
-        Color? dangerFg
-    }) {
-        return AppColorScheme(
-            primary: primary ?? this.primary,
-            onPrimary: onPrimary ?? this.onPrimary,
-            dangerBg: dangerBg ?? this.dangerBg,
-            dangerFg: dangerFg ?? this.dangerFg,
-        );
-    }
-
-
-  /// Method for smooth transition between two themes.
-  @override
-  ThemeExtension<AppColorScheme> lerp(
-    ThemeExtension<AppColorScheme>? other,
-    double t,
-  ) {
-    if (other is! AppColorScheme) {
-      return this;
-    }
-
-    return AppColorScheme._(
-      primary: Color.lerp(primary, other.primary, t),
-      onPrimary: Color.lerp(onPrimary, other.onPrimary, t),
-      dangerBg: Color.lerp(dangerBg, other.dangerBg, t),
-      dangerFg: Color.lerp(dangerFg, other.dangerFg, t),
-    );
-  }
-
-
-  /// Returns [AppColorScheme] from [context].
-  static AppColorScheme of(BuildContext context) =>
-      Theme.of(context).extension<AppColorScheme>()!;
-}
-```
-
-
-> It is important that `ThemeExtension` is in sync with `ThemeData` - thanks to this, a smooth theme update for custom extensions is possible.
-
-Read more [here](https://api.flutter.dev/flutter/material/ThemeExtension-class.html).
-
-#### Recommended practices
-
-You can define whatever `ThemeExtension` you want or use only `ThemeData`, but you also can use our semantic [`ColorScheme`](lib/assets/colors/color_scheme.dart).
-
-This scheme inspired by Material Design and contains colors for primary, secondary, error, background, surface, onPrimary, onSecondary, onBackground, onSurface, onError, etc.
-
-You don't have use only this set of fields - you can add your own, delete unnecessary, etc.
-
-Example of use:
-```dart
-class SomeCustomWidget extends StatelessWidget {
-  const SomeCustomWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final scheme = AppColorScheme.of(context);
-    return Container(
-      color: scheme.surface,
-      /// etc...
-    );
-  }
-}
-```
 
 ### Implementation examples
 
@@ -486,8 +261,8 @@ class SomeCustomWidget extends StatelessWidget {
 
 ### Icons launcher
 
-The basic rules and tips for working with icon generation are described in the [README.md](./assets/launcher_icon/README.md).
+The basic rules and tips for working with icon generation are described in the [guide](docs/icons_launcher.md).
 
 ### Native splash screen
 
-Basic guidelines for creating a native splash screen [README.md](./assets/splash/README.md)
+Basic guidelines for creating a native splash screen are [here](docs/splash.md).

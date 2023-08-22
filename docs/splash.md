@@ -4,26 +4,27 @@ Creating native splash screen
 
 ## Image folder
 
-In the root of the project in the assets folder we use the `assets` folder with the following structure:
+The splash folder is located in the assets folder and has the following structure:
 
-``` text
-splash
--- 📁 1.5x
----- splash.png
----- splash_dark.png
--- 📁 2.0x
----- splash.png
----- splash_dark.png
--- 📁 3.0x
----- splash.png
----- splash_dark.png
--- 📁 4.0x
----- splash.png
----- splash_dark.png
-splash.png
-splash_android12.png
-splash_dark.png
-splash_dark_android12.png
+```text
+- assets
+    - splash
+        - 1.5x
+            - splash.png
+            - splash_dark.png
+        - 2.0x
+            - splash.png
+            - splash_dark.png
+        - 3.0x
+            - splash.png
+            - splash_dark.png
+        - 4.0x
+            - splash.png
+            - splash_dark.png
+        splash.png
+        splash_android12.png
+        splash_dark.png
+        splash_dark_android12.png
 ```
 
 Additional folders with different image resolutions are created to properly prepare images for 
@@ -33,7 +34,7 @@ Focusing on https://docs.flutter.dev/ui/assets-and-images.
 For versions 12 and above, the required file will be prepared from the images `splash_android12.png` 
 and `splash_dark_android12.png` 
 
-Basic files should be prepared by designers.
+Designers should prepare basic files.
 
 ### Configuring image generation
 
@@ -57,17 +58,14 @@ flutter_native_splash:
   web: true
 ```
 
+### Generation
+
+To start the generation, run the command:
+```shell
+fvm flutter pub run flutter_native_splash:create
+```
+
 ## Useful links
 
 - [Instructions on how to configure additional parameters](https://pub.dev/packages/flutter_native_splash)
 - [Splash screens Android 12](https://developer.android.com/develop/ui/views/launch/splash-screen)
-
-### Start generation
-
-```shell
-# Without fvm
-flutter pub run flutter_native_splash:create
-
-# If using fvm
-fvm flutter pub run flutter_native_splash:create
-```

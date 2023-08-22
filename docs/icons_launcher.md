@@ -1,6 +1,6 @@
 # Icons launcher
 
-To generate icons we use the flutter_launcher_icons package, as it generates adaptive icons.
+To generate icons, we use the flutter_launcher_icons package, as it generates adaptive icons.
 
 The template contains basic icons. To replace them with yours, follow the recommendations.
 
@@ -9,16 +9,17 @@ The template contains basic icons. To replace them with yours, follow the recomm
 In the root of the project in the assets folder we use the `assets` folder with the following structure:
 
 ``` text
-launcher_icon
--- icon_background.png (If you don't want a gradient or textured background, you can remove this)
--- icon_background_dev.png
--- icon_foreground.png
--- icon_foreground_dev.png
--- icon_rectangle.png
--- icon_rectangle_dev.png
+- assets
+   - launcher_icon
+      - icon_background.png (If you don't want a gradient or textured background, you can remove this)
+      - icon_background_dev.png
+      - icon_foreground.png
+      - icon_foreground_dev.png
+      - icon_rectangle.png
+      - icon_rectangle_dev.png
 ```
 
-Basic files should be prepared by designers.
+Designers should prepare basic files.
 
 ### Configuring image generation
 
@@ -39,18 +40,16 @@ ios/runner/Assets.xcassets/AppIcon-dev.appiconset
 ios/runner/Assets.xcassets/AppIcon-prod.appiconset
 ```
 
-Data in default folders: android/app/scr/main/res/ и
-ios/runner/Assets.xcassets/AppIcon.appiconset **won't be generated**.
+Data in default folders: android/app/scr/main/res/ and ios/runner/Assets.xcassets/AppIcon.appiconset **won't be generated**.
 
 If you need to overwrite the icons there as well, you need to:
 1. Customize the flutter_launcher_icons.yaml file
-2. Rename files with configuration settings for flutter, for example: flutter_SKIP_launcher_icons-dev.yaml
-   and flutter_SKIP_SKIP_launcher_iconsRelease.yaml
+2. Rename files with configuration settings for Flutter, for example: 
+   - flutter_SKIP_launcher_icons-dev.yaml
+   - flutter_SKIP_SKIP_launcher_iconsRelease.yaml
 3. Start generation
 
-Running generation from a specific file fails. The script goes through all the configuration files, so
-we reassign the unnecessary ones.
-
+Running generation from a specific file fails. The script goes through all the configuration files, so we reassign the unnecessary ones.
 
 ```text
 flutter_launcher_icons:
@@ -76,13 +75,14 @@ flutter_launcher_icons:
     image_path: "assets/launcher_icon/icon_rectangle_dev.png"
 ```
 
-## Useful links
-- [Instructions on how to configure additional parameters](https://pub.dev/packages/flutter_launcher_icons)
-- [UI Guide: Adaptive icons](https://developer.android.com/develop/ui/views/launch/icon_design_adaptive)
+### Generation
 
-### Start generation
-
+To start the generation, run the command:
 ```shell
 # Starts generating icons from all customization files
 dart run flutter_launcher_icons
 ```
+
+## Useful links
+- [Instructions on how to configure additional parameters](https://pub.dev/packages/flutter_launcher_icons)
+- [UI Guide: Adaptive icons](https://developer.android.com/develop/ui/views/launch/icon_design_adaptive)
