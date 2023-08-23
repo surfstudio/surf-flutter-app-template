@@ -32,9 +32,14 @@ class RefreshTokenInterceptor extends Interceptor {
       final options = err.requestOptions;
 
       /// After which, if successful, proceed with the initial request.
-      final result = await _dio.request<dynamic>(
-        options.path,
-        options: Options(
+      final result = await _dio.fetch<dynamic>(
+        RequestOptions(
+          path: options.path,
+          data: options.data,
+          queryParameters: options.queryParameters,
+          cancelToken: options.cancelToken,
+          onSendProgress: options.onSendProgress,
+          onReceiveProgress: options.onReceiveProgress,
           method: options.method,
           sendTimeout: options.sendTimeout,
           receiveTimeout: options.receiveTimeout,
@@ -50,11 +55,6 @@ class RefreshTokenInterceptor extends Interceptor {
           responseDecoder: options.responseDecoder,
           listFormat: options.listFormat,
         ),
-        data: options.data,
-        queryParameters: options.queryParameters,
-        cancelToken: options.cancelToken,
-        onSendProgress: options.onSendProgress,
-        onReceiveProgress: options.onReceiveProgress,
       );
 
       handler.resolve(result);
