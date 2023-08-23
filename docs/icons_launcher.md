@@ -28,7 +28,7 @@ To generate icons for iOS, you need to check the Xcode settings. Open your proje
 
 Here, you'll find the default folder for icons named AppIcon.
 
-<img src="images/icons_launcher-1.png" width="300"/>
+<img src="images/icons_launcher-1.png" width="500"/>
 
 Next, go to Target -> Runner -> Build Settings and search for the primary app icon. Make sure that there is an icon 
 directory configured for each build type. If this is not the case, adjust the settings accordingly.
