@@ -21,6 +21,20 @@ In the root of the project in the assets folder we use the `assets` folder with 
 
 Designers should prepare basic files.
 
+
+### Setting up Xcode
+
+To generate icons for iOS, you need to check the Xcode settings. Open your project in Xcode, then navigate to Runner -> Assets.
+
+Here, you'll find the default folder for icons named AppIcon.
+
+![icons_launcher-1.png](images/icons_launcher-1.png)
+
+Next, go to Target -> Runner -> Build Settings and search for primary app icon. Make sure that there is an icon 
+directory configured for each build type. If this is not the case, adjust the settings accordingly.
+
+![icons_launcher-2.png](images/icons_launcher-2.png)
+
 ### Configuring image generation
 
 Configuration files:
@@ -39,17 +53,12 @@ IOS:
 ios/runner/Assets.xcassets/AppIcon-dev.appiconset
 ios/runner/Assets.xcassets/AppIcon-prod.appiconset
 ```
+After generating, make sure that the icons have been generated correctly. You can delete the default `AppIcon` 
+directory on iOS.
+
+![icons_launcher-3.png](images/icons_launcher-3.png)
 
 Data in default folders: android/app/scr/main/res/ and ios/runner/Assets.xcassets/AppIcon.appiconset **won't be generated**.
-
-If you need to overwrite the icons there as well, you need to:
-1. Customize the flutter_launcher_icons.yaml file
-2. Rename files with configuration settings for Flutter, for example: 
-   - flutter_SKIP_launcher_icons-dev.yaml
-   - flutter_SKIP_SKIP_launcher_iconsRelease.yaml
-3. Start generation
-
-Running generation from a specific file fails. The script goes through all the configuration files, so we reassign the unnecessary ones.
 
 ```text
 flutter_launcher_icons:
