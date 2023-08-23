@@ -26,8 +26,8 @@ class BaseWidgetTestWrapper extends StatelessWidget {
     required this.child,
     required this.mode,
     MockStackRouter? router,
-    Key? key,
-  }) : super(key: key) {
+    super.key,
+  }) {
     registerFallbackValue(FakePageRouteInfo());
     mockRouter = router ?? MockStackRouter();
     when(() => appScopeMock.themeService).thenReturn(themeServiceMock);

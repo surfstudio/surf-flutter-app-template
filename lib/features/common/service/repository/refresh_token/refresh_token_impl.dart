@@ -54,6 +54,7 @@ class RefreshTokenRepositoryImpl implements IRefreshTokenRepository {
       if (failure is RefreshTokenFailure) {
         // TODO(anyone): Log error, handleRefreshTokenFailure
       }
+      // ignore: unused_catch_clause
     } on Exception catch (e) {
       // TODO(anyone): Log error, handleRefreshTokenFailure
     } finally {
