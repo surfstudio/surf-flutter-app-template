@@ -63,7 +63,7 @@ For VSCode IDE you can also run the script [`fvm_vscode.sh`](scripts/fvm_vscode.
 sh script/fvm_vscode.sh
 ```
 
-You need to use `flutter fvm ...` everywhere instead of just `flutter ...` when working with the project.
+You need to use `fvm flutter ...` everywhere instead of just `flutter ...` when working with the project.
 
 ### Flutter and Dart FVM versions of the project
 
@@ -109,7 +109,7 @@ Spider configuration file is located [here](spider.yaml).
 
 ## Project scripts
 
-All scripts are located in the [scripts](scripts) folder, and their description is below:
+All scripts are located in the [scripts](scripts) folder and described below:
 - [fvm_vscode.sh](scripts/fvm_vscode.sh) — script for VSCode IDE configuration for working with FVM
 - [spider_build.sh](scripts/spider_build.sh) — script for assets codegen
 
@@ -127,14 +127,14 @@ For example, you can use this approach:
 Given the version number MAJOR.MINOR.PATCH, the following should be incremented:
 
 - MAJOR version, based on the last number of release year 2021 -> 1, 2022 -> 2, 2023 -> 3, ...
-- MINOR version, each release month 1, 2, 3 ... 12
-- PATCH version, the day on which the release is made 1, 2, 3, ... 31
+- MINOR version, month of release -> 1, 2, 3 ... 12
+- PATCH version, the day on which the release is made -> 1, 2, 3, ... 31
 
 Build number or versionCode, which comes after +, is added following this rule — combine all the values of the application version and add a place for version counting.
 
 ```
-3.11.23+31123000 // first build for the date November 23, 2023
-3.11.23+31123001 // second build for the date November 23, 2023
+3.11.29+31129000 // first build for the date November 29, 2023
+3.11.29+31129001 // second build for the date November 29, 2023
 4.01.03+30103001 // second build for the date January 3, 2024
 ```
 
@@ -147,24 +147,28 @@ The guide to adding flavors can be found [here](docs/flavors.md).
 
 > [!NOTE]
 > Add here guides for building the app or skip this section.
+> 
 > Delete this alert, but don't delete this section.
 
 ### Certs and secrets
 
 iOS certs and profiles should be saved here: `ios/certs`.
 
-DO NOT STORE CERTIFICATES IN THE PROJECT REPOSITORY.
+> [!WARNING]
+> DO NOT STORE CERTIFICATES IN THE PROJECT REPOSITORY.
 
 ### CI/CD
 
 > [!NOTE]
 > Add here CI/CD information or skip this section.
+> 
 > Delete this alert, but don't delete this section.
 
 ## Problems and possible solutions
 
 > [!NOTE]
 > Add problems and possible solutions here as you work with the project.
+> 
 > Delete this alert, but don't delete this section.
 
 ## Workflow in a repository
@@ -222,7 +226,7 @@ The basic rules and tips for working with icon generation are described in the [
 
 ## Native splash screen
 
-Basic guidelines for creating a native splash screen are [here](docs/splash.md).
+The Basic guide for creating a native splash screen is [here](docs/splash.md).
 
 ## Additional useful practices
 
