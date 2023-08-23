@@ -6,17 +6,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// Based on SharedPreferences.
 class ConfigSettingsStorageImpl implements IConfigSettingsStorage {
   static const String _proxyKey = 'proxy_url';
+  final SharedPreferences _prefs;
+
 
   /// Create an instance [ConfigSettingsStorageImpl].
-  ConfigSettingsStorageImpl();
+  ConfigSettingsStorageImpl(this._prefs);
 
   @override
   Future<String?> getProxyUrl() async {
-    return (await SharedPreferences.getInstance()).getString(_proxyKey);
+    return _prefs.getString(_proxyKey);
   }
 
   @override
   Future<void> setProxyUrl({required String proxy}) async {
-    await (await SharedPreferences.getInstance()).setString(_proxyKey, proxy);
+    await _prefs.setString(_proxyKey, proxy);
   }
 }
