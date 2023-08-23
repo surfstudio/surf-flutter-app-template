@@ -1,4 +1,3 @@
-
 import 'package:flutter_template/persistence/storage/auth_tokens/data/auth_tokens.dart';
 
 /// Storage for authentication tokens of the application.

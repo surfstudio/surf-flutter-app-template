@@ -12,4 +12,3 @@ class RefreshTokenFailure extends ServerFailure {
   @override
   String toString() => 'RefreshTokenFailure(message: $message)';
 }
-
