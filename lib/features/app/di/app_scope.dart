@@ -14,6 +14,7 @@ import 'package:flutter_template/features/common/service/theme/theme_service_imp
 import 'package:flutter_template/features/navigation/service/router.dart';
 import 'package:flutter_template/persistence/storage/auth_tokens/auth_tokens_storage.dart';
 import 'package:flutter_template/persistence/storage/auth_tokens/auth_tokens_storage_secure.dart';
+import 'package:flutter_template/persistence/storage/first_run/first_run_storage_impl.dart';
 import 'package:flutter_template/persistence/storage/theme_storage/theme_storage.dart';
 import 'package:flutter_template/persistence/storage/theme_storage/theme_storage_impl.dart';
 import 'package:flutter_template/util/default_error_handler.dart';
@@ -37,7 +38,8 @@ class AppScope implements IAppScope {
   final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
 
   @override
-  late final IAuthTokensStorage authTokensStorage = AuthTokensStorageSecure(secureStorage);
+  late final IAuthTokensStorage authTokensStorage =
+      AuthTokensStorageSecure(secureStorage);
 
   @override
   Dio get dio => _dio;
@@ -61,22 +63,33 @@ class AppScope implements IAppScope {
     /// List interceptor. Fill in as needed.
     final additionalInterceptors = <Interceptor>[
       AuthTokenInterceptor(authTokensStorage),
-      RefreshTokenInterceptor(
-        refreshTokenRepository,
-        dio,
-      ),
-      RetryInterceptor(dio),
     ];
 
     _dio = _initDio(additionalInterceptors);
+    _dio.interceptors
+      ..add(
+        RefreshTokenInterceptor(
+          refreshTokenRepository,
+          dio,
+        ),
+      )
+      ..add(RetryInterceptor(dio));
+
     _errorHandler = DefaultErrorHandler();
     _router = AppRouter.instance();
     _themeModeStorage = ThemeModeStorageImpl(_sharedPreferences);
+
+    final firstRun = FirstRunStorageImpl(_sharedPreferences).getIsFirstRun();
+    if (firstRun) {
+      authTokensStorage.removeTokens();
+    }
   }
 
   @override
   Future<void> initTheme() async {
-    final theme = await ThemeModeStorageImpl(_sharedPreferences).getThemeMode() ?? _themeByDefault;
+    final theme =
+        await ThemeModeStorageImpl(_sharedPreferences).getThemeMode() ??
+            _themeByDefault;
     _themeService = ThemeServiceImpl(theme);
     _themeService.addListener(_onThemeModeChanged);
   }
@@ -96,7 +109,8 @@ class AppScope implements IAppScope {
       ..receiveTimeout = timeout
       ..sendTimeout = timeout;
 
-    (dio.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate = (client) {
+    (dio.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate =
+        (client) {
       final proxyUrl = Environment.instance().config.proxyUrl;
       if (proxyUrl != null && proxyUrl.isNotEmpty) {
         client
