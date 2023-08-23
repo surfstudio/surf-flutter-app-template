@@ -7,6 +7,7 @@ import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/common/service/interceptors/auth_token_interceptor.dart';
 import 'package:flutter_template/features/common/service/interceptors/refresh_token_interceptor.dart';
 import 'package:flutter_template/features/common/service/interceptors/retry_interceptor.dart';
+import 'package:flutter_template/features/common/service/interceptors/server_error_interceptor.dart';
 import 'package:flutter_template/features/common/service/repository/refresh_token/refresh_token_impl.dart';
 import 'package:flutter_template/features/common/service/repository/refresh_token/refresh_token_repository.dart';
 import 'package:flutter_template/features/common/service/theme/theme_service.dart';
@@ -63,6 +64,7 @@ class AppScope implements IAppScope {
     /// List interceptor. Fill in as needed.
     final additionalInterceptors = <Interceptor>[
       AuthTokenInterceptor(authTokensStorage),
+      ServerErrorInterceptor(),
     ];
 
     _dio = _initDio(additionalInterceptors);
