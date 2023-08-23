@@ -362,6 +362,7 @@
 				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/PromisesSwift/Promises.framework",
 				"${BUILT_PRODUCTS_DIR}/flutter_native_splash/flutter_native_splash.framework",
+				"${BUILT_PRODUCTS_DIR}/flutter_secure_storage/flutter_secure_storage.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 				"${BUILT_PRODUCTS_DIR}/path_provider_foundation/path_provider_foundation.framework",
 				"${BUILT_PRODUCTS_DIR}/shared_preferences_foundation/shared_preferences_foundation.framework",
@@ -379,6 +380,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Promises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/flutter_native_splash.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/flutter_secure_storage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/path_provider_foundation.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/shared_preferences_foundation.framework",
@@ -473,7 +475,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = $APP_ICON;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$APP_ICON";
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = 8GTLF376N4;
 				ENABLE_BITCODE = NO;
@@ -605,7 +607,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9C64539A22F45CEF008DCC00 /* dev.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = $APP_ICON;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$APP_ICON";
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = 8GTLF376N4;
@@ -637,7 +639,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9C64539A22F45CEF008DCC00 /* dev.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = $APP_ICON;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$APP_ICON";
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = 8GTLF376N4;
@@ -717,7 +719,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9C64539B22F45CEF008DCC00 /* prod.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = $APP_ICON;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$APP_ICON";
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = 8GTLF376N4;
@@ -802,7 +804,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9C64539A22F45CEF008DCC00 /* dev.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = $APP_ICON;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$APP_ICON";
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = 8GTLF376N4;
@@ -888,7 +890,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9C64539B22F45CEF008DCC00 /* prod.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = $APP_ICON;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$APP_ICON";
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = 8GTLF376N4;
@@ -969,7 +971,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9C64539A22F45CEF008DCC00 /* dev.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = $APP_ICON;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "$APP_ICON";
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = 8GTLF376N4;
