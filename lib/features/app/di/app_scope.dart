@@ -34,7 +34,7 @@ class AppScope implements IAppScope {
   final FlutterSecureStorage secureStorage = const FlutterSecureStorage();
 
   @override
-  late final IAuthTokensStorage authTokensStorage = _createAuthTokensStorage();
+  late final IAuthTokensStorage authTokensStorage = AuthTokensStorageSecure(secureStorage);
 
   @override
   Dio get dio => _dio;
@@ -119,10 +119,6 @@ class AppScope implements IAppScope {
 
   Future<void> _onThemeModeChanged() async {
     await _themeModeStorage.saveThemeMode(mode: _themeService.currentThemeMode);
-  }
-
-  IAuthTokensStorage _createAuthTokensStorage() {
-    return AuthTokensStorageSecure(secureStorage);
   }
 }
 
