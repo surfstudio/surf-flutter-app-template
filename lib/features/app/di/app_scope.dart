@@ -9,10 +9,13 @@ import 'package:flutter_template/features/navigation/service/router.dart';
 import 'package:flutter_template/persistence/storage/theme_storage/theme_storage.dart';
 import 'package:flutter_template/persistence/storage/theme_storage/theme_storage_impl.dart';
 import 'package:flutter_template/util/default_error_handler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// Scope of dependencies which need through all app's life.
 class AppScope implements IAppScope {
   static const _themeByDefault = ThemeMode.system;
+
+  final SharedPreferences _sharedPreferences;
 
   late final Dio _dio;
   late final ErrorHandler _errorHandler;
@@ -34,22 +37,26 @@ class AppScope implements IAppScope {
   @override
   IThemeService get themeService => _themeService;
 
+  @override
+  SharedPreferences get sharedPreferences => _sharedPreferences;
+
   late IThemeModeStorage _themeModeStorage;
 
   /// Create an instance [AppScope].
-  AppScope() {
+  AppScope(this._sharedPreferences) {
     /// List interceptor. Fill in as needed.
     final additionalInterceptors = <Interceptor>[];
 
     _dio = _initDio(additionalInterceptors);
     _errorHandler = DefaultErrorHandler();
     _router = AppRouter.instance();
-    _themeModeStorage = ThemeModeStorageImpl();
+    _themeModeStorage = ThemeModeStorageImpl(_sharedPreferences);
   }
 
   @override
   Future<void> initTheme() async {
-    final theme = await ThemeModeStorageImpl().getThemeMode() ?? _themeByDefault;
+    final theme =
+        await ThemeModeStorageImpl(_sharedPreferences).getThemeMode() ?? _themeByDefault;
     _themeService = ThemeServiceImpl(theme);
     _themeService.addListener(_onThemeModeChanged);
   }
@@ -65,7 +72,8 @@ class AppScope implements IAppScope {
       ..receiveTimeout = timeout
       ..sendTimeout = timeout;
 
-    (dio.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate = (client) {
+    (dio.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate =
+        (client) {
       final proxyUrl = Environment.instance().config.proxyUrl;
       if (proxyUrl != null && proxyUrl.isNotEmpty) {
         client
@@ -83,7 +91,8 @@ class AppScope implements IAppScope {
     dio.interceptors.addAll(additionalInterceptors);
 
     if (Environment.instance().isDebug) {
-      dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
+      dio.interceptors
+          .add(LogInterceptor(requestBody: true, responseBody: true));
     }
 
     return dio;
@@ -113,4 +122,7 @@ abstract class IAppScope {
 
   /// Init theme service with theme from storage or default value.
   Future<void> initTheme();
+
+  /// Shared preferences.
+  SharedPreferences get sharedPreferences;
 }

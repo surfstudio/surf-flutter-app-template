@@ -65,7 +65,7 @@ class TempScreenWidgetModel extends WidgetModel<TempScreen, ITempScreenModel>
   bool get _isDebugMode => model.isDebugMode;
 
   /// Create an instance [TempScreenWidgetModel].
-  TempScreenWidgetModel(ITempScreenModel model) : super(model);
+  TempScreenWidgetModel(super._model);
 
   @override
   String appBarTitle(RouteData topRoute) => _appBarTitle(topRoute);

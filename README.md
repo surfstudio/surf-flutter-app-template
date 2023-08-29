@@ -58,6 +58,34 @@ Do the following to initialize a project:
 
 1. Search for flutter_template and replace it with the name of your project where needed.
 2. Initialize FirebaseCrashlytics (you can find that in TODO(init-project)).
+3. Run this command to get up-to-date versions of dependencies:
+   ```sh
+   flutter pub get --enforce-lockfile
+   ```
+
+### FVM
+
+If you have multiple versions of Flutter installed, you can use [FVM](https://fvm.app/).<br>
+You can find installation instructions [here](https://fvm.app/docs/getting_started/installation). <br>
+To switch to the desired Flutter version run:
+```sh
+fvm use <desired_version> # e.g. fvm use 3.10.6
+```
+
+Now you need to configure FVM for your IDE:
+
+#### Configuration for VSCode
+
+Follow the [configuration guide](https://fvm.app/docs/getting_started/configuration/#vs-code)
+or 
+Run the [`fvm_vscode.sh` script](scripts/fvm_vscode.sh):
+```sh
+sh script/fvm_vscode.sh
+```
+
+#### Configuration for AndroidStudio/IDEA
+
+The configuration guide can be found [here](https://fvm.app/docs/getting_started/configuration/#android-studio).
 
 ### Structure
 
@@ -180,6 +208,70 @@ You can easily add assets to your project by following these steps:
    ```
 
 Initially, the project has two groups of assets - [Images](lib/assets/res/images.dart) and [Svg Icons](lib/assets/res/svg_icons.dart). You can change it in spider [configuration file](spider.yaml).
+
+### Testing
+
+#### Goldens
+
+To generate golden tests in the project, the [golden_toolkit](https://pub.dev/packages/golden_toolkit) library has been added.
+
+By opening the file [flutter_test_config.dart](test/flutter_test_config.dart), you can configure the strictness of golden comparisons and the set of devices for which they will be generated.
+
+To save time on writing goldens, you can use the function [testWidget](test/core/utils/test_widget.dart). This function allows you to:
+
+- Test the functionality of a widget (e.g., interactions with elements, element presence, etc.), including for `ElementaryWidget`'s.
+- Generate goldens for both light and dark themes.
+
+**IMPORTANT**: Always specify the generic type of the widget you are testing (e.g.,`testWidget<TestableScreen>`), as the golden's name generation is based on the widget class name.
+
+Example usage:
+```dart
+class MockTestableScreenWM extends Mock implements ITestableScreenWM {}
+
+void main() {
+  final mockData = MockData('test data');
+  final widget = TestableScreen(mockData);
+  final wm = MockTestableScreenWM();
+
+  testWidget<TestableScreen>(
+    'Test screen',
+    widgetBuilder: (_) => widget.build(wm),
+    setup: (theme) {
+      when(() => wm.data).thenReturn(EntityValueNotifier(mockData));
+      when(() => wm.theme).thenReturn(theme);
+      when(wm.onSubmitPressed).thenAnswer((_) => Future.value())
+      when(wm.onCancelPressed).thenReturn(null);
+    },
+    test: (tester, theme) async {
+        final submitButton = find.widgetWithText(PrimaryButton, CommonStrings.submitButton);
+        final cancelButton = find.widgetWithText(SecondaryButton, CommonStrings.cancelButton);
+        
+        expect(submitButton, findsOneWidget);
+        expect(cancelButton, findsOneWidget);
+        expect(finder, findsOneWidget);
+
+        await tester.tap(submitButton);
+        verify(wm.onSubmitPressed);
+
+        await tester.tap(cancelButton);
+        verify(wm.onCancelPressed);
+    },
+  );
+
+  /// Nothing to test, just want to generate the golden.
+  testWidget<TestableScreen>(
+    'Test screen - loading',
+    widgetBuilder: (_) => widget.build(wm),
+    /// Since we are testing a specific widget state, we fill in the [screenState] property.
+    screenState: 'loading',
+    setup: (theme) {
+      when(() => wm.data).thenReturn(EntityValueNotifier.loading());
+      when(() => wm.theme).thenReturn(theme);
+    }
+  );
+}
+```
+
 ### Theming
 
 There are three layers of theme we use in our projects:
@@ -324,7 +416,6 @@ class SomeCustomWidget extends StatelessWidget {
   }
 }
 ```
-
 
 ### Implementation examples
 

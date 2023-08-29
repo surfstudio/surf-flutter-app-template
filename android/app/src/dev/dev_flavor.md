@@ -1,3 +1,3 @@
-# Флейвор для разработки
+# Flavor for development
 
-Сюда поставляются файлы, которые используются в приложениии для разработки. Например, google-services.json.
+Files that are used in the application for development are supplied here. For example, `google-services.json`.

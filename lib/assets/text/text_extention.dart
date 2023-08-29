@@ -65,6 +65,7 @@ class AppTextTheme extends ThemeExtension<AppTextTheme> {
   }
 
   /// @nodoc.
+  @override
   ThemeExtension<AppTextTheme> copyWith({
     TextStyle? regular14,
     TextStyle? regular16,

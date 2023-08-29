@@ -38,10 +38,10 @@ class Environment implements Listenable {
     this._currentBuildType,
     AppConfig config,
     this.firebaseOptions,
-  ) : _config = ValueNotifier(config);
+  ) : _config = ValueNotifier<AppConfig>(config);
 
   /// Provides instance [Environment].
-  factory Environment.instance() => _instance as Environment;
+  factory Environment.instance() => _instance!;
 
   @override
   void addListener(VoidCallback listener) {

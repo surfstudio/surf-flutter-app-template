@@ -14,10 +14,10 @@ class App extends StatefulWidget {
   final AppScope appScope;
 
   /// Create an instance App.
-  const App(this.appScope, {Key? key}) : super(key: key);
+  const App(this.appScope, {super.key});
 
   @override
-  _AppState createState() => _AppState();
+  State<App> createState() => _AppState();
 }
 
 class _AppState extends State<App> {
@@ -31,7 +31,7 @@ class _AppState extends State<App> {
     _scope = widget.appScope..applicationRebuilder = _rebuildApplication;
     _themeService = _scope.themeService;
 
-    final configStorage = ConfigSettingsStorageImpl();
+    final configStorage = ConfigSettingsStorageImpl(_scope.sharedPreferences);
     final environment = Environment.instance();
     if (!environment.isRelease) {
       environment

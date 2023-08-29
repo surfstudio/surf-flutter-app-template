@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 @RoutePage(name: AppRouteNames.uiKitScreen)
 class UiKitScreen extends StatelessWidget {
   /// @nodoc.
-  const UiKitScreen({Key? key}) : super(key: key);
+  const UiKitScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +22,14 @@ class UiKitScreen extends StatelessWidget {
             behavior: HitTestBehavior.opaque,
             onTap: context.read<IAppScope>().themeService.switchTheme,
             child: const Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(8),
               child: Icon(Icons.light_mode_outlined),
             ),
           ),
         ],
       ),
       body: ListView(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16),
         children: [
           TextField(
             style: TextStyle(
@@ -163,7 +163,7 @@ class UiKitScreen extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 16.0),
+          const SizedBox(height: 16),
           const _ColorGrid(),
         ]
             .map((e) => Padding(
@@ -177,7 +177,7 @@ class UiKitScreen extends StatelessWidget {
 }
 
 class _ColorGrid extends StatelessWidget {
-  const _ColorGrid({Key? key}) : super(key: key);
+  const _ColorGrid();
 
   @override
   Widget build(BuildContext context) {
@@ -296,8 +296,7 @@ class _ColorCard extends StatelessWidget {
     required this.color,
     required this.colorName,
     required this.textColor,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -306,7 +305,7 @@ class _ColorCard extends StatelessWidget {
       child: Align(
         alignment: Alignment.bottomCenter,
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8),
           child: ColoredBox(
             color: Colors.white,
             child: Padding(
@@ -316,7 +315,7 @@ class _ColorCard extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   color: Colors.black,
-                  fontSize: 16.0,
+                  fontSize: 16,
                 ),
               ),
             ),

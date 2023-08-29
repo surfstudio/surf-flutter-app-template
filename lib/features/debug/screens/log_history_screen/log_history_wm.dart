@@ -24,7 +24,7 @@ class LogHistoryWm extends WidgetModel<LogHistoryScreen, LogHistoryModel>
   ValueListenable<String> get logHistory => _logsHistory;
 
   /// Create an instance [LogHistoryWm].
-  LogHistoryWm(LogHistoryModel model) : super(model) {
+  LogHistoryWm(super._model) {
     _loadFile();
   }
 

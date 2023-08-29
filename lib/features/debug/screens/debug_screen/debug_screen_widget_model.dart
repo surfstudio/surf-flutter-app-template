@@ -17,7 +17,7 @@ DebugScreenWidgetModel debugScreenWidgetModelFactory(
   BuildContext context,
 ) {
   final appDependencies = context.read<IAppScope>();
-  final configStorage = ConfigSettingsStorageImpl();
+  final configStorage = ConfigSettingsStorageImpl(appDependencies.sharedPreferences);
 
   final model = DebugScreenModel(
     appDependencies.errorHandler,
@@ -62,9 +62,9 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
 
   /// Create an instance [DebugScreenModel].
   DebugScreenWidgetModel(
-    DebugScreenModel model,
+    super._model,
     this.router,
-  ) : super(model);
+  );
 
   @override
   void initWidgetModel() {
