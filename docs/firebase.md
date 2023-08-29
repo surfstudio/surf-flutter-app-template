@@ -1,4 +1,4 @@
-#### Firebase
+# Firebase
 
 To use Firebase in your project, you need to do the following:
 
