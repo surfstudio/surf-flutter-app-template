@@ -4,7 +4,8 @@ import 'package:flutter_template/features/common/utils/analytics/base/analytic_e
 import 'package:flutter_template/features/common/utils/analytics/mock/mock_firebase_analytics.dart';
 
 /// A class for sending analytics data to Firebase
-class FirebaseAnalyticTracker implements AnalyticActionPerformer<AnalyticEvent> {
+class FirebaseAnalyticTracker
+    implements AnalyticActionPerformer<AnalyticEvent> {
   /// The instance of MockFirebaseAnalytics used for sending analytics data.
   final MockFirebaseAnalytics _analytics;
 

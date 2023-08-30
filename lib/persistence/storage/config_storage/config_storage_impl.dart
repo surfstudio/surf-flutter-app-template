@@ -8,7 +8,6 @@ class ConfigSettingsStorageImpl implements IConfigSettingsStorage {
   static const String _proxyKey = 'proxy_url';
   final SharedPreferences _prefs;
 
-
   /// Create an instance [ConfigSettingsStorageImpl].
   ConfigSettingsStorageImpl(this._prefs);
 

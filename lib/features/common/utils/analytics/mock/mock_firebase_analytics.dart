@@ -11,6 +11,7 @@ class MockFirebaseAnalytics {
     required String name,
     Map<String, Object?>? parameters,
   }) {
-    debugPrint('logEvent MockFirebaseAnalytics: name: $name, parameters: $parameters');
+    debugPrint(
+        'logEvent MockFirebaseAnalytics: name: $name, parameters: $parameters');
   }
 }

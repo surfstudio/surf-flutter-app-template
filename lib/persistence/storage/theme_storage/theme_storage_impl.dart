@@ -15,7 +15,7 @@ class ThemeModeStorageImpl implements IThemeModeStorage {
 
   @override
   Future<ThemeMode?> getThemeMode() async {
-    final themeName =_prefs.getString(_themeModeKey);
+    final themeName = _prefs.getString(_themeModeKey);
     if (themeName?.isEmpty ?? true) return null;
     return ThemeMode.values.firstWhereOrNull((e) => e.name == themeName);
   }
