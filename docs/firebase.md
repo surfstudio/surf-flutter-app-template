@@ -1,5 +1,7 @@
 # Firebase
 
+## Configuration
+
 To use Firebase in your project, you need to do the following:
 
 1. If you haven't already, install [Firebase CLI](https://firebase.google.com/docs/cli).
@@ -45,3 +47,13 @@ To use Firebase in your project, you need to do the following:
 
 > [!WARNING]
 > Make sure that you use correct Firebase options for current entry point (e.g. `firebase_options_dev.dart` for `lib/main.dart` and `firebase_options.dart` for `lib/main_release.dart`).
+
+## Readable crash reports in the Crashlytics dashboard
+
+The `flutterfire configure` command will attempt to automatically configure your project to send readable crash reports to Crashlytics.
+
+Unfortunately, there are cases that can result in the project not being fully configured.
+[This guide](https://firebase.google.com/docs/crashlytics/get-deobfuscated-reports?platform=flutter) outlines what the automation does and provides first steps to debug your project setup.
+
+
+
