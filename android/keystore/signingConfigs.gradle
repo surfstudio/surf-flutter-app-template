@@ -1,8 +1,9 @@
-//Информация о подписи приложения
+// Information about the signature of the application
+// https://developer.android.com/studio/publish/app-signing#secure-shared-keystore
 
 android {
     signingConfigs {
-        //todo настроить релизную подпись приложения
+        // TODO: Add your own signing config for the release build.
         release {
             apply from: '../keystore/keystoreConfig.gradle'
 
