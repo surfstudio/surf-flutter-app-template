@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/environment/build_types.dart';
@@ -12,6 +13,9 @@ import 'package:surf_logger/surf_logger.dart' as surf;
 /// Environment configuration.
 class Environment implements Listenable {
   static Environment? _instance;
+
+  /// Firebase options for initialize.
+  final FirebaseOptions? firebaseOptions;
   final BuildType _currentBuildType;
 
   /// Configuration.
@@ -30,8 +34,11 @@ class Environment implements Listenable {
 
   ValueNotifier<AppConfig> _config;
 
-  Environment._(this._currentBuildType, AppConfig config)
-      : _config = ValueNotifier<AppConfig>(config);
+  Environment._(
+    this._currentBuildType,
+    AppConfig config,
+    this.firebaseOptions,
+  ) : _config = ValueNotifier<AppConfig>(config);
 
   /// Provides instance [Environment].
   factory Environment.instance() => _instance!;
@@ -50,8 +57,13 @@ class Environment implements Listenable {
   static void init({
     required BuildType buildType,
     required AppConfig config,
+    FirebaseOptions? firebaseOptions,
   }) {
-    _instance ??= Environment._(buildType, config);
+    _instance ??= Environment._(
+      buildType,
+      config,
+      firebaseOptions,
+    );
   }
 
   /// Update config proxy url from storage.
