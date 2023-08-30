@@ -14,7 +14,7 @@ import '../../flutter_test_config.dart';
 import '../../mocks/base_widget_test_wrapper.dart';
 import 'testing_theme.dart';
 
-typedef TestFunctionWithTheme = Future Function(WidgetTester, ThemeData);
+typedef TestFunctionWithTheme = Future<dynamic> Function(WidgetTester, ThemeData);
 
 /// Performs testing of the widget of type [T].
 ///
