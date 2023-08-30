@@ -11,18 +11,19 @@ Do the following to initialize a project:
 
 1. Specify the name of the application [here](#application-name).
 2. Search for `flutter_template` and replace it with the name of your project where needed.
-3. Initialize `FirebaseCrashlytics` (you can find that in `TODO(init-project)`).
-4. Install a needed Flutter version with FVM using the command:
+3. Configure Firebase with the guide [here](docs/firebase.md).
+4. Initialize `FirebaseCrashlytics` (you can find that in `TODO(init-project)`).
+5. Install a needed Flutter version with FVM using the command:
     ```sh
     fvm use <flutter_version>
     ```
     If FVM is not installed, check [FVM workflow](#fvm-workflow).
-5. Specify the Flutter version used in the project [here](#flutter-and-dart-fvm-versions-of-the-project).
-6. Run this command to get up-to-date versions of dependencies:
+6. Specify the Flutter version used in the project [here](#flutter-and-dart-fvm-versions-of-the-project).
+7. Run this command to get up-to-date versions of dependencies:
     ```sh
     fvm flutter pub get --enforce-lockfile
     ```
-7. Setup labels for issues and pull requests in the repository settings according to the [list](docs/workflow_in_repository.md#list-of-labels-for-pr-and-issues).
+8. Setup labels for issues and pull requests in the repository settings according to the [list](docs/workflow_in_repository.md#list-of-labels-for-pr-and-issues).
 
 ## Workflow in the template repository
 
@@ -46,7 +47,18 @@ The rules for branches, commits, and pull requests are the same as for a project
 > - briefly, what technologies are used (BLoC, Riverpod, something specific, etc.)
 > - link to Confluence space with all project documentation
 
+### Settings
+
+Project line length: 80 characters.
+
 ## Flutter Version Management (FVM)
+
+### Flutter and Dart FVM versions of the project
+
+> [!IMPORTANT]
+> Change Flutter and Dart versions below and delete this alert.
+
+Flutter: ***3.13*** / Dart SDK: ***3.1***
 
 ### FVM workflow
 
@@ -64,13 +76,6 @@ sh script/fvm_vscode.sh
 ```
 
 You need to use `fvm flutter ...` everywhere instead of just `flutter ...` when working with the project.
-
-### Flutter and Dart FVM versions of the project
-
-> [!IMPORTANT]
-> Change Flutter and Dart versions below and delete this alert.
-
-Flutter: ***3.13*** / Dart SDK: ***3.1***
 
 ## Code generation
 
@@ -150,7 +155,9 @@ The guide to adding flavors can be found [here](docs/flavors.md).
 > 
 > Delete this alert, but don't delete this section.
 
-### Certs and secrets
+### App Signature, Certs and secrets
+
+Android Application Signature guide can be found [here](docs/sign_app_rules_android.md).
 
 iOS certs and profiles should be saved here: `ios/certs`.
 
