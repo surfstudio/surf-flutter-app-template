@@ -11,7 +11,7 @@ Do the following to initialize a project:
 
 1. Specify the name of the application [here](#application-name).
 2. Search for `flutter_template` and replace it with the name of your project where needed.
-3. Configure Firebase with the guide [here](docs/firebase.md).
+3. Configure Firebase with the [guide](docs/firebase.md).
 4. Initialize `FirebaseCrashlytics` (you can find that in `TODO(init-project)`).
 5. Install a needed Flutter version with FVM using the command:
     ```sh
