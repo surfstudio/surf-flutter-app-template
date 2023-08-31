@@ -56,7 +56,8 @@ class AppScope implements IAppScope {
   @override
   Future<void> initTheme() async {
     final theme =
-        await ThemeModeStorageImpl(_sharedPreferences).getThemeMode() ?? _themeByDefault;
+        await ThemeModeStorageImpl(_sharedPreferences).getThemeMode() ??
+            _themeByDefault;
     _themeService = ThemeServiceImpl(theme);
     _themeService.addListener(_onThemeModeChanged);
   }
