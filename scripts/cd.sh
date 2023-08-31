@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+if [ "$(basename "$PWD")" = 'scripts' ]; then cd ..; fi
 
 while [[ $# -gt 0 ]]
 do
