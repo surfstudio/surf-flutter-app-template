@@ -28,19 +28,19 @@ if [[ -z "$TAG" ]]; then
   exit 1
 fi
 
-# Определение цветов для вывода в консоль
-GREEN_COLOR=$(tput setaf 2)  # Зеленый цвет
-RED_COLOR=$(tput setaf 1)  # Красный цвет
-RESET_COLOR=$(tput sgr0)  # Сброс цвета
+# Defining colors for console output
+GREEN_COLOR=$(tput setaf 2)  # Green color
+RED_COLOR=$(tput setaf 1)  # Red color
+RESET_COLOR=$(tput sgr0)  # Reset color
 
 echo "Stage: ${GREEN_COLOR}Git pull${RESET_COLOR}"
-# Выполняем pull, чтобы получить последние изменения
+# Perform a pull to fetch the latest changes.
 echo "Pulling the latest changes from Git..."
 git pull
 echo "Git pull completed successfully."
 
 echo "Stage: ${GREEN_COLOR}Parse tag${RESET_COLOR}"
-# Парсинг тега, чтобы получить версию, номер сборки, окружение и проект
+# Parsing a tag to obtain version, build number, environment, and project.
 if [[ $TAG =~ ^([0-9]+\.[0-9]+\.[0-9]+)-?([a-zA-Z]+)?\+?([0-9]+)?-?([a-zA-Z]+)?$ ]]; then
   version=${BASH_REMATCH[1]}
   env=${BASH_REMATCH[2]}
@@ -56,12 +56,12 @@ else
 fi
 
 echo "Stage: ${GREEN_COLOR}Calculate and update version${RESET_COLOR}"
-# Обновляем версию в файле pubspec.yaml
+# Updating the version in the pubspec.yaml file.
 oldVersion=$(grep 'version:' pubspec.yaml)
 sed -i.bak "s/$oldVersion/version: $TAG/g" pubspec.yaml
 
 echo "Stage: ${GREEN_COLOR}Tag create${RESET_COLOR}"
-# Удаляем локальные теги, которые отсутствуют в удаленном репозитории
+# Deleting local tags that are not present in the remote repository.
 remoteList=$(git ls-remote --tags origin)
 localList=$(git tag)
 
@@ -73,7 +73,7 @@ done
 
 git fetch --tags
 
-# Создаем новый тег с изменениями из последнего коммита и пушим его в удаленный репозиторий
+# Creating a new tag with changes from the latest commit and pushing it to the remote repository.
 CHANGELOG=$(git log --pretty=format:'%h %s (%an)' $(git describe --tags --abbrev=0)..HEAD)
 git tag -a "$TAG" -m "$CHANGELOG"
 git push origin "$TAG"
@@ -83,12 +83,12 @@ echo $CHANGELOG
 export CHANGELOG="$CHANGELOG"
 
 echo "Stage: ${GREEN_COLOR}Build and deploy${RESET_COLOR}"
-# В этом блоке происходит сборка и развертывание проекта для Android и iOS
+# In this block, the project is built and deployed for Android and iOS.
 fvm flutter pub run surf_flutter_ci_cd full --env=$env --proj=$project --target=android --deploy-to=fb || { echo "${RED_COLOR}Failed to build or deploy android${RESET_COLOR}"; exit 1; }
 fvm flutter pub run surf_flutter_ci_cd full --env=$env --proj=$project --target=ios --deploy-to=tf || { echo "${RED_COLOR}Failed to build or deploy ios{RESET_COLOR}"; exit 1; }
 
 echo "Stage: ${GREEN_COLOR}Update pubspec.yaml${RESET_COLOR}"
-# Если команды выполнены успешно, то делаем коммит и пушим изменения версии
+# If the commands are executed successfully, then commit and push the version changes.
 git add pubspec.yaml
 git commit -m "Bump version"
 git push
