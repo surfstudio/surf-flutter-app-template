@@ -9,10 +9,6 @@ It starts before the first start. Does:
 - flutter pub run build_runner
 - dart format -l 100 .
 
-## cd.sh
-
-Updates the version in pubspec.yaml by git tag and builds and deploys the application.
-
 ## clean_ios.sh
 
 Clears local dependencies for iOS.
