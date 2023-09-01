@@ -13,7 +13,7 @@ do
     firstLine=$(awk 'NR==1' $currentFile)
     if grep -v "part"<<<"$firstLine"; then
         # If current file is not a part of another then add import of the file to helper
-        echo $currentFile | cut -c4- | awk -v package=$1 '{ printf "import '\''package:tagme%s%s'\'';\n", package, $1}'>>$file
+        echo $currentFile | cut -c4- | awk -v package=$1 '{ printf "import '\''package:flutter_template%s%s'\'';\n", package, $1}'>>$file
     fi
 done
 echo "// ignore: no-empty-block">>$file
