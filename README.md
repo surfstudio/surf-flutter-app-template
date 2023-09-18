@@ -19,11 +19,7 @@ Do the following to initialize a project:
     ```
     If FVM is not installed, check [FVM workflow](#fvm-workflow).
 6. Specify the Flutter version used in the project [here](#flutter-and-dart-fvm-versions-of-the-project).
-7. Run this command to get up-to-date versions of dependencies:
-    ```sh
-    fvm flutter pub get --enforce-lockfile
-    ```
-8. Setup labels for issues and pull requests in the repository settings according to the [list](docs/workflow_in_repository.md#list-of-labels-for-pr-and-issues).
+7. Setup labels for issues and pull requests in the repository settings according to the [list](docs/workflow_in_repository.md#list-of-labels-for-pr-and-issues).
 
 ## Workflow in the template repository
 
@@ -50,6 +46,13 @@ The rules for branches, commits, and pull requests are the same as for a project
 ### Settings
 
 Project line length: 80 characters.
+
+### Dependencies
+
+Run this command to get up-to-date versions of dependencies:
+```sh
+fvm flutter pub get --enforce-lockfile
+```
 
 ## Flutter Version Management (FVM)
 
@@ -159,17 +162,7 @@ The guide to adding flavors can be found [here](docs/flavors.md).
 
 Android Application Signature guide can be found [here](docs/sign_app_rules_android.md).
 
-iOS certs and profiles should be saved here: `ios/certs`.
-
-> [!WARNING]
-> DO NOT STORE CERTIFICATES IN THE PROJECT REPOSITORY.
-
-### CI/CD
-
-> [!NOTE]
-> Add here CI/CD information or skip this section.
-> 
-> Delete this alert, but don't delete this section.
+iOS certs and profiles should be saved here: `ios/certs`. But don't store them in the project repository!
 
 ## Problems and possible solutions
 

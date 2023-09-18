@@ -6,8 +6,8 @@ To do this, follow these steps:
 
 - Create a keystore.
 - Set up the required Gradle tasks.
-- Upload the keystore to Jenkins.
-- Configure Continuous Integration (CI) in the project.
+- Upload the keystore to your continuous integration/continuous delivery and deployment (CI/CD) automation software tool.
+- Configure CI/CD in the project.
 
 ## Creating a Keystore
 
