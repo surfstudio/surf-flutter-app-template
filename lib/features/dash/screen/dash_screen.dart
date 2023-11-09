@@ -29,6 +29,8 @@ class DashScreen extends ElementaryWidget<IDashScreenWidgetModel> {
           ),
           const SizedBox(height: 16),
           const _LocalizationExamples(),
+          const SizedBox(height: 46),
+          _AnalyticsExample(trackAnalyticsExample: wm.trackAnalyticsExample),
         ],
       ),
     );
@@ -52,6 +54,22 @@ class _LocalizationExamples extends StatelessWidget {
         Text(context.l10n.thingsWithCount(1)),
         Text(context.l10n.date(DateTime.now())),
       ],
+    );
+  }
+}
+
+class _AnalyticsExample extends StatelessWidget {
+  final VoidCallback trackAnalyticsExample;
+
+  const _AnalyticsExample({
+    required this.trackAnalyticsExample,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return FilledButton(
+      onPressed: trackAnalyticsExample,
+      child: const Text('Track analytics example'),
     );
   }
 }
