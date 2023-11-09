@@ -1,8 +1,8 @@
-### SharedPreferences
+# SharedPreferences
 
 SharedPreferences is a simple way to store and retrieve small data, such as settings, states, or user preferences.
 
-Using as a Dependency
+## Using as a Dependency
 
 For clearer and more predictable dependency management, pass the SharedPreferences instance through constructors
 of classes or repositories. Here's an example of how you can do this:
@@ -36,7 +36,7 @@ final appDependencies = context.read<IAppScope>();
 final firstRunStorage = FirstRunStorageImpl(appDependencies.sharedPreferences);
 ```
 
-Write data
+## Write data
 
 ```dart
 // Obtain shared preferences.
@@ -54,7 +54,7 @@ await prefs.setString('action', 'Start');
 await prefs.setStringList('items', <String>['Earth', 'Moon', 'Sun']);
 ```
 
-Read data
+## Read data
 
 ```dart
 // Try reading data from the 'counter' key. If it doesn't exist, returns null.
@@ -69,7 +69,7 @@ final String? action = prefs.getString('action');
 final List<String>? items = prefs.getStringList('items');
 ```
 
-Remove an entry
+## Remove an entry
 
 ```dart
 // Remove data for the 'counter' key.
