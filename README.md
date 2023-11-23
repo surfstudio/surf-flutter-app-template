@@ -75,7 +75,7 @@ fvm install
 
 For VSCode IDE you can also run the script [`fvm_vscode.sh`](scripts/fvm_vscode.sh):
 ```sh
-sh script/fvm_vscode.sh
+sh scripts/fvm_vscode.sh
 ```
 
 You need to use `fvm flutter ...` everywhere instead of just `flutter ...` when working with the project.
