@@ -1,0 +1,14 @@
+name: screen
+description: Template for creating a screen
+
+version: 0.1.0+1
+
+environment:
+  mason: ">=0.1.0-dev.51 <0.1.0"
+
+vars:
+  name:
+    type: string
+    description: Screen name
+    prompt: Enter name of screen
+    default: Example
