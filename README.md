@@ -126,14 +126,10 @@ In order for templates to be used, they need to be obtained from [mason.yaml](ma
 mason get
 ```
 
-To generate code based on the [feature](settings/bricks/feature) template, you need to open a terminal in the [features] folder(lib/features) and run the following command:
-```sh
-mason make feature
-```
+In order to generate code based on a template, you need to open a terminal in the [features](lib/features) folder and run the following command:
 
-To generate code based on the [screen](settings/bricks/screen) template, you need to open a terminal in the screens folder of the feature for which you want to generate a screen and run the following command:
 ```sh
-mason make screen
+mason make TEMPLATE_NAME # substitute a template instead of TEMPLATE_NAME, for example feature
 ```
 
 ## Requirements for running the app
