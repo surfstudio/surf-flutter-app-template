@@ -36,7 +36,7 @@ Future<void> run() async {
 Future<void> _runApp() async {
   final scopeRegister = AppScopeRegister();
   final scope = await scopeRegister.createScope();
-  await scope.initTheme();
+  await scope.init();
   runApp(App(scope));
 }
 
