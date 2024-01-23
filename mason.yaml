@@ -1,0 +1,8 @@
+# Register bricks which can be consumed via the Mason CLI.
+# Run "mason get" to install all registered bricks.
+# To learn more, visit https://docs.brickhub.dev.
+bricks:
+  feature:
+    path: tools/bricks/feature
+  screen:
+    path: tools/bricks/screen
