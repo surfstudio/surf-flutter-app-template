@@ -80,5 +80,8 @@
 .fvm/flutter_sdk
 
 # Mason
+# Mason
 mason-lock.json
 .mason
+tools/bricks/**/hooks/build
+tools/bricks/**/*.dill
