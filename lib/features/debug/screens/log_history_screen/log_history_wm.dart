@@ -16,8 +16,7 @@ abstract class ILogHistoryWm extends IWidgetModel {
 }
 
 /// Widget model for [LogHistoryScreen].
-class LogHistoryWm extends WidgetModel<LogHistoryScreen, LogHistoryModel>
-    implements ILogHistoryWm {
+class LogHistoryWm extends WidgetModel<LogHistoryScreen, LogHistoryModel> implements ILogHistoryWm {
   final _logsHistory = ValueNotifier('');
 
   @override

@@ -46,8 +46,7 @@ class DashScreenWidgetModel extends WidgetModel<DashScreen, DashScreenModel>
 }
 
 /// Interface of [IDashScreenWidgetModel].
-abstract class IDashScreenWidgetModel extends IWidgetModel
-    with ThemeIModelMixin {
+abstract class IDashScreenWidgetModel extends IWidgetModel with ThemeIModelMixin {
   /// Localization strings.
   AppLocalizations get l10n;
 

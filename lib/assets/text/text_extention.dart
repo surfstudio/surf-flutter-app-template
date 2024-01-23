@@ -60,8 +60,7 @@ class AppTextTheme extends ThemeExtension<AppTextTheme> {
 
   /// Return text theme for app from context.
   static AppTextTheme of(BuildContext context) {
-    return Theme.of(context).extension<AppTextTheme>() ??
-        _throwThemeExceptionFromFunc(context);
+    return Theme.of(context).extension<AppTextTheme>() ?? _throwThemeExceptionFromFunc(context);
   }
 
   /// @nodoc.
