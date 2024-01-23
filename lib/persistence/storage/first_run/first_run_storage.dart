@@ -1,8 +1,31 @@
-/// Repository interface for working with first app status
-abstract class IFirstRunStorage {
-  /// Returns is it first app run
-  bool getIsFirstRun();
+import 'package:flutter_template/persistence/storage/first_run/i_first_run_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-  /// Save first run app
-  Future<void> setIsFirstRun({required bool value});
+/// Repository for working with first app status
+class FirstRunStorage implements IFirstRunStorage {
+  final SharedPreferences _prefs;
+
+  /// Create an instance [FirstRunStorage]
+  const FirstRunStorage(this._prefs);
+
+  @override
+  bool getIsFirstRun() {
+    return _prefs.getBool(FirstRunStorageKeys.firstRun.keyName) ?? true;
+  }
+
+  @override
+  Future<void> setIsFirstRun({required bool value}) async {
+    await _prefs.setBool(FirstRunStorageKeys.firstRun.keyName, value);
+  }
+}
+
+/// Ключи для [FirstRunStorage]
+enum FirstRunStorageKeys {
+  /// @nodoc
+  firstRun('first_run');
+
+  /// Название ключа
+  final String keyName;
+
+  const FirstRunStorageKeys(this.keyName);
 }
