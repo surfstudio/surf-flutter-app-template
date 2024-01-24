@@ -126,7 +126,7 @@ In order for templates to be used, they need to be obtained from [mason.yaml](ma
 mason get
 ```
 
-In order to generate code based on a template, you need to open a terminal in the [features](lib/features) folder and run the following command:
+To generate code based on a template, you need to run the following command:
 
 ```sh
 mason make TEMPLATE_NAME # insert the template 'feature' or 'screen' instead of TEMPLATE_NAME
