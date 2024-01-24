@@ -10,7 +10,7 @@ Welcome to the Surf Flutter Team's project template – your springboard for lau
 - 🏗️ **Project Structure:** Adopt the tried-and-true structure we use across our projects, providing clarity and consistency.
 - 📚 **Basic Documentation:** Understand our project structure with the included basic documentation, making onboarding smooth and straightforward.
 - 🔄 **FVM Integration:** Enjoy seamless Flutter version management with Flutter Version Management (FVM) already integrated.
-- 🍦 **Pre-Configured Flavors:** We've set up basic flavors for your project – QA, Production, and Development – to streamline your workflow.
+- 🍦 **Pre-Configured Flavors:** We've set up basic flavors for your project – Production, and Development – to streamline your workflow.
 - 🎨 **App Icon & Splash Screen Setup:** Dive right in with pre-configured app icons and splash screens, enhancing the user experience from the start.
 - 🌍 **Localization Setup:** Reach a global audience with our ready-to-use localization setup.
 - 📦 **Default Libraries:** Benefit from a suite of libraries that we regularly use, included by default for your convenience.
