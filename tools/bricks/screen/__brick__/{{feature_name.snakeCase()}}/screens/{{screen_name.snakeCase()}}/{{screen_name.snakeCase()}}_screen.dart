@@ -3,7 +3,7 @@ import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/features/{{feature_name.snakeCase()}}/screens/{{screen_name.snakeCase()}}/{{screen_name.snakeCase()}}_wm.dart';
 
-/// {{screen_name.pascalCase()}}Screen
+///[{{screen_name.pascalCase()}}Screen]
 @RoutePage()
 class {{screen_name.pascalCase()}}Screen extends ElementaryWidget<I{{screen_name.pascalCase()}}WM> {
   /// Create an instance [{{screen_name.pascalCase()}}Screen]

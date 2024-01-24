@@ -4,7 +4,6 @@ import 'package:flutter_template/features/{{feature_name.snakeCase()}}/service/i
 
 /// [ElementaryModel] for [{{screen_name.pascalCase()}}Screen]
 final class {{screen_name.pascalCase()}}Model extends ElementaryModel {
-
   final I{{feature_name.pascalCase()}}Service _service;
 
   /// Create an instance of [{{screen_name.pascalCase()}}Model]
