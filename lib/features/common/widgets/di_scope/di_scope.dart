@@ -13,10 +13,14 @@ class DiScope<T> extends StatefulWidget {
   /// The widget below this widget in the tree.
   final Widget child;
 
+  /// The method called when disposing the widget.
+  final Function(T)? dispose;
+
   /// Create an instance [DiScope].
   const DiScope({
     required this.factory,
     required this.child,
+    this.dispose,
     super.key,
   });
 
@@ -31,6 +35,12 @@ class _DiScopeState<T> extends State<DiScope<T>> {
   void initState() {
     super.initState();
     scope = widget.factory();
+  }
+
+  @override
+  void dispose() {
+    widget.dispose?.call(scope);
+    super.dispose();
   }
 
   @override
