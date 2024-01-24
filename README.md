@@ -105,7 +105,7 @@ Spider configuration file is located [here](spider.yaml).
 >
 > Delete this alert after initialization of the template.
 
-## Mason
+### Mason
 
 The project uses [mason](https://pub.dev/packages/mason) to generate code based on templates.
 To install [mason](https://pub.dev/packages/mason) you need to run the command:
@@ -129,7 +129,7 @@ mason get
 In order to generate code based on a template, you need to open a terminal in the [features](lib/features) folder and run the following command:
 
 ```sh
-mason make TEMPLATE_NAME # substitute a template instead of TEMPLATE_NAME, for example feature
+mason make TEMPLATE_NAME # insert the template 'feature' or 'screen' instead of TEMPLATE_NAME
 ```
 
 ## Requirements for running the app
