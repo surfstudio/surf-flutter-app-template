@@ -1,4 +1,5 @@
 import 'package:elementary/elementary.dart';
+import 'package:elementary_helper/elementary_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/config/urls.dart';
@@ -17,8 +18,7 @@ DebugScreenWidgetModel debugScreenWidgetModelFactory(
   BuildContext context,
 ) {
   final appDependencies = context.read<IAppScope>();
-  final configStorage =
-      ConfigSettingsStorageImpl(appDependencies.sharedPreferences);
+  final configStorage = ConfigSettingsStorageImpl(appDependencies.sharedPreferences);
 
   final model = DebugScreenModel(
     appDependencies.errorHandler,
@@ -156,7 +156,7 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
 }
 
 /// Interface of [DebugScreenWidgetModel].
-abstract class IDebugScreenWidgetModel extends IWidgetModel {
+abstract class IDebugScreenWidgetModel implements IWidgetModel {
   /// Text Editing Controller.
   TextEditingController get proxyEditingController;
 
