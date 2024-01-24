@@ -16,8 +16,7 @@ class MockErrorHandler extends Mock implements ErrorHandler {}
 
 class MockEnvironment extends Mock implements Environment {}
 
-class MockConfigSettingsStorage extends Mock
-    implements IConfigSettingsStorage {}
+class MockConfigSettingsStorage extends Mock implements IConfigSettingsStorage {}
 
 class MockThemeService extends Mock implements IThemeService {}
 
