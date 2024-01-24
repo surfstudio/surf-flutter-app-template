@@ -44,9 +44,7 @@ class BaseWidgetTestWrapper extends StatelessWidget {
     intl.Intl.systemLocale = 'ru';
     initializeDateFormatting();
     return materialAppWrapper(
-      theme: mode == ThemeType.dark
-          ? AppThemeData.darkTheme
-          : AppThemeData.lightTheme,
+      theme: mode == ThemeType.dark ? AppThemeData.darkTheme : AppThemeData.lightTheme,
       localizations: AppLocalizations.localizationsDelegates,
       localeOverrides: AppLocalizations.supportedLocales,
     )(
@@ -57,9 +55,8 @@ class BaseWidgetTestWrapper extends StatelessWidget {
           providers: [
             Provider<IAppScope>(create: (_) => appScopeMock),
             Provider<AppColorScheme>(
-              create: (_) => mode == ThemeType.dark
-                  ? AppColorScheme.dark()
-                  : AppColorScheme.light(),
+              create: (_) =>
+                  mode == ThemeType.dark ? AppColorScheme.dark() : AppColorScheme.light(),
             ),
           ],
           child: Directionality(

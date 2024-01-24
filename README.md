@@ -61,7 +61,7 @@ fvm flutter pub get --enforce-lockfile
 > [!IMPORTANT]
 > Change Flutter and Dart versions below and delete this alert.
 
-Flutter: ***3.13*** / Dart SDK: ***3.1***
+Flutter: ***3.16.8*** / Dart SDK: ***3.2.5***
 
 ### FVM workflow
 

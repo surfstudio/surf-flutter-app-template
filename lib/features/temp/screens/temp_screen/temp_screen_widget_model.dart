@@ -88,7 +88,7 @@ class TempScreenWidgetModel extends WidgetModel<TempScreen, ITempScreenModel>
 }
 
 /// Interface of [TempScreenWidgetModel].
-abstract class IDebugWidgetModel extends IWidgetModel with ThemeIModelMixin {
+abstract class IDebugWidgetModel with ThemeIModelMixin implements IWidgetModel {
   /// Routes for [AutoTabsRouter.tabBar].
   List<PageRouteInfo<dynamic>> get routes;
 

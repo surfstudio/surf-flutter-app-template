@@ -14,8 +14,7 @@ import '../../flutter_test_config.dart';
 import '../../mocks/base_widget_test_wrapper.dart';
 import 'testing_theme.dart';
 
-typedef TestFunctionWithTheme = Future<dynamic> Function(
-    WidgetTester, ThemeData);
+typedef TestFunctionWithTheme = Future<dynamic> Function(WidgetTester, ThemeData);
 
 /// Performs testing of the widget of type [T].
 ///
@@ -56,8 +55,7 @@ void testWidget<T extends Widget>({
         final List<TestingTheme> themesForTest;
 
         // If the theme is not important for the test, the first one from the list will be used.
-        themesForTest =
-            onlyOneTheme ? [themesForTesting.first] : themesForTesting;
+        themesForTest = onlyOneTheme ? [themesForTesting.first] : themesForTesting;
 
         /// Iterate over each theme.
         for (final theme in themesForTest) {
