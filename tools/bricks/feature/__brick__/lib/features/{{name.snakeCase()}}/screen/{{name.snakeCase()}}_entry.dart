@@ -17,6 +17,7 @@ class {{name.pascalCase()}}Entry extends StatelessWidget implements AutoRouteWra
 
     return DiScope<I{{name.pascalCase()}}Scope>(
       factory: () => {{name.pascalCase()}}Scope(repository: repository),
+      dispose: (scope) => scope.dispose(),
       child: this,
     );
   }
