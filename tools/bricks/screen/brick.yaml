@@ -16,5 +16,4 @@ vars:
     type: string
     description: Screen name
     prompt: Enter name of screen
-    default: Example
-    
+    default: Example\n

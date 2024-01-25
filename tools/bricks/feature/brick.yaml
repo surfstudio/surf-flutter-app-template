@@ -11,5 +11,4 @@ vars:
     type: string
     description: Name of feature
     prompt: Enter name of feature
-    default: Example
-    
+    default: Example\n
