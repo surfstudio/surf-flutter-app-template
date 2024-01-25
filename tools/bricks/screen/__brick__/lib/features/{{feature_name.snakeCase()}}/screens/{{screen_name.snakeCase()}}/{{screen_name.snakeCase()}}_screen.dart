@@ -3,10 +3,13 @@ import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/features/{{feature_name.snakeCase()}}/screens/{{screen_name.snakeCase()}}/{{screen_name.snakeCase()}}_wm.dart';
 
-///[{{screen_name.pascalCase()}}Screen]
+
+/// {@template {{screen_name.snakeCase()}}_screen.class}
+/// [{{screen_name.pascalCase()}}Screen]
+/// {@endtemplate}
 @RoutePage()
 class {{screen_name.pascalCase()}}Screen extends ElementaryWidget<I{{screen_name.pascalCase()}}WM> {
-  /// Create an instance [{{screen_name.pascalCase()}}Screen]
+  /// {@macro {{screen_name.snakeCase()}}_screen.class}
   const {{screen_name.pascalCase()}}Screen ({
     super.key,
     WidgetModelFactory wmFactory = default{{screen_name.pascalCase()}}WMFactory,

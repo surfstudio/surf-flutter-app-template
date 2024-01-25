@@ -10,11 +10,13 @@ abstract interface class I{{name.pascalCase()}}Scope implements IDisposableObjec
   I{{name.pascalCase()}}Service get service;
 }
 
+/// {@template {{name.snakeCase()}}_scope.class}
 /// Implementation of [I{{name.pascalCase()}}Scope]
+/// {@endtemplate}
 final class {{name.pascalCase()}}Scope extends DisposableObject implements I{{name.pascalCase()}}Scope {
   @override
   late final I{{name.pascalCase()}}Service service;
 
-  /// Create an instance of [{{name.pascalCase()}}Scope]
+  /// {@macro {{name.snakeCase()}}_scope.class}
   {{name.pascalCase()}}Scope({required I{{name.pascalCase()}}Repository repository}) : service = {{name.pascalCase()}}Service(repository: repository);
 }

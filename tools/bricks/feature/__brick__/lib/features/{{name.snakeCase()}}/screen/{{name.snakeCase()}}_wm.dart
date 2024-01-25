@@ -16,9 +16,11 @@ import 'package:provider/provider.dart';
 /// Interface for [{{name.pascalCase()}}WM]
 abstract interface class I{{name.pascalCase()}}WM with ThemeIModelMixin implements IWidgetModel {}
 
+/// {@template {{name.snakeCase()}}_wm.class}
 /// [WidgetModel] for [{{name.pascalCase()}}Screen]
+/// {@endtemplate}
 final class {{name.pascalCase()}}WM extends WidgetModel<{{name.pascalCase()}}Screen, {{name.pascalCase()}}Model> with ThemeWMMixin implements I{{name.pascalCase()}}WM {
 
-  /// Create an instance [{{name.pascalCase()}}WM]
+  /// {@macro {{name.snakeCase()}}_wm.class}
   {{name.pascalCase()}}WM(super._model);
 }

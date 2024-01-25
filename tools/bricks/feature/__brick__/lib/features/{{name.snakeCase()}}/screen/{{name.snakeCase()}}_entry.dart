@@ -5,10 +5,12 @@ import 'package:flutter_template/features/{{name.snakeCase()}}/di/{{name.snakeCa
 import 'package:flutter_template/features/{{name.snakeCase()}}/domain/repository/{{name.snakeCase()}}_repository.dart';
 import 'package:flutter_template/features/{{name.snakeCase()}}/screen/{{name.snakeCase()}}_screen.dart';
 
+/// {@template {{name.snakeCase()}}_entry.class}
 /// Entry point to feature {{name.PascalCase()}}
+/// {@endtemplate}
 @RoutePage()
 class {{name.pascalCase()}}Entry extends StatelessWidget implements AutoRouteWrapper {
-  /// Create an instance [{{name.pascalCase()}}Entry]
+  /// {@macro {{name.snakeCase()}}_entry.class}
   const {{name.pascalCase()}}Entry({super.key});
 
   @override
