@@ -1,5 +1,5 @@
 import 'package:elementary/elementary.dart';
-import 'package:elementary_helper/elementary_helper.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/config/urls.dart';
@@ -18,7 +18,8 @@ DebugScreenWidgetModel debugScreenWidgetModelFactory(
   BuildContext context,
 ) {
   final appDependencies = context.read<IAppScope>();
-  final configStorage = ConfigSettingsStorageImpl(appDependencies.sharedPreferences);
+  final configStorage =
+      ConfigSettingsStorageImpl(appDependencies.sharedPreferences);
 
   final model = DebugScreenModel(
     appDependencies.errorHandler,
@@ -43,17 +44,17 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
   late final _textEditingController = TextEditingController(
     text: model.proxyUrl,
   );
-  final _urlState = StateNotifier<UrlType>();
-  final _themeState = StateNotifier<ThemeMode>();
+  late final ValueNotifier<UrlType> _urlState;
+  late final ValueNotifier<ThemeMode> _themeState;
 
   @override
   TextEditingController get proxyEditingController => _textEditingController;
 
   @override
-  ListenableState<UrlType> get urlState => _urlState;
+  ValueListenable<UrlType> get urlState => _urlState;
 
   @override
-  ListenableState<ThemeMode> get themeState => _themeState;
+  ValueListenable<ThemeMode> get themeState => _themeState;
 
   /// Current value url.
   late String _currentUrl;
@@ -70,9 +71,12 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
   @override
   void initWidgetModel() {
     super.initWidgetModel();
+    _urlState = ValueNotifier<UrlType>(
+      _resolveUrlType(model.configNotifier.value.url),
+    );
+    _themeState = ValueNotifier<ThemeMode>(model.currentThemeMode.value);
     model.configNotifier.addListener(_updateAppConfig);
     model.currentThemeMode.addListener(_updateThemeMode);
-    _themeState.accept(model.currentThemeMode.value);
   }
 
   @override
@@ -87,7 +91,10 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
   }
 
   @override
-  void urlChange(UrlType? urlType) => _urlState.accept(urlType);
+  void urlChange(UrlType? urlType) {
+    if (urlType == null) return;
+    _urlState.value = urlType;
+  }
 
   @override
   void switchServer(UrlType urlType) {
@@ -123,16 +130,9 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
     final config = model.configNotifier.value;
 
     _currentUrl = config.url;
+    _urlState.value = _resolveUrlType(_currentUrl);
+
     _proxyUrl = config.proxyUrl;
-
-    if (_currentUrl == Url.testUrl) {
-      _urlState.accept(UrlType.test);
-    } else if (_currentUrl == Url.prodUrl) {
-      _urlState.accept(UrlType.prod);
-    } else {
-      _urlState.accept(UrlType.dev);
-    }
-
     if (_proxyUrl != null && _proxyUrl!.isNotEmpty) {
       proxyEditingController
         ..text = _proxyUrl!
@@ -145,13 +145,19 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
   }
 
   void _updateThemeMode() {
-    _themeState.accept(model.currentThemeMode.value);
+    _themeState.value = model.currentThemeMode.value;
   }
 
   void _saveExampleLog() {
     final error = Exception('Some exception');
     final st = StackTrace.fromString('stackTraceString');
     Logger.e(st.toString(), error);
+  }
+
+  UrlType _resolveUrlType(String currentUrl) {
+    if (currentUrl == Url.testUrl) return UrlType.test;
+    if (currentUrl == Url.prodUrl) return UrlType.prod;
+    return UrlType.dev;
   }
 }
 
@@ -161,10 +167,10 @@ abstract class IDebugScreenWidgetModel implements IWidgetModel {
   TextEditingController get proxyEditingController;
 
   /// Listener current state [UrlType].
-  ListenableState<UrlType> get urlState;
+  ValueListenable<UrlType> get urlState;
 
   /// Listener current state [ThemeMode].
-  ListenableState<ThemeMode> get themeState;
+  ValueListenable<ThemeMode> get themeState;
 
   /// Method to close the debug screens.
   void closeScreen() {}

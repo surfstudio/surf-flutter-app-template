@@ -9,7 +9,6 @@ dependencies:
   collection: 1.18.0
   dio: 5.4.0
   elementary: 3.0.0
-  elementary_helper: 1.0.1
   firebase_core: 2.24.2
   firebase_crashlytics: 3.4.9
   flutter:

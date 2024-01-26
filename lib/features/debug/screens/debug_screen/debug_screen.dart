@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:elementary/elementary.dart';
-import 'package:elementary_helper/elementary_helper.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/config/urls.dart';
 import 'package:flutter_template/features/debug/screens/debug_screen/debug_screen_widget_model.dart';
@@ -37,8 +37,8 @@ class DebugScreen extends ElementaryWidget<IDebugScreenWidgetModel> {
 }
 
 class _Body extends StatelessWidget {
-  final ListenableState<UrlType> urlState;
-  final ListenableState<ThemeMode> themeState;
+  final ValueListenable<UrlType> urlState;
+  final ValueListenable<ThemeMode> themeState;
   final void Function(UrlType?) urlChanged;
   final void Function(UrlType) switchServer;
   final void Function(ThemeMode?) setThemeMode;
@@ -109,7 +109,7 @@ class _Body extends StatelessWidget {
 }
 
 class _ServerSwitchCard extends StatelessWidget {
-  final ListenableState<UrlType> urlState;
+  final ValueListenable<UrlType> urlState;
   final void Function(UrlType?) urlChange;
   final void Function(UrlType) switchServer;
 
@@ -127,9 +127,9 @@ class _ServerSwitchCard extends StatelessWidget {
         child: Column(
           children: <Widget>[
             const Text('Сервер'),
-            StateNotifierBuilder<UrlType>(
-              listenableState: urlState,
-              builder: (context, urlState) {
+            ValueListenableBuilder<UrlType>(
+              valueListenable: urlState,
+              builder: (context, urlState, _) {
                 return Column(
                   children: <Widget>[
                     RadioListTile<UrlType>(
@@ -154,7 +154,7 @@ class _ServerSwitchCard extends StatelessWidget {
                       onChanged: urlChange,
                     ),
                     MaterialButton(
-                      onPressed: () => switchServer(urlState!),
+                      onPressed: () => switchServer(urlState),
                       child: const Text(
                         'Переключить',
                         style: TextStyle(fontSize: 16),
@@ -226,7 +226,7 @@ class _ProxyCard extends StatelessWidget {
 }
 
 class _ThemeCard extends StatelessWidget {
-  final ListenableState<ThemeMode> themeState;
+  final ValueListenable<ThemeMode> themeState;
   final void Function(ThemeMode?) setThemeMode;
 
   const _ThemeCard({
@@ -239,9 +239,9 @@ class _ThemeCard extends StatelessWidget {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(8),
-        child: StateNotifierBuilder<ThemeMode>(
-          listenableState: themeState,
-          builder: (context, themeState) {
+        child: ValueListenableBuilder<ThemeMode>(
+          valueListenable: themeState,
+          builder: (context, themeState, _) {
             return Column(
               children: <Widget>[
                 const Text('Выбрать тему приложения'),
