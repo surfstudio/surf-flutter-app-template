@@ -5,12 +5,13 @@ publish_to: none
 
 dependencies:
   analytics: 1.0.2
-  auto_route: 7.4.0
-  collection: 1.17.1
-  dio: 5.1.1
-  elementary: 2.0.0
-  firebase_core: 2.15.0
-  firebase_crashlytics: 3.1.0
+  auto_route: 7.8.4
+  collection: 1.18.0
+  dio: 5.4.0
+  elementary: 3.0.0
+  elementary_helper: 1.0.1
+  firebase_core: 2.24.2
+  firebase_crashlytics: 3.4.9
   flutter:
     sdk: flutter
   flutter_localizations:
@@ -18,35 +19,35 @@ dependencies:
   flutter_secure_storage: 9.0.0
   freezed: 2.4.6
   freezed_annotation: 2.4.1
-  intl: 0.18.0
-  logger: 1.3.0
+  intl: 0.18.1
+  logger: 1.4.0
   path: 1.8.3
-  path_provider: 2.0.14
-  provider: 6.0.5
-  retrofit: 4.0.1
+  path_provider: 2.1.2
+  provider: 6.1.1
+  retrofit: 4.0.3
+  shared_preferences: 2.2.2
   rxdart: 0.27.7
-  shared_preferences: 2.1.0
   surf_logger: 1.1.0
   uuid: 4.2.1
 
 dev_dependencies:
-  auto_route_generator: 7.1.1
-  build_runner: 2.3.3
-  elementary_test: 1.1.3
+  auto_route_generator: 7.3.2
+  build_runner: 2.4.8
+  elementary_test: 2.0.0
   flutter_launcher_icons: 0.13.1
-  flutter_native_splash: 2.3.1
+  flutter_native_splash: 2.3.9
   flutter_test:
     sdk: flutter
   golden_toolkit: 0.15.0
-  json_serializable: 6.6.1
-  mocktail: 0.3.0
-  retrofit_generator: 6.0.0+1
-  spider: 4.2.1
+  json_serializable: 6.7.1
+  mocktail: 1.0.3
+  retrofit_generator: 8.0.6
+  spider: 4.2.2
   surf_lint_rules: 3.0.0
 
 environment:
-    sdk: '>=3.0.5 <4.0.0'
-    flutter: 3.10.6
+    sdk: '>=3.2.5 <4.0.0'
+    flutter: 3.16.8
 
 
 flutter:
