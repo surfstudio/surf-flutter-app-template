@@ -16,22 +16,22 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$UserProfileEntity {
-  /// Номер телефона пользователя.
+  /// User's phone number.
   String get phone => throw _privateConstructorUsedError;
 
-  /// Флаг получения пуш-уведомлений.
+  /// Flag for receiving push notifications.
   bool get shouldReceivePromoActionsInfo => throw _privateConstructorUsedError;
 
-  /// Идентификатор пользователя.
+  /// User identifier.
   String get id => throw _privateConstructorUsedError;
 
-  /// Дата рождения пользователя.
+  /// User's date of birth.
   String? get birthday => throw _privateConstructorUsedError;
 
-  /// Имя пользователя.
+  /// User's name.
   String? get name => throw _privateConstructorUsedError;
 
-  /// Почта пользователя
+  /// User's email
   String? get email => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -176,27 +176,27 @@ class _$UserProfileEntityImpl implements _UserProfileEntity {
       this.name,
       this.email});
 
-  /// Номер телефона пользователя.
+  /// User's phone number.
   @override
   final String phone;
 
-  /// Флаг получения пуш-уведомлений.
+  /// Flag for receiving push notifications.
   @override
   final bool shouldReceivePromoActionsInfo;
 
-  /// Идентификатор пользователя.
+  /// User identifier.
   @override
   final String id;
 
-  /// Дата рождения пользователя.
+  /// User's date of birth.
   @override
   final String? birthday;
 
-  /// Имя пользователя.
+  /// User's name.
   @override
   final String? name;
 
-  /// Почта пользователя
+  /// User's email
   @override
   final String? email;
 
@@ -241,27 +241,27 @@ abstract class _UserProfileEntity implements UserProfileEntity {
 
   @override
 
-  /// Номер телефона пользователя.
+  /// User's phone number.
   String get phone;
   @override
 
-  /// Флаг получения пуш-уведомлений.
+  /// Flag for receiving push notifications.
   bool get shouldReceivePromoActionsInfo;
   @override
 
-  /// Идентификатор пользователя.
+  /// User identifier.
   String get id;
   @override
 
-  /// Дата рождения пользователя.
+  /// User's date of birth.
   String? get birthday;
   @override
 
-  /// Имя пользователя.
+  /// User's name.
   String? get name;
   @override
 
-  /// Почта пользователя
+  /// User's email
   String? get email;
   @override
   @JsonKey(ignore: true)

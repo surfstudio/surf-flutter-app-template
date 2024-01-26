@@ -13,7 +13,7 @@ import 'package:flutter_template/persistence/storage/tokens_storage/i_tokens_sto
 /// {@template token_operations_dio_service.class}
 /// Implementation [ITokenOperationsService]
 /// {@endtemplate}
-class TokenOperationsDioService implements ITokenOperationsService<TokensData, DioError> {
+class TokenOperationsDioService implements ITokenOperationsService<TokensData, DioException> {
   final CommonApi _commonApi;
   final ITokensStorage _tokensStorage;
   final IErrorReportsService _errorReportsService;
@@ -28,11 +28,11 @@ class TokenOperationsDioService implements ITokenOperationsService<TokensData, D
         _errorReportsService = errorReportsService;
 
   @override
-  Future<Result<TokensData, Failure<DioError>>> refreshTokens(String refreshToken) async {
+  Future<Result<TokensData, Failure<DioException>>> refreshTokens(String refreshToken) async {
     try {
       final tokensData = await _commonApi.postRefresh(RefreshTokenData(refreshToken: refreshToken));
       return Result.ok(tokensData);
-    } on DioError catch (e, s) {
+    } on DioException catch (e, s) {
       _errorReportsService.recordError(e, trace: s);
       return Result.failed(Failure(original: e, trace: s));
     }

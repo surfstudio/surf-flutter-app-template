@@ -16,10 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$OtpTokenEntity {
-  /// Время жизни кода для авторизации в секундах
+  /// Authorization code lifetime in seconds
   Duration get codeLifetime => throw _privateConstructorUsedError;
 
-  /// OTP-token для аутентификации пользователя
+  /// OTP token for user authentication
   String get otpToken => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -105,11 +105,11 @@ class __$$OtpTokenEntityImplCopyWithImpl<$Res>
 class _$OtpTokenEntityImpl implements _OtpTokenEntity {
   const _$OtpTokenEntityImpl({required this.codeLifetime, required this.otpToken});
 
-  /// Время жизни кода для авторизации в секундах
+  /// Authorization code lifetime in seconds
   @override
   final Duration codeLifetime;
 
-  /// OTP-token для аутентификации пользователя
+  /// OTP token for user authentication
   @override
   final String otpToken;
 
@@ -144,11 +144,11 @@ abstract class _OtpTokenEntity implements OtpTokenEntity {
 
   @override
 
-  /// Время жизни кода для авторизации в секундах
+  /// Authorization code lifetime in seconds
   Duration get codeLifetime;
   @override
 
-  /// OTP-token для аутентификации пользователя
+  /// OTP token for user authentication
   String get otpToken;
   @override
   @JsonKey(ignore: true)

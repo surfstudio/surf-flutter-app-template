@@ -15,11 +15,21 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
-    TempRouter.name: (routeData) {
-      final args = routeData.argsAs<TempRouterArgs>(orElse: () => const TempRouterArgs());
+    DashRouter.name: (routeData) {
+      final args = routeData.argsAs<DashRouterArgs>(orElse: () => const DashRouterArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: TempScreen(
+        child: DashScreen(
+          key: args.key,
+          wmFactory: args.wmFactory,
+        ),
+      );
+    },
+    DebugRouter.name: (routeData) {
+      final args = routeData.argsAs<DebugRouterArgs>(orElse: () => const DebugRouterArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: DebugScreen(
           key: args.key,
           wmFactory: args.wmFactory,
         ),
@@ -30,16 +40,6 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: InfoScreen(
-          key: args.key,
-          wmFactory: args.wmFactory,
-        ),
-      );
-    },
-    DashRouter.name: (routeData) {
-      final args = routeData.argsAs<DashRouterArgs>(orElse: () => const DashRouterArgs());
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: DashScreen(
           key: args.key,
           wmFactory: args.wmFactory,
         ),
@@ -56,11 +56,11 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
-    DebugRouter.name: (routeData) {
-      final args = routeData.argsAs<DebugRouterArgs>(orElse: () => const DebugRouterArgs());
+    TempRouter.name: (routeData) {
+      final args = routeData.argsAs<TempRouterArgs>(orElse: () => const TempRouterArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: DebugScreen(
+        child: TempScreen(
           key: args.key,
           wmFactory: args.wmFactory,
         ),
@@ -76,31 +76,31 @@ abstract class _$AppRouter extends RootStackRouter {
 }
 
 /// generated route for
-/// [TempScreen]
-class TempRouter extends PageRouteInfo<TempRouterArgs> {
-  TempRouter({
+/// [DashScreen]
+class DashRouter extends PageRouteInfo<DashRouterArgs> {
+  DashRouter({
     Key? key,
     WidgetModel<ElementaryWidget<IWidgetModel>, ElementaryModel> Function(BuildContext) wmFactory =
-        initScreenWidgetModelFactory,
+        dashScreenWmFactory,
     List<PageRouteInfo>? children,
   }) : super(
-          TempRouter.name,
-          args: TempRouterArgs(
+          DashRouter.name,
+          args: DashRouterArgs(
             key: key,
             wmFactory: wmFactory,
           ),
           initialChildren: children,
         );
 
-  static const String name = 'TempRouter';
+  static const String name = 'DashRouter';
 
-  static const PageInfo<TempRouterArgs> page = PageInfo<TempRouterArgs>(name);
+  static const PageInfo<DashRouterArgs> page = PageInfo<DashRouterArgs>(name);
 }
 
-class TempRouterArgs {
-  const TempRouterArgs({
+class DashRouterArgs {
+  const DashRouterArgs({
     this.key,
-    this.wmFactory = initScreenWidgetModelFactory,
+    this.wmFactory = dashScreenWmFactory,
   });
 
   final Key? key;
@@ -110,7 +110,46 @@ class TempRouterArgs {
 
   @override
   String toString() {
-    return 'TempRouterArgs{key: $key, wmFactory: $wmFactory}';
+    return 'DashRouterArgs{key: $key, wmFactory: $wmFactory}';
+  }
+}
+
+/// generated route for
+/// [DebugScreen]
+class DebugRouter extends PageRouteInfo<DebugRouterArgs> {
+  DebugRouter({
+    Key? key,
+    WidgetModel<ElementaryWidget<IWidgetModel>, ElementaryModel> Function(BuildContext) wmFactory =
+        debugScreenWidgetModelFactory,
+    List<PageRouteInfo>? children,
+  }) : super(
+          DebugRouter.name,
+          args: DebugRouterArgs(
+            key: key,
+            wmFactory: wmFactory,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'DebugRouter';
+
+  static const PageInfo<DebugRouterArgs> page = PageInfo<DebugRouterArgs>(name);
+}
+
+class DebugRouterArgs {
+  const DebugRouterArgs({
+    this.key,
+    this.wmFactory = debugScreenWidgetModelFactory,
+  });
+
+  final Key? key;
+
+  final WidgetModel<ElementaryWidget<IWidgetModel>, ElementaryModel> Function(BuildContext)
+      wmFactory;
+
+  @override
+  String toString() {
+    return 'DebugRouterArgs{key: $key, wmFactory: $wmFactory}';
   }
 }
 
@@ -154,45 +193,6 @@ class InfoRouterArgs {
 }
 
 /// generated route for
-/// [DashScreen]
-class DashRouter extends PageRouteInfo<DashRouterArgs> {
-  DashRouter({
-    Key? key,
-    WidgetModel<ElementaryWidget<IWidgetModel>, ElementaryModel> Function(BuildContext) wmFactory =
-        dashScreenWmFactory,
-    List<PageRouteInfo>? children,
-  }) : super(
-          DashRouter.name,
-          args: DashRouterArgs(
-            key: key,
-            wmFactory: wmFactory,
-          ),
-          initialChildren: children,
-        );
-
-  static const String name = 'DashRouter';
-
-  static const PageInfo<DashRouterArgs> page = PageInfo<DashRouterArgs>(name);
-}
-
-class DashRouterArgs {
-  const DashRouterArgs({
-    this.key,
-    this.wmFactory = dashScreenWmFactory,
-  });
-
-  final Key? key;
-
-  final WidgetModel<ElementaryWidget<IWidgetModel>, ElementaryModel> Function(BuildContext)
-      wmFactory;
-
-  @override
-  String toString() {
-    return 'DashRouterArgs{key: $key, wmFactory: $wmFactory}';
-  }
-}
-
-/// generated route for
 /// [LogHistoryScreen]
 class LogHistoryRouter extends PageRouteInfo<LogHistoryRouterArgs> {
   LogHistoryRouter({
@@ -232,31 +232,31 @@ class LogHistoryRouterArgs {
 }
 
 /// generated route for
-/// [DebugScreen]
-class DebugRouter extends PageRouteInfo<DebugRouterArgs> {
-  DebugRouter({
+/// [TempScreen]
+class TempRouter extends PageRouteInfo<TempRouterArgs> {
+  TempRouter({
     Key? key,
     WidgetModel<ElementaryWidget<IWidgetModel>, ElementaryModel> Function(BuildContext) wmFactory =
-        debugScreenWidgetModelFactory,
+        initScreenWidgetModelFactory,
     List<PageRouteInfo>? children,
   }) : super(
-          DebugRouter.name,
-          args: DebugRouterArgs(
+          TempRouter.name,
+          args: TempRouterArgs(
             key: key,
             wmFactory: wmFactory,
           ),
           initialChildren: children,
         );
 
-  static const String name = 'DebugRouter';
+  static const String name = 'TempRouter';
 
-  static const PageInfo<DebugRouterArgs> page = PageInfo<DebugRouterArgs>(name);
+  static const PageInfo<TempRouterArgs> page = PageInfo<TempRouterArgs>(name);
 }
 
-class DebugRouterArgs {
-  const DebugRouterArgs({
+class TempRouterArgs {
+  const TempRouterArgs({
     this.key,
-    this.wmFactory = debugScreenWidgetModelFactory,
+    this.wmFactory = initScreenWidgetModelFactory,
   });
 
   final Key? key;
@@ -266,7 +266,7 @@ class DebugRouterArgs {
 
   @override
   String toString() {
-    return 'DebugRouterArgs{key: $key, wmFactory: $wmFactory}';
+    return 'TempRouterArgs{key: $key, wmFactory: $wmFactory}';
   }
 }
 

@@ -20,14 +20,14 @@ typedef LogoutCallback = FutureOr<void> Function();
 /// {@endtemplate}
 final class AuthInterceptor extends QueuedInterceptorsWrapper {
   final Dio _dio;
-  final ITokenOperationsService<TokensData, DioError> _tokenOperationsService;
+  final ITokenOperationsService<TokensData, DioException> _tokenOperationsService;
   final IErrorReportsService _errorReportsService;
   final LogoutCallback _onLogout;
 
   /// {@macro auth_interceptor.class}
   AuthInterceptor({
     required Dio dio,
-    required ITokenOperationsService<TokensData, DioError> tokenOperationsService,
+    required ITokenOperationsService<TokensData, DioException> tokenOperationsService,
     required IErrorReportsService errorReportsService,
     required LogoutCallback onLogout,
   })  : _dio = dio,
@@ -40,7 +40,7 @@ final class AuthInterceptor extends QueuedInterceptorsWrapper {
     final accessToken = await _tokenOperationsService.getAccessToken();
 
     if (accessToken == null) {
-      return handler.reject(DioError(requestOptions: options));
+      return handler.reject(DioException(requestOptions: options));
     }
 
     return super.onRequest(
@@ -50,7 +50,7 @@ final class AuthInterceptor extends QueuedInterceptorsWrapper {
   }
 
   @override
-  Future<void> onError(DioError err, ErrorInterceptorHandler handler) async {
+  Future<void> onError(DioException err, ErrorInterceptorHandler handler) async {
     if (err.response?.statusCode != unauthorisedStatusCode) {
       return super.onError(err, handler);
     }
@@ -82,7 +82,7 @@ final class AuthInterceptor extends QueuedInterceptorsWrapper {
   }
 
   // ignore: avoid-dynamic
-  Future<Result<Response<dynamic>, Failure<DioError>>> _retryRequest(
+  Future<Result<Response<dynamic>, Failure<DioException>>> _retryRequest(
       RequestOptions requestOptions) async {
     try {
       final response = await _dio.request(
@@ -96,7 +96,7 @@ final class AuthInterceptor extends QueuedInterceptorsWrapper {
       );
 
       return Result.ok(response);
-    } on DioError catch (e, s) {
+    } on DioException catch (e, s) {
       _errorReportsService.recordError(e, trace: s);
       return Result.failed(Failure(original: e, trace: s));
     }

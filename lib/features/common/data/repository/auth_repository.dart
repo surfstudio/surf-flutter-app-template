@@ -91,7 +91,7 @@ final class AuthRepository with ApiCallerRepositoryMixin implements IAuthReposit
       final response = await _authApi.postOtp(_authByCodeRequestDataConverter.convert(phone));
 
       return Result.ok(_otpTokenEntityConverter.convert(response));
-    } on DioError catch (e, s) {
+    } on DioException catch (e, s) {
       return Result.failed(mapApiError(e, trace: s));
     } on Exception catch (e, s) {
       return Result.failed(Failure(original: e, trace: s));
@@ -109,7 +109,7 @@ final class AuthRepository with ApiCallerRepositoryMixin implements IAuthReposit
       _authSubject.add(AuthState.authenticated);
 
       return Result.ok(_userProfileEntityConverter.convert(response.user));
-    } on DioError catch (e, s) {
+    } on DioException catch (e, s) {
       return Result.failed(mapApiError(e, trace: s));
     } on Exception catch (e, s) {
       return Result.failed(Failure(original: e, trace: s));
@@ -167,7 +167,7 @@ final class AuthRepository with ApiCallerRepositoryMixin implements IAuthReposit
       );
 
       return const Result.ok(null);
-    } on DioError catch (e, s) {
+    } on DioException catch (e, s) {
       return Result.failed(mapApiError(e, trace: s));
     } on Exception catch (e, s) {
       return Result.failed(Failure(original: e, trace: s));

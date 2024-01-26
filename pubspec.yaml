@@ -25,8 +25,8 @@ dependencies:
   path_provider: 2.1.2
   provider: 6.1.1
   retrofit: 4.0.3
-  shared_preferences: 2.2.2
   rxdart: 0.27.7
+  shared_preferences: 2.2.2
   surf_logger: 1.1.0
   uuid: 4.2.1
 

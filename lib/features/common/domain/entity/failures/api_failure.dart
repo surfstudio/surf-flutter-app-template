@@ -4,9 +4,9 @@ import 'package:flutter_template/features/common/domain/entity/operation/failure
 /// {@template api_failure.class}
 /// API error.
 /// {@endtemplate}
-base class ApiFailure extends Failure<DioError> {
+base class ApiFailure extends Failure<DioException> {
   /// Error status code.
-  /// It can be either original from [DioError], or a special one parsed from the response body.
+  /// It can be either original from [DioException], or a special one parsed from the response body.
   /// Special status codes are described below and are checked through getters.
   final int? statusCode;
 

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:elementary/elementary.dart';
@@ -50,7 +52,7 @@ class AppScope implements IAppScope {
   late final IThemeService _themeService;
   late final IAnalyticsService _analyticsService;
   late final IErrorReportsService _errorReportsService;
-  late final ITokenOperationsService<TokensData, DioError> _tokenOperationsService;
+  late final ITokenOperationsService<TokensData, DioException> _tokenOperationsService;
   late final IThemeModeStorage _themeModeStorage;
   late final FlutterSecureStorage _secureStorage;
   late final ITokensStorage _tokensStorage;
@@ -188,7 +190,8 @@ class AppScope implements IAppScope {
       ..receiveTimeout = timeout
       ..sendTimeout = timeout;
 
-    (dio.httpClientAdapter as IOHttpClientAdapter).onHttpClientCreate = (client) {
+    (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
+      final client = HttpClient();
       final proxyUrl = Environment.instance().config.proxyUrl;
       if (proxyUrl != null && proxyUrl.isNotEmpty) {
         client

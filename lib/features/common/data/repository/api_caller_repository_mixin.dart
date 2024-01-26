@@ -10,13 +10,13 @@ import 'package:flutter_template/util/extensions/closures.dart';
 /// Serves for error mapping.
 base mixin ApiCallerRepositoryMixin {
   /// Маппинг ошибки API
-  Failure mapApiError(DioError error, {required StackTrace trace}) {
+  Failure mapApiError(DioException error, {required StackTrace trace}) {
     switch (error.type) {
-      case DioErrorType.connectionTimeout:
-      case DioErrorType.connectionError:
-      case DioErrorType.sendTimeout:
-      case DioErrorType.receiveTimeout:
-      case DioErrorType.unknown when error.error is SocketException:
+      case DioExceptionType.connectionTimeout:
+      case DioExceptionType.connectionError:
+      case DioExceptionType.sendTimeout:
+      case DioExceptionType.receiveTimeout:
+      case DioExceptionType.unknown when error.error is SocketException:
         return TimeoutFailure(
           statusCode: error.response?.statusCode,
           original: error,
