@@ -69,7 +69,7 @@ The rules for branches, commits, and pull requests are the same as for a project
 
 ### Settings
 
-Project line length: 80 characters.
+Project line length: 100 characters.
 
 ### Dependencies
 
@@ -141,9 +141,7 @@ Spider configuration file is located [here](spider.yaml).
 
 ## Project scripts
 
-All scripts are located in the [scripts](scripts) folder and described below:
-- [fvm_vscode.sh](scripts/fvm_vscode.sh) — script for VSCode IDE configuration for working with FVM
-- [spider_build.sh](scripts/spider_build.sh) — script for assets codegen
+All scripts are located in the [scripts](scripts) folder and described [here](docs/scripts.md)).
 
 ## Build
 
