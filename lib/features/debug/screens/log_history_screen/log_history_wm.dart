@@ -7,7 +7,7 @@ import 'package:flutter_template/features/debug/screens/log_history_screen/log_h
 import 'package:flutter_template/features/debug/screens/log_history_screen/log_history_screen.dart';
 
 /// Interface of [LogHistoryWm].
-abstract class ILogHistoryWm extends IWidgetModel {
+abstract interface class ILogHistoryWm implements IWidgetModel {
   /// Listener current state for log history.
   ValueListenable<String> get logHistory;
 
@@ -16,8 +16,7 @@ abstract class ILogHistoryWm extends IWidgetModel {
 }
 
 /// Widget model for [LogHistoryScreen].
-class LogHistoryWm extends WidgetModel<LogHistoryScreen, LogHistoryModel>
-    implements ILogHistoryWm {
+class LogHistoryWm extends WidgetModel<LogHistoryScreen, LogHistoryModel> implements ILogHistoryWm {
   final _logsHistory = ValueNotifier('');
 
   @override

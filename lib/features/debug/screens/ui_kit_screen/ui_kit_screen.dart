@@ -39,12 +39,10 @@ class UiKitScreen extends StatelessWidget {
               labelText: 'Text Field',
               labelStyle: TextStyle(color: colorScheme.textFieldLabel),
               border: OutlineInputBorder(
-                borderSide:
-                    BorderSide(color: colorScheme.frameTextFieldSecondary),
+                borderSide: BorderSide(color: colorScheme.frameTextFieldSecondary),
               ),
               enabledBorder: OutlineInputBorder(
-                borderSide:
-                    BorderSide(color: colorScheme.frameTextFieldSecondary),
+                borderSide: BorderSide(color: colorScheme.frameTextFieldSecondary),
               ),
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: colorScheme.primary),

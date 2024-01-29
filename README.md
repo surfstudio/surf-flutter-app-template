@@ -1,9 +1,33 @@
-# Template information section
+
+<p align="center">
+<img src="./docs/images/cover.png" height="220" />
+</p>
+
+# Overview 🐄
+
+Welcome to the Surf Flutter Team's project template – your springboard for launching new Flutter projects with ease and efficiency. Our template encapsulates years of experience and best practices in Flutter development, providing a solid foundation for your project. Here's what's included:
+
+- 🏗️ **Project Structure:** Adopt the tried-and-true structure we use across our projects, providing clarity and consistency.
+- 📚 **Basic Documentation:** Understand our project structure with the included basic documentation, making onboarding smooth and straightforward.
+- 🔄 **FVM Integration:** Enjoy seamless Flutter version management with Flutter Version Management (FVM) already integrated.
+- 🍦 **Pre-Configured Flavors:** We've set up basic flavors for your project – Production, and Development – to streamline your workflow.
+- 🎨 **App Icon & Splash Screen Setup:** Dive right in with pre-configured app icons and splash screens, enhancing the user experience from the start.
+- 🌍 **Localization Setup:** Reach a global audience with our ready-to-use localization setup.
+- 📦 **Default Libraries:** Benefit from a suite of libraries that we regularly use, included by default for your convenience.
+- 🛠️ **Essential Project Scripts:** Access important project scripts like code generation and cache cleaning, saving time and effort.
+- ✨ **Basic Features:** Our template includes essential features such as first-run checks, theme switching, configuration storage, and a debug screen.
+- 💉 **Dependency Injection Configuration:** Streamline your coding with our pre-configured Dependency Injection setup.
+- 🛠️ **Utilities:** Utilize the same handy utilities that have become a staple in our projects.
+- 🏛️ **Architectural Approaches with Elementary:** Our architectural methodologies based on the Elementary library, ensuring robust and scalable app architecture.
+
+This template is more than just a starting point – it's a culmination of our expertise, designed to elevate your Flutter projects right from the beginning. Enjoy the ease of development with the Surf Flutter Team's touch!
+
+# Quick Start 🚀
 
 > [!IMPORTANT]
 > This section needs to be removed after template initialization.
 
-A project initialization template adopted at [Surf](https://surfstudio.ru).
+A project initialization template adopted at [Surf](https://surf.dev).
 
 ## Template initialization
 
@@ -30,7 +54,7 @@ The rules for branches, commits, and pull requests are the same as for a project
 > [!IMPORTANT]
 > If you find that some information or code in the template is outdated or found errors, do not be lazy and make a change request in the [template repository](https://github.com/surfstudio/surf-flutter-app-template). Thank you.
 
-# Application name
+# Enter App Name Here
 
 > [!IMPORTANT]
 > Enter the application name above and delete this alert.
@@ -45,7 +69,7 @@ The rules for branches, commits, and pull requests are the same as for a project
 
 ### Settings
 
-Project line length: 80 characters.
+Project line length: 100 characters.
 
 ### Dependencies
 
@@ -61,7 +85,7 @@ fvm flutter pub get --enforce-lockfile
 > [!IMPORTANT]
 > Change Flutter and Dart versions below and delete this alert.
 
-Flutter: ***3.13*** / Dart SDK: ***3.1***
+Flutter: ***3.16.8*** / Dart SDK: ***3.2.5***
 
 ### FVM workflow
 
@@ -75,7 +99,7 @@ fvm install
 
 For VSCode IDE you can also run the script [`fvm_vscode.sh`](scripts/fvm_vscode.sh):
 ```sh
-sh script/fvm_vscode.sh
+sh scripts/fvm_vscode.sh
 ```
 
 You need to use `fvm flutter ...` everywhere instead of just `flutter ...` when working with the project.
@@ -144,9 +168,7 @@ mason make TEMPLATE_NAME # insert the template 'feature' or 'screen' instead of 
 
 ## Project scripts
 
-All scripts are located in the [scripts](scripts) folder and described below:
-- [fvm_vscode.sh](scripts/fvm_vscode.sh) — script for VSCode IDE configuration for working with FVM
-- [spider_build.sh](scripts/spider_build.sh) — script for assets codegen
+All scripts are located in the [scripts](scripts) folder and described [here](docs/scripts.md)).
 
 ## Build
 

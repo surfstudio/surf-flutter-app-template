@@ -4,8 +4,7 @@ import 'package:flutter_template/features/common/utils/analytics/base/analytic_e
 import 'package:flutter_template/features/common/utils/analytics/mock/mock_amplitude_analytics.dart';
 
 /// A class for sending analytics data to Amplitude.
-class AmplitudeAnalyticTracker
-    implements AnalyticActionPerformer<AnalyticEvent> {
+class AmplitudeAnalyticTracker implements AnalyticActionPerformer<AnalyticEvent> {
   /// The instance of MockAmplitudeAnalytics used for sending analytics data.
   final MockAmplitudeAnalytics _analytics;
 

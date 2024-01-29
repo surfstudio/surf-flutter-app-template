@@ -11,7 +11,6 @@ class MockAmplitudeAnalytics {
     required String name,
     Map<String, Object?>? parameters,
   }) {
-    debugPrint(
-        'logEvent MockAmplitudeAnalytics: name: $name, parameters: $parameters');
+    debugPrint('logEvent MockAmplitudeAnalytics: name: $name, parameters: $parameters');
   }
 }

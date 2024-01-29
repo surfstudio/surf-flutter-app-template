@@ -43,9 +43,7 @@ class LogHistoryScreen extends ElementaryWidget<ILogHistoryWm> {
           return SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 2),
-              child: logs.isEmpty
-                  ? const Center(child: Text('История пуста'))
-                  : Text(logs),
+              child: logs.isEmpty ? const Center(child: Text('История пуста')) : Text(logs),
             ),
           );
         },
