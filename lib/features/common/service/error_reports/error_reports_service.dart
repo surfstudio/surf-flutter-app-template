@@ -14,7 +14,7 @@ final class ErrorReportsService implements IErrorReportsService {
   void recordError(Object e, {StackTrace? trace}) {
     debugPrint('EXCEPTION: $e');
     debugPrint('STACK TRACE: ${trace ?? ''}');
-    // TODO(dzmitry-struk-surf): implement recordError with crashlytics
+    // TODO(anyone): implement recordError with crashlytics
   }
 
   @override
