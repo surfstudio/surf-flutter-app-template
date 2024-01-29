@@ -1,13 +1,13 @@
-import 'package:flutter_template/features/common/domain/entity/operation/failure.dart';
-import 'package:flutter_template/features/common/domain/entity/operation/result.dart';
+import 'package:flutter_template/features/common/domain/entity/operation/request_operation.dart';
+import 'package:flutter_template/features/common/domain/entity/tokens/tokens_entity.dart';
 
 /// Interface for the token management service
-abstract interface class ITokenOperationsService<T extends Object, E extends Object> {
+abstract interface class ITokenOperationsService {
   /// refresh Tokens
-  Future<Result<T, Failure<E>>> refreshTokens(String refreshToken);
+  RequestOperation<TokensEntity> refreshTokens(String refreshToken);
 
   /// Refresh token
-  Future<void> saveTokens(T tokens);
+  Future<void> saveTokens(TokensEntity tokens);
 
   /// Get Access Token from storage
   Future<String?> getAccessToken();
