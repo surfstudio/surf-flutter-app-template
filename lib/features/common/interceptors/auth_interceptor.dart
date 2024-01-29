@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
-import 'package:flutter_template/api/data/tokens_data.dart';
 import 'package:flutter_template/features/common/domain/entity/operation/failure.dart';
 import 'package:flutter_template/features/common/domain/entity/operation/result.dart';
 import 'package:flutter_template/features/common/service/error_reports/i_error_reports_service.dart';
@@ -20,14 +19,14 @@ typedef LogoutCallback = FutureOr<void> Function();
 /// {@endtemplate}
 final class AuthInterceptor extends QueuedInterceptorsWrapper {
   final Dio _dio;
-  final ITokenOperationsService<TokensData, DioException> _tokenOperationsService;
+  final ITokenOperationsService _tokenOperationsService;
   final IErrorReportsService _errorReportsService;
   final LogoutCallback _onLogout;
 
   /// {@macro auth_interceptor.class}
   AuthInterceptor({
     required Dio dio,
-    required ITokenOperationsService<TokensData, DioException> tokenOperationsService,
+    required ITokenOperationsService tokenOperationsService,
     required IErrorReportsService errorReportsService,
     required LogoutCallback onLogout,
   })  : _dio = dio,
@@ -77,7 +76,9 @@ final class AuthInterceptor extends QueuedInterceptorsWrapper {
         }
       case ResultFailed(:final failure):
         _onLogout();
-        return handler.reject(failure.original);
+        final originalException = failure.original;
+        final dioException = originalException is DioException ? originalException : null;
+        return dioException != null ? handler.reject(dioException) : null;
     }
   }
 
