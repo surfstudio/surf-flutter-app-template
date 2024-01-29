@@ -5,23 +5,20 @@ import 'package:dio/io.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:flutter_template/api/data/tokens_data.dart';
-import 'package:flutter_template/api/service/auth/auth_api.dart';
 import 'package:flutter_template/api/service/common/common_api.dart';
 import 'package:flutter_template/config/environment/environment.dart';
-import 'package:flutter_template/features/common/data/converter/auth/auth_by_code_request_data_converter.dart';
-import 'package:flutter_template/features/common/data/converter/auth/auth_by_code_verify_request_data_converter.dart';
-import 'package:flutter_template/features/common/data/converter/auth/otp_token_entity_converter.dart';
-import 'package:flutter_template/features/common/data/converter/user/user_profile_entity_converter.dart';
+import 'package:flutter_template/features/common/data/converter/tokens/tokens_entity_converter.dart';
 import 'package:flutter_template/features/common/data/repository/auth_repository.dart';
+import 'package:flutter_template/features/common/data/repository/refresh_tokens_repository.dart';
 import 'package:flutter_template/features/common/domain/repository/auth_repository.dart';
+import 'package:flutter_template/features/common/domain/repository/refresh_tokens_repository.dart';
 import 'package:flutter_template/features/common/interceptors/auth_interceptor.dart';
 import 'package:flutter_template/features/common/service/error_reports/error_reports_service.dart';
 import 'package:flutter_template/features/common/service/error_reports/i_error_reports_service.dart';
 import 'package:flutter_template/features/common/service/theme/theme_service.dart';
 import 'package:flutter_template/features/common/service/theme/theme_service_impl.dart';
 import 'package:flutter_template/features/common/service/token_operations/i_token_operations_service.dart';
-import 'package:flutter_template/features/common/service/token_operations/token_operations_dio_service.dart';
+import 'package:flutter_template/features/common/service/token_operations/token_operations_service.dart';
 import 'package:flutter_template/features/common/utils/analytics/amplitude/amplitude_analytic_tracker.dart';
 import 'package:flutter_template/features/common/utils/analytics/firebase/firebase_analytic_tracker.dart';
 import 'package:flutter_template/features/common/utils/analytics/mock/mock_amplitude_analytics.dart';
@@ -46,18 +43,18 @@ class AppScope implements IAppScope {
 
   late final Dio _dio;
   late final Dio _authDio;
-  late final Dio _logoutDio;
   late final ErrorHandler _errorHandler;
   late final AppRouter _router;
   late final IThemeService _themeService;
   late final IAnalyticsService _analyticsService;
   late final IErrorReportsService _errorReportsService;
-  late final ITokenOperationsService<TokensData, DioException> _tokenOperationsService;
+  late final ITokenOperationsService _tokenOperationsService;
   late final IThemeModeStorage _themeModeStorage;
   late final FlutterSecureStorage _secureStorage;
   late final ITokensStorage _tokensStorage;
   late final IFirstRunStorage _firstRunStorage;
   late final IAuthRepository _authRepository;
+  late final IRefreshTokensRepository _refreshTokensRepository;
 
   @override
   late VoidCallback applicationRebuilder;
@@ -67,9 +64,6 @@ class AppScope implements IAppScope {
 
   @override
   Dio get authDio => _authDio;
-
-  @override
-  Dio get logoutDio => _logoutDio;
 
   @override
   ErrorHandler get errorHandler => _errorHandler;
@@ -99,6 +93,9 @@ class AppScope implements IAppScope {
   IAuthRepository get authRepository => _authRepository;
 
   @override
+  IRefreshTokensRepository get refreshTokensRepository => _refreshTokensRepository;
+
+  @override
   IErrorReportsService get errorReportsService => _errorReportsService;
 
   /// Create an instance [AppScope].
@@ -119,34 +116,18 @@ class AppScope implements IAppScope {
       AmplitudeAnalyticTracker(MockAmplitudeAnalytics()),
     ]);
 
-    _errorReportsService = const ErrorReportsService();
-    _tokenOperationsService = TokenOperationsDioService(
+    _refreshTokensRepository = RefreshTokensRepository(
       commonApi: CommonApi(_dio),
       tokensStorage: _tokensStorage,
+      tokensEntityConverter: const TokensEntityConverter(),
+    );
+    _errorReportsService = const ErrorReportsService();
+    _tokenOperationsService = TokenOperationsService(
       errorReportsService: _errorReportsService,
+      refreshTokensRepository: _refreshTokensRepository,
     );
 
-    _logoutDio = _initDio([
-      AuthInterceptor(
-        dio: _dio,
-        tokenOperationsService: _tokenOperationsService,
-        errorReportsService: _errorReportsService,
-        // ignore: no-empty-block
-        onLogout: () {},
-      ),
-    ]);
-
-    _authRepository = AuthRepository(
-      authApi: AuthApi(_dio),
-      commonApi: CommonApi(_logoutDio),
-      tokensStorage: _tokensStorage,
-      errorReportsService: _errorReportsService,
-      authByCodeRequestDataConverter: const AuthByCodeRequestDataConverter(),
-      otpTokenEntityConverter: const OtpTokenEntityConverter(),
-      authByCodeVerifyRequestDataConverter: const AuthByCodeVerifyRequestDataConverter(),
-      userProfileEntityConverter: const UserProfileEntityConverter(),
-      firstRunStorage: _firstRunStorage,
-    );
+    _authRepository = AuthRepository();
 
     _authDio = _initDio([
       AuthInterceptor(
@@ -161,22 +142,12 @@ class AppScope implements IAppScope {
   @override
   Future<void> init() async {
     await _initTheme();
-    await _initAuthRepository();
-  }
-
-  @override
-  void dispose() {
-    _authRepository.dispose();
   }
 
   Future<void> _initTheme() async {
     final theme = await ThemeModeStorageImpl(_sharedPreferences).getThemeMode() ?? _themeByDefault;
     _themeService = ThemeServiceImpl(theme);
     _themeService.addListener(_onThemeModeChanged);
-  }
-
-  Future<void> _initAuthRepository() async {
-    await _authRepository.init();
   }
 
   Dio _initDio(Iterable<Interceptor> additionalInterceptors) {
@@ -228,10 +199,6 @@ abstract class IAppScope {
   /// Http client for authorized requests.
   Dio get authDio;
 
-  /// Http client for requests before logout.
-  /// It is authorized, but ignores error if token refresh fails.
-  Dio get logoutDio;
-
   /// Interface for handle error in business logic.
   ErrorHandler get errorHandler;
 
@@ -262,12 +229,12 @@ abstract class IAppScope {
   /// Auth repository
   IAuthRepository get authRepository;
 
+  /// Refresh tokens repository
+  IRefreshTokensRepository get refreshTokensRepository;
+
   /// Interface for error reports
   IErrorReportsService get errorReportsService;
 
   /// Initialize dependencies
   Future<void> init();
-
-  /// Dispose resources
-  void dispose();
 }
