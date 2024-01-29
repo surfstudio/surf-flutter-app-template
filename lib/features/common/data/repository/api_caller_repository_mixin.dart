@@ -9,7 +9,7 @@ import 'package:flutter_template/util/extensions/closures.dart';
 /// Mixin for all repositories that make API calls.
 /// Serves for error mapping.
 base mixin ApiCallerRepositoryMixin {
-  /// Маппинг ошибки API
+  /// API error mapping.
   Failure mapApiError(DioException error, {required StackTrace trace}) {
     switch (error.type) {
       case DioExceptionType.connectionTimeout:
