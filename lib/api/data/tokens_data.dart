@@ -9,11 +9,11 @@ part 'tokens_data.g.dart';
 
 @JsonSerializable(includeIfNull: false)
 class TokensData {
-  /// Access-token для доступа к ресурсам сервера для авторизованного пользователя
+  /// Access-token for accessing server resources for an authorized user.
   @JsonKey(name: 'accessToken')
   final String accessToken;
 
-  /// Refresh-token для обновление access-токена
+  /// Refresh-token for updating the access-token.
   @JsonKey(name: 'refreshToken')
   final String refreshToken;
 

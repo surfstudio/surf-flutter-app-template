@@ -11,13 +11,11 @@ abstract class CommonApi {
   /// Creates CommonApi gateway
   factory CommonApi(Dio dio, {String baseUrl}) = _CommonApi;
 
-  /// Выход из аккаунта
+  /// Logout from the account.
   @POST(CommonUrls.logout)
-  Future<void> postLogout(
-    @Body() LogoutRequestData logoutRequest,
-  );
+  Future<void> postLogout();
 
-  /// Обновление токенов
+  /// Tokens update.
   @POST(CommonUrls.refresh)
   Future<TokensData> postRefresh(
     @Body() RefreshTokenData refreshToken,

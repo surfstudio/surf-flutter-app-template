@@ -9,7 +9,7 @@ part 'refresh_token_data.g.dart';
 
 @JsonSerializable(includeIfNull: false)
 class RefreshTokenData {
-  /// По refresh токену сервер должен обновить пару токенов и вернуть их в ответе
+  /// The server should refresh the pair of tokens using the refresh token and return them in the response.
   @JsonKey(name: 'refreshToken')
   final String refreshToken;
 

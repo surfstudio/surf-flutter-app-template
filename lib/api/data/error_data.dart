@@ -12,7 +12,7 @@ class ErrorData {
   @JsonKey(name: 'code')
   final int code;
 
-  /// Сообщение которое будет показано на UI, либо будет использовано только для информирования разработчиков
+  /// Message that will be displayed on the UI, or will be used only to inform developers.
   @JsonKey(name: 'detail')
   final String detail;
 
