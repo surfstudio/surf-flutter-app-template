@@ -19,12 +19,12 @@ class FirstRunStorage implements IFirstRunStorage {
   }
 }
 
-/// Ключи для [FirstRunStorage]
+/// Keys for [FirstRunStorage]
 enum FirstRunStorageKeys {
   /// @nodoc
   firstRun('first_run');
 
-  /// Название ключа
+  /// Key name
   final String keyName;
 
   const FirstRunStorageKeys(this.keyName);
