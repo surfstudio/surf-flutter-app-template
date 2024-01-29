@@ -21,23 +21,9 @@ base class ApiFailure extends Failure<DioException> {
     super.trace,
   });
 
-  /// UserBlocked - user was blocked
-  bool get isUserBlocked => statusCode == 101;
-
-  /// ExpiredToken - refresh token has expired
-  bool get isExpiredRefreshToken => statusCode == 102;
-
-  /// OTPCodeRequestsTooMany - too frequent requests for OTP code generation
-  bool get isOTPCodeRequestsTooMany => statusCode == 103;
-
-  /// OTPCodeInvalid - invalid OTP code
-  bool get isOTPCodeInvalid => statusCode == 104;
-
-  /// SendingCodeFailed - failed to send OTP code
-  bool get isSendingCodeFailed => statusCode == 105;
-
-  /// OTPCodeExpired - OTP code lifetime has expired
-  bool get isOTPCodeExpired => statusCode == 113;
+  // TODO(anyone): add getters for special status codes
+  /// Sample: ExpiredToken - refresh token has expired
+  // bool get isExpiredRefreshToken => statusCode == 102;
 }
 
 /// {@template timeout_failure.class}

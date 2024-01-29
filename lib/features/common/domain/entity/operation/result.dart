@@ -27,7 +27,7 @@ sealed class Result<TData, TErr extends Failure> {
 }
 
 /// {@macro result.class}
-final class ResultOk<TData, TErr extends Failure> extends Result<TData, TErr> {
+class ResultOk<TData, TErr extends Failure> extends Result<TData, TErr> {
   /// Data
   final TData data;
 
@@ -36,7 +36,7 @@ final class ResultOk<TData, TErr extends Failure> extends Result<TData, TErr> {
 }
 
 /// {@macro result.class}
-final class ResultFailed<TData, TErr extends Failure> extends Result<TData, TErr> {
+class ResultFailed<TData, TErr extends Failure> extends Result<TData, TErr> {
   /// Error
   final TErr failure;
 
