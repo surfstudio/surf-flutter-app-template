@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_template/features/common/domain/entity/operation/failure.dart';
 import 'package:flutter_template/features/common/domain/entity/operation/result.dart';
 import 'package:flutter_template/features/common/service/error_reports/i_error_reports_service.dart';
@@ -9,11 +10,6 @@ import 'package:flutter_template/features/common/service/token_operations/i_toke
 /// Authorization error status code.
 const unauthorisedStatusCode = 401;
 
-/// Logout callback.
-/// Called when an authorization error occurs (status code [unauthorisedStatusCode])
-/// and the tokens could not be successfully refreshed.
-typedef LogoutCallback = FutureOr<void> Function();
-
 /// {@template auth_interceptor.class}
 /// Interceptor for requests requiring authorization.
 /// {@endtemplate}
@@ -21,14 +17,14 @@ final class AuthInterceptor extends QueuedInterceptorsWrapper {
   final Dio _dio;
   final ITokenOperationsService _tokenOperationsService;
   final IErrorReportsService _errorReportsService;
-  final LogoutCallback _onLogout;
+  final AsyncCallback _onLogout;
 
   /// {@macro auth_interceptor.class}
   AuthInterceptor({
     required Dio dio,
     required ITokenOperationsService tokenOperationsService,
     required IErrorReportsService errorReportsService,
-    required LogoutCallback onLogout,
+    required AsyncCallback onLogout,
   })  : _dio = dio,
         _tokenOperationsService = tokenOperationsService,
         _errorReportsService = errorReportsService,
@@ -75,7 +71,7 @@ final class AuthInterceptor extends QueuedInterceptorsWrapper {
             return super.onError(failure.original, handler);
         }
       case ResultFailed(:final failure):
-        _onLogout();
+        await _onLogout();
         final originalException = failure.original;
         final dioException = originalException is DioException ? originalException : null;
         return dioException != null ? handler.reject(dioException) : null;

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_template/api/data/umbrella.dart';
 import 'package:flutter_template/api/service/common/common_api.dart';
@@ -20,6 +22,9 @@ final class RefreshTokensRepository
   final ITokensStorage _tokensStorage;
   final ITokensEntityConverter _tokensEntityConverter;
 
+  /// To control parallel token refresh
+  Completer<RequestOperationCompleter<TokensEntity>>? _refreshCompleter;
+
   /// {@macro refresh_tokens_repository.class}
   RefreshTokensRepository({
     required CommonApi commonApi,
@@ -31,14 +36,34 @@ final class RefreshTokensRepository
 
   @override
   RequestOperation<TokensEntity> refreshTokens(String refreshToken) async {
+    if (_refreshCompleter != null) {
+      final result = await _refreshCompleter!.future;
+
+      switch (result) {
+        case ResultOk(:final data):
+          return Result.ok(data);
+        case ResultFailed(:final failure):
+          return Result.failed(failure);
+      }
+    }
+
+    _refreshCompleter = Completer();
+
     try {
       final response = await _commonApi.postRefresh(RefreshTokenData(refreshToken: refreshToken));
-
-      return Result.ok(_tokensEntityConverter.convert(response));
+      final result = Result.ok(_tokensEntityConverter.convert(response));
+      _refreshCompleter!.complete(result);
+      return result;
     } on DioException catch (e, s) {
-      return Result.failed(mapApiError(e, trace: s));
+      final failure = mapApiError(e, trace: s);
+      _refreshCompleter!.complete(Result.failed(failure));
+      return Result.failed(failure);
     } on Exception catch (e, s) {
-      return Result.failed(Failure(original: e, trace: s));
+      final failure = Failure(original: e, trace: s);
+      _refreshCompleter!.complete(Result.failed(failure));
+      return Result.failed(failure);
+    } finally {
+      _refreshCompleter = null;
     }
   }
 
