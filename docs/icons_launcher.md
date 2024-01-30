@@ -89,7 +89,7 @@ flutter_launcher_icons:
 To start the generation, run the command:
 ```shell
 # Starts generating icons from all customization files
-dart run flutter_launcher_icons
+fvm flutter pub run flutter_launcher_icons
 ```
 
 ## Useful links
