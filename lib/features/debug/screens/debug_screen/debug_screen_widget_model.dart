@@ -43,17 +43,15 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
   late final _textEditingController = TextEditingController(
     text: model.proxyUrl,
   );
-  late final ValueNotifier<UrlType> _urlState;
-  late final ValueNotifier<ThemeMode> _themeState;
+
+  @override
+  late final ValueNotifier<UrlType> urlState;
+
+  @override
+  late final ValueNotifier<ThemeMode> themeState;
 
   @override
   TextEditingController get proxyEditingController => _textEditingController;
-
-  @override
-  ValueListenable<UrlType> get urlState => _urlState;
-
-  @override
-  ValueListenable<ThemeMode> get themeState => _themeState;
 
   /// Current value url.
   late String _currentUrl;
@@ -70,10 +68,10 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
   @override
   void initWidgetModel() {
     super.initWidgetModel();
-    _urlState = ValueNotifier<UrlType>(
+    urlState = ValueNotifier<UrlType>(
       _resolveUrlType(model.configNotifier.value.url),
     );
-    _themeState = ValueNotifier<ThemeMode>(model.currentThemeMode.value);
+    themeState = ValueNotifier<ThemeMode>(model.currentThemeMode.value);
     model.configNotifier.addListener(_updateAppConfig);
     model.currentThemeMode.addListener(_updateThemeMode);
   }
@@ -92,7 +90,7 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
   @override
   void urlChange(UrlType? urlType) {
     if (urlType == null) return;
-    _urlState.value = urlType;
+    urlState.value = urlType;
   }
 
   @override
@@ -129,7 +127,7 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
     final config = model.configNotifier.value;
 
     _currentUrl = config.url;
-    _urlState.value = _resolveUrlType(_currentUrl);
+    urlState.value = _resolveUrlType(_currentUrl);
 
     _proxyUrl = config.proxyUrl;
     if (_proxyUrl != null && _proxyUrl!.isNotEmpty) {
@@ -144,7 +142,7 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
   }
 
   void _updateThemeMode() {
-    _themeState.value = model.currentThemeMode.value;
+    themeState.value = model.currentThemeMode.value;
   }
 
   void _saveExampleLog() {
