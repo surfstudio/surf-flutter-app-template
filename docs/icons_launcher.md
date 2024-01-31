@@ -4,6 +4,10 @@ To generate icons, we use the flutter_launcher_icons package, as it generates ad
 
 The template contains basic icons. To replace them with yours, follow the recommendations.
 
+# Sizes Figma
+
+![icons_launcher_figma.png](images/icons_launcher_figma.png)
+
 ## Image folder
 
 In the root of the project in the assets folder we use the `assets` folder with the following structure:
