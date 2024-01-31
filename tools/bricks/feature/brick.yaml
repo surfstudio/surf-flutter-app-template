@@ -1,0 +1,14 @@
+name: feature
+description: Template for creating feature
+
+version: 0.1.0+1
+
+environment:
+  mason: ">=0.1.0-dev.51 <0.1.0"
+
+vars:
+  name:
+    type: string
+    description: Name of feature
+    prompt: Enter name of feature
+    default: Example

@@ -1,0 +1,19 @@
+name: screen
+description: Template for creating a screen
+
+version: 0.1.0+1
+
+environment:
+  mason: ">=0.1.0-dev.51 <0.1.0"
+
+vars:
+  feature_name:
+    type: string
+    description: Feature name
+    prompt: Enter name of feature for which you want to add a screen
+    default: Example
+  screen_name:
+    type: string
+    description: Screen name
+    prompt: Enter name of screen
+    default: Example

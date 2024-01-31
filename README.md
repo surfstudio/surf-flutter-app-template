@@ -129,6 +129,33 @@ Spider configuration file is located [here](spider.yaml).
 >
 > Delete this alert after initialization of the template.
 
+### Mason
+
+The project uses [mason](https://pub.dev/packages/mason) to generate code based on templates.
+To install [mason](https://pub.dev/packages/mason) you need to run the command:
+```sh
+# Install from pub.dev
+dart pub global activate mason_cli
+
+# Or
+
+# Install from  homebrew
+brew tap felangel/mason
+brew install mason
+```
+
+The project uses 2 templates - [feature](settings/bricks/feature) and [screen](settings/bricks/screen).
+In order for templates to be used, they need to be obtained from [mason.yaml](mason.yaml). Run the following command:
+```sh
+mason get
+```
+
+To generate code based on a template, you need to run the following command:
+
+```sh
+mason make TEMPLATE_NAME # insert the template 'feature' or 'screen' instead of TEMPLATE_NAME
+```
+
 ## Requirements for running the app
 
 > [!NOTE]
