@@ -1,5 +1,3 @@
-import 'package:elementary_helper/elementary_helper.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_template/features/debug/screens/debug_screen/debug_screen.dart';
 import 'package:flutter_template/features/debug/screens/debug_screen/debug_screen_widget_model.dart';
@@ -14,10 +12,10 @@ void main() {
   testWidget<DebugScreen>(
     widgetBuilder: (_) => const DebugScreen().build(wm),
     setup: (theme, mode, l10n) {
-      when(() => wm.themeState).thenReturn(StateNotifier(initValue: mode));
+      when(() => wm.themeState).thenReturn(ValueNotifier<ThemeMode>(mode));
       when(() => wm.proxyEditingController).thenReturn(TextEditingController());
       when(() => wm.urlState).thenReturn(
-        StateNotifier(initValue: UrlType.test),
+        ValueNotifier<UrlType>(UrlType.test),
       );
     },
   );

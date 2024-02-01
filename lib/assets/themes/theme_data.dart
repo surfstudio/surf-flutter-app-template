@@ -34,6 +34,11 @@ abstract class AppThemeData {
         color: _lightColorScheme.onPrimary,
       ),
     ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: _lightColorScheme.background,
+      selectedItemColor: _lightColorScheme.primary,
+      unselectedItemColor: _lightColorScheme.onBackground,
+    ),
     scaffoldBackgroundColor: _lightColorScheme.background,
     extensions: [_lightColorScheme, _textTheme],
   );
@@ -66,6 +71,11 @@ abstract class AppThemeData {
       iconTheme: IconThemeData(
         color: _lightColorScheme.onPrimary,
       ),
+    ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: _darkColorScheme.background,
+      selectedItemColor: _darkColorScheme.primary,
+      unselectedItemColor: _darkColorScheme.onBackground,
     ),
     scaffoldBackgroundColor: _darkColorScheme.background,
     extensions: [_darkColorScheme, _textTheme],
