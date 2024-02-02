@@ -1,10 +1,8 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter_template/api/data/error_data.dart';
 import 'package:flutter_template/features/common/domain/entity/failures/api_failure.dart';
 import 'package:flutter_template/features/common/domain/entity/operation/failure.dart';
-import 'package:flutter_template/util/extensions/closures.dart';
 
 /// Mixin for all repositories that make API calls.
 /// Serves for error mapping.
@@ -27,15 +25,22 @@ base mixin ApiCallerRepositoryMixin {
     }
 
     if (error.response?.statusCode == 500) {
-      final errorData =
-          error.response.let((it) => it.data as Map<String, dynamic>?).let(ErrorData.fromJson);
+      // TODO(anyone): implement
+      /*
+      If an internal server error occurred and the server returns a custom error
+      in the form of an object, for example
+      {
+      "code": 102,
+      "detail": "This is a description of an error.",
+      }, then it is necessary to perform mapping and return
 
-      return ApiFailure(
-        statusCode: errorData?.code ?? error.response?.statusCode,
-        message: errorData?.detail,
+      ApiFailure(
+        statusCode: ...,
+        message: ...,
         original: error,
         trace: trace,
-      );
+      )
+     */
     }
 
     return ApiFailure(

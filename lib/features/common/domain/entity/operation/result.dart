@@ -17,7 +17,7 @@ sealed class Result<TData, TErr extends Failure> {
   /// {@macro result.class}
   const factory Result.failed(TErr failure) = ResultFailed;
 
-  /// Преобразование [ResultOk]
+  /// Mapping the result [ResultOk]
   Result<R, TErr> mapResult<R>(R Function(TData value) mapper) {
     return switch (this) {
       ResultOk<TData, TErr>(:final data) => Result.ok(mapper(data)),
