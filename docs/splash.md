@@ -2,6 +2,12 @@
 
 Creating native splash screen
 
+# Sizes Figma
+
+![native_splash_figma.png](images/native_splash_figma.png)
+
+![native_splash_android_12.png](images/native_splash_android_12.png)
+
 ## Image folder
 
 The splash folder is located in the assets folder and has the following structure:
