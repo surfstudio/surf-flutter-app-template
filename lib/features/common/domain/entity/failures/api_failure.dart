@@ -10,7 +10,7 @@ base class ApiFailure extends Failure<DioException> {
   /// Special status codes are described below and are checked through getters.
   final int? statusCode;
 
-  /// Сообщение
+  /// Message
   final String? message;
 
   /// {@macro api_failure.class}
