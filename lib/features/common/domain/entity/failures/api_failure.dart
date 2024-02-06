@@ -16,9 +16,9 @@ base class ApiFailure extends Failure<DioException> {
   /// {@macro api_failure.class}
   const ApiFailure({
     required super.original,
+    required super.trace,
     this.statusCode,
     this.message,
-    super.trace,
   });
 
   // TODO(anyone): add getters for special status codes
@@ -33,8 +33,8 @@ final class TimeoutFailure extends ApiFailure {
   /// {@macro timeout_failure.class}
   const TimeoutFailure({
     required super.original,
+    required super.trace,
     super.statusCode,
     super.message,
-    super.trace,
   });
 }

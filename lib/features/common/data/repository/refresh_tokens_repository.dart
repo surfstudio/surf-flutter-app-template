@@ -1,9 +1,6 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
-import 'package:flutter_template/api/data/umbrella.dart';
-import 'package:flutter_template/api/service/common/common_api.dart';
-import 'package:flutter_template/features/common/data/converter/tokens/tokens_entity_converter.dart';
 import 'package:flutter_template/features/common/data/repository/api_caller_repository_mixin.dart';
 import 'package:flutter_template/features/common/domain/entity/operation/failure.dart';
 import 'package:flutter_template/features/common/domain/entity/operation/request_operation.dart';
@@ -18,21 +15,19 @@ import 'package:flutter_template/persistence/storage/tokens_storage/i_tokens_sto
 final class RefreshTokensRepository
     with ApiCallerRepositoryMixin
     implements IRefreshTokensRepository {
-  final CommonApi _commonApi;
   final ITokensStorage _tokensStorage;
-  final ITokensEntityConverter _tokensEntityConverter;
+
+  // TODO(anyone): implement
+  /// Add an Api for working with authorization tokens
+  /// Add a converter for mapping data from the data layer to the domain layer. Use `Converter`.
 
   /// To control parallel token refresh
   Completer<RequestOperationCompleter<TokensEntity>>? _refreshCompleter;
 
   /// {@macro refresh_tokens_repository.class}
   RefreshTokensRepository({
-    required CommonApi commonApi,
     required ITokensStorage tokensStorage,
-    required ITokensEntityConverter tokensEntityConverter,
-  })  : _commonApi = commonApi,
-        _tokensStorage = tokensStorage,
-        _tokensEntityConverter = tokensEntityConverter;
+  }) : _tokensStorage = tokensStorage;
 
   @override
   RequestOperation<TokensEntity> refreshTokens(String refreshToken) async {
@@ -50,8 +45,15 @@ final class RefreshTokensRepository
     _refreshCompleter = Completer();
 
     try {
-      final response = await _commonApi.postRefresh(RefreshTokenData(refreshToken: refreshToken));
-      final result = Result.ok(_tokensEntityConverter.convert(response));
+      // TODO(anyone): implement
+      /// 1. Send a request to the API with refreshToken
+      /// 2. Convert the received response into domain layer data using a converter.
+      const responseMock = TokensEntity(
+        accessToken: 'accessToken',
+        refreshToken: 'refreshToken',
+      );
+      /// 3. Replace the mock result.
+      const result = Result.ok(responseMock);
       _refreshCompleter!.complete(result);
       return result;
     } on DioException catch (e, s) {

@@ -5,9 +5,7 @@ import 'package:dio/io.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:flutter_template/api/service/common/common_api.dart';
 import 'package:flutter_template/config/environment/environment.dart';
-import 'package:flutter_template/features/common/data/converter/tokens/tokens_entity_converter.dart';
 import 'package:flutter_template/features/common/data/repository/auth_repository.dart';
 import 'package:flutter_template/features/common/data/repository/refresh_tokens_repository.dart';
 import 'package:flutter_template/features/common/domain/repository/auth_repository.dart';
@@ -116,10 +114,11 @@ class AppScope implements IAppScope {
       AmplitudeAnalyticTracker(MockAmplitudeAnalytics()),
     ]);
 
+    // TODO(anyone): needs customization for a specific project
     _refreshTokensRepository = RefreshTokensRepository(
-      commonApi: CommonApi(_dio),
       tokensStorage: _tokensStorage,
-      tokensEntityConverter: const TokensEntityConverter(),
+      /// Add an Api for working with authorization tokens
+      /// Add a converter for mapping data from the data layer to the domain layer. Use `Converter`.
     );
     _errorReportsService = const ErrorReportsService();
     _tokenOperationsService = TokenOperationsService(
