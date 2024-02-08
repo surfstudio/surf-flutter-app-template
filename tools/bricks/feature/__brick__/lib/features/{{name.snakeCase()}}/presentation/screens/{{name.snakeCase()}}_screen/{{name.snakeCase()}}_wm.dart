@@ -2,8 +2,8 @@ import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/features/common/mixin/theme_mixin.dart';
 import 'package:flutter_template/features/{{name.snakeCase()}}/di/{{name.snakeCase()}}_scope.dart';
-import 'package:flutter_template/features/{{name.snakeCase()}}/screen/{{name.snakeCase()}}_model.dart';
-import 'package:flutter_template/features/{{name.snakeCase()}}/screen/{{name.snakeCase()}}_screen.dart';
+import 'package:flutter_template/features/{{name.snakeCase()}}/presentation/screens/{{name.snakeCase()}}_screen/{{name.snakeCase()}}_model.dart';
+import 'package:flutter_template/features/{{name.snakeCase()}}/presentation/screens/{{name.snakeCase()}}_screen/{{name.snakeCase()}}_screen.dart';
 import 'package:provider/provider.dart';
 
 /// DI factory for [{{name.pascalCase()}}WM]

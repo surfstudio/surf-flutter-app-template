@@ -1,6 +1,6 @@
+import 'package:flutter_template/features/{{name.snakeCase()}}/data/service/{{name.snakeCase()}}_service.dart';
 import 'package:flutter_template/features/{{name.snakeCase()}}/domain/repository/i_{{name.snakeCase()}}_repository.dart';
-import 'package:flutter_template/features/{{name.snakeCase()}}/service/i_{{name.snakeCase()}}_service.dart';
-import 'package:flutter_template/features/{{name.snakeCase()}}/service/{{name.snakeCase()}}_service.dart';
+import 'package:flutter_template/features/{{name.snakeCase()}}/domain/service/i_{{name.snakeCase()}}_service.dart';
 import 'package:flutter_template/util/disposable_object/disposable_object.dart';
 import 'package:flutter_template/util/disposable_object/i_disposable_object.dart';
 

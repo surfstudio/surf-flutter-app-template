@@ -1,6 +1,6 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/features/{{name.snakeCase()}}/screen/{{name.snakeCase()}}_wm.dart';
+import 'package:flutter_template/features/{{name.snakeCase()}}/presentation/screens/{{name.snakeCase()}}_screen/{{name.snakeCase()}}_wm.dart';
 
 /// {@template {{name.snakeCase()}}_screen.class}
 /// {{name.pascalCase()}}Screen

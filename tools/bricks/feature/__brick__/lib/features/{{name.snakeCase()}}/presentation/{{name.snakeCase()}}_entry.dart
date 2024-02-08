@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/features/common/widgets/di_scope/di_scope.dart';
+import 'package:flutter_template/features/{{name.snakeCase()}}/data/repository/{{name.snakeCase()}}_repository.dart';
 import 'package:flutter_template/features/{{name.snakeCase()}}/di/{{name.snakeCase()}}_scope.dart';
-import 'package:flutter_template/features/{{name.snakeCase()}}/domain/repository/{{name.snakeCase()}}_repository.dart';
-import 'package:flutter_template/features/{{name.snakeCase()}}/screen/{{name.snakeCase()}}_screen.dart';
+import 'package:flutter_template/features/{{name.snakeCase()}}/presentation/screens/{{name.snakeCase()}}_screen/{{name.snakeCase()}}_screen.dart';
 
 /// {@template {{name.snakeCase()}}_entry.class}
 /// Entry point to feature {{name.PascalCase()}}

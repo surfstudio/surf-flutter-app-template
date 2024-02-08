@@ -35,15 +35,19 @@
             - di
             - domain
                 - entity
-                - repository
-                - mappers
-            - service
-            - screens
-                - {screen_name}
-                    - widget
-                    - wm
-                    - model
-            - widgets
+                - repository *(interfaces)*
+                - service *(interfaces)*
+            - data
+              - repository *(implementations)*
+              - service *(implementations)*
+              - mappers
+            - presentation
+                - screens
+                    - {screen_name}
+                        - widget
+                        - wm
+                        - model
+                - widgets
     - l10n
     - persistence
     - util

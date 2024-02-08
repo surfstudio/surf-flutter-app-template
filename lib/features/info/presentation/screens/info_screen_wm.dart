@@ -1,6 +1,6 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/features/common/mixin/theme_mixin.dart';
+import 'package:flutter_template/features/common/utils/mixin/theme_mixin.dart';
 import 'package:flutter_template/features/info/presentation/screens/info_screen.dart';
 import 'package:flutter_template/features/info/presentation/screens/info_screen_model.dart';
 
@@ -21,4 +21,6 @@ class InfoScreenWidgetModel extends WidgetModel<InfoScreen, InfoScreenModel>
 }
 
 /// Interface of [InfoScreenWidgetModel].
-abstract interface class IInfoScreenWidgetModel with ThemeIModelMixin implements IWidgetModel {}
+abstract interface class IInfoScreenWidgetModel
+    with ThemeIModelMixin
+    implements IWidgetModel {}
