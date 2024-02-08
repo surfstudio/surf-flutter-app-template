@@ -125,6 +125,9 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
   /// Tertiary skeleton color.
   final Color skeletonTertiary;
 
+  /// The color of the shimmer.
+  final Color shimmer;
+
   /// Base light theme version.
   AppColorScheme.light()
       : primary = ColorPalette.purple,
@@ -153,7 +156,8 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
         skeletonOnPrimary = ColorPalette.white,
         skeletonSecondary = ColorPalette.cultured,
         skeletonTertiary = ColorPalette.lightSilver,
-        tetradicBackground = ColorPalette.lightGreen;
+        tetradicBackground = ColorPalette.lightGreen,
+        shimmer = ColorPalette.platinum;
 
   /// Base dark theme version.
   AppColorScheme.dark()
@@ -183,7 +187,8 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
         skeletonOnPrimary = DarkColorPalette.white,
         skeletonSecondary = DarkColorPalette.raisinBlack,
         skeletonTertiary = DarkColorPalette.lightSilver,
-        tetradicBackground = DarkColorPalette.etonBlue;
+        tetradicBackground = DarkColorPalette.etonBlue,
+        shimmer = ColorPalette.platinum;
 
   const AppColorScheme._({
     required this.primary,
@@ -213,6 +218,7 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
     required this.skeletonSecondary,
     required this.skeletonTertiary,
     required this.tetradicBackground,
+    required this.shimmer,
   });
 
   @override
@@ -244,6 +250,7 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
     Color? skeletonSecondary,
     Color? skeletonTertiary,
     Color? tetradicBackground,
+    Color? shimmer,
   }) {
     return AppColorScheme._(
       primary: primary ?? this.primary,
@@ -273,6 +280,7 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
       skeletonSecondary: skeletonSecondary ?? this.skeletonSecondary,
       skeletonTertiary: skeletonTertiary ?? this.skeletonTertiary,
       tetradicBackground: tetradicBackground ?? this.tetradicBackground,
+      shimmer: shimmer ?? this.shimmer,
     );
   }
 
@@ -314,6 +322,7 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
       skeletonSecondary: Color.lerp(skeletonSecondary, other.skeletonSecondary, t)!,
       skeletonTertiary: Color.lerp(skeletonTertiary, other.skeletonTertiary, t)!,
       tetradicBackground: Color.lerp(tetradicBackground, other.tetradicBackground, t)!,
+      shimmer: Color.lerp(shimmer, other.shimmer, t)!,
     );
   }
 
