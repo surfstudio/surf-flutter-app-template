@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:analytics/core/analytyc_service.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:elementary/elementary.dart';
@@ -11,8 +12,6 @@ import 'package:flutter_template/features/common/utils/analytics/amplitude/ampli
 import 'package:flutter_template/features/common/utils/analytics/firebase/firebase_analytic_tracker.dart';
 import 'package:flutter_template/features/common/utils/analytics/mock/mock_amplitude_analytics.dart';
 import 'package:flutter_template/features/common/utils/analytics/mock/mock_firebase_analytics.dart';
-import 'package:flutter_template/features/common/utils/analytics/service/analytics_service.dart';
-import 'package:flutter_template/features/common/utils/analytics/service/analytics_service_impl.dart';
 import 'package:flutter_template/features/navigation/service/router.dart';
 import 'package:flutter_template/persistence/storage/theme_storage/theme_storage.dart';
 import 'package:flutter_template/persistence/storage/theme_storage/theme_storage_impl.dart';
@@ -29,7 +28,7 @@ class AppScope implements IAppScope {
   late final ErrorHandler _errorHandler;
   late final AppRouter _router;
   late final IThemeService _themeService;
-  late final IAnalyticsService _analyticsService;
+  late final AnalyticService _analyticsService;
 
   @override
   late VoidCallback applicationRebuilder;
@@ -50,7 +49,7 @@ class AppScope implements IAppScope {
   SharedPreferences get sharedPreferences => _sharedPreferences;
 
   @override
-  IAnalyticsService get analyticsService => _analyticsService;
+  AnalyticService get analyticsService => _analyticsService;
 
   late IThemeModeStorage _themeModeStorage;
 
@@ -63,11 +62,11 @@ class AppScope implements IAppScope {
     _errorHandler = DefaultErrorHandler();
     _router = AppRouter.instance();
     _themeModeStorage = ThemeModeStorageImpl(_sharedPreferences);
-    _analyticsService = AnalyticsServiceImpl([
+    _analyticsService = AnalyticService.withStrategies({
       // TODO(init): can be removed MockFirebaseAnalytics and MockAmplitudeAnalytics, added for demo analytics track
-      FirebaseAnalyticTracker(MockFirebaseAnalytics()),
-      AmplitudeAnalyticTracker(MockAmplitudeAnalytics()),
-    ]);
+      FirebaseAnalyticStrategy(MockFirebaseAnalytics()),
+      AmplitudeAnalyticStrategy(MockAmplitudeAnalytics()),
+    });
   }
 
   @override
@@ -142,5 +141,5 @@ abstract class IAppScope {
   SharedPreferences get sharedPreferences;
 
   /// Analytics sending service
-  IAnalyticsService get analyticsService;
+  AnalyticService get analyticsService;
 }

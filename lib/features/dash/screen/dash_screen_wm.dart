@@ -1,10 +1,10 @@
+import 'package:analytics/core/analytyc_service.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/common/mixin/theme_mixin.dart';
 import 'package:flutter_template/features/common/utils/analytics/event/common/track_analytics_example.dart';
-import 'package:flutter_template/features/common/utils/analytics/service/analytics_service.dart';
 import 'package:flutter_template/features/dash/screen/dash_screen.dart';
 import 'package:flutter_template/features/dash/screen/dash_screen_model.dart';
 import 'package:flutter_template/l10n/app_localizations_x.dart';
@@ -27,7 +27,7 @@ DashScreenWidgetModel dashScreenWmFactory(
 class DashScreenWidgetModel extends WidgetModel<DashScreen, DashScreenModel>
     with ThemeWMMixin
     implements IDashScreenWidgetModel {
-  final IAnalyticsService _analyticsService;
+  final AnalyticService _analyticsService;
 
   @override
   AppLocalizations get l10n => context.l10n;
@@ -35,13 +35,13 @@ class DashScreenWidgetModel extends WidgetModel<DashScreen, DashScreenModel>
   /// Create an instance [DashScreenWidgetModel].
   DashScreenWidgetModel({
     required DashScreenModel model,
-    required IAnalyticsService analyticsService,
+    required AnalyticService analyticsService,
   })  : _analyticsService = analyticsService,
         super(model);
 
   @override
   void trackAnalyticsExample() {
-    _analyticsService.trackEvent(const TrackAnalyticsExampleEvent());
+    _analyticsService.performAction(const TrackAnalyticsExampleEvent());
   }
 }
 
