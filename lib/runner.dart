@@ -23,6 +23,9 @@ Future<void> run() async {
   // TODO(init-project): change as needed or remove.
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   // TODO(init-project): Initialize Crashlytics.
+  // FlutterError.onError = (details) {
+  //   FirebaseCrashlytics.instance.recordFlutterError(details, fatal: true);
+  // };
   // PlatformDispatcher.instance.onError = (error, stack) {
   //   FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
   //
