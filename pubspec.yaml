@@ -22,7 +22,7 @@ dependencies:
   provider: 6.1.1
   retrofit: 4.0.3
   shared_preferences: 2.2.2
-  surf_logger: 1.1.0
+  surf_logger: 2.0.0
 
 dev_dependencies:
   auto_route_generator: 7.3.2

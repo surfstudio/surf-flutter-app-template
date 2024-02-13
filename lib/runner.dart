@@ -6,7 +6,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/app/app.dart';
 import 'package:flutter_template/features/app/di/app_scope_register.dart';
-import 'package:surf_logger/surf_logger.dart';
 
 /// App launch.
 Future<void> run() async {
@@ -29,7 +28,6 @@ Future<void> run() async {
   //   return true;
   // };
 
-  _initLogger();
   await _runApp();
 }
 
@@ -38,11 +36,4 @@ Future<void> _runApp() async {
   final scope = await scopeRegister.createScope();
   await scope.initTheme();
   runApp(App(scope));
-}
-
-void _initLogger() {
-  // TODO(init-project): Initialize CrashlyticsRemoteLogStrategy.
-  // RemoteLogger.addStrategy(CrashlyticsRemoteLogStrategy());
-  Logger.addStrategy(DebugLogStrategy());
-  Logger.addStrategy(RemoteLogStrategy());
 }

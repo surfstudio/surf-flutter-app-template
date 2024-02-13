@@ -27,18 +27,22 @@ DebugScreenWidgetModel debugScreenWidgetModelFactory(
     configStorage,
     appDependencies.themeService,
   );
+
   final router = appDependencies.router;
-  return DebugScreenWidgetModel(model, router);
+  final logger = appDependencies.logger;
+
+  return DebugScreenWidgetModel(model, router, logger);
 }
 
 /// Widget Model for [DebugScreen].
-class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
-    implements IDebugScreenWidgetModel {
+class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel> implements IDebugScreenWidgetModel {
   /// Empty string.
   static const String _emptyString = '';
 
   /// Class that coordinates navigation for the whole app.
   final AppRouter router;
+
+  final LogWriter _logger;
 
   late final _textEditingController = TextEditingController(
     text: model.proxyUrl,
@@ -63,6 +67,7 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
   DebugScreenWidgetModel(
     super._model,
     this.router,
+    this._logger,
   );
 
   @override
@@ -148,7 +153,7 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
   void _saveExampleLog() {
     final error = Exception('Some exception');
     final st = StackTrace.fromString('stackTraceString');
-    Logger.e(st.toString(), error);
+    _logger.e(error, st);
   }
 
   UrlType _resolveUrlType(String currentUrl) {

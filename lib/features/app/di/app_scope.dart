@@ -5,6 +5,7 @@ import 'package:dio/io.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/config/environment/environment.dart';
+import 'package:flutter_template/features/common/service/log_history/log_history_service_impl.dart';
 import 'package:flutter_template/features/common/service/theme/theme_service.dart';
 import 'package:flutter_template/features/common/service/theme/theme_service_impl.dart';
 import 'package:flutter_template/features/common/utils/analytics/amplitude/amplitude_analytic_tracker.dart';
@@ -17,7 +18,11 @@ import 'package:flutter_template/features/navigation/service/router.dart';
 import 'package:flutter_template/persistence/storage/theme_storage/theme_storage.dart';
 import 'package:flutter_template/persistence/storage/theme_storage/theme_storage_impl.dart';
 import 'package:flutter_template/util/default_error_handler.dart';
+import 'package:flutter_template/util/log_strategy/debug_log_strategy.dart';
+import 'package:flutter_template/util/log_strategy/log_history_strategy.dart';
+import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:surf_logger/surf_logger.dart' as surf;
 
 /// Scope of dependencies which need through all app's life.
 class AppScope implements IAppScope {
@@ -30,6 +35,7 @@ class AppScope implements IAppScope {
   late final AppRouter _router;
   late final IThemeService _themeService;
   late final IAnalyticsService _analyticsService;
+  late final surf.LogWriter _logger;
 
   @override
   late VoidCallback applicationRebuilder;
@@ -52,6 +58,9 @@ class AppScope implements IAppScope {
   @override
   IAnalyticsService get analyticsService => _analyticsService;
 
+  @override
+  surf.LogWriter get logger => _logger;
+
   late IThemeModeStorage _themeModeStorage;
 
   /// Create an instance [AppScope].
@@ -68,6 +77,8 @@ class AppScope implements IAppScope {
       FirebaseAnalyticTracker(MockFirebaseAnalytics()),
       AmplitudeAnalyticTracker(MockAmplitudeAnalytics()),
     ]);
+
+    _initLogger();
   }
 
   @override
@@ -116,6 +127,28 @@ class AppScope implements IAppScope {
   Future<void> _onThemeModeChanged() async {
     await _themeModeStorage.saveThemeMode(mode: _themeService.currentThemeMode);
   }
+
+  Future<void> _initLogger() async {
+    _logger = surf.Logger.withStrategies({
+      // TODO(init-project): Initialize CrashlyticsRemoteLogStrategy.
+      // CrashlyticsRemoteLogStrategy(),
+      DebugLogStrategy(),
+      if (Environment.instance().isQa) await _logHistoryStrategy(),
+    });
+
+    
+  }
+
+  /// Add strategy to logger for save logs history for qa environment.
+  Future<surf.LogStrategy> _logHistoryStrategy() async {
+    final file = await const LogHistoryServiceImpl().logHistoryFile();
+    final logger = Logger(
+      output: FileCustomOutput(file: file),
+      printer: PrettyPrinter(lineLength: 80, noBoxingByDefault: true),
+    );
+
+    return LogHistoryStrategy(logger);
+  }
 }
 
 /// App dependencies.
@@ -143,4 +176,7 @@ abstract class IAppScope {
 
   /// Analytics sending service
   IAnalyticsService get analyticsService;
+
+  /// Surf Logger
+  surf.LogWriter get logger;
 }

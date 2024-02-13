@@ -1,12 +1,14 @@
 import 'dart:io';
 
+import 'package:flutter_template/util/log_strategy/debug_log_strategy.dart';
 import 'package:logger/logger.dart';
-import 'package:surf_logger/surf_logger.dart' as surf;
 
+/// {@template log_history_strategy.class}
 /// Strategy for log output to file.
 /// * used for local debugging with qa environment.
-class LogHistoryStrategy extends surf.DebugLogStrategy {
-  /// Create an instance DebugLogStrategy.
+/// {@endtemplate}
+class LogHistoryStrategy extends DebugLogStrategy {
+  /// {@macro log_history_strategy.class}
   LogHistoryStrategy(super.logger);
 }
 

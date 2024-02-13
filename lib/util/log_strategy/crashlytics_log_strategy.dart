@@ -3,33 +3,20 @@ import 'package:flutter/foundation.dart';
 import 'package:surf_logger/surf_logger.dart';
 
 /// Strategy for sending logs to Crashlytics.
-class CrashlyticsRemoteLogStrategy extends RemoteUserLogStrategy {
+class CrashlyticsLogStrategy extends LogStrategy {
   FirebaseCrashlytics get _crashlytics => FirebaseCrashlytics.instance;
 
-  @override
+  /// Add user info.
   void setUser(String id, String username, String email) {
     _crashlytics.setUserIdentifier(id);
   }
 
-  @override
+  /// Delete user info.
   void clearUser() {
     _crashlytics.setUserIdentifier('');
   }
 
-  @override
-  void log(String message) {
-    _crashlytics.log(message);
-  }
-
-  @override
-  void logError(Exception error) {
-    _crashlytics.recordError(
-      error,
-      FlutterErrorDetails(exception: error).stack,
-    );
-  }
-
-  @override
+  /// Log info.
   void logInfo(String key, Object? info) {
     if (info != null) {
       if (info is num || info is String || info is bool) {
@@ -39,5 +26,23 @@ class CrashlyticsRemoteLogStrategy extends RemoteUserLogStrategy {
         _crashlytics.setCustomKey(key, info.toString());
       }
     }
+  }
+
+  @override
+  void log(Object message) {
+    _crashlytics.log(message.toString());
+  }
+
+  @override
+  void e(Object exception, [StackTrace? stackTrace]) {
+    _crashlytics.recordError(
+      exception,
+      FlutterErrorDetails(exception: exception).stack,
+    );
+  }
+
+  @override
+  void w(String message, [Exception? exception, StackTrace? stackTrace]) {
+    _crashlytics.log(message);
   }
 }
