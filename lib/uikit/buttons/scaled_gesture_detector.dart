@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_template/uikit/buttons/animated_pressed_scale.dart';
+import 'package:flutter_template/uikit/others/conditional_wrapper.dart';
 
 /// {@template scaled_gesture_detector.class}
 /// GestureDetector with click animation.
@@ -50,33 +51,33 @@ class _ScaledGestureDetectorState extends State<ScaledGestureDetector> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.onTap == null) {
-      return widget.child;
-    }
-
-    return GestureDetector(
-      onTap: widget.onTap,
-      onTapUp: (_) {
-        setState(() => isOnPress = false);
-        widget.isOnPressChanged?.call(isOnPress);
-        widget.onTapUp?.call();
-      },
-      onTapDown: (_) {
-        setState(() => isOnPress = true);
-        widget.isOnPressChanged?.call(isOnPress);
-        widget.onTapDown?.call();
-      },
-      onTapCancel: () {
-        setState(() => isOnPress = false);
-        widget.isOnPressChanged?.call(isOnPress);
-        widget.onTapCancel?.call();
-      },
-      behavior: HitTestBehavior.opaque,
-      child: AnimatedPressScale(
-        key: widget.key,
-        child: widget.child,
-        isOnPress: isOnPress,
+    return ConditionalWrapper(
+      condition: widget.onTap != null,
+      wrapper: (child) => GestureDetector(
+        onTap: widget.onTap,
+        onTapUp: (_) {
+          setState(() => isOnPress = false);
+          widget.isOnPressChanged?.call(isOnPress);
+          widget.onTapUp?.call();
+        },
+        onTapDown: (_) {
+          setState(() => isOnPress = true);
+          widget.isOnPressChanged?.call(isOnPress);
+          widget.onTapDown?.call();
+        },
+        onTapCancel: () {
+          setState(() => isOnPress = false);
+          widget.isOnPressChanged?.call(isOnPress);
+          widget.onTapCancel?.call();
+        },
+        behavior: HitTestBehavior.opaque,
+        child: AnimatedPressScale(
+          key: widget.key,
+          child: widget.child,
+          isOnPress: isOnPress,
+        ),
       ),
+      child: widget.child,
     );
   }
 }

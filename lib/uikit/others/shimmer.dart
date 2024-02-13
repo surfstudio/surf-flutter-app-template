@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_template/assets/colors/color_scheme.dart';
+import 'package:flutter_template/uikit/others/conditional_wrapper.dart';
 import 'package:shimmer/shimmer.dart' as shimmer;
 
 /// {@template shimmer.class}
@@ -19,11 +20,13 @@ class Shimmer extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = AppColorScheme.of(context);
 
-    if (!loading) return child;
-
-    return shimmer.Shimmer.fromColors(
-      baseColor: colorScheme.shimmer,
-      highlightColor: colorScheme.background,
+    return ConditionalWrapper(
+      condition: loading,
+      wrapper: (child) => shimmer.Shimmer.fromColors(
+        baseColor: colorScheme.shimmer,
+        highlightColor: colorScheme.background,
+        child: child,
+      ),
       child: child,
     );
   }
