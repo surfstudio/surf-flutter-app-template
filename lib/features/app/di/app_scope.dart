@@ -5,7 +5,6 @@ import 'package:dio/io.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/config/environment/environment.dart';
-import 'package:flutter_template/features/common/service/log_history/log_history_service_impl.dart';
 import 'package:flutter_template/features/common/service/theme/theme_service.dart';
 import 'package:flutter_template/features/common/service/theme/theme_service_impl.dart';
 import 'package:flutter_template/features/common/utils/analytics/amplitude/amplitude_analytic_tracker.dart';
@@ -20,7 +19,6 @@ import 'package:flutter_template/persistence/storage/theme_storage/theme_storage
 import 'package:flutter_template/util/default_error_handler.dart';
 import 'package:flutter_template/util/log_strategy/debug_log_strategy.dart';
 import 'package:flutter_template/util/log_strategy/log_history_strategy.dart';
-import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:surf_logger/surf_logger.dart' as surf;
 
@@ -130,24 +128,11 @@ class AppScope implements IAppScope {
 
   Future<void> _initLogger() async {
     _logger = surf.Logger.withStrategies({
-      // TODO(init-project): Initialize CrashlyticsRemoteLogStrategy.
+      // TODO(init-project): Initialize CrashlyticsRemoteLßogStrategy.
       // CrashlyticsRemoteLogStrategy(),
       DebugLogStrategy(),
-      if (Environment.instance().isQa) await _logHistoryStrategy(),
+      if (Environment.instance().isQa) await createLogHistoryStrategy(),
     });
-
-    
-  }
-
-  /// Add strategy to logger for save logs history for qa environment.
-  Future<surf.LogStrategy> _logHistoryStrategy() async {
-    final file = await const LogHistoryServiceImpl().logHistoryFile();
-    final logger = Logger(
-      output: FileCustomOutput(file: file),
-      printer: PrettyPrinter(lineLength: 80, noBoxingByDefault: true),
-    );
-
-    return LogHistoryStrategy(logger);
   }
 }
 

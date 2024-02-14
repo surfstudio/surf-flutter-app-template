@@ -7,7 +7,7 @@ class CrashlyticsLogStrategy extends LogStrategy {
   FirebaseCrashlytics get _crashlytics => FirebaseCrashlytics.instance;
 
   /// Add user info.
-  void setUser(String id, String username, String email) {
+  void setUser(String id) {
     _crashlytics.setUserIdentifier(id);
   }
 
