@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:analytics/core/analytic_action_performer.dart';
 import 'package:analytics/core/analytyc_service.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
@@ -28,7 +29,7 @@ class AppScope implements IAppScope {
   late final ErrorHandler _errorHandler;
   late final AppRouter _router;
   late final IThemeService _themeService;
-  late final AnalyticService _analyticsService;
+  late final AnalyticActionPerformer _analyticsService;
 
   @override
   late VoidCallback applicationRebuilder;
@@ -49,7 +50,7 @@ class AppScope implements IAppScope {
   SharedPreferences get sharedPreferences => _sharedPreferences;
 
   @override
-  AnalyticService get analyticsService => _analyticsService;
+  AnalyticActionPerformer get analyticsService => _analyticsService;
 
   late IThemeModeStorage _themeModeStorage;
 
@@ -141,5 +142,5 @@ abstract class IAppScope {
   SharedPreferences get sharedPreferences;
 
   /// Analytics sending service
-  AnalyticService get analyticsService;
+  AnalyticActionPerformer get analyticsService;
 }

@@ -1,4 +1,4 @@
-import 'package:analytics/core/analytyc_service.dart';
+import 'package:analytics/core/analytic_action_performer.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -27,7 +27,7 @@ DashScreenWidgetModel dashScreenWmFactory(
 class DashScreenWidgetModel extends WidgetModel<DashScreen, DashScreenModel>
     with ThemeWMMixin
     implements IDashScreenWidgetModel {
-  final AnalyticService _analyticsService;
+  final AnalyticActionPerformer _analyticsService;
 
   @override
   AppLocalizations get l10n => context.l10n;
@@ -35,7 +35,7 @@ class DashScreenWidgetModel extends WidgetModel<DashScreen, DashScreenModel>
   /// Create an instance [DashScreenWidgetModel].
   DashScreenWidgetModel({
     required DashScreenModel model,
-    required AnalyticService analyticsService,
+    required AnalyticActionPerformer analyticsService,
   })  : _analyticsService = analyticsService,
         super(model);
 
