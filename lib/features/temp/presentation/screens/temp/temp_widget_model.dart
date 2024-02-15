@@ -6,9 +6,9 @@ import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/common/utils/mixin/theme_mixin.dart';
 import 'package:flutter_template/features/navigation/domain/entity/app_route_paths.dart';
 import 'package:flutter_template/features/navigation/service/router.dart';
-import 'package:flutter_template/features/temp/di/template_scope.dart';
-import 'package:flutter_template/features/temp/presentation/screens/temp/temp_screen.dart';
+import 'package:flutter_template/features/temp/di/temp_scope.dart';
 import 'package:flutter_template/features/temp/presentation/screens/temp/temp_model.dart';
+import 'package:flutter_template/features/temp/presentation/screens/temp/temp_screen.dart';
 import 'package:provider/provider.dart';
 
 /// Factory for [TempWidgetModel].
@@ -16,12 +16,12 @@ TempWidgetModel initScreenWidgetModelFactory(
   BuildContext context,
 ) {
   final appScope = context.read<IAppScope>();
-  final tempScope = context.read<ITemplateScope>();
+  final tempScope = context.read<ITempScope>();
 
   final model = TempModel(
     Environment.instance(),
     appScope.themeService,
-    tempScope.templateRepo,
+    tempScope.templateRepository,
   );
 
   return TempWidgetModel(model);
@@ -30,7 +30,7 @@ TempWidgetModel initScreenWidgetModelFactory(
 /// Widget model for [TempScreen].
 class TempWidgetModel extends WidgetModel<TempScreen, ITempModel>
     with ThemeWMMixin
-    implements IDebugWidgetModel {
+    implements ITempWidgetModel {
   final _defaultNavBarItems = [
     const BottomNavigationBarItem(
       label: 'Dash screen',
@@ -91,7 +91,7 @@ class TempWidgetModel extends WidgetModel<TempScreen, ITempModel>
 }
 
 /// Interface of [TempWidgetModel].
-abstract class IDebugWidgetModel with ThemeIModelMixin implements IWidgetModel {
+abstract class ITempWidgetModel with ThemeIModelMixin implements IWidgetModel {
   /// Routes for [AutoTabsRouter.tabBar].
   List<PageRouteInfo<dynamic>> get routes;
 

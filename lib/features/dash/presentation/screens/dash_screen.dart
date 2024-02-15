@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/features/dash/presentation/screens/dash_screen_wm.dart';
+import 'package:flutter_template/features/dash/presentation/screens/dash_wm.dart';
 import 'package:flutter_template/features/navigation/domain/entity/app_route_names.dart';
 import 'package:flutter_template/l10n/app_localizations_x.dart';
 
@@ -9,7 +9,7 @@ import 'package:flutter_template/l10n/app_localizations_x.dart';
 @RoutePage(
   name: AppRouteNames.dashScreen,
 )
-class DashScreen extends ElementaryWidget<IDashScreenWidgetModel> {
+class DashScreen extends ElementaryWidget<IDashWidgetModel> {
   /// Create an instance [DashScreen].
   const DashScreen({
     Key? key,
@@ -17,7 +17,7 @@ class DashScreen extends ElementaryWidget<IDashScreenWidgetModel> {
   }) : super(wmFactory, key: key);
 
   @override
-  Widget build(IDashScreenWidgetModel wm) {
+  Widget build(IDashWidgetModel wm) {
     return ColoredBox(
       color: wm.colorScheme.background,
       child: Column(

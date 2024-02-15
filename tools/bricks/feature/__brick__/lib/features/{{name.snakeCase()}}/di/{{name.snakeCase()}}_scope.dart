@@ -1,13 +1,12 @@
-import 'package:flutter_template/features/{{name.snakeCase()}}/data/service/{{name.snakeCase()}}_service.dart';
-import 'package:flutter_template/features/{{name.snakeCase()}}/domain/repository/i_{{name.snakeCase()}}_repository.dart';
-import 'package:flutter_template/features/{{name.snakeCase()}}/domain/service/i_{{name.snakeCase()}}_service.dart';
+import 'package:flutter_template/features/{{name.snakeCase()}}/data/repositories/{{name.snakeCase()}}_repository.dart';
+import 'package:flutter_template/features/{{name.snakeCase()}}/domain/repositories/i_{{name.snakeCase()}}_repository.dart';
 import 'package:flutter_template/util/disposable_object/disposable_object.dart';
 import 'package:flutter_template/util/disposable_object/i_disposable_object.dart';
 
 /// Scope dependencies of the {{name.pascalCase()}} feature
 abstract interface class I{{name.pascalCase()}}Scope implements IDisposableObject {
-  /// {{name.pascalCase()}}Service
-  I{{name.pascalCase()}}Service get service;
+  /// {{name.pascalCase()}}Repository
+  I{{name.pascalCase()}}Repository get repository;
 }
 
 /// {@template {{name.snakeCase()}}_scope.class}
@@ -15,8 +14,13 @@ abstract interface class I{{name.pascalCase()}}Scope implements IDisposableObjec
 /// {@endtemplate}
 final class {{name.pascalCase()}}Scope extends DisposableObject implements I{{name.pascalCase()}}Scope {
   @override
-  late final I{{name.pascalCase()}}Service service;
+  late final I{{name.pascalCase()}}Repository repository;
+
+  /// Factory constructor for [I{{name.pascalCase()}}Scope]
+  factory {{name.pascalCase()}}Scope.create() {
+    return {{name.pascalCase()}}Scope(const {{name.pascalCase()}}Repository());
+  }
 
   /// {@macro {{name.snakeCase()}}_scope.class}
-  {{name.pascalCase()}}Scope({required I{{name.pascalCase()}}Repository repository}) : service = {{name.pascalCase()}}Service(repository: repository);
+  {{name.pascalCase()}}Scope(this.repository);
 }
