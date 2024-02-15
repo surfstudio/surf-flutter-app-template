@@ -6,7 +6,7 @@ import 'package:flutter_template/features/debug/presentation/screens/debug/debug
 import 'package:flutter_template/features/navigation/domain/entity/app_route_names.dart';
 
 /// Entry of template feature.
-@RoutePage(name: AppRouteNames.tempScreen)
+@RoutePage(name: AppRouteNames.debugScreen)
 class DebugFlow extends StatelessWidget implements AutoRouteWrapper {
   /// {@macro scan_biomarkers_entry.class}
   const DebugFlow({super.key});

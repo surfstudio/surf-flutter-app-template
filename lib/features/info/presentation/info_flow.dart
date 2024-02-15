@@ -6,7 +6,7 @@ import 'package:flutter_template/features/info/presentation/screens/info/info_sc
 import 'package:flutter_template/features/navigation/domain/entity/app_route_names.dart';
 
 /// Entry of template feature.
-@RoutePage(name: AppRouteNames.tempScreen)
+@RoutePage(name: AppRouteNames.infoScreen)
 class InfoFlow extends StatelessWidget implements AutoRouteWrapper {
   /// {@macro scan_biomarkers_entry.class}
   const InfoFlow({super.key});

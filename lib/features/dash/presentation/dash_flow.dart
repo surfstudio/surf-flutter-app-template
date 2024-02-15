@@ -6,7 +6,7 @@ import 'package:flutter_template/features/dash/presentation/screens/dash/dash_sc
 import 'package:flutter_template/features/navigation/domain/entity/app_route_names.dart';
 
 /// Entry of template feature.
-@RoutePage(name: AppRouteNames.tempScreen)
+@RoutePage(name: AppRouteNames.dashScreen)
 class DashFlow extends StatelessWidget implements AutoRouteWrapper {
   /// {@macro scan_biomarkers_entry.class}
   const DashFlow({super.key});
