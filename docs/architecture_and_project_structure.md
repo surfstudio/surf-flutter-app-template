@@ -34,12 +34,10 @@
         - {name/common}
             - di
             - domain
-                - entity
-                - repository *(interfaces)*
-                - service *(interfaces)*
+                - entities
+                - repositories *(interfaces)*
             - data
-              - repository *(implementations)*
-              - service *(implementations)*
+              - repositories *(implementations)*
               - mappers
             - presentation
                 - screens
@@ -92,17 +90,20 @@ The folder has the code of the project and consists of the following folders:
 
   The structure of features:
 
+
   - di — dependency injection containers.
   - domain — contains:
-      - entity — business data models.
-      - repository — repositories relevant to the feature.
-      - mappers — data-to-model (and vice versa) mappers.
-  - service — business logic.
-  - screens — screens relevant to the feature, with each screen in a separate self-titled folder containing the following in separate files:
-      - widget - ElementaryWidget.
-      - wm - WidgetModel.
-      - model - ElementaryModel.
-  - widgets — widgets relevant to the feature.
+    - entities — business data models.
+    - repositories — interfaces for repositories relevant to the feature.
+  - data - contains:
+    - mappers - classes for mapping data from DTO in entity and vice versa.
+    - repositories - repositories relevant to the feature.
+  - presentation - contains:
+    - screens — screens relevant to the feature, with each screen in a separate self-titled folder containing the following in separate files:
+        - widget - ElementaryWidget.
+        - wm - WidgetModel.
+        - model - ElementaryModel.
+    - widgets — widgets relevant to the feature.
   - utils — necessary utilities.
   
 - l10n — localization files.
