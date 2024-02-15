@@ -15,6 +15,12 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    TempRouter.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: WrappedRoute(child: const TempFlow()),
+      );
+    },
     DashRouter.name: (routeData) {
       final args = routeData.argsAs<DashRouterArgs>(
           orElse: () => const DashRouterArgs());
@@ -59,12 +65,6 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
-    TempRouter.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: WrappedRoute(child: const TemplateEntry()),
-      );
-    },
     UiKitRouter.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -72,6 +72,20 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
   };
+}
+
+/// generated route for
+/// [TempFlow]
+class TempRouter extends PageRouteInfo<void> {
+  const TempRouter({List<PageRouteInfo>? children})
+      : super(
+          TempRouter.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'TempRouter';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -233,20 +247,6 @@ class LogHistoryRouterArgs {
   String toString() {
     return 'LogHistoryRouterArgs{key: $key, wmFactory: $wmFactory}';
   }
-}
-
-/// generated route for
-/// [TemplateEntry]
-class TempRouter extends PageRouteInfo<void> {
-  const TempRouter({List<PageRouteInfo>? children})
-      : super(
-          TempRouter.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'TempRouter';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

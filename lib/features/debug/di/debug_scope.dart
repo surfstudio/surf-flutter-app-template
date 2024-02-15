@@ -1,4 +1,4 @@
-import 'package:flutter_template/features/debug/data/repositories/debug_repo.dart';
+import 'package:flutter_template/features/debug/data/repositories/debug_repository.dart';
 import 'package:flutter_template/features/debug/domain/repositories/i_debug_repository.dart';
 import 'package:flutter_template/util/disposable_object/disposable_object.dart';
 import 'package:flutter_template/util/disposable_object/i_disposable_object.dart';

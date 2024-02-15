@@ -1,5 +1,5 @@
-import 'package:flutter_template/features/dash/presentation/screens/dash_screen.dart';
-import 'package:flutter_template/features/dash/presentation/screens/dash_wm.dart';
+import 'package:flutter_template/features/dash/presentation/screens/dash/dash_screen.dart';
+import 'package:flutter_template/features/dash/presentation/screens/dash/dash_wm.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../core/utils/test_widget.dart';

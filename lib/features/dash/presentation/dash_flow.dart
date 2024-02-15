@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/features/common/widgets/di_scope/di_scope.dart';
 import 'package:flutter_template/features/dash/di/dash_scope.dart';
-import 'package:flutter_template/features/dash/presentation/screens/dash_screen.dart';
+import 'package:flutter_template/features/dash/presentation/screens/dash/dash_screen.dart';
 import 'package:flutter_template/features/navigation/domain/entity/app_route_names.dart';
 
 /// Entry of template feature.
