@@ -10,7 +10,7 @@ part 'router.gr.dart';
 /// When you add route with screen don't forget add imports of screen and screen_widget_model
 
 @AutoRouterConfig(
-  replaceInRouteName: 'ScreenWidget|Screen,Route',
+  replaceInRouteName: 'Flow,Route',
 )
 
 /// Main point of the application navigation.
