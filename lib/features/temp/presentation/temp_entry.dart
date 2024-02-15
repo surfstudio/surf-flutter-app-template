@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_template/features/common/widgets/di_scope/di_scope.dart';
 import 'package:flutter_template/features/navigation/domain/entity/app_route_names.dart';
 import 'package:flutter_template/features/temp/di/template_scope.dart';
-import 'package:flutter_template/features/temp/presentation/screens/temp_screen/temp_screen_export.dart';
+import 'package:flutter_template/features/temp/presentation/screens/temp/temp_screen.dart';
 
 /// Entry of template feature.
 @RoutePage(name: AppRouteNames.tempScreen)

@@ -1,8 +1,8 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/features/common/utils/mixin/theme_mixin.dart';
-import 'package:flutter_template/features/info/presentation/screens/info_screen.dart';
-import 'package:flutter_template/features/info/presentation/screens/info_screen_model.dart';
+import 'package:flutter_template/features/info/presentation/screens/info_screen/info_screen.dart';
+import 'package:flutter_template/features/info/presentation/screens/info_screen/info_screen_model.dart';
 
 /// Factory for [InfoScreenWidgetModel].
 InfoScreenWidgetModel infoScreenWmFactory(

@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/features/temp/presentation/screens/temp_screen/temp_screen_widget_model.dart';
+import 'package:flutter_template/features/temp/presentation/screens/temp/temp_widget_model.dart';
 
 /// Initialization screens (this can be a HomeScreen or SplashScreen for example).
-class TempScreen extends ElementaryWidget<TempScreenWidgetModel> {
+class TempScreen extends ElementaryWidget<TempWidgetModel> {
   /// Create an instance [TempScreen].
   const TempScreen({
     Key? key,
@@ -12,7 +12,7 @@ class TempScreen extends ElementaryWidget<TempScreenWidgetModel> {
   }) : super(wmFactory, key: key);
 
   @override
-  Widget build(TempScreenWidgetModel wm) {
+  Widget build(TempWidgetModel wm) {
     return AutoTabsRouter.tabBar(
       routes: wm.routes,
       builder: (context, child, controller) {

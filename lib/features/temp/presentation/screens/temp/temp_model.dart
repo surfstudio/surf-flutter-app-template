@@ -2,10 +2,10 @@ import 'package:elementary/elementary.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/common/service/theme/theme_service.dart';
 import 'package:flutter_template/features/temp/domain/repositories/i_template_repo.dart';
-import 'package:flutter_template/features/temp/presentation/screens/temp_screen/temp_screen.dart';
+import 'package:flutter_template/features/temp/presentation/screens/temp/temp_screen.dart';
 
 /// Model for [TempScreen].
-class TempScreenModel extends ElementaryModel implements ITempScreenModel {
+class TempModel extends ElementaryModel implements ITempModel {
   final Environment _environment;
   final IThemeService _themeService;
 
@@ -15,8 +15,8 @@ class TempScreenModel extends ElementaryModel implements ITempScreenModel {
   @override
   bool get isDebugMode => !_environment.isRelease;
 
-  /// Create an instance [TempScreenModel].
-  TempScreenModel(this._environment, this._themeService, this._templateRepo);
+  /// Create an instance [TempModel].
+  TempModel(this._environment, this._themeService, this._templateRepo);
 
   @override
   void switchTheme() {
@@ -24,8 +24,8 @@ class TempScreenModel extends ElementaryModel implements ITempScreenModel {
   }
 }
 
-/// Interface of [TempScreenModel].
-abstract class ITempScreenModel extends ElementaryModel {
+/// Interface of [TempModel].
+abstract class ITempModel extends ElementaryModel {
   /// Return value for app environment status.
   bool get isDebugMode;
 

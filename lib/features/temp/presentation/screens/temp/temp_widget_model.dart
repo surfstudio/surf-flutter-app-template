@@ -7,28 +7,28 @@ import 'package:flutter_template/features/common/utils/mixin/theme_mixin.dart';
 import 'package:flutter_template/features/navigation/domain/entity/app_route_paths.dart';
 import 'package:flutter_template/features/navigation/service/router.dart';
 import 'package:flutter_template/features/temp/di/template_scope.dart';
-import 'package:flutter_template/features/temp/presentation/screens/temp_screen/temp_screen.dart';
-import 'package:flutter_template/features/temp/presentation/screens/temp_screen/temp_screen_model.dart';
+import 'package:flutter_template/features/temp/presentation/screens/temp/temp_screen.dart';
+import 'package:flutter_template/features/temp/presentation/screens/temp/temp_model.dart';
 import 'package:provider/provider.dart';
 
-/// Factory for [TempScreenWidgetModel].
-TempScreenWidgetModel initScreenWidgetModelFactory(
+/// Factory for [TempWidgetModel].
+TempWidgetModel initScreenWidgetModelFactory(
   BuildContext context,
 ) {
   final appScope = context.read<IAppScope>();
   final tempScope = context.read<ITemplateScope>();
 
-  final model = TempScreenModel(
+  final model = TempModel(
     Environment.instance(),
     appScope.themeService,
     tempScope.templateRepo,
   );
 
-  return TempScreenWidgetModel(model);
+  return TempWidgetModel(model);
 }
 
 /// Widget model for [TempScreen].
-class TempScreenWidgetModel extends WidgetModel<TempScreen, ITempScreenModel>
+class TempWidgetModel extends WidgetModel<TempScreen, ITempModel>
     with ThemeWMMixin
     implements IDebugWidgetModel {
   final _defaultNavBarItems = [
@@ -67,8 +67,8 @@ class TempScreenWidgetModel extends WidgetModel<TempScreen, ITempScreenModel>
 
   bool get _isDebugMode => model.isDebugMode;
 
-  /// Create an instance [TempScreenWidgetModel].
-  TempScreenWidgetModel(super._model);
+  /// Create an instance [TempWidgetModel].
+  TempWidgetModel(super._model);
 
   @override
   String appBarTitle(RouteData topRoute) => _appBarTitle(topRoute);
@@ -90,7 +90,7 @@ class TempScreenWidgetModel extends WidgetModel<TempScreen, ITempScreenModel>
   }
 }
 
-/// Interface of [TempScreenWidgetModel].
+/// Interface of [TempWidgetModel].
 abstract class IDebugWidgetModel with ThemeIModelMixin implements IWidgetModel {
   /// Routes for [AutoTabsRouter.tabBar].
   List<PageRouteInfo<dynamic>> get routes;
