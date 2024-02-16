@@ -1,7 +1,20 @@
 # Architecture
 
-> [!NOTE]
-> A description of the architectural decisions that were made on the project should be added here.
+![architecture scheme](/images/architecture.png)
+
+### Presentation
+
+Logic in a presentation layer can be either business logic(Model) or UI logic(WidgetModel):
+* Business logic is the implementation of product requirements for application data. For example, bookmarking an article in a news reader app when a user clicks on a button.
+* UI logic is related to how to display UI state on the screen. For example, obtaining the right search bar hint when the user has selected a category, scrolling to a particular item in a list, or the navigation logic to a particular screen when the user clicks a button.
+
+### Repository
+
+The repository is designed to abstract the details of data storage. It makes the ElementaryModel independent of the specific data source. You need to interact with the repository through the interface from the ElementaryModel.
+
+### Dependency rule
+
+It is also necessary to observe the dependency rule - entities on one layer should depend only on neighboring layers, but not on entities on the same layer. For example, one repository should not depend on another repository. The direction of dependencies must also be followed. For example, repository depends on the data source, but not vice versa.
 
 # Project structure
 
