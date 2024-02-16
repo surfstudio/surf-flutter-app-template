@@ -1,6 +1,6 @@
 import 'package:elementary/elementary.dart';
-import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/common/service/theme/theme_service.dart';
+import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/temp/screens/temp_screen/temp_screen.dart';
 
 /// Model for [TempScreen].
