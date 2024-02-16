@@ -1,6 +1,6 @@
 # Architecture
 
-![architecture scheme](/images/architecture.png)
+![architecture scheme](docs/images/architecture.png)
 
 ### Presentation
 
