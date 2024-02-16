@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter_template/features/common/service/log_history/log_history_service.dart';
+import 'package:flutter_template/common/service/log_history/log_history_service.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 

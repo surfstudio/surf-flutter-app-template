@@ -28,10 +28,12 @@
         - strings
         - text
         - themes
+    - common
     - config
       - environment
+    - core
     - features
-        - {name/common}
+        - {name/shared}
             - di
             - domain
                 - entity
@@ -83,8 +85,10 @@ The folder has the code of the project and consists of the following folders:
 
 - api — the layer of data and interactions with the Rest API.
 - assets — string representation of the necessary assets, themes, colors, and strings.
+- common - general purpose files that are not directly related to the project and can be used in other projects. For example, utilities (utils folder), general purpose widgets (widgets folder).
 - config — project configuration, e.g., environment.
-- features — features used and implemented in the project. It’s the default location of all folders created for particular features, where each folder contains all of the files relevant to this or that feature. The “common” folder contains entities shared between several features or crucial for the entire app. Try to avoid adding files there unless absolutely necessary. 
+- core - contains files that are basic for building each feature in the project. In other words, the architecture of each feature of the project is fixed in the core folder, and the basic blocks for its construction are located.
+- features — features used and implemented in the project. It’s the default location of all folders created for particular features, where each folder contains all of the files relevant to this or that feature. The "shared" folder is organized according to the structure of the feature. It contains files that are used in several features and are directly related to the features of the project.
 
   The structure of features:
 
