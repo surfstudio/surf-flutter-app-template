@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_template/assets/colors/color_palette.dart';
+import 'package:flutter_template/uikit/colors/color_palette.dart';
 
 /// App brand color scheme.
 ///
