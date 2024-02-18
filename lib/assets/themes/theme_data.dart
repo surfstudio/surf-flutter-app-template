@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_template/assets/colors/color_scheme.dart';
-import 'package:flutter_template/assets/text/text_extention.dart';
+import 'package:flutter_template/uikit/colors/color_scheme.dart';
+import 'package:flutter_template/uikit/text/text_extention.dart';
 
 /// Class of the app themes data.
 abstract class AppThemeData {
