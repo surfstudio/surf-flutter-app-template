@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_template/assets/text/text_style.dart';
+import 'package:flutter_template/uikit/text/text_style.dart';
 
 /// App text style scheme.
 class AppTextTheme extends ThemeExtension<AppTextTheme> {
