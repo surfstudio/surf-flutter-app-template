@@ -120,7 +120,7 @@ Read more [here](https://api.flutter.dev/flutter/material/ThemeExtension-class.h
 
 #### Recommended practices
 
-You can define whatever `ThemeExtension` you want or use only `ThemeData`, but you also can use our semantic [`ColorScheme`](lib/assets/colors/color_scheme.dart).
+You can define whatever `ThemeExtension` you want or use only `ThemeData`, but you also can use our semantic [`ColorScheme`](lib/uikit/colors/color_scheme.dart).
 
 This scheme is inspired by Material Design and contains colors for primary, secondary, error, background, surface, onPrimary, onSecondary, onBackground, onSurface, onError, etc.
 
