@@ -12,11 +12,11 @@ import 'package:flutter_template/common/utils/analytics/mock/mock_amplitude_anal
 import 'package:flutter_template/common/utils/analytics/mock/mock_firebase_analytics.dart';
 import 'package:flutter_template/common/utils/analytics/service/analytics_service.dart';
 import 'package:flutter_template/common/utils/analytics/service/analytics_service_impl.dart';
+import 'package:flutter_template/common/utils/default_error_handler.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/navigation/service/router.dart';
 import 'package:flutter_template/persistence/storage/theme_storage/theme_storage.dart';
 import 'package:flutter_template/persistence/storage/theme_storage/theme_storage_impl.dart';
-import 'package:flutter_template/common/utils/default_error_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Scope of dependencies which need through all app's life.
