@@ -158,7 +158,7 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
   }
 }
 
-/// Interface of [DebugScreenWidgetModel].
+/// Interface for [DebugScreenWidgetModel].
 abstract class IDebugScreenWidgetModel implements IWidgetModel {
   /// Text Editing Controller.
   TextEditingController get proxyEditingController;

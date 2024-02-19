@@ -3,7 +3,7 @@ import 'package:flutter_template/features/info/domain/repositories/i_info_reposi
 import 'package:flutter_template/util/disposable_object/disposable_object.dart';
 import 'package:flutter_template/util/disposable_object/i_disposable_object.dart';
 
-/// Interface of Info DI Scope.
+/// Interface for Info DI Scope.
 abstract interface class IInfoScope implements IDisposableObject {
   /// Info repository
   abstract final IInfoRepository infoRepository;
@@ -12,13 +12,13 @@ abstract interface class IInfoScope implements IDisposableObject {
 /// {@template info_scope.class}
 /// Dependencies scope of Info module.
 /// {@endtemplate}
-class InfoScope extends DisposableObject implements IInfoScope {
+final class InfoScope extends DisposableObject implements IInfoScope {
   @override
   final IInfoRepository infoRepository;
 
   /// Factory constructor for [InfoScope]
   factory InfoScope.create() {
-    return InfoScope(InfoRepository());
+    return InfoScope(const InfoRepository());
   }
 
   /// {@macro info_scope.class}

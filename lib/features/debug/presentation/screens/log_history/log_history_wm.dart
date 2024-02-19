@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_template/features/debug/presentation/screens/log_history/log_history_model.dart';
 import 'package:flutter_template/features/debug/presentation/screens/log_history/log_history_screen.dart';
 
-/// Interface of [LogHistoryWm].
+/// Interface for [LogHistoryWm].
 abstract interface class ILogHistoryWm implements IWidgetModel {
   /// Listener current state for log history.
   ValueListenable<String> get logHistory;

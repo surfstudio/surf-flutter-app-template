@@ -2,7 +2,7 @@ import 'package:elementary/elementary.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/config/urls.dart';
-import 'package:flutter_template/features/debug/presentation/screens/debug/debug_widget_model.dart';
+import 'package:flutter_template/features/debug/presentation/screens/debug/debug_wm.dart';
 
 /// Debug screens.
 class DebugScreen extends ElementaryWidget<IDebugScreenWidgetModel> {

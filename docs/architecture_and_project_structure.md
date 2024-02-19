@@ -40,12 +40,18 @@
               - repositories *(implementations)*
               - mappers
             - presentation
-                - screens
-                    - {screen_name}
-                        - widget
-                        - wm
-                        - model
+              if feature contains multiple sub-features/screens
+                - {sub_feature_name/screen_name}
+                    - {sub_feature_name/screen_name}_widget.dart
+                    - {sub_feature_name/screen_name}_wm.dart
+                    - {sub_feature_name/screen_name}_model.dart
+              else 
+                - {sub_feature_name/screen_name}_widget.dart
+                - {sub_feature_name/screen_name}_wm.dart
+                - {sub_feature_name/screen_name}_model.dart
+
                 - widgets
+                {feature_name}_flow.dart
     - l10n
     - persistence
     - util
@@ -99,13 +105,19 @@ The folder has the code of the project and consists of the following folders:
     - mappers - classes for mapping data from DTO in entity and vice versa.
     - repositories - repositories relevant to the feature.
   - presentation - contains:
-    - screens — screens relevant to the feature, with each screen in a separate self-titled folder containing the following in separate files:
-        - widget - ElementaryWidget.
-        - wm - WidgetModel.
-        - model - ElementaryModel.
+   if feature contains multiple sub-features/screens
+    - {sub_feature_name/screen_name} - screens or sub-features relevant to the feature, with each screen in a separate self-titled folder containing the following in separate files:
+        - {sub_feature_name/screen_name}_widget.dart - ElementaryWidget.
+        - {sub_feature_name/screen_name}_wm.dart - WidgetModel.
+        - {sub_feature_name/screen_name}_model.dart - ElementaryModel.
+   else
+    - {sub_feature_name/screen_name}_widget.dart - ElementaryWidget.
+    - {sub_feature_name/screen_name}_wm.dart - WidgetModel.
+    - {sub_feature_name/screen_name}_model.dart - ElementaryModel.
+
     - widgets — widgets relevant to the feature.
+    - {feature_name}_flow.dart - the entry point to the feature.
   - utils — necessary utilities.
-  
 - l10n — localization files.
 - persistence — the layer of data and interactions with the database.
 - util — utilities used in the project.

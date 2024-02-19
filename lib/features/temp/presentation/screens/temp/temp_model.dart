@@ -5,7 +5,7 @@ import 'package:flutter_template/features/temp/domain/repositories/i_temp_reposi
 import 'package:flutter_template/features/temp/presentation/screens/temp/temp_screen.dart';
 
 /// Model for [TempScreen].
-class TempModel extends ElementaryModel implements ITempModel {
+final class TempModel extends ElementaryModel implements ITempModel {
   final Environment _environment;
   final IThemeService _themeService;
 
@@ -24,7 +24,7 @@ class TempModel extends ElementaryModel implements ITempModel {
   }
 }
 
-/// Interface of [TempModel].
+/// Interface for [TempModel].
 abstract class ITempModel extends ElementaryModel {
   /// Return value for app environment status.
   bool get isDebugMode;

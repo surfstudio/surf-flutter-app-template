@@ -1,2 +1,2 @@
-/// Interface of the template repository
+/// Interface for Temp repository
 abstract interface class ITempRepository{}

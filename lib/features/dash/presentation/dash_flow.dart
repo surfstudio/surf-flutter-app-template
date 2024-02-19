@@ -5,15 +5,17 @@ import 'package:flutter_template/features/dash/di/dash_scope.dart';
 import 'package:flutter_template/features/dash/presentation/screens/dash/dash_screen.dart';
 import 'package:flutter_template/features/navigation/domain/entity/app_route_names.dart';
 
-/// Entry of template feature.
+/// {@template dash_flow.class}
+/// Entry of dash feature.
+/// {@endtemplate}
 @RoutePage(name: AppRouteNames.dashScreen)
 class DashFlow extends StatelessWidget implements AutoRouteWrapper {
-  /// {@macro scan_biomarkers_entry.class}
+  /// {@macro dash_flow.class}
   const DashFlow({super.key});
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    return DiScope<DashScope>(
+    return DiScope<IDashScope>(
       factory: DashScope.create,
       dispose: (scope) => scope.dispose(),
       child: this,

@@ -5,13 +5,11 @@ import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/config/urls.dart';
 import 'package:flutter_template/features/common/service/theme/theme_service.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_screen.dart';
-import 'package:flutter_template/features/debug/presentation/screens/debug/debug_widget_model.dart';
+import 'package:flutter_template/features/debug/presentation/screens/debug/debug_wm.dart';
 import 'package:flutter_template/persistence/storage/config_storage/config_storage.dart';
 
-// ignore_for_file: avoid_positional_boolean_parameters
-
 /// Model for [DebugScreen].
-class DebugScreenModel extends ElementaryModel {
+final class DebugScreenModel extends ElementaryModel {
   /// Interface for handle error in business logic.
   final ErrorHandler errorHandler;
 

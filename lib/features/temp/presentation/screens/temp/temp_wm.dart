@@ -9,6 +9,7 @@ import 'package:flutter_template/features/navigation/service/router.dart';
 import 'package:flutter_template/features/temp/di/temp_scope.dart';
 import 'package:flutter_template/features/temp/presentation/screens/temp/temp_model.dart';
 import 'package:flutter_template/features/temp/presentation/screens/temp/temp_screen.dart';
+import 'package:flutter_template/l10n/app_localizations_x.dart';
 import 'package:provider/provider.dart';
 
 /// Factory for [TempWidgetModel].
@@ -28,24 +29,29 @@ TempWidgetModel initScreenWidgetModelFactory(
 }
 
 /// Widget model for [TempScreen].
-class TempWidgetModel extends WidgetModel<TempScreen, ITempModel>
-    with ThemeWMMixin
-    implements ITempWidgetModel {
-  final _defaultNavBarItems = [
-    const BottomNavigationBarItem(
-      label: 'Dash screen',
-      icon: Icon(Icons.flutter_dash),
-    ),
-    const BottomNavigationBarItem(
-      label: 'Info screen',
-      icon: Icon(Icons.info_outline),
-    ),
-  ];
+class TempWidgetModel extends WidgetModel<TempScreen, ITempModel> with ThemeWMMixin implements ITempWidgetModel {
+  late final List<BottomNavigationBarItem> _defaultNavBarItems;
 
-  final _debugNavBarItem = const BottomNavigationBarItem(
-    label: 'Debug screen',
-    icon: Icon(Icons.bug_report_outlined),
-  );
+  late final BottomNavigationBarItem _debugNavBarItem;
+
+  @override
+  void initWidgetModel() {
+    _defaultNavBarItems = [
+      BottomNavigationBarItem(
+        label: context.l10n.dashScreenNavBarItemLabel,
+        icon: const Icon(Icons.flutter_dash),
+      ),
+      BottomNavigationBarItem(
+        label: context.l10n.infoScreenNavBarItemLabel,
+        icon: const Icon(Icons.info_outline),
+      ),
+    ];
+    _debugNavBarItem = BottomNavigationBarItem(
+      label: context.l10n.debugScreenNavBarItemLabel,
+      icon: const Icon(Icons.bug_report_outlined),
+    );
+    super.initWidgetModel();
+  }
 
   @override
   List<PageRouteInfo> get routes => _routes;
@@ -90,7 +96,7 @@ class TempWidgetModel extends WidgetModel<TempScreen, ITempModel>
   }
 }
 
-/// Interface of [TempWidgetModel].
+/// Interface for [TempWidgetModel].
 abstract class ITempWidgetModel with ThemeIModelMixin implements IWidgetModel {
   /// Routes for [AutoTabsRouter.tabBar].
   List<PageRouteInfo<dynamic>> get routes;

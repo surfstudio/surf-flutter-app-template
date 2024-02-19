@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_screen.dart';
-import 'package:flutter_template/features/debug/presentation/screens/debug/debug_widget_model.dart';
+import 'package:flutter_template/features/debug/presentation/screens/debug/debug_wm.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../core/utils/test_widget.dart';

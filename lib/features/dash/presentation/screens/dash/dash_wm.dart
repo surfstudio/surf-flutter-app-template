@@ -45,7 +45,7 @@ class DashWidgetModel extends WidgetModel<DashScreen, DashModel>
   }
 }
 
-/// Interface of [IDashWidgetModel].
+/// Interface for [DashWidgetModel].
 abstract class IDashWidgetModel
     with ThemeIModelMixin
     implements IWidgetModel {

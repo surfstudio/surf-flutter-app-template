@@ -20,7 +20,7 @@ class InfoWidgetModel extends WidgetModel<InfoScreen, InfoModel>
   InfoWidgetModel(super._model);
 }
 
-/// Interface of [InfoWidgetModel].
+/// Interface for [InfoWidgetModel].
 abstract interface class IInfoWidgetModel
     with ThemeIModelMixin
     implements IWidgetModel {}

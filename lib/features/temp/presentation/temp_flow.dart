@@ -5,10 +5,12 @@ import 'package:flutter_template/features/navigation/domain/entity/app_route_nam
 import 'package:flutter_template/features/temp/di/temp_scope.dart';
 import 'package:flutter_template/features/temp/presentation/screens/temp/temp_screen.dart';
 
-/// Entry of template feature.
+/// {@template temp_flow.class}
+/// Entry of temp feature.
+/// {@endtemplate}
 @RoutePage(name: AppRouteNames.tempScreen)
 class TempFlow extends StatelessWidget implements AutoRouteWrapper {
-  /// {@macro scan_biomarkers_entry.class}
+  /// {@macro temp_flow.class}
   const TempFlow({super.key});
 
   @override

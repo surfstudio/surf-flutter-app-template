@@ -5,15 +5,17 @@ import 'package:flutter_template/features/debug/di/debug_scope.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_screen.dart';
 import 'package:flutter_template/features/navigation/domain/entity/app_route_names.dart';
 
-/// Entry of template feature.
+/// {@template debug_flow.class}
+/// Entry of debug feature.
+/// {@endtemplate}
 @RoutePage(name: AppRouteNames.debugScreen)
 class DebugFlow extends StatelessWidget implements AutoRouteWrapper {
-  /// {@macro scan_biomarkers_entry.class}
+  /// {@macro debug_flow.class}
   const DebugFlow({super.key});
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    return DiScope<DebugScope>(
+    return DiScope<IDebugScope>(
       factory: DebugScope.create,
       dispose: (scope) => scope.dispose(),
       child: this,

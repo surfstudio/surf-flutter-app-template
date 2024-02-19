@@ -1,2 +1,2 @@
-/// Interface of the Debug repository
+/// Interface for the Debug repository
 abstract interface class IDebugRepository{}

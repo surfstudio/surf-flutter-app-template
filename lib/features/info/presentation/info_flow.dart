@@ -5,15 +5,17 @@ import 'package:flutter_template/features/info/di/info_scope.dart';
 import 'package:flutter_template/features/info/presentation/screens/info/info_screen.dart';
 import 'package:flutter_template/features/navigation/domain/entity/app_route_names.dart';
 
-/// Entry of template feature.
+/// {@template info_flow.class}
+/// Entry of info feature.
+/// {@endtemplate}
 @RoutePage(name: AppRouteNames.infoScreen)
 class InfoFlow extends StatelessWidget implements AutoRouteWrapper {
-  /// {@macro scan_biomarkers_entry.class}
+  /// {@macro info_flow.class}
   const InfoFlow({super.key});
 
   @override
   Widget wrappedRoute(BuildContext context) {
-    return DiScope<InfoScope>(
+    return DiScope<IInfoScope>(
       factory: InfoScope.create,
       dispose: (scope) => scope.dispose(),
       child: this,
