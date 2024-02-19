@@ -3,6 +3,13 @@
 > [!NOTE]
 > A description of the architectural decisions that were made on the project should be added here.
 
+# Сatching errors
+
+The `Result` class is used to catch errors. It allows you to return either a successful result or a failure.
+
+The return type of all repository methods is set as `RequestOperation<T>` - typedef for asynchronous `Result`. Inside the method, if successful, `Result.ok(data)` is returned, and if an error occurs, `Result.failed(failure)` is returned. 
+The result of calling the repository method is processed in the `switch` in the `ElementaryModel`.
+
 # Project structure
 
 > - directories in italics are optional and may be present in some cases
