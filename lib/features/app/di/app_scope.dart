@@ -20,7 +20,7 @@ import 'package:flutter_template/util/default_error_handler.dart';
 import 'package:flutter_template/util/log_strategy/debug_log_strategy.dart';
 import 'package:flutter_template/util/log_strategy/log_history_strategy.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:surf_logger/surf_logger.dart' as surf;
+import 'package:surf_logger/surf_logger.dart';
 
 /// Scope of dependencies which need through all app's life.
 class AppScope implements IAppScope {
@@ -33,7 +33,7 @@ class AppScope implements IAppScope {
   late final AppRouter _router;
   late final IThemeService _themeService;
   late final IAnalyticsService _analyticsService;
-  late final surf.LogWriter _logger;
+  late final LogWriter _logger;
 
   @override
   late VoidCallback applicationRebuilder;
@@ -57,7 +57,7 @@ class AppScope implements IAppScope {
   IAnalyticsService get analyticsService => _analyticsService;
 
   @override
-  surf.LogWriter get logger => _logger;
+  LogWriter get logger => _logger;
 
   late IThemeModeStorage _themeModeStorage;
 
@@ -127,8 +127,8 @@ class AppScope implements IAppScope {
   }
 
   Future<void> _initLogger() async {
-    _logger = surf.Logger.withStrategies({
-      // TODO(init-project): Initialize CrashlyticsRemoteLßogStrategy.
+    _logger = Logger.withStrategies({
+      // TODO(init-project): Initialize CrashlyticsRemoteLogStrategy.
       // CrashlyticsRemoteLogStrategy(),
       DebugLogStrategy(),
       if (Environment.instance().isQa) await createLogHistoryStrategy(),
@@ -163,5 +163,5 @@ abstract class IAppScope {
   IAnalyticsService get analyticsService;
 
   /// Surf Logger
-  surf.LogWriter get logger;
+  LogWriter get logger;
 }
