@@ -27,7 +27,7 @@ use_references_list: true
 #   file_name: my_fonts
 
 # Location where all the generated references will be stored
-package: uikit/res
+package: assets
 
 groups:
   - path: assets/images
