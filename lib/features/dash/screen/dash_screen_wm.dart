@@ -1,13 +1,12 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
+import 'package:flutter_template/features/common/mixin/localization_mixin.dart';
 import 'package:flutter_template/features/common/mixin/theme_mixin.dart';
 import 'package:flutter_template/features/common/utils/analytics/event/common/track_analytics_example.dart';
 import 'package:flutter_template/features/common/utils/analytics/service/analytics_service.dart';
 import 'package:flutter_template/features/dash/screen/dash_screen.dart';
 import 'package:flutter_template/features/dash/screen/dash_screen_model.dart';
-import 'package:flutter_template/l10n/app_localizations_x.dart';
 import 'package:provider/provider.dart';
 
 /// Factory for [DashScreenWidgetModel].
@@ -25,12 +24,9 @@ DashScreenWidgetModel dashScreenWmFactory(
 
 /// Widget model for [DashScreen].
 class DashScreenWidgetModel extends WidgetModel<DashScreen, DashScreenModel>
-    with ThemeWMMixin
+    with LocalizationMixin, ThemeWMMixin
     implements IDashScreenWidgetModel {
   final IAnalyticsService _analyticsService;
-
-  @override
-  AppLocalizations get l10n => context.l10n;
 
   /// Create an instance [DashScreenWidgetModel].
   DashScreenWidgetModel({
@@ -46,10 +42,9 @@ class DashScreenWidgetModel extends WidgetModel<DashScreen, DashScreenModel>
 }
 
 /// Interface of [IDashScreenWidgetModel].
-abstract class IDashScreenWidgetModel with ThemeIModelMixin implements IWidgetModel {
-  /// Localization strings.
-  AppLocalizations get l10n;
-
+abstract class IDashScreenWidgetModel
+    with ILocalizationMixin, ThemeIModelMixin
+    implements IWidgetModel {
   /// Sending an analytics event
   void trackAnalyticsExample();
 }
