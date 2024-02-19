@@ -9,9 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/common/service/theme/theme_service.dart';
 import 'package:flutter_template/features/common/service/theme/theme_service_impl.dart';
-import 'package:flutter_template/features/common/utils/analytics/amplitude/amplitude_analytic_strategy.dart';
 import 'package:flutter_template/features/common/utils/analytics/firebase/firebase_analytic_strategy.dart';
-import 'package:flutter_template/features/common/utils/analytics/mock/mock_amplitude_analytics.dart';
 import 'package:flutter_template/features/common/utils/analytics/mock/mock_firebase_analytics.dart';
 import 'package:flutter_template/features/navigation/service/router.dart';
 import 'package:flutter_template/persistence/storage/theme_storage/theme_storage.dart';
@@ -64,9 +62,8 @@ class AppScope implements IAppScope {
     _router = AppRouter.instance();
     _themeModeStorage = ThemeModeStorageImpl(_sharedPreferences);
     _analyticsService = AnalyticService.withStrategies({
-      // TODO(init): can be removed MockFirebaseAnalytics and MockAmplitudeAnalytics, added for demo analytics track
+      // TODO(init): can be removed MockFirebaseAnalytics, added for demo analytics track
       FirebaseAnalyticStrategy(MockFirebaseAnalytics()),
-      AmplitudeAnalyticStrategy(MockAmplitudeAnalytics()),
     });
   }
 
