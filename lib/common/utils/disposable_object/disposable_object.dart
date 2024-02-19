@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter_template/util/disposable_object/i_disposable_object.dart';
+import 'package:flutter_template/common/utils/disposable_object/i_disposable_object.dart';
 
 /// Object that provides a method for resetting the state before destruction.
 abstract class DisposableObject implements IDisposableObject {
