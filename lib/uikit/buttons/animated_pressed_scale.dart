@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 const Duration _defaultDuration = Duration(milliseconds: 200);
 
-const double _defaultOnPressScale = 0.98;
+const double _defaultPressedScale = 0.98;
 
 /// {@template animated_press_scale.class}
 /// Implicit animation. Wrapper over [AnimatedScale].
@@ -15,11 +15,11 @@ class AnimatedPressScale extends StatelessWidget {
   final Widget child;
 
   /// Whether the button is currently being pressed.
-  final bool isOnPress;
+  final bool isPressed;
 
   /// {@macro animated_press_scale.class}
   const AnimatedPressScale({
-    required this.isOnPress,
+    required this.isPressed,
     required this.child,
     super.key,
   });
@@ -28,7 +28,7 @@ class AnimatedPressScale extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedScale(
       // When clicked, it reduces the content from the animation.
-      scale: isOnPress ? _defaultOnPressScale : 1,
+      scale: isPressed ? _defaultPressedScale : 1,
       duration: _defaultDuration,
       child: child,
     );

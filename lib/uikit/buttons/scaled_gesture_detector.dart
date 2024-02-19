@@ -21,17 +21,18 @@ class ScaledGestureDetector extends StatefulWidget {
   /// The element that will shrink when clicked.
   final Widget child;
 
-  /// Callback when the click status changes.
-  final ValueChanged<bool>? isOnPressChanged;
+
+  /// How to behave during hit tests.
+  final HitTestBehavior? behavior;
 
   /// {@macro scaled_gesture_detector.class}
   const ScaledGestureDetector({
     required this.child,
-    this.isOnPressChanged,
     this.onTap,
     this.onTapCancel,
     this.onTapDown,
     this.onTapUp,
+    this.behavior,
     super.key,
   });
 
@@ -40,13 +41,13 @@ class ScaledGestureDetector extends StatefulWidget {
 }
 
 class _ScaledGestureDetectorState extends State<ScaledGestureDetector> {
-  late bool isOnPress;
+  late bool isPressed;
 
   @override
   void initState() {
     super.initState();
 
-    isOnPress = false;
+    isPressed = false;
   }
 
   @override
@@ -56,25 +57,22 @@ class _ScaledGestureDetectorState extends State<ScaledGestureDetector> {
       wrapper: (child) => GestureDetector(
         onTap: widget.onTap,
         onTapUp: (_) {
-          setState(() => isOnPress = false);
-          widget.isOnPressChanged?.call(isOnPress);
+          setState(() => isPressed = false);
           widget.onTapUp?.call();
         },
         onTapDown: (_) {
-          setState(() => isOnPress = true);
-          widget.isOnPressChanged?.call(isOnPress);
+          setState(() => isPressed = true);
           widget.onTapDown?.call();
         },
         onTapCancel: () {
-          setState(() => isOnPress = false);
-          widget.isOnPressChanged?.call(isOnPress);
+          setState(() => isPressed = false);
           widget.onTapCancel?.call();
         },
-        behavior: HitTestBehavior.opaque,
+        behavior: widget.behavior ?? HitTestBehavior.opaque,
         child: AnimatedPressScale(
           key: widget.key,
           child: widget.child,
-          isOnPress: isOnPress,
+          isPressed: isPressed,
         ),
       ),
       child: widget.child,
