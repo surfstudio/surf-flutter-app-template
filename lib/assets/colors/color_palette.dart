@@ -155,4 +155,9 @@ abstract class ColorPalette {
   ///
   /// https://www.color-name.com/hex/83C000.
   static const Color appleGreen = Color(0xFF83C000);
+
+  /// Platinum
+  ///
+  /// https://www.color-name.com/hex/e7e4e0
+  static const Color platinum = Color(0xFFE7E4E0);
 }
