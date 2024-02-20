@@ -4,13 +4,13 @@
 
 ### Presentation
 
-Logic in a presentation layer can be either business logic(Model) or UI logic(WidgetModel):
-* Business logic is the implementation of product requirements for application data. For example, bookmarking an article in a news reader app when a user clicks on a button.
-* UI logic is related to how to display UI state on the screen. For example, obtaining the right search bar hint when the user has selected a category, scrolling to a particular item in a list, or the navigation logic to a particular screen when the user clicks a button.
+Logic in a presentation layer can be either **Business logic**(Elementary Model) or **UI logic**(Widget Model):
+* **Business logic** is the implementation of product requirements for application data. For example, adding an item to the cart when the user clicks on a button.
+* **UI logic** is related to how to display UI state on the screen. For example, displaying or hiding the load indicator depending on the data load status or showing a snack bar.
 
 ### Repository
 
-The repository is designed to abstract the details of data storage. It makes the ElementaryModel independent of the specific data source. You need to interact with the repository through the interface from the ElementaryModel.
+The repository is designed to abstract the details of data storage. It makes the `ElementaryModel` independent of the specific data source. You need to interact with the repository from the `ElementaryModel` through the interface.
 
 ### Dependency rule
 
