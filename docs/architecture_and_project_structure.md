@@ -40,18 +40,24 @@
                 - entities
                 - repositories *(interfaces)*
             - presentation
-              if feature contains multiple sub-features/screens
+
+              **if feature contains multiple sub-features/screens**
+
                 - {sub_feature_name/screen_name}
                     - {sub_feature_name/screen_name}_widget.dart
                     - {sub_feature_name/screen_name}_wm.dart
                     - {sub_feature_name/screen_name}_model.dart
-              else 
+                    - {sub_feature_name}_flow.dart
+                - widgets
+
+              **else** 
+
                 - {feature_name}_widget.dart
                 - {feature_name}_wm.dart
                 - {feature_name}_model.dart
-
+                - {feature_name}_flow.dart
                 - widgets
-                {feature_name}_flow.dart
+
     - l10n
     - persistence
     - util
@@ -105,18 +111,22 @@ The folder has the code of the project and consists of the following folders:
     - entities — business data models.
     - repositories — interfaces for repositories relevant to the feature.
   - presentation - contains:
-   if feature contains multiple sub-features/screens
+
+   **if feature contains multiple sub-features/screens**
+
     - {sub_feature_name/screen_name} - screens or sub-features relevant to the feature, with each screen in a separate self-titled folder containing the following in separate files:
         - {sub_feature_name/screen_name}_widget.dart - ElementaryWidget.
         - {sub_feature_name/screen_name}_wm.dart - WidgetModel.
         - {sub_feature_name/screen_name}_model.dart - ElementaryModel.
         - {sub_feature_name}_flow.dart - the entry point to the sub-feature.
-   else
+    - widgets — widgets relevant to the feature.
+    
+   **else**
+
     - {feature_name}_widget.dart - ElementaryWidget.
     - {feature_name}_wm.dart - WidgetModel.
     - {feature_name}_model.dart - ElementaryModel.
     - {feature_name}_flow.dart - the entry point to the feature.
-
     - widgets — widgets relevant to the feature.
   - utils — necessary utilities.
 - l10n — localization files.
