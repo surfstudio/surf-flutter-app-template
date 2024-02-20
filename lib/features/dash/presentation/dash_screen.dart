@@ -1,6 +1,6 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/features/dash/presentation/screens/dash/dash_wm.dart';
+import 'package:flutter_template/features/dash/presentation/dash_wm.dart';
 import 'package:flutter_template/l10n/app_localizations_x.dart';
 
 /// Main widget for DashScreen feature.
