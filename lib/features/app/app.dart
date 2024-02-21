@@ -5,8 +5,6 @@ import 'package:flutter_template/common/service/theme/theme_service.dart';
 import 'package:flutter_template/common/widgets/di_scope/di_scope.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
-import 'package:flutter_template/features/common/service/theme/theme_service.dart';
-import 'package:flutter_template/features/common/widgets/di_scope/di_scope.dart';
 import 'package:flutter_template/l10n/app_localizations.g.dart';
 import 'package:flutter_template/persistence/storage/config_storage/config_storage_impl.dart';
 
