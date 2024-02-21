@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_template/uikit/buttons/animated_pressed_scale.dart';
+import 'package:flutter_template/uikit/others/conditional_wrapper.dart';
 
 /// {@template scaled_gesture_detector.class}
 /// GestureDetector with click animation.
@@ -20,17 +21,18 @@ class ScaledGestureDetector extends StatefulWidget {
   /// The element that will shrink when clicked.
   final Widget child;
 
-  /// Callback when the click status changes.
-  final ValueChanged<bool>? isOnPressChanged;
+
+  /// How to behave during hit tests.
+  final HitTestBehavior? behavior;
 
   /// {@macro scaled_gesture_detector.class}
   const ScaledGestureDetector({
     required this.child,
-    this.isOnPressChanged,
     this.onTap,
     this.onTapCancel,
     this.onTapDown,
     this.onTapUp,
+    this.behavior,
     super.key,
   });
 
@@ -39,44 +41,41 @@ class ScaledGestureDetector extends StatefulWidget {
 }
 
 class _ScaledGestureDetectorState extends State<ScaledGestureDetector> {
-  late bool isOnPress;
+  late bool isPressed;
 
   @override
   void initState() {
     super.initState();
 
-    isOnPress = false;
+    isPressed = false;
   }
 
   @override
   Widget build(BuildContext context) {
-    if (widget.onTap == null) {
-      return widget.child;
-    }
-
-    return GestureDetector(
-      onTap: widget.onTap,
-      onTapUp: (_) {
-        setState(() => isOnPress = false);
-        widget.isOnPressChanged?.call(isOnPress);
-        widget.onTapUp?.call();
-      },
-      onTapDown: (_) {
-        setState(() => isOnPress = true);
-        widget.isOnPressChanged?.call(isOnPress);
-        widget.onTapDown?.call();
-      },
-      onTapCancel: () {
-        setState(() => isOnPress = false);
-        widget.isOnPressChanged?.call(isOnPress);
-        widget.onTapCancel?.call();
-      },
-      behavior: HitTestBehavior.opaque,
-      child: AnimatedPressScale(
-        key: widget.key,
-        child: widget.child,
-        isOnPress: isOnPress,
+    return ConditionalWrapper(
+      condition: widget.onTap != null,
+      wrapper: (child) => GestureDetector(
+        onTap: widget.onTap,
+        onTapUp: (_) {
+          setState(() => isPressed = false);
+          widget.onTapUp?.call();
+        },
+        onTapDown: (_) {
+          setState(() => isPressed = true);
+          widget.onTapDown?.call();
+        },
+        onTapCancel: () {
+          setState(() => isPressed = false);
+          widget.onTapCancel?.call();
+        },
+        behavior: widget.behavior ?? HitTestBehavior.opaque,
+        child: AnimatedPressScale(
+          key: widget.key,
+          child: widget.child,
+          isPressed: isPressed,
+        ),
       ),
+      child: widget.child,
     );
   }
 }

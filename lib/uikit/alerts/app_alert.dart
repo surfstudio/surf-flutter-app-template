@@ -24,18 +24,20 @@ class AppAlert extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final actions = this.actions.map((action) => action.build(context)).toList();
+
     if (Platform.isIOS) {
       return CupertinoAlertDialog(
         title: title,
         content: content,
-        actions: actions.map((action) => action.build(context)).toList(),
-      );
-    } else {
-      return AlertDialog(
-        title: title,
-        content: content,
-        actions: actions.map((action) => action.build(context)).toList(),
+        actions: actions,
       );
     }
+    
+    return AlertDialog(
+      title: title,
+      content: content,
+      actions: actions,
+    );
   }
 }
