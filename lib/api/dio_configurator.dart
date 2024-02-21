@@ -1,18 +1,20 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
+import 'package:dio/io.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 
-/// Базовый класс с настройкой клиента [Dio].
+/// {@template dio_configurator.class}
+/// The base class with client configuration of [Dio].
+/// {@endtemplate}
 class AppDioConfigurator {
   final Environment _environment;
 
-  /// Дополнительные интерсепторы для Dio.
-  Iterable<Interceptor> additionalInterceptors = [];
-
-  /// Инициализация клиента.
+  /// {@macro dio_configurator.class}
   AppDioConfigurator(this._environment);
 
-  /// Создание клиента [Dio].
-  Dio create() {
+  /// Creating a client [Dio].
+  Dio create(Iterable<Interceptor> additionalInterceptors) {
     const timeout = Duration(seconds: 30);
 
     final dio = Dio();
@@ -23,9 +25,9 @@ class AppDioConfigurator {
       ..receiveTimeout = timeout
       ..sendTimeout = timeout;
 
-    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-        (client) {
-      final proxyUrl = Environment.instance().config.proxyUrl;
+    (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
+      final client = HttpClient();
+      final proxyUrl = _environment.config.proxyUrl;
       if (proxyUrl != null && proxyUrl.isNotEmpty) {
         client
           ..findProxy = (uri) {
@@ -41,7 +43,7 @@ class AppDioConfigurator {
 
     dio.interceptors.addAll(additionalInterceptors);
 
-    if (Environment.instance().isDebug) {
+    if (_environment.isDebug) {
       dio.interceptors.add(LogInterceptor(
         requestBody: true,
         responseBody: true,

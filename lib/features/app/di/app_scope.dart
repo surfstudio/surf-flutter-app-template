@@ -1,9 +1,7 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
-import 'package:dio/io.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_template/api/dio_configurator.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/common/service/theme/theme_service.dart';
 import 'package:flutter_template/features/common/service/theme/theme_service_impl.dart';
@@ -30,6 +28,8 @@ class AppScope implements IAppScope {
   late final AppRouter _router;
   late final IThemeService _themeService;
   late final IAnalyticsService _analyticsService;
+
+  final AppDioConfigurator _dioConfigurator = AppDioConfigurator(Environment.instance());
 
   @override
   late VoidCallback applicationRebuilder;
@@ -59,7 +59,7 @@ class AppScope implements IAppScope {
     /// List interceptor. Fill in as needed.
     final additionalInterceptors = <Interceptor>[];
 
-    _dio = _initDio(additionalInterceptors);
+    _dio = _dioConfigurator.create(additionalInterceptors);
     _errorHandler = DefaultErrorHandler();
     _router = AppRouter.instance();
     _themeModeStorage = ThemeModeStorageImpl(_sharedPreferences);
@@ -75,42 +75,6 @@ class AppScope implements IAppScope {
     final theme = await ThemeModeStorageImpl(_sharedPreferences).getThemeMode() ?? _themeByDefault;
     _themeService = ThemeServiceImpl(theme);
     _themeService.addListener(_onThemeModeChanged);
-  }
-
-  Dio _initDio(Iterable<Interceptor> additionalInterceptors) {
-    const timeout = Duration(seconds: 30);
-
-    final dio = Dio();
-
-    dio.options
-      ..baseUrl = Environment.instance().config.url
-      ..connectTimeout = timeout
-      ..receiveTimeout = timeout
-      ..sendTimeout = timeout;
-
-    (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
-      final client = HttpClient();
-      final proxyUrl = Environment.instance().config.proxyUrl;
-      if (proxyUrl != null && proxyUrl.isNotEmpty) {
-        client
-          ..findProxy = (uri) {
-            return 'PROXY $proxyUrl';
-          }
-          ..badCertificateCallback = (_, __, ___) {
-            return true;
-          };
-      }
-
-      return client;
-    };
-
-    dio.interceptors.addAll(additionalInterceptors);
-
-    if (Environment.instance().isDebug) {
-      dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
-    }
-
-    return dio;
   }
 
   Future<void> _onThemeModeChanged() async {
