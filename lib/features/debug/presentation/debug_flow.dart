@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/features/common/widgets/di_scope/di_scope.dart';
+import 'package:flutter_template/common/widgets/di_scope/di_scope.dart';
 import 'package:flutter_template/features/debug/di/debug_scope.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_screen.dart';
 import 'package:flutter_template/features/navigation/domain/entity/app_route_names.dart';

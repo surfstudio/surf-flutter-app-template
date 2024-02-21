@@ -1,7 +1,7 @@
+import 'package:flutter_template/common/utils/disposable_object/disposable_object.dart';
+import 'package:flutter_template/common/utils/disposable_object/i_disposable_object.dart';
 import 'package:flutter_template/features/debug/data/repositories/debug_repository.dart';
 import 'package:flutter_template/features/debug/domain/repositories/i_debug_repository.dart';
-import 'package:flutter_template/util/disposable_object/disposable_object.dart';
-import 'package:flutter_template/util/disposable_object/i_disposable_object.dart';
 
 /// Interface for Debug DI Scope.
 abstract interface class IDebugScope implements IDisposableObject {

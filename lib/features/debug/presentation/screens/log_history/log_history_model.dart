@@ -1,5 +1,5 @@
 import 'package:elementary/elementary.dart';
-import 'package:flutter_template/features/common/service/log_history/log_history_service_impl.dart';
+import 'package:flutter_template/common/service/log_history/log_history_service_impl.dart';
 import 'package:flutter_template/features/debug/presentation/screens/log_history/log_history_screen.dart';
 
 /// Model for [LogHistoryScreen].

@@ -1,6 +1,6 @@
 import 'package:elementary/elementary.dart';
+import 'package:flutter_template/common/service/theme/theme_service.dart';
 import 'package:flutter_template/config/environment/environment.dart';
-import 'package:flutter_template/features/common/service/theme/theme_service.dart';
 import 'package:flutter_template/features/temp/domain/repositories/i_temp_repository.dart';
 import 'package:flutter_template/features/temp/presentation/screens/temp/temp_screen.dart';
 
