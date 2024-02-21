@@ -1,15 +1,15 @@
 import 'package:logger/logger.dart';
-import 'package:surf_logger/surf_logger.dart' as surf;
+import 'package:surf_logger/surf_logger.dart' as surf_logger;
 
 /// {@template debug_log_strategy.class}
 /// Strategy for log output to console.
 /// * used for local debugging
 /// {@endtemplate}
-class DebugLogStrategy extends surf.LogStrategy {
+class DebugLogStrategy extends surf_logger.LogStrategy {
   final Logger _logger;
 
   /// {@macro debug_log_strategy.class}
-  DebugLogStrategy([Logger? logger]) : _logger = logger ??= Logger(printer: PrettyPrinter(methodCount: 0));
+  DebugLogStrategy(this._logger);
 
   @override
   void e(Object exception, [StackTrace? stackTrace]) {
