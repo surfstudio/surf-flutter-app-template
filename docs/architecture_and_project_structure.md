@@ -6,7 +6,7 @@
 
 Logic in a presentation layer can be either **Business logic**(Elementary Model) or **UI logic**(Widget Model):
 * **Business logic** is the implementation of product requirements for application data. For example, adding an item to the cart when the user clicks on a button.
-* **UI logic** is related to how to display UI state on the screen. For example, displaying or hiding the load indicator depending on the data load status or showing a snack bar.
+* **UI logic** is related to how to display UI state on the screen. For example, navigation logic to a screen when the user clicks a button, or showing a snack bar.
 
 ### Repository
 
