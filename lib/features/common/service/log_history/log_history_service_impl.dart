@@ -32,6 +32,6 @@ class LogHistoryServiceImpl implements LogHistoryService {
   Future<File> logHistoryFile() async {
     final directory = await getApplicationDocumentsDirectory();
     final fullPath = join(directory.path, _fileName);
-    return File(fullPath);
+    return File(fullPath).create();
   }
 }
