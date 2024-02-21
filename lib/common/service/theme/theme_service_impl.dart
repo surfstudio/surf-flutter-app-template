@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_template/features/common/service/theme/theme_service.dart';
+import 'package:flutter_template/common/service/theme/theme_service.dart';
 
 /// A service that stores and retrieves app theme mode.
 class ThemeServiceImpl extends IThemeService {

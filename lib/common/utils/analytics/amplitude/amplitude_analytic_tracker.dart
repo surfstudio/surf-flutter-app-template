@@ -1,19 +1,17 @@
 import 'package:analytics/core/analytic_action.dart';
 import 'package:analytics/core/analytic_action_performer.dart';
-import 'package:flutter_template/features/common/utils/analytics/base/analytic_event.dart';
-import 'package:flutter_template/features/common/utils/analytics/mock/mock_firebase_analytics.dart';
+import 'package:flutter_template/common/utils/analytics/base/analytic_event.dart';
+import 'package:flutter_template/common/utils/analytics/mock/mock_amplitude_analytics.dart';
 
-/// A class for sending analytics data to Firebase
-class FirebaseAnalyticTracker implements AnalyticActionPerformer<AnalyticEvent> {
-  /// The instance of MockFirebaseAnalytics used for sending analytics data.
-  final MockFirebaseAnalytics _analytics;
+/// A class for sending analytics data to Amplitude.
+class AmplitudeAnalyticTracker implements AnalyticActionPerformer<AnalyticEvent> {
+  /// The instance of MockAmplitudeAnalytics used for sending analytics data.
+  final MockAmplitudeAnalytics _analytics;
 
-  /// Constructs an instance of [FirebaseAnalyticTracker].
+  /// Constructs an instance of [AmplitudeAnalyticTracker].
   ///
   /// The [_analytics] parameter is required to initialize the tracker.
-  const FirebaseAnalyticTracker(
-    this._analytics,
-  );
+  AmplitudeAnalyticTracker(this._analytics);
 
   /// Checks if the provided [action] can be handled by this tracker.
   ///

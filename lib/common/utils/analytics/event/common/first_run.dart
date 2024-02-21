@@ -1,5 +1,5 @@
-import 'package:flutter_template/features/common/utils/analytics/base/analytic_event.dart';
-import 'package:flutter_template/features/common/utils/analytics/ids_analytics_events.dart';
+import 'package:flutter_template/common/utils/analytics/base/analytic_event.dart';
+import 'package:flutter_template/common/utils/analytics/ids_analytics_events.dart';
 
 /// Represents an event that occurs during the first launch of the app.
 class FirstRunEvent implements AnalyticEvent {

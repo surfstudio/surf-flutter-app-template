@@ -2,8 +2,8 @@ import 'package:analytics/core/analytic_action.dart';
 import 'package:analytics/core/analytic_action_performer.dart';
 import 'package:analytics/core/analytic_service.dart';
 import 'package:analytics/impl/default_analytic_service.dart';
-import 'package:flutter_template/features/common/utils/analytics/base/analytic_event.dart';
-import 'package:flutter_template/features/common/utils/analytics/service/analytics_service.dart';
+import 'package:flutter_template/common/utils/analytics/base/analytic_event.dart';
+import 'package:flutter_template/common/utils/analytics/service/analytics_service.dart';
 
 /// An analytics service implementation.
 class AnalyticsServiceImpl implements IAnalyticsService {

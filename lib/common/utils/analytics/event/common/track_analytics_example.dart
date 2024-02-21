@@ -1,5 +1,5 @@
-import 'package:flutter_template/features/common/utils/analytics/base/analytic_event.dart';
-import 'package:flutter_template/features/common/utils/analytics/ids_analytics_events.dart';
+import 'package:flutter_template/common/utils/analytics/base/analytic_event.dart';
+import 'package:flutter_template/common/utils/analytics/ids_analytics_events.dart';
 
 /// An example event for demonstrating the functionality of the analytics tracking service.
 class TrackAnalyticsExampleEvent implements AnalyticEvent {
