@@ -10,4 +10,3 @@ analyzer:
     - lib/**/*.gr.dart
     - lib/assets/**
     - tools/bricks/**/__brick__/**
-    - lib/l10n/**

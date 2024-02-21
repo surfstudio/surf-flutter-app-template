@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_template/assets/colors/color_scheme.dart';
 import 'package:flutter_template/assets/text/text_extention.dart';
-import 'package:flutter_template/l10n/app_localizations.dart';
+import 'package:flutter_template/l10n/app_localizations.g.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
