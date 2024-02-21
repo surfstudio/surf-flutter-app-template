@@ -1,11 +1,11 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_template/common/service/theme/theme_service.dart';
 import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/config/urls.dart';
-import 'package:flutter_template/features/common/service/theme/theme_service.dart';
-import 'package:flutter_template/features/debug/screens/debug_screen/debug_screen_model.dart';
-import 'package:flutter_template/features/debug/screens/debug_screen/debug_screen_widget_model.dart';
+import 'package:flutter_template/features/debug/presentation/screens/debug/debug_model.dart';
+import 'package:flutter_template/features/debug/presentation/screens/debug/debug_wm.dart';
 import 'package:flutter_template/persistence/storage/config_storage/config_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
