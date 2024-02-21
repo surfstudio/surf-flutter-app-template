@@ -3,13 +3,16 @@ import 'package:flutter_template/uikit/text/text_style.dart';
 
 /// App text style scheme.
 class AppTextTheme extends ThemeExtension<AppTextTheme> {
-  /// Text style 45/52.
+  /// Text style with a size of 45/52.
+  /// Use for short, important text or numerals
   final TextStyle display;
 
-  /// Text style 28/36.
+  /// Text style with a size of 28/36.
+  /// Use for marking primary passages of text or important regions of content.
   final TextStyle headline;
 
-  /// Text style 12/16.
+  /// Text style with a size of 12/16.
+  /// Use for things like the text inside components or for very small text in the content body.
   final TextStyle label;
 
   AppTextTheme._({
@@ -61,4 +64,4 @@ class AppTextTheme extends ThemeExtension<AppTextTheme> {
 }
 
 Never _throwThemeExceptionFromFunc(BuildContext context) =>
-    throw Exception('$AppTextTheme не найдена в $context');
+    throw Exception('$AppTextTheme not found in $context');
