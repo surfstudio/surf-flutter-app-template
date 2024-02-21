@@ -10,6 +10,11 @@ The `Result` class is used to catch errors. It allows you to return either a suc
 The return type of all repository methods is set as `RequestOperation<T>` - typedef for asynchronous `Result`. Inside the method, if successful, `Result.ok(data)` is returned, and if an error occurs, `Result.failed(failure)` is returned. 
 The result of calling the repository method is processed in the `switch` in the `ElementaryModel`.
 
+`Either` was chosen instead of `rethrow` due to the advantages of `Either`, which make the code more reliable and less error-prone:
+
+- The `Result` type lets us explicitly declare success and failure types in the signature of a function or method in Dart.
+- We can use pattern matching in the calling code to ensure we handle both cases explicitly.
+
 # Project structure
 
 > - directories in italics are optional and may be present in some cases
