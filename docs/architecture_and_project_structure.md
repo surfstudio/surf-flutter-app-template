@@ -35,7 +35,7 @@
             - di
             - data
               - repositories *(implementations)*
-              - mappers
+              - converters
             - domain
                 - entities
                 - repositories *(interfaces)*
@@ -105,7 +105,7 @@ The folder has the code of the project and consists of the following folders:
 
   - di — dependency injection containers.
   - data - contains:
-    - mappers - classes for mapping data from DTO in entity and vice versa.
+    - converters - classes for mapping data from DTO in entity and vice versa. These classes extends the abstract class `Converter`.
     - repositories - repositories relevant to the feature.
   - domain — contains:
     - entities — business data models.
