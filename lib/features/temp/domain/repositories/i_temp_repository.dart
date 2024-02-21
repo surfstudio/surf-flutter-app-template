@@ -1,2 +1,2 @@
 /// Interface for Temp repository
-abstract interface class ITempRepository{}
+abstract interface class ITempRepository {}
