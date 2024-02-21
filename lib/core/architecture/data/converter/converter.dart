@@ -12,5 +12,5 @@ abstract base class Converter<TResult, TFrom> {
   TResult? convertNullable(TFrom? from) => from != null ? convert(from) : null;
 
   /// Convert TFrom list to TResult list
-  Iterable<TResult> convertMultiple(Iterable<TFrom> dtoList) => dtoList.map(convert);
+  Iterable<TResult> convertMultiple(Iterable<TFrom> fromList) => fromList.map(convert);
 }
