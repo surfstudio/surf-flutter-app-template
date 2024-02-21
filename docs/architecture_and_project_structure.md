@@ -105,7 +105,7 @@ The folder has the code of the project and consists of the following folders:
 
   - di — dependency injection containers.
   - data - contains:
-    - converters - classes for mapping data from DTO in entity and vice versa. These classes extends the abstract class `Converter`.
+    - converters - classes for mapping data from DTO in entity and vice versa. These classes extend the abstract class `Converter`.
     - repositories - repositories relevant to the feature.
   - domain — contains:
     - entities — business data models.
@@ -114,7 +114,7 @@ The folder has the code of the project and consists of the following folders:
 
    **if feature contains multiple sub-features/screens**
 
-    - {sub_feature_name/screen_name} - screens or sub-features relevant to the feature, with each screen in a separate self-titled folder containing the following in separate files:
+    - {sub_feature_name/screen_name} - screens or sub-features relevant to the feature, with each screen or sub-feature in a separate self-titled folder containing the following in separate files:
         - {sub_feature_name/screen_name}_widget.dart - ElementaryWidget.
         - {sub_feature_name/screen_name}_wm.dart - WidgetModel.
         - {sub_feature_name/screen_name}_model.dart - ElementaryModel.
