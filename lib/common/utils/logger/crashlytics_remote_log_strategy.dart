@@ -8,36 +8,38 @@ class CrashlyticsRemoteLogStrategy extends RemoteUserLogStrategy {
 
   @override
   void setUser(String id, String username, String email) {
-    _crashlytics.setUserIdentifier(id);
+    _crashlytics.setUserIdentifier(id).ignore();
   }
 
   @override
   void clearUser() {
-    _crashlytics.setUserIdentifier('');
+    _crashlytics.setUserIdentifier('').ignore();
   }
 
   @override
   void log(String message) {
-    _crashlytics.log(message);
+    _crashlytics.log(message).ignore();
   }
 
   @override
   void logError(Exception error) {
-    _crashlytics.recordError(
-      error,
-      FlutterErrorDetails(exception: error).stack,
-    );
+    _crashlytics
+        .recordError(
+          error,
+          FlutterErrorDetails(exception: error).stack,
+        )
+        .ignore();
   }
 
   @override
   void logInfo(String key, Object? info) {
-    if (info != null) {
-      if (info is num || info is String || info is bool) {
-        _crashlytics.setCustomKey(key, info);
-        return;
-      } else {
-        _crashlytics.setCustomKey(key, info.toString());
-      }
+    if (info == null) return;
+
+    if (info is num || info is String || info is bool) {
+      _crashlytics.setCustomKey(key, info).ignore();
+
+      return;
     }
+    _crashlytics.setCustomKey(key, info.toString()).ignore();
   }
 }
