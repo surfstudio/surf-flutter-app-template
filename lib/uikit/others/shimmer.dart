@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_template/uikit/colors/color_scheme.dart';
+import 'package:flutter_template/uikit/colors/app_color_scheme.dart';
 import 'package:flutter_template/uikit/others/conditional_wrapper.dart';
 import 'package:shimmer/shimmer.dart' as shimmer;
 

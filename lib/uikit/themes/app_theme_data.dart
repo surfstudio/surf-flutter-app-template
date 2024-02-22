@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_template/features/common/utils/sizes/app_sizes.dart';
 
-import 'package:flutter_template/uikit/colors/color_scheme.dart';
+import 'package:flutter_template/uikit/colors/app_color_scheme.dart';
 import 'package:flutter_template/uikit/text/text_extention.dart';
 
 /// Class of the app themes data.
 abstract class AppThemeData {
   /// Light theme configuration.
-  static final ThemeData lightTheme = ThemeData(
+  static final lightTheme = ThemeData(
+    extensions: [_lightColorScheme, _textTheme],
     brightness: Brightness.light,
     colorScheme: ColorScheme(
       brightness: Brightness.light,
@@ -21,15 +23,10 @@ abstract class AppThemeData {
       surface: _lightColorScheme.surface,
       onSurface: _lightColorScheme.onSurface,
     ),
-    snackBarTheme: SnackBarThemeData(
-      backgroundColor: _lightColorScheme.primary,
-      contentTextStyle: TextStyle(
-        color: _lightColorScheme.onPrimary,
-      ),
-    ),
+    scaffoldBackgroundColor: _lightColorScheme.background,
     appBarTheme: AppBarTheme(
       color: _lightColorScheme.primary,
-      elevation: 0,
+      elevation: AppSizes.double0,
       iconTheme: IconThemeData(
         color: _lightColorScheme.onPrimary,
       ),
@@ -39,12 +36,17 @@ abstract class AppThemeData {
       selectedItemColor: _lightColorScheme.primary,
       unselectedItemColor: _lightColorScheme.onBackground,
     ),
-    scaffoldBackgroundColor: _lightColorScheme.background,
-    extensions: [_lightColorScheme, _textTheme],
+    snackBarTheme: SnackBarThemeData(
+      backgroundColor: _lightColorScheme.primary,
+      contentTextStyle: TextStyle(
+        color: _lightColorScheme.onPrimary,
+      ),
+    ),
   );
 
   /// Dark theme configuration.
-  static final ThemeData darkTheme = ThemeData(
+  static final darkTheme = ThemeData(
+    extensions: [_darkColorScheme, _textTheme],
     brightness: Brightness.dark,
     colorScheme: ColorScheme(
       brightness: Brightness.dark,
@@ -59,15 +61,10 @@ abstract class AppThemeData {
       surface: _darkColorScheme.surface,
       onSurface: _darkColorScheme.onSurface,
     ),
-    snackBarTheme: SnackBarThemeData(
-      backgroundColor: _darkColorScheme.primary,
-      contentTextStyle: TextStyle(
-        color: _darkColorScheme.onPrimary,
-      ),
-    ),
+    scaffoldBackgroundColor: _darkColorScheme.background,
     appBarTheme: AppBarTheme(
       color: _lightColorScheme.primary,
-      elevation: 0,
+      elevation: AppSizes.double0,
       iconTheme: IconThemeData(
         color: _lightColorScheme.onPrimary,
       ),
@@ -77,8 +74,12 @@ abstract class AppThemeData {
       selectedItemColor: _darkColorScheme.primary,
       unselectedItemColor: _darkColorScheme.onBackground,
     ),
-    scaffoldBackgroundColor: _darkColorScheme.background,
-    extensions: [_darkColorScheme, _textTheme],
+    snackBarTheme: SnackBarThemeData(
+      backgroundColor: _darkColorScheme.primary,
+      contentTextStyle: TextStyle(
+        color: _darkColorScheme.onPrimary,
+      ),
+    ),
   );
 
   static final _lightColorScheme = AppColorScheme.light();

@@ -1,5 +1,8 @@
+// ignore_for_file: avoid-non-null-assertion, prefer-correct-callback-field-name
 import 'package:flutter/material.dart';
-import 'package:flutter_template/uikit/colors/color_palette.dart';
+import 'package:flutter_template/uikit/colors/dark_color_palette.dart';
+
+const _double006 = 0.06;
 
 /// App brand color scheme.
 ///
@@ -152,7 +155,7 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
         inactive = ColorPalette.black,
         positive = ColorPalette.greenYellow,
         onPositive = ColorPalette.chineseBlack,
-        skeletonPrimary = ColorPalette.black.withOpacity(0.06),
+        skeletonPrimary = ColorPalette.black.withOpacity(_double006),
         skeletonOnPrimary = ColorPalette.white,
         skeletonSecondary = ColorPalette.cultured,
         skeletonTertiary = ColorPalette.lightSilver,
@@ -183,7 +186,7 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
         inactive = DarkColorPalette.black,
         positive = DarkColorPalette.inchworm,
         onPositive = DarkColorPalette.black,
-        skeletonPrimary = DarkColorPalette.black.withOpacity(0.06),
+        skeletonPrimary = DarkColorPalette.black.withOpacity(_double006),
         skeletonOnPrimary = DarkColorPalette.white,
         skeletonSecondary = DarkColorPalette.raisinBlack,
         skeletonTertiary = DarkColorPalette.lightSilver,
@@ -261,13 +264,13 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
       surfaceSecondary: surfaceSecondary ?? this.surfaceSecondary,
       onSurface: onSurface ?? this.onSurface,
       background: background ?? this.background,
+      backgroundSecondary: backgroundSecondary ?? this.backgroundSecondary,
+      backgroundTertiary: backgroundTertiary ?? this.backgroundTertiary,
       onBackground: onBackground ?? this.onBackground,
+      onBackgroundSecondary: onBackgroundSecondary ?? this.onBackgroundSecondary,
       danger: danger ?? this.danger,
       dangerSecondary: dangerSecondary ?? this.dangerSecondary,
       onDanger: onDanger ?? this.onDanger,
-      backgroundSecondary: backgroundSecondary ?? this.backgroundSecondary,
-      onBackgroundSecondary: onBackgroundSecondary ?? this.onBackgroundSecondary,
-      backgroundTertiary: backgroundTertiary ?? this.backgroundTertiary,
       textField: textField ?? this.textField,
       textFieldLabel: textFieldLabel ?? this.textFieldLabel,
       textFieldHelper: textFieldHelper ?? this.textFieldHelper,
