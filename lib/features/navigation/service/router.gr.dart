@@ -15,6 +15,12 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    ApiInteractExampleRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: WrappedRoute(child: const ApiInteractExampleFlow()),
+      );
+    },
     DashRouter.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -57,6 +63,20 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
   };
+}
+
+/// generated route for
+/// [ApiInteractExampleFlow]
+class ApiInteractExampleRoute extends PageRouteInfo<void> {
+  const ApiInteractExampleRoute({List<PageRouteInfo>? children})
+      : super(
+          ApiInteractExampleRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ApiInteractExampleRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
