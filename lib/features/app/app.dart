@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_template/assets/themes/theme_data.dart';
 import 'package:flutter_template/common/service/theme/theme_service.dart';
 import 'package:flutter_template/common/widgets/di_scope/di_scope.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/l10n/app_localizations.g.dart';
 import 'package:flutter_template/persistence/storage/config_storage/config_storage_impl.dart';
+import 'package:flutter_template/uikit/themes/theme_data.dart';
 
 /// App widget.
 class App extends StatefulWidget {

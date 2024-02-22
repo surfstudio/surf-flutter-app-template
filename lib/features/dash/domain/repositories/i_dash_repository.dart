@@ -1,2 +1,2 @@
 /// Interface for the Dash repository
-abstract interface class IDashRepository{}
+abstract interface class IDashRepository {}

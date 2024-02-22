@@ -1,5 +1,6 @@
 // ignore_for_file: comment_references, depend_on_referenced_packages
 
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/assets/colors/color_scheme.dart';
 import 'package:flutter_template/assets/text/text_extention.dart';

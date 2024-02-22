@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_template/assets/res/resources.dart';
+import 'package:flutter_template/assets/resources.dart';
 import 'package:flutter_template/uikit/images/image_placeholder_widget.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 

@@ -21,7 +21,6 @@ class ScaledGestureDetector extends StatefulWidget {
   /// The element that will shrink when clicked.
   final Widget child;
 
-
   /// How to behave during hit tests.
   final HitTestBehavior? behavior;
 

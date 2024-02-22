@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/assets/colors/color_scheme.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/navigation/domain/entity/app_route_names.dart';
+import 'package:flutter_template/uikit/colors/color_scheme.dart';
 import 'package:provider/provider.dart';
 
 /// UI-kit screen.
