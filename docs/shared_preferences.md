@@ -9,13 +9,13 @@ of classes or repositories. Here's an example of how you can do this:
 
 ```dart
 /// Repository for working with first app status
-class FirstRunStorageImpl implements IFirstRunStorage {
+class FirstRunStorage implements IFirstRunStorage {
   /// First run app key
   static const _firstRunAppKey = 'first_run';
   final SharedPreferences _prefs;
 
-  /// Create an instance [FirstRunStorageImpl]
-  const FirstRunStorageImpl(this._prefs);
+  /// Create an instance [FirstRunStorage]
+  const FirstRunStorage(this._prefs);
 
   @override
   bool getIsFirstRun() {
