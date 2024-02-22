@@ -56,7 +56,7 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return DiScope<IAppScope>(
-      factory: () {
+      onFactory: () {
         return _scope;
       },
       key: ObjectKey(_scope),
