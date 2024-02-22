@@ -32,7 +32,7 @@ final class ResultOk<TData, TErr extends Failure> extends Result<TData, TErr> {
   final TData data;
 
   /// {@macro result.class}
-  const ResultOk(this.data) : super();
+  const ResultOk(this.data);
 }
 
 /// {@macro result.class}
