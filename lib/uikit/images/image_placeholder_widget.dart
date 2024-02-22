@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:flutter_template/assets/res/resources.dart';
+import 'package:flutter_template/assets/resources.dart';
 
 /// {@template image_placeholder_widget.class}
 /// Placeholder for the time of uploading an image from the network

@@ -33,7 +33,7 @@ class AppAlert extends StatelessWidget {
         actions: actions,
       );
     }
-    
+
     return AlertDialog(
       title: title,
       content: content,
