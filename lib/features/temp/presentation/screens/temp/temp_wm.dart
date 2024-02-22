@@ -29,7 +29,9 @@ TempWidgetModel initScreenWidgetModelFactory(
 }
 
 /// Widget model for [TempScreen].
-class TempWidgetModel extends WidgetModel<TempScreen, ITempModel> with ThemeWMMixin implements ITempWidgetModel {
+class TempWidgetModel extends WidgetModel<TempScreen, ITempModel>
+    with ThemeWMMixin
+    implements ITempWidgetModel {
   late final List<BottomNavigationBarItem> _defaultNavBarItems;
 
   late final BottomNavigationBarItem _debugNavBarItem;

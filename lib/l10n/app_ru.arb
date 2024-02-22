@@ -68,10 +68,5 @@
   },
   "dashScreenNavBarItemLabel": "Dash screen",
   "infoScreenNavBarItemLabel": "Info screen",
-  "debugScreenNavBarItemLabel": "Debug screen",
-  "@segmentApiInteractExample": {
-    "---------": "---------",
-    "description": "Пример взаимодействия с API"
-  },
-  "failedLoadIpMessage": "Не удалось загрузить IP-адрес"
+  "debugScreenNavBarItemLabel": "Debug screen"
 }
