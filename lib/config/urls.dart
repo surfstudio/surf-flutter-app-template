@@ -1,7 +1,7 @@
 import 'package:flutter_template/config/environment/environment.dart';
 
 /// Server urls.
-abstract class Url {
+abstract class Urls {
   /// TRest url.
   static String get testUrl => 'http://uinames.com/api/';
 
