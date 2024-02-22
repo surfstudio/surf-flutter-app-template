@@ -1,2 +1,2 @@
-/// Interface for the Info repository
+/// Interface for the Info repository.
 abstract interface class IInfoRepository {}
