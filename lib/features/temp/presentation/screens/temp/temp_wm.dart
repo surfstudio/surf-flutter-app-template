@@ -37,39 +37,22 @@ class TempWidgetModel extends WidgetModel<TempScreen, ITempModel>
   late final BottomNavigationBarItem _debugNavBarItem;
 
   @override
-  void initWidgetModel() {
-    _defaultNavBarItems = [
-      BottomNavigationBarItem(
-        label: context.l10n.dashScreenNavBarItemLabel,
-        icon: const Icon(Icons.flutter_dash),
-      ),
-      BottomNavigationBarItem(
-        label: context.l10n.infoScreenNavBarItemLabel,
-        icon: const Icon(Icons.info_outline),
-      ),
-    ];
-    _debugNavBarItem = BottomNavigationBarItem(
-      label: context.l10n.debugScreenNavBarItemLabel,
-      icon: const Icon(Icons.bug_report_outlined),
-    );
-    super.initWidgetModel();
-  }
-
-  @override
   List<PageRouteInfo> get routes => _routes;
 
   @override
   List<BottomNavigationBarItem> get navigationBarItems => _navigationBarItems;
 
   List<PageRouteInfo> get _routes {
-    final defaultRoutes = <PageRouteInfo>[DashRouter(), InfoRouter()];
-    if (_isDebugMode) defaultRoutes.add(DebugRouter());
+    final defaultRoutes = <PageRouteInfo>[const DashRouter(), const InfoRouter()];
+    if (_isDebugMode) defaultRoutes.add(const DebugRouter());
+
     return defaultRoutes;
   }
 
   List<BottomNavigationBarItem> get _navigationBarItems {
     final navBarItems = [..._defaultNavBarItems];
     if (_isDebugMode) navBarItems.add(_debugNavBarItem);
+
     return navBarItems;
   }
 
@@ -77,6 +60,25 @@ class TempWidgetModel extends WidgetModel<TempScreen, ITempModel>
 
   /// Create an instance [TempWidgetModel].
   TempWidgetModel(super._model);
+
+  @override
+  void initWidgetModel() {
+    _defaultNavBarItems = [
+      BottomNavigationBarItem(
+        icon: const Icon(Icons.flutter_dash),
+        label: context.l10n.dashScreenNavBarItemLabel,
+      ),
+      BottomNavigationBarItem(
+        icon: const Icon(Icons.info_outline),
+        label: context.l10n.infoScreenNavBarItemLabel,
+      ),
+    ];
+    _debugNavBarItem = BottomNavigationBarItem(
+      icon: const Icon(Icons.bug_report_outlined),
+      label: context.l10n.debugScreenNavBarItemLabel,
+    );
+    super.initWidgetModel();
+  }
 
   @override
   String appBarTitle(RouteData topRoute) => _appBarTitle(topRoute);
@@ -101,6 +103,7 @@ class TempWidgetModel extends WidgetModel<TempScreen, ITempModel>
 /// Interface for [TempWidgetModel].
 abstract class ITempWidgetModel with ThemeIModelMixin implements IWidgetModel {
   /// Routes for [AutoTabsRouter.tabBar].
+  // ignore: avoid-dynamic
   List<PageRouteInfo<dynamic>> get routes;
 
   /// Items for [BottomNavigationBar].
