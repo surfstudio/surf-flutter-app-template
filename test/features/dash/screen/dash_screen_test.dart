@@ -1,10 +1,10 @@
-import 'package:flutter_template/features/dash/screen/dash_screen.dart';
-import 'package:flutter_template/features/dash/screen/dash_screen_wm.dart';
+import 'package:flutter_template/features/dash/presentation/dash_screen.dart';
+import 'package:flutter_template/features/dash/presentation/dash_wm.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../core/utils/test_widget.dart';
 
-class MockDashWM extends Mock implements IDashScreenWidgetModel {}
+class MockDashWM extends Mock implements IDashWidgetModel {}
 
 void main() {
   final wm = MockDashWM();

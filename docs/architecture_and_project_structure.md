@@ -1,7 +1,20 @@
 # Architecture
 
-> [!NOTE]
-> A description of the architectural decisions that were made on the project should be added here.
+![architecture scheme](/docs/images/architecture.png)
+
+### Presentation
+
+Logic in a presentation layer can be either **Business logic**(Elementary Model) or **UI logic**(Widget Model):
+* **Business logic** is the implementation of product requirements for application data. For example, adding an item to the cart when the user clicks on a button.
+* **UI logic** is related to how to display UI state on the screen. For example, navigation logic to a screen when the user clicks a button, or showing a snack bar.
+
+### Repository
+
+The repository is designed to abstract the details of data storage. It makes the `ElementaryModel` independent of the specific data source. You need to interact with the repository from the `ElementaryModel` through the interface.
+
+### Dependency rule
+
+It is also necessary to observe the dependency rule - entities on one layer should depend only on neighboring layers, but not on entities on the same layer. For example, one repository should not depend on another repository. The direction of dependencies must also be followed. For example, repository depends on the data source, but not vice versa.
 
 # Сatching errors
 
@@ -47,17 +60,31 @@ The result of calling the repository method is processed in the `switch` in the 
     - features
         - {name/shared}
             - di
+            - data
+              - repositories *(implementations)*
+              - converters
             - domain
-                - entity
-                - repository
-                - mappers
-            - service
-            - screens
-                - {screen_name}
-                    - widget
-                    - wm
-                    - model
-            - widgets
+                - entities
+                - repositories *(interfaces)*
+            - presentation
+
+              **if feature contains multiple sub-features/screens**
+
+                - {sub_feature_name/screen_name}
+                    - {sub_feature_name/screen_name}_widget.dart
+                    - {sub_feature_name/screen_name}_wm.dart
+                    - {sub_feature_name/screen_name}_model.dart
+                    - {sub_feature_name}_flow.dart
+                - widgets
+
+              **else** 
+
+                - {feature_name}_widget.dart
+                - {feature_name}_wm.dart
+                - {feature_name}_model.dart
+                - {feature_name}_flow.dart
+                - widgets
+
     - l10n
     - persistence
     - util
@@ -99,24 +126,38 @@ The folder has the code of the project and consists of the following folders:
 - assets — string representation of the necessary assets, themes, colors, and strings.
 - common - general purpose files that are not directly related to the project and can be used in other projects. For example, utilities (utils folder), general purpose widgets (widgets folder).
 - config — project configuration, e.g., environment.
-- core - contains files that are basic for building each feature in the project. In other words, the architecture of each feature of the project is fixed in the core folder, and the basic blocks for its construction are located.
+- core - contains the basic architectural building blocks for each feature in the project.
 - features — features used and implemented in the project. It’s the default location of all folders created for particular features, where each folder contains all of the files relevant to this or that feature. The "shared" folder is organized according to the structure of the feature. It contains files that are used in several features and are directly related to the features of the project.
 
   The structure of features:
 
+
   - di — dependency injection containers.
+  - data - contains:
+    - converters - classes for mapping data from DTO in entity and vice versa. These classes extend the abstract class `Converter`.
+    - repositories - repositories relevant to the feature.
   - domain — contains:
-      - entity — business data models.
-      - repository — repositories relevant to the feature.
-      - mappers — data-to-model (and vice versa) mappers.
-  - service — business logic.
-  - screens — screens relevant to the feature, with each screen in a separate self-titled folder containing the following in separate files:
-      - widget - ElementaryWidget.
-      - wm - WidgetModel.
-      - model - ElementaryModel.
-  - widgets — widgets relevant to the feature.
+    - entities — business data models.
+    - repositories — interfaces for repositories relevant to the feature.
+  - presentation - contains:
+
+   **if feature contains multiple sub-features/screens**
+
+    - {sub_feature_name/screen_name} - screens or sub-features relevant to the feature, with each screen or sub-feature in a separate self-titled folder containing the following in separate files:
+        - {sub_feature_name/screen_name}_widget.dart - ElementaryWidget.
+        - {sub_feature_name/screen_name}_wm.dart - WidgetModel.
+        - {sub_feature_name/screen_name}_model.dart - ElementaryModel.
+        - {sub_feature_name}_flow.dart - the entry point to the sub-feature.
+    - widgets — widgets relevant to the feature.
+    
+   **else**
+
+    - {feature_name}_widget.dart - ElementaryWidget.
+    - {feature_name}_wm.dart - WidgetModel.
+    - {feature_name}_model.dart - ElementaryModel.
+    - {feature_name}_flow.dart - the entry point to the feature.
+    - widgets — widgets relevant to the feature.
   - utils — necessary utilities.
-  
 - l10n — localization files.
 - persistence — the layer of data and interactions with the database.
 - util — utilities used in the project.
