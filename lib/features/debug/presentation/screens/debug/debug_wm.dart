@@ -8,7 +8,7 @@ import 'package:flutter_template/config/urls.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_model.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_screen.dart';
-import 'package:flutter_template/features/navigation/service/router.dart';
+import 'package:flutter_template/features/navigation/service/app_router.dart';
 import 'package:flutter_template/persistence/storage/config_storage/config_settings_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:surf_logger/surf_logger.dart';
