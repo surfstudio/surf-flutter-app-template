@@ -1,7 +1,7 @@
 import 'package:flutter_template/features/{{name.snakeCase()}}/data/repositories/{{name.snakeCase()}}_repository.dart';
 import 'package:flutter_template/features/{{name.snakeCase()}}/domain/repositories/i_{{name.snakeCase()}}_repository.dart';
-import 'package:flutter_template/util/disposable_object/disposable_object.dart';
-import 'package:flutter_template/util/disposable_object/i_disposable_object.dart';
+import 'package:flutter_template/common/utils/disposable_object/disposable_object.dart';
+import 'package:flutter_template/common/utils/disposable_object/i_disposable_object.dart';
 
 /// Scope dependencies of the {{name.pascalCase()}} feature
 abstract interface class I{{name.pascalCase()}}Scope implements IDisposableObject {
