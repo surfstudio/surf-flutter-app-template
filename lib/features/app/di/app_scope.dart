@@ -1,20 +1,18 @@
 import 'dart:io';
-
-import 'package:analytics/core/analytic_action_performer.dart';
 import 'package:analytics/core/analytyc_service.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_template/common/service/theme/theme_service.dart';
+import 'package:flutter_template/common/service/theme/theme_service_impl.dart';
+import 'package:flutter_template/common/utils/analytics/firebase/firebase_analytic_strategy.dart';
+import 'package:flutter_template/common/utils/analytics/mock/mock_firebase_analytics.dart';
+import 'package:flutter_template/common/utils/default_error_handler.dart';
 import 'package:flutter_template/config/environment/environment.dart';
-import 'package:flutter_template/features/common/service/theme/theme_service.dart';
-import 'package:flutter_template/features/common/service/theme/theme_service_impl.dart';
-import 'package:flutter_template/features/common/utils/analytics/firebase/firebase_analytic_strategy.dart';
-import 'package:flutter_template/features/common/utils/analytics/mock/mock_firebase_analytics.dart';
 import 'package:flutter_template/features/navigation/service/router.dart';
 import 'package:flutter_template/persistence/storage/theme_storage/theme_storage.dart';
 import 'package:flutter_template/persistence/storage/theme_storage/theme_storage_impl.dart';
-import 'package:flutter_template/util/default_error_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Scope of dependencies which need through all app's life.
@@ -27,7 +25,7 @@ class AppScope implements IAppScope {
   late final ErrorHandler _errorHandler;
   late final AppRouter _router;
   late final IThemeService _themeService;
-  late final AnalyticActionPerformer _analyticsService;
+  late final AnalyticService _analyticsService;
 
   @override
   late VoidCallback applicationRebuilder;
@@ -48,7 +46,7 @@ class AppScope implements IAppScope {
   SharedPreferences get sharedPreferences => _sharedPreferences;
 
   @override
-  AnalyticActionPerformer get analyticsService => _analyticsService;
+  AnalyticService get analyticsService => _analyticsService;
 
   late IThemeModeStorage _themeModeStorage;
 
@@ -139,5 +137,5 @@ abstract class IAppScope {
   SharedPreferences get sharedPreferences;
 
   /// Analytics sending service
-  AnalyticActionPerformer get analyticsService;
+  AnalyticService get analyticsService;
 }
