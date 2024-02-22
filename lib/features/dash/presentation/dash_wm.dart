@@ -1,13 +1,13 @@
-import 'package:analytics/core/analytyc_service.dart';
+import 'package:analytics/analytics.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/common/utils/analytics/event/common/track_analytics_example.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
-import 'package:flutter_template/features/common/utils/mixin/localization_mixin.dart';
 import 'package:flutter_template/features/common/utils/mixin/theme_mixin.dart';
 import 'package:flutter_template/features/dash/presentation/dash_model.dart';
 import 'package:flutter_template/features/dash/presentation/dash_screen.dart';
 import 'package:flutter_template/features/navigation/service/router.dart';
+import 'package:flutter_template/l10n/app_localizations.g.dart';
 import 'package:flutter_template/l10n/app_localizations_x.dart';
 import 'package:provider/provider.dart';
 
@@ -27,11 +27,9 @@ DashWidgetModel dashScreenWmFactory(
 
 /// Widget model for [DashScreen].
 class DashWidgetModel extends WidgetModel<DashScreen, DashModel>
-    with LocalizationMixin, ThemeWMMixin
+    with ThemeWMMixin
     implements IDashWidgetModel {
   final AnalyticService _analyticsService;
-class DashWidgetModel extends WidgetModel<DashScreen, DashModel> with ThemeWMMixin implements IDashWidgetModel {
-  final IAnalyticsService _analyticsService;
   final AppRouter _router;
 
   @override
@@ -55,15 +53,9 @@ class DashWidgetModel extends WidgetModel<DashScreen, DashModel> with ThemeWMMix
   void goToIpScreen() {
     _router.navigate(const ApiInteractExampleRoute());
   }
-
-  @override
-  void goToIpScreen() {
-    _router.navigate(const ApiInteractExampleRoute());
-  }
 }
 
 /// Interface for [DashWidgetModel].
-abstract class IDashWidgetModel with ILocalizationMixin, ThemeIModelMixin implements IWidgetModel {
 abstract class IDashWidgetModel with ThemeIModelMixin implements IWidgetModel {
   /// Localization strings.
   AppLocalizations get l10n;
