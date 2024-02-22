@@ -2,6 +2,7 @@ import 'package:elementary/elementary.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/config/urls.dart';
+import 'package:flutter_template/features/common/utils/sizes/app_sizes.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_wm.dart';
 
 /// Debug screens.
@@ -18,141 +19,137 @@ class DebugScreen extends ElementaryWidget<IDebugScreenWidgetModel> {
       body: _Body(
         urlState: wm.urlState,
         themeState: wm.themeState,
-        urlChanged: wm.urlChange,
-        switchServer: wm.switchServer,
-        setProxy: wm.setProxy,
-        openLogsHistory: wm.openLogsHistory,
-        openUiKit: wm.openUiKit,
-        saveExampleLog: wm.saveExampleLog,
+        onUrlChanged: wm.urlChange,
+        onSwitchServer: wm.switchServer,
+        onSetThemeMode: wm.setThemeMode,
+        onSetProxy: wm.setProxy,
+        onOpenLogsHistory: wm.openLogsHistory,
+        onOpenUiKit: wm.openUiKit,
+        onSaveExampleLog: wm.saveExampleLog,
         proxyController: wm.proxyEditingController,
-        setThemeMode: wm.setThemeMode,
       ),
     );
   }
 }
 
 class _Body extends StatelessWidget {
-  final ValueListenable<UrlType> urlState;
-  final ValueListenable<ThemeMode> themeState;
-  final void Function(UrlType?) urlChanged;
-  final void Function(UrlType) switchServer;
-  final void Function(ThemeMode?) setThemeMode;
-  final Function() setProxy;
-  final VoidCallback openLogsHistory;
-  final VoidCallback openUiKit;
-  final VoidCallback saveExampleLog;
-  final TextEditingController proxyController;
-
   const _Body({
     required this.urlState,
     required this.themeState,
-    required this.urlChanged,
-    required this.switchServer,
-    required this.setThemeMode,
-    required this.setProxy,
-    required this.openLogsHistory,
-    required this.openUiKit,
-    required this.saveExampleLog,
+    required this.onUrlChanged,
+    required this.onSwitchServer,
+    required this.onSetThemeMode,
+    required this.onSetProxy,
+    required this.onOpenLogsHistory,
+    required this.onOpenUiKit,
+    required this.onSaveExampleLog,
     required this.proxyController,
   });
 
+  final ValueListenable<UrlType> urlState;
+  final ValueListenable<ThemeMode> themeState;
+  final ValueChanged<UrlType?> onUrlChanged;
+  final ValueChanged<UrlType> onSwitchServer;
+  final ValueChanged<ThemeMode?> onSetThemeMode;
+  final VoidCallback onSetProxy;
+  final VoidCallback onOpenLogsHistory;
+  final VoidCallback onOpenUiKit;
+  final VoidCallback onSaveExampleLog;
+  final TextEditingController proxyController;
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8),
-      child: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            _ServerSwitchCard(
-              urlState: urlState,
-              urlChange: urlChanged,
-              switchServer: switchServer,
-            ),
-            _ProxyCard(
-              setProxy: setProxy,
-              proxyController: proxyController,
-            ),
-            _ThemeCard(
-              themeState: themeState,
-              setThemeMode: setThemeMode,
-            ),
-            Card(
-              child: ListTile(
-                onTap: openUiKit,
-                title: const Text('To ui kit screen'),
-              ),
-            ),
-            Card(
-              child: Column(
-                children: [
-                  ListTile(
-                    onTap: openLogsHistory,
-                    title: const Text('Открыть логи'),
-                  ),
-                  ListTile(
-                    onTap: saveExampleLog,
-                    title: const Text('Протестировать запись в логи'),
-                  ),
-                ],
-              ),
-            ),
-          ],
+    return ListView(
+      padding: const EdgeInsets.all(AppSizes.double8),
+      children: <Widget>[
+        _ServerSwitchCard(
+          urlState: urlState,
+          onUrlChange: onUrlChanged,
+          onSwitchServer: onSwitchServer,
         ),
-      ),
+        _ProxyCard(
+          onSetProxy: onSetProxy,
+          proxyController: proxyController,
+        ),
+        _ThemeCard(
+          themeState: themeState,
+          onSetThemeMode: onSetThemeMode,
+        ),
+        Card(
+          child: ListTile(
+            title: const Text('To ui kit screen'),
+            onTap: onOpenUiKit,
+          ),
+        ),
+        Card(
+          child: Column(
+            children: [
+              ListTile(
+                title: const Text('Открыть логи'),
+                onTap: onOpenLogsHistory,
+              ),
+              ListTile(
+                title: const Text('Протестировать запись в логи'),
+                onTap: onSaveExampleLog,
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
 
 class _ServerSwitchCard extends StatelessWidget {
-  final ValueListenable<UrlType> urlState;
-  final void Function(UrlType?) urlChange;
-  final void Function(UrlType) switchServer;
-
   const _ServerSwitchCard({
     required this.urlState,
-    required this.urlChange,
-    required this.switchServer,
+    required this.onUrlChange,
+    required this.onSwitchServer,
   });
+
+  final ValueListenable<UrlType> urlState;
+  final ValueChanged<UrlType?> onUrlChange;
+  final ValueChanged<UrlType> onSwitchServer;
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(AppSizes.double8),
         child: Column(
           children: <Widget>[
             const Text('Сервер'),
             ValueListenableBuilder<UrlType>(
               valueListenable: urlState,
-              builder: (context, urlState, _) {
+              builder: (_, url, __) {
                 return Column(
                   children: <Widget>[
                     RadioListTile<UrlType>(
-                      groupValue: urlState,
-                      title: Text(UrlType.test.toString()),
-                      subtitle: Text(Url.testUrl),
                       value: UrlType.test,
-                      onChanged: urlChange,
+                      groupValue: url,
+                      onChanged: onUrlChange,
+                      title: Text(UrlType.test.toString()),
+                      subtitle: Text(Urls.testUrl),
                     ),
                     RadioListTile<UrlType>(
-                      groupValue: urlState,
-                      title: Text(UrlType.prod.toString()),
-                      subtitle: Text(Url.prodUrl),
                       value: UrlType.prod,
-                      onChanged: urlChange,
+                      groupValue: url,
+                      onChanged: onUrlChange,
+                      title: Text(UrlType.prod.toString()),
+                      subtitle: Text(Urls.prodUrl),
                     ),
                     RadioListTile<UrlType>(
-                      groupValue: urlState,
-                      title: Text(UrlType.dev.toString()),
-                      subtitle: Text(Url.devUrl),
                       value: UrlType.dev,
-                      onChanged: urlChange,
+                      groupValue: url,
+                      onChanged: onUrlChange,
+                      title: Text(UrlType.dev.toString()),
+                      subtitle: Text(Urls.devUrl),
                     ),
                     MaterialButton(
-                      onPressed: () => switchServer(urlState),
+                      onPressed: () => onSwitchServer(url),
                       child: const Text(
                         'Переключить',
-                        style: TextStyle(fontSize: 16),
+                        style: TextStyle(fontSize: AppSizes.double16),
                       ),
                     ),
                   ],
@@ -167,48 +164,48 @@ class _ServerSwitchCard extends StatelessWidget {
 }
 
 class _ProxyCard extends StatelessWidget {
-  final Function() setProxy;
-  final TextEditingController proxyController;
-
   const _ProxyCard({
-    required this.setProxy,
+    required this.onSetProxy,
     required this.proxyController,
   });
+
+  final VoidCallback onSetProxy;
+  final TextEditingController proxyController;
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(AppSizes.double8),
         child: Column(
           children: <Widget>[
             const Padding(
-              padding: EdgeInsets.only(bottom: 8),
+              padding: EdgeInsets.only(bottom: AppSizes.double8),
               child: Text('Прокси-сервер'),
             ),
             const Padding(
-              padding: EdgeInsets.only(bottom: 8),
+              padding: EdgeInsets.only(bottom: AppSizes.double8),
               child: Text('Активирует передачу трафика через прокси сервер.'),
             ),
             Column(
               children: <Widget>[
                 TextField(
-                  textInputAction: TextInputAction.done,
-                  onSubmitted: (_) {
-                    setProxy();
-                  },
                   controller: proxyController,
                   decoration: const InputDecoration(
+                    labelText: 'Адрес прокси сервера',
                     filled: true,
                     border: UnderlineInputBorder(),
-                    labelText: 'Адрес прокси сервера',
                   ),
+                  textInputAction: TextInputAction.done,
+                  onSubmitted: (_) {
+                    onSetProxy();
+                  },
                 ),
                 MaterialButton(
-                  onPressed: setProxy,
+                  onPressed: onSetProxy,
                   child: const Text(
                     'Переключить прокси',
-                    style: TextStyle(fontSize: 16),
+                    style: TextStyle(fontSize: AppSizes.double16),
                   ),
                 ),
               ],
@@ -221,44 +218,44 @@ class _ProxyCard extends StatelessWidget {
 }
 
 class _ThemeCard extends StatelessWidget {
-  final ValueListenable<ThemeMode> themeState;
-  final void Function(ThemeMode?) setThemeMode;
-
   const _ThemeCard({
     required this.themeState,
-    required this.setThemeMode,
+    required this.onSetThemeMode,
   });
+
+  final ValueListenable<ThemeMode> themeState;
+  final ValueSetter<ThemeMode?> onSetThemeMode;
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(AppSizes.double8),
         child: ValueListenableBuilder<ThemeMode>(
           valueListenable: themeState,
-          builder: (context, themeState, _) {
+          builder: (_, theme, __) {
             return Column(
               children: <Widget>[
                 const Text('Выбрать тему приложения'),
                 Column(
                   children: <Widget>[
                     RadioListTile<ThemeMode>(
-                      groupValue: themeState,
-                      title: const Text('Light Theme'),
                       value: ThemeMode.light,
-                      onChanged: setThemeMode,
+                      groupValue: theme,
+                      onChanged: onSetThemeMode,
+                      title: const Text('Light Theme'),
                     ),
                     RadioListTile<ThemeMode>(
-                      groupValue: themeState,
-                      title: const Text('Dark Theme'),
                       value: ThemeMode.dark,
-                      onChanged: setThemeMode,
+                      groupValue: theme,
+                      onChanged: onSetThemeMode,
+                      title: const Text('Dark Theme'),
                     ),
                     RadioListTile<ThemeMode>(
-                      groupValue: themeState,
-                      title: const Text('System Theme'),
                       value: ThemeMode.system,
-                      onChanged: setThemeMode,
+                      groupValue: theme,
+                      onChanged: onSetThemeMode,
+                      title: const Text('System Theme'),
                     ),
                   ],
                 ),

@@ -1,3 +1,4 @@
+// ignore_for_file: avoid-ignoring-return-values
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/common/service/theme/theme_service.dart';
@@ -6,7 +7,7 @@ import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/config/urls.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_model.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_wm.dart';
-import 'package:flutter_template/persistence/storage/config_storage/config_storage.dart';
+import 'package:flutter_template/persistence/storage/config_storage/i_config_settings_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -21,17 +22,17 @@ class MockConfigSettingsStorage extends Mock implements IConfigSettingsStorage {
 class MockThemeService extends Mock implements IThemeService {}
 
 void main() {
-  late DebugScreenModel model;
+  late DebugModel model;
   final errorHandler = MockErrorHandler();
   final env = MockEnvironment();
   final configSettingsStorage = MockConfigSettingsStorage();
   final themeService = MockThemeService();
-  final config = AppConfig(url: Url.testUrl);
+  final config = AppConfig(url: Urls.testUrl);
 
   final appRebuilder = VoidCallbackMock();
 
   setUpAll(() {
-    model = DebugScreenModel(
+    model = DebugModel(
       errorHandler,
       env,
       appRebuilder,

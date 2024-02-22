@@ -22,7 +22,7 @@ DebugScreenWidgetModel debugScreenWidgetModelFactory(
   final appDependencies = context.read<IAppScope>();
   final configStorage = ConfigSettingsStorage(appDependencies.sharedPreferences);
 
-  final model = DebugScreenModel(
+  final model = DebugModel(
     appDependencies.errorHandler,
     Environment.instance(),
     appDependencies.applicationRebuilder,
@@ -35,7 +35,7 @@ DebugScreenWidgetModel debugScreenWidgetModelFactory(
 }
 
 /// Widget Model for [DebugScreen].
-class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
+class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugModel>
     implements IDebugScreenWidgetModel {
   /// Class that coordinates navigation for the whole app.
   final AppRouter router;
@@ -62,7 +62,7 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
   @override
   TextEditingController get proxyEditingController => _textEditingController;
 
-  /// Create an instance [DebugScreenModel].
+  /// Create an instance [DebugModel].
   DebugScreenWidgetModel(
     super._model,
     this.router,
