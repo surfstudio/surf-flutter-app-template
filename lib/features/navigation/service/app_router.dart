@@ -10,7 +10,7 @@ import 'package:flutter_template/features/info/presentation/info_flow.dart';
 import 'package:flutter_template/features/navigation/domain/entity/app_route_paths.dart';
 import 'package:flutter_template/features/temp/presentation/temp_flow.dart';
 
-part 'router.gr.dart';
+part 'app_router.gr.dart';
 
 /// When you add route with screen don't forget add imports of screen and screen_widget_model
 
@@ -19,7 +19,7 @@ part 'router.gr.dart';
   replaceInRouteName: 'Flow,Route',
 )
 class AppRouter extends _$AppRouter {
-  static final AppRouter _router = AppRouter._();
+  static final _router = AppRouter._();
 
   @override
   RouteType get defaultRouteType => const RouteType.material();
@@ -28,8 +28,8 @@ class AppRouter extends _$AppRouter {
   List<AutoRoute> get routes => [
         AutoRoute(
           page: TempRouter.page,
-          initial: true,
           path: AppRoutePaths.tempPath,
+          initial: true,
           children: [
             AutoRoute(
               page: DashRouter.page,
