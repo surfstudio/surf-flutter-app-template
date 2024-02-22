@@ -970,6 +970,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  surf_dcm_presets:
+    dependency: "direct dev"
+    description:
+      name: surf_dcm_presets
+      sha256: "144c2d2db18d17073e657ab0f6f09700eb2ab5f862d1f078b7f4ad96fd3a826a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2"
   surf_lint_rules:
     dependency: "direct dev"
     description:
