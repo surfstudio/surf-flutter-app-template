@@ -11,8 +11,8 @@ import 'package:flutter_template/common/utils/analytics/mock/mock_firebase_analy
 import 'package:flutter_template/common/utils/default_error_handler.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/navigation/service/router.dart';
+import 'package:flutter_template/persistence/storage/theme_storage/i_theme_storage.dart';
 import 'package:flutter_template/persistence/storage/theme_storage/theme_storage.dart';
-import 'package:flutter_template/persistence/storage/theme_storage/theme_storage_impl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Scope of dependencies which need through all app's life.
@@ -48,7 +48,7 @@ class AppScope implements IAppScope {
   @override
   AnalyticService get analyticsService => _analyticsService;
 
-  late IThemeModeStorage _themeModeStorage;
+  late IThemeStorage _themeModeStorage;
 
   /// Create an instance [AppScope].
   AppScope(this._sharedPreferences) {
@@ -58,7 +58,7 @@ class AppScope implements IAppScope {
     _dio = _initDio(additionalInterceptors);
     _errorHandler = DefaultErrorHandler();
     _router = AppRouter.instance();
-    _themeModeStorage = ThemeModeStorageImpl(_sharedPreferences);
+    _themeModeStorage = ThemeStorage(_sharedPreferences);
     _analyticsService = AnalyticService.withStrategies({
       // TODO(init): can be removed MockFirebaseAnalytics, added for demo analytics track
       FirebaseAnalyticStrategy(MockFirebaseAnalytics()),
@@ -67,7 +67,7 @@ class AppScope implements IAppScope {
 
   @override
   Future<void> initTheme() async {
-    final theme = await ThemeModeStorageImpl(_sharedPreferences).getThemeMode() ?? _themeByDefault;
+    final theme = await ThemeStorage(_sharedPreferences).getThemeMode() ?? _themeByDefault;
     _themeService = ThemeServiceImpl(theme);
     _themeService.addListener(_onThemeModeChanged);
   }
