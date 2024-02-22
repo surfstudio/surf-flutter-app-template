@@ -43,10 +43,6 @@ class TempWidgetModel extends WidgetModel<TempScreen, ITempModel>
         label: context.l10n.dashScreenNavBarItemLabel,
         icon: const Icon(Icons.flutter_dash),
       ),
-      BottomNavigationBarItem(
-        label: context.l10n.infoScreenNavBarItemLabel,
-        icon: const Icon(Icons.info_outline),
-      ),
     ];
     _debugNavBarItem = BottomNavigationBarItem(
       label: context.l10n.debugScreenNavBarItemLabel,
@@ -62,7 +58,7 @@ class TempWidgetModel extends WidgetModel<TempScreen, ITempModel>
   List<BottomNavigationBarItem> get navigationBarItems => _navigationBarItems;
 
   List<PageRouteInfo> get _routes {
-    final defaultRoutes = <PageRouteInfo>[DashRouter(), InfoRouter()];
+    final defaultRoutes = <PageRouteInfo>[DashRouter()];
     if (_isDebugMode) defaultRoutes.add(DebugRouter());
     return defaultRoutes;
   }

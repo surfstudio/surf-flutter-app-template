@@ -6,7 +6,6 @@ import 'package:flutter_template/features/debug/presentation/debug_flow.dart';
 import 'package:flutter_template/features/debug/presentation/screens/log_history/log_history_screen.dart';
 import 'package:flutter_template/features/debug/presentation/screens/log_history/log_history_wm.dart';
 import 'package:flutter_template/features/debug/presentation/screens/ui_kit/ui_kit_screen.dart';
-import 'package:flutter_template/features/info/presentation/info_flow.dart';
 import 'package:flutter_template/features/navigation/domain/entity/app_route_paths.dart';
 import 'package:flutter_template/features/temp/presentation/temp_flow.dart';
 
@@ -34,10 +33,6 @@ class AppRouter extends _$AppRouter {
             AutoRoute(
               page: DashRouter.page,
               path: AppRoutePaths.dashPath,
-            ),
-            AutoRoute(
-              page: InfoRouter.page,
-              path: AppRoutePaths.infoPath,
             ),
             AutoRoute(
               page: DebugRouter.page,

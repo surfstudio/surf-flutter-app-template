@@ -27,15 +27,9 @@ abstract class _$AppRouter extends RootStackRouter {
         child: WrappedRoute(child: const DebugFlow()),
       );
     },
-    InfoRouter.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: WrappedRoute(child: const InfoFlow()),
-      );
-    },
     LogHistoryRouter.name: (routeData) {
-      final args =
-          routeData.argsAs<LogHistoryRouterArgs>(orElse: () => const LogHistoryRouterArgs());
+      final args = routeData.argsAs<LogHistoryRouterArgs>(
+          orElse: () => const LogHistoryRouterArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: LogHistoryScreen(
@@ -88,26 +82,13 @@ class DebugRouter extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [InfoFlow]
-class InfoRouter extends PageRouteInfo<void> {
-  const InfoRouter({List<PageRouteInfo>? children})
-      : super(
-          InfoRouter.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'InfoRouter';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
 /// [LogHistoryScreen]
 class LogHistoryRouter extends PageRouteInfo<LogHistoryRouterArgs> {
   LogHistoryRouter({
     Key? key,
-    WidgetModel<ElementaryWidget<IWidgetModel>, ElementaryModel> Function(BuildContext) wmFactory =
-        logHistoryScreenWmFactory,
+    WidgetModel<ElementaryWidget<IWidgetModel>, ElementaryModel> Function(
+            BuildContext)
+        wmFactory = logHistoryScreenWmFactory,
     List<PageRouteInfo>? children,
   }) : super(
           LogHistoryRouter.name,
@@ -120,7 +101,8 @@ class LogHistoryRouter extends PageRouteInfo<LogHistoryRouterArgs> {
 
   static const String name = 'LogHistoryRouter';
 
-  static const PageInfo<LogHistoryRouterArgs> page = PageInfo<LogHistoryRouterArgs>(name);
+  static const PageInfo<LogHistoryRouterArgs> page =
+      PageInfo<LogHistoryRouterArgs>(name);
 }
 
 class LogHistoryRouterArgs {
@@ -131,8 +113,8 @@ class LogHistoryRouterArgs {
 
   final Key? key;
 
-  final WidgetModel<ElementaryWidget<IWidgetModel>, ElementaryModel> Function(BuildContext)
-      wmFactory;
+  final WidgetModel<ElementaryWidget<IWidgetModel>, ElementaryModel> Function(
+      BuildContext) wmFactory;
 
   @override
   String toString() {
