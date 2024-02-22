@@ -2,7 +2,7 @@
 
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_template/l10n/app_localizations.g.dart';
 import 'package:flutter_template/uikit/colors/color_scheme.dart';
 import 'package:flutter_template/uikit/text/text_extention.dart';
 
@@ -145,6 +145,7 @@ enum ThemeType {
 extension ThemeDataExt on ThemeData {
   AppColorScheme get customColorScheme =>
       extension<AppColorScheme>() ?? (throw Exception('no AppColorScheme'));
+
   AppTextTheme get customTextTheme =>
       extension<AppTextTheme>() ?? (throw Exception('no AppTextTheme'));
 }
