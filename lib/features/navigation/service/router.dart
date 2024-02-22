@@ -12,6 +12,7 @@ import 'package:flutter_template/features/navigation/domain/entity/log_history/l
 import 'package:flutter_template/features/navigation/domain/entity/temp/temp_routes.dart';
 import 'package:flutter_template/features/navigation/domain/entity/ui_kit/ui_kit_routes.dart';
 import 'package:flutter_template/features/temp/presentation/temp_flow.dart';
+
 part 'router.gr.dart';
 
 /// When you add route with screen don't forget add imports of screen and screen_widget_model
