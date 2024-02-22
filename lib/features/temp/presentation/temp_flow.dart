@@ -16,8 +16,8 @@ class TempFlow extends StatelessWidget implements AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) {
     return DiScope<ITempScope>(
-      factory: TempScope.create,
-      dispose: (scope) => scope.dispose(),
+      onFactory: TempScope.create,
+      onDispose: (scope) => scope.dispose(),
       child: this,
     );
   }
