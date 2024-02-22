@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_template/persistence/storage/theme_storage/i_theme_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// {@template theme_storage.class}
 /// Persistent storage for theme mode.
 ///
 /// Based on SharedPreferences.
+/// {@endtemplate}
 class ThemeStorage implements IThemeStorage {
   final SharedPreferences _prefs;
 
   /// Create an instance [ThemeStorage].
+  /// {@macro theme_storage.class}
   const ThemeStorage(this._prefs);
 
   @override
