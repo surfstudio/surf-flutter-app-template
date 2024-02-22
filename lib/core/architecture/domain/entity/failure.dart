@@ -1,6 +1,6 @@
 /// {@template failure.class}
 /// The failure processed in the business logic layer of the application.
-/// 
+///
 /// It is mostly returned from repository methods.
 /// {@endtemplate}
 base class Failure<T extends Object?> implements Exception {
