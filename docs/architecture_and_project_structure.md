@@ -16,6 +16,18 @@ The repository is designed to abstract the details of data storage. It makes the
 
 It is also necessary to observe the dependency rule - entities on one layer should depend only on neighboring layers, but not on entities on the same layer. For example, one repository should not depend on another repository. The direction of dependencies must also be followed. For example, repository depends on the data source, but not vice versa.
 
+# Сatching errors
+
+The `Result` class is used to catch errors. It allows you to return either a successful result or a failure.
+
+The return type of all repository methods is set as `RequestOperation<T>` - typedef for asynchronous `Result`. Inside the method, if successful, `Result.ok(data)` is returned, and if an error occurs, `Result.failed(failure)` is returned. 
+The result of calling the repository method is processed in the `switch` in the `ElementaryModel`.
+
+`Either` was chosen instead of `rethrow` due to the advantages of `Either`, which make the code more reliable and less error-prone:
+
+- The `Result` type lets us explicitly declare success and failure types in the signature of a function or method in Dart.
+- We can use pattern matching in the calling code to ensure we handle both cases explicitly.
+
 # Project structure
 
 > - directories in italics are optional and may be present in some cases
