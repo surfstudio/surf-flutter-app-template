@@ -16,8 +16,8 @@ class DashFlow extends StatelessWidget implements AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) {
     return DiScope<IDashScope>(
-      factory: DashScope.create,
-      dispose: (scope) => scope.dispose(),
+      onFactory: DashScope.create,
+      onDispose: (scope) => scope.dispose(),
       child: this,
     );
   }

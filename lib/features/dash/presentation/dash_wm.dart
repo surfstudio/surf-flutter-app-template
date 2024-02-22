@@ -43,6 +43,6 @@ class DashWidgetModel extends WidgetModel<DashScreen, DashModel>
 
 /// Interface for [DashWidgetModel].
 abstract class IDashWidgetModel with ILocalizationMixin, ThemeIModelMixin implements IWidgetModel {
-  /// Sending an analytics event
+  /// Sending an analytics event.
   void trackAnalyticsExample();
 }
