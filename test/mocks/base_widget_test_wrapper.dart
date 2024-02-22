@@ -1,11 +1,11 @@
 // ignore_for_file: avoid_implementing_value_types
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/assets/colors/color_scheme.dart';
-import 'package:flutter_template/assets/themes/theme_data.dart';
 import 'package:flutter_template/common/service/theme/theme_service.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/l10n/app_localizations.g.dart';
+import 'package:flutter_template/uikit/colors/color_scheme.dart';
+import 'package:flutter_template/uikit/themes/theme_data.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart' as intl;
