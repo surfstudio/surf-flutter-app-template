@@ -49,7 +49,6 @@ environment:
 
 flutter:
   uses-material-design: true
-  generate: true
   assets:
     - assets/fonts/
     - assets/icons/
