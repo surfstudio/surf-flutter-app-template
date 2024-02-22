@@ -53,7 +53,7 @@ class _ScaledGestureDetectorState extends State<ScaledGestureDetector> {
   Widget build(BuildContext context) {
     return ConditionalWrapper(
       condition: widget.onTap != null,
-      wrapper: (child) => GestureDetector(
+      onAddWrapper: (child) => GestureDetector(
         onTapDown: (_) {
           setState(() => _isPressed = true);
           widget.onTapDown?.call();
