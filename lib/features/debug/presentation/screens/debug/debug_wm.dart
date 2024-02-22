@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:elementary/elementary.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +9,7 @@ import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_model.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_screen.dart';
 import 'package:flutter_template/features/navigation/service/router.dart';
-import 'package:flutter_template/persistence/storage/config_storage/config_storage_impl.dart';
+import 'package:flutter_template/persistence/storage/config_storage/config_settings_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:surf_logger/surf_logger.dart';
 
@@ -18,7 +20,7 @@ DebugScreenWidgetModel debugScreenWidgetModelFactory(
   BuildContext context,
 ) {
   final appDependencies = context.read<IAppScope>();
-  final configStorage = ConfigSettingsStorageImpl(appDependencies.sharedPreferences);
+  final configStorage = ConfigSettingsStorage(appDependencies.sharedPreferences);
 
   final model = DebugScreenModel(
     appDependencies.errorHandler,
@@ -28,21 +30,15 @@ DebugScreenWidgetModel debugScreenWidgetModelFactory(
     appDependencies.themeService,
   );
   final router = appDependencies.router;
+
   return DebugScreenWidgetModel(model, router);
 }
 
 /// Widget Model for [DebugScreen].
 class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
     implements IDebugScreenWidgetModel {
-  /// Empty string.
-  static const String _emptyString = '';
-
   /// Class that coordinates navigation for the whole app.
   final AppRouter router;
-
-  late final _textEditingController = TextEditingController(
-    text: model.proxyUrl,
-  );
 
   @override
   late final ValueNotifier<UrlType> urlState;
@@ -50,8 +46,12 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
   @override
   late final ValueNotifier<ThemeMode> themeState;
 
-  @override
-  TextEditingController get proxyEditingController => _textEditingController;
+  /// Empty string.
+  static const _emptyString = '';
+
+  late final _textEditingController = TextEditingController(
+    text: model.proxyUrl,
+  );
 
   /// Current value url.
   late String _currentUrl;
@@ -59,11 +59,20 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
   /// Proxy url.
   late String? _proxyUrl;
 
+  @override
+  TextEditingController get proxyEditingController => _textEditingController;
+
   /// Create an instance [DebugScreenModel].
   DebugScreenWidgetModel(
     super._model,
     this.router,
   );
+
+  @override
+  void dispose() {
+    model.configNotifier.removeListener(_updateAppConfig);
+    super.dispose();
+  }
 
   @override
   void initWidgetModel() {
@@ -77,14 +86,8 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
   }
 
   @override
-  void dispose() {
-    model.configNotifier.removeListener(_updateAppConfig);
-    super.dispose();
-  }
-
-  @override
   void closeScreen() {
-    router.pop();
+    unawaited(router.pop());
   }
 
   @override
@@ -112,12 +115,12 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
 
   @override
   void openLogsHistory() {
-    router.push(LogHistoryRouter());
+    unawaited(router.push(LogHistoryRouter()));
   }
 
   @override
   void openUiKit() {
-    router.push(const UiKitRouter());
+    unawaited(router.push(const UiKitRouter()));
   }
 
   @override
@@ -130,11 +133,13 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
     urlState.value = _resolveUrlType(_currentUrl);
 
     _proxyUrl = config.proxyUrl;
-    if (_proxyUrl != null && _proxyUrl!.isNotEmpty) {
+    final proxyUrl = _proxyUrl;
+
+    if (proxyUrl != null && proxyUrl.isNotEmpty) {
       proxyEditingController
-        ..text = _proxyUrl!
+        ..text = proxyUrl
         ..selection = TextSelection.collapsed(
-          offset: _proxyUrl!.length,
+          offset: proxyUrl.length,
         );
     } else {
       proxyEditingController.text = _emptyString;
@@ -152,8 +157,9 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
   }
 
   UrlType _resolveUrlType(String currentUrl) {
-    if (currentUrl == Url.testUrl) return UrlType.test;
-    if (currentUrl == Url.prodUrl) return UrlType.prod;
+    if (currentUrl == Urls.testUrl) return UrlType.test;
+    if (currentUrl == Urls.prodUrl) return UrlType.prod;
+
     return UrlType.dev;
   }
 }
@@ -170,19 +176,19 @@ abstract class IDebugScreenWidgetModel implements IWidgetModel {
   ValueListenable<ThemeMode> get themeState;
 
   /// Method to close the debug screens.
-  void closeScreen() {}
+  void closeScreen();
 
   /// Change url.
-  void urlChange(UrlType? urlType) {}
+  void urlChange(UrlType? urlType);
 
   /// Switch server.
-  void switchServer(UrlType urlType) {}
+  void switchServer(UrlType urlType);
 
   /// Change proxyUrl value.
-  void setProxy() {}
+  void setProxy();
 
   /// Set theme mode for app.
-  void setThemeMode(ThemeMode? themeMode) {}
+  void setThemeMode(ThemeMode? themeMode);
 
   /// Navigate to log history screen.
   void openLogsHistory();
