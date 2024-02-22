@@ -26,6 +26,8 @@ class DashScreen extends ElementaryWidget<IDashWidgetModel> {
           const _LocalizationExamples(),
           const SizedBox(height: 46),
           _AnalyticsExample(trackAnalyticsExample: wm.trackAnalyticsExample),
+          const SizedBox(height: 16),
+          _IpButton(goToIpScreen: wm.goToIpScreen),
         ],
       ),
     );
@@ -65,6 +67,22 @@ class _AnalyticsExample extends StatelessWidget {
     return FilledButton(
       onPressed: trackAnalyticsExample,
       child: const Text('Track analytics example'),
+    );
+  }
+}
+
+class _IpButton extends StatelessWidget {
+  final VoidCallback goToIpScreen;
+
+  const _IpButton({
+    required this.goToIpScreen,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return FilledButton(
+      onPressed: goToIpScreen,
+      child: const Text('Go to IP screen'),
     );
   }
 }

@@ -7,6 +7,7 @@ import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/common/utils/mixin/theme_mixin.dart';
 import 'package:flutter_template/features/dash/presentation/dash_model.dart';
 import 'package:flutter_template/features/dash/presentation/dash_screen.dart';
+import 'package:flutter_template/features/navigation/service/router.dart';
 import 'package:flutter_template/l10n/app_localizations_x.dart';
 import 'package:provider/provider.dart';
 
@@ -20,14 +21,14 @@ DashWidgetModel dashScreenWmFactory(
   return DashWidgetModel(
     model: model,
     analyticsService: scope.analyticsService,
+    router: scope.router,
   );
 }
 
 /// Widget model for [DashScreen].
-class DashWidgetModel extends WidgetModel<DashScreen, DashModel>
-    with ThemeWMMixin
-    implements IDashWidgetModel {
+class DashWidgetModel extends WidgetModel<DashScreen, DashModel> with ThemeWMMixin implements IDashWidgetModel {
   final IAnalyticsService _analyticsService;
+  final AppRouter _router;
 
   @override
   AppLocalizations get l10n => context.l10n;
@@ -36,22 +37,30 @@ class DashWidgetModel extends WidgetModel<DashScreen, DashModel>
   DashWidgetModel({
     required DashModel model,
     required IAnalyticsService analyticsService,
+    required AppRouter router,
   })  : _analyticsService = analyticsService,
+        _router = router,
         super(model);
 
   @override
   void trackAnalyticsExample() {
     _analyticsService.trackEvent(const TrackAnalyticsExampleEvent());
   }
+
+  @override
+  void goToIpScreen() {
+    _router.navigate(const ApiInteractExampleRoute());
+  }
 }
 
 /// Interface for [DashWidgetModel].
-abstract class IDashWidgetModel
-    with ThemeIModelMixin
-    implements IWidgetModel {
+abstract class IDashWidgetModel with ThemeIModelMixin implements IWidgetModel {
   /// Localization strings.
   AppLocalizations get l10n;
 
   /// Sending an analytics event
   void trackAnalyticsExample();
+
+  /// Сallback of the transition to the IP address screen
+  void goToIpScreen();
 }

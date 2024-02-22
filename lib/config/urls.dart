@@ -11,6 +11,9 @@ abstract class Url {
   /// Dev url.
   static String get devUrl => 'https://localhost:9999/food/hs/ExchangeSotr';
 
+  /// Url for getting IP address.
+  static const String ipUrl = 'https://api.ipify.org/';
+
   /// Base url.
   static String get baseUrl => Environment.instance().config.url;
 }

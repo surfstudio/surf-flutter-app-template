@@ -10,7 +10,7 @@ abstract class IpApi {
   /// API creation factory using [Dio].
   factory IpApi(Dio dio) = _IpApi;
 
-  /// Request to obtain the current IP address.
+  /// Request to get the current IP address.
   @GET('/')
-  Future<IpDto> getIp();
+  Future<IpDto> getIp([@Query('format') String format = 'json']);
 }

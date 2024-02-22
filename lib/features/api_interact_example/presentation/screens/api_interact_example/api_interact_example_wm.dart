@@ -1,9 +1,12 @@
 import 'package:elementary/elementary.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/features/common/utils/mixin/theme_mixin.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_template/features/api_interact_example/di/api_interact_example_scope.dart';
 import 'package:flutter_template/features/api_interact_example/presentation/screens/api_interact_example/api_interact_example_model.dart';
 import 'package:flutter_template/features/api_interact_example/presentation/screens/api_interact_example/api_interact_example_screen.dart';
+import 'package:flutter_template/features/common/utils/mixin/theme_mixin.dart';
+import 'package:flutter_template/l10n/app_localizations_x.dart';
 import 'package:provider/provider.dart';
 
 /// DI factory for [ApiInteractExampleWM]
@@ -14,13 +17,32 @@ ApiInteractExampleWM defaultApiInteractExampleWMFactory(BuildContext context) {
 }
 
 /// Interface for [ApiInteractExampleWM]
-abstract interface class IApiInteractExampleWM with ThemeIModelMixin implements IWidgetModel {}
+abstract interface class IApiInteractExampleWM with ThemeIModelMixin implements IWidgetModel {
+  /// State notifier with IP address.
+  ValueListenable<IpUnionState> get ipState;
+
+  /// Localization strings.
+  AppLocalizations get l10n;
+}
 
 /// {@template api_interact_example_wm.class}
 /// [WidgetModel] for [ApiInteractExampleScreen]
 /// {@endtemplate}
-final class ApiInteractExampleWM extends WidgetModel<ApiInteractExampleScreen, ApiInteractExampleModel> with ThemeWMMixin implements IApiInteractExampleWM {
-
+final class ApiInteractExampleWM extends WidgetModel<ApiInteractExampleScreen, ApiInteractExampleModel>
+    with ThemeWMMixin
+    implements IApiInteractExampleWM {
   /// {@macro api_interact_example_wm.class}
   ApiInteractExampleWM(super._model);
+
+  @override
+  void initWidgetModel() {
+    model.loadIp();
+    super.initWidgetModel();
+  }
+
+  @override
+  ValueListenable<IpUnionState> get ipState => model.ipState;
+
+  @override
+  AppLocalizations get l10n => context.l10n;
 }
