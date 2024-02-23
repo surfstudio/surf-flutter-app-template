@@ -20,7 +20,7 @@ class LogHistoryScreen extends ElementaryWidget<ILogHistoryWm> {
   Widget build(ILogHistoryWm wm) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('История логов'),
+        title: const Text('Log History'),
         actions: [
           GestureDetector(
             onTap: wm.clearLogHistory,
@@ -30,7 +30,7 @@ class LogHistoryScreen extends ElementaryWidget<ILogHistoryWm> {
               child: Column(
                 children: [
                   Icon(Icons.delete_forever_rounded),
-                  Text('Очистить'),
+                  Text('Clear'),
                 ],
               ),
             ),
@@ -45,7 +45,7 @@ class LogHistoryScreen extends ElementaryWidget<ILogHistoryWm> {
             child: Padding(
               padding: const EdgeInsets.symmetric(
                   vertical: AppSizes.double8, horizontal: AppSizes.double2),
-              child: logs.isEmpty ? const Center(child: Text('История пуста')) : Text(logs),
+              child: logs.isEmpty ? const Center(child: Text('History is empty')) : Text(logs),
             ),
           );
         },

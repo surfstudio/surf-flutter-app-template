@@ -24,7 +24,7 @@ class LogHistoryWm extends WidgetModel<LogHistoryScreen, LogHistoryModel> implem
 
   /// Create an instance [LogHistoryWm].
   LogHistoryWm(super._model) {
-    _loadFile();
+    unawaited(_loadFile());
   }
 
   @override
@@ -42,8 +42,9 @@ class LogHistoryWm extends WidgetModel<LogHistoryScreen, LogHistoryModel> implem
 
 /// Factory for [LogHistoryWm].
 LogHistoryWm logHistoryScreenWmFactory(
-  BuildContext context,
+  BuildContext _,
 ) {
   final model = LogHistoryModel();
+
   return LogHistoryWm(model);
 }

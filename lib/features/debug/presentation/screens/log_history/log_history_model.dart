@@ -10,7 +10,7 @@ class LogHistoryModel extends ElementaryModel {
   }
 
   /// Upload logs history file.
-  Future<String> loadFile() async {
+  Future<String> loadFile() {
     return const LogHistoryServiceImpl().loadFile();
   }
 }
