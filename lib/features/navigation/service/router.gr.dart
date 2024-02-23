@@ -45,17 +45,6 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
-    LogHistoryRouter.name: (routeData) {
-      final args =
-          routeData.argsAs<LogHistoryRouterArgs>(orElse: () => const LogHistoryRouterArgs());
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: LogHistoryScreen(
-          key: args.key,
-          wmFactory: args.wmFactory,
-        ),
-      );
-    },
     TempRouter.name: (routeData) {
       final args = routeData.argsAs<TempRouterArgs>(orElse: () => const TempRouterArgs());
       return AutoRoutePage<dynamic>(
@@ -189,45 +178,6 @@ class InfoRouterArgs {
   @override
   String toString() {
     return 'InfoRouterArgs{key: $key, wmFactory: $wmFactory}';
-  }
-}
-
-/// generated route for
-/// [LogHistoryScreen]
-class LogHistoryRouter extends PageRouteInfo<LogHistoryRouterArgs> {
-  LogHistoryRouter({
-    Key? key,
-    WidgetModel<ElementaryWidget<IWidgetModel>, ElementaryModel> Function(BuildContext) wmFactory =
-        logHistoryScreenWmFactory,
-    List<PageRouteInfo>? children,
-  }) : super(
-          LogHistoryRouter.name,
-          args: LogHistoryRouterArgs(
-            key: key,
-            wmFactory: wmFactory,
-          ),
-          initialChildren: children,
-        );
-
-  static const String name = 'LogHistoryRouter';
-
-  static const PageInfo<LogHistoryRouterArgs> page = PageInfo<LogHistoryRouterArgs>(name);
-}
-
-class LogHistoryRouterArgs {
-  const LogHistoryRouterArgs({
-    this.key,
-    this.wmFactory = logHistoryScreenWmFactory,
-  });
-
-  final Key? key;
-
-  final WidgetModel<ElementaryWidget<IWidgetModel>, ElementaryModel> Function(BuildContext)
-      wmFactory;
-
-  @override
-  String toString() {
-    return 'LogHistoryRouterArgs{key: $key, wmFactory: $wmFactory}';
   }
 }
 

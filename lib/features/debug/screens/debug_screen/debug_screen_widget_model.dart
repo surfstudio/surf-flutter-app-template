@@ -9,9 +9,6 @@ import 'package:flutter_template/features/debug/screens/debug_screen/debug_scree
 import 'package:flutter_template/features/navigation/service/router.dart';
 import 'package:flutter_template/persistence/storage/config_storage/config_storage_impl.dart';
 import 'package:provider/provider.dart';
-import 'package:surf_logger/surf_logger.dart';
-
-// ignore_for_file: avoid_positional_boolean_parameters
 
 /// Factory for [DebugScreenWidgetModel].
 DebugScreenWidgetModel debugScreenWidgetModelFactory(
@@ -29,9 +26,8 @@ DebugScreenWidgetModel debugScreenWidgetModelFactory(
   );
 
   final router = appDependencies.router;
-  final logger = appDependencies.logger;
 
-  return DebugScreenWidgetModel(model, router, logger);
+  return DebugScreenWidgetModel(model, router);
 }
 
 /// Widget Model for [DebugScreen].
@@ -41,8 +37,6 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel> 
 
   /// Class that coordinates navigation for the whole app.
   final AppRouter router;
-
-  final LogWriter _logger;
 
   late final _textEditingController = TextEditingController(
     text: model.proxyUrl,
@@ -67,7 +61,6 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel> 
   DebugScreenWidgetModel(
     super._model,
     this.router,
-    this._logger,
   );
 
   @override
@@ -116,17 +109,9 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel> 
   }
 
   @override
-  void openLogsHistory() {
-    router.push(LogHistoryRouter());
-  }
-
-  @override
   void openUiKit() {
     router.push(const UiKitRouter());
   }
-
-  @override
-  Future<void> saveExampleLog() async => _saveExampleLog();
 
   void _updateAppConfig() {
     final config = model.configNotifier.value;
@@ -148,12 +133,6 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel> 
 
   void _updateThemeMode() {
     themeState.value = model.currentThemeMode.value;
-  }
-
-  void _saveExampleLog() {
-    final error = Exception('Some exception');
-    final st = StackTrace.fromString('stackTraceString');
-    _logger.e(error, st);
   }
 
   UrlType _resolveUrlType(String currentUrl) {
@@ -188,12 +167,6 @@ abstract class IDebugScreenWidgetModel implements IWidgetModel {
 
   /// Set theme mode for app.
   void setThemeMode(ThemeMode? themeMode) {}
-
-  /// Navigate to log history screen.
-  void openLogsHistory();
-
-  /// Method for save example log to log history file.
-  void saveExampleLog();
 
   /// Navigate to ui kit screen.
   void openUiKit();

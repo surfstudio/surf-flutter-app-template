@@ -6,7 +6,6 @@ import 'package:elementary/elementary.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/config/environment/environment.dart';
-import 'package:flutter_template/features/common/service/log_history/log_history_service_impl.dart';
 import 'package:flutter_template/features/common/service/theme/theme_service.dart';
 import 'package:flutter_template/features/common/service/theme/theme_service_impl.dart';
 import 'package:flutter_template/features/common/utils/analytics/amplitude/amplitude_analytic_tracker.dart';
@@ -21,7 +20,6 @@ import 'package:flutter_template/persistence/storage/theme_storage/theme_storage
 import 'package:flutter_template/util/default_error_handler.dart';
 import 'package:flutter_template/util/disposable_object/i_disposable_object.dart';
 import 'package:flutter_template/util/log_strategy/debug_log_strategy.dart';
-import 'package:flutter_template/util/log_strategy/log_history_strategy.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:surf_logger/surf_logger.dart' as surf_logger;
@@ -40,7 +38,6 @@ final class AppScope implements IAppScope {
   late final IAnalyticsService _analyticsService;
 
   Logger? _debugLogPrinter;
-  Logger? _qaLogPrinter;
   late final surf_logger.LogWriter _logger;
 
   @override
@@ -143,7 +140,6 @@ final class AppScope implements IAppScope {
   Future<void> _initLogger() async {
     _logger = surf_logger.Logger.withStrategies({
       if (!kReleaseMode) DebugLogStrategy(_debugLogPrinter = Logger(printer: PrettyPrinter(methodCount: 0))),
-      if (Environment.instance().isQa) await _createLogHistoryStrategy(),
       // TODO(init-project): Initialize CrashlyticsLogStrategy.
       // CrashlyticsLogStrategy(),
     });
@@ -151,18 +147,6 @@ final class AppScope implements IAppScope {
 
   Future<void> _disposeLogger() async {
     _debugLogPrinter?.close();
-    _qaLogPrinter?.close();
-  }
-
-  // Create strategy to logger for save logs history for qa environment.
-  Future<surf_logger.LogStrategy> _createLogHistoryStrategy() async {
-    final file = await const LogHistoryServiceImpl().logHistoryFile();
-    final logger = _qaLogPrinter = Logger(
-      output: FileCustomOutput(file: file),
-      printer: PrettyPrinter(lineLength: 80, noBoxingByDefault: true),
-    );
-
-    return LogHistoryStrategy(logger);
   }
 }
 

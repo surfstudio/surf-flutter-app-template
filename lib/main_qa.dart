@@ -11,7 +11,6 @@ void main() {
     config: AppConfig(
       url: Url.testUrl,
     ),
-    
   );
 
   run();

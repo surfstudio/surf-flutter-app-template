@@ -14,7 +14,12 @@ class ConditionalWrapper extends StatelessWidget {
   final Widget child;
 
   /// {@macro conditional_wrapper.class}
-  const ConditionalWrapper({required this.condition, required this.wrapper, required this.child, super.key});
+  const ConditionalWrapper({
+    required this.condition,
+    required this.wrapper,
+    required this.child,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
