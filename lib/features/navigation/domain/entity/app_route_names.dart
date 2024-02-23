@@ -7,20 +7,20 @@
 /// ```
 abstract class AppRouteNames {
   /// TempScreen route name.
-  static const String tempScreen = 'tempRouter';
+  static const tempScreen = 'tempRouter';
 
   /// TempScreen route name.
-  static const String uiKitScreen = 'uiKitRouter';
+  static const uiKitScreen = 'uiKitRouter';
 
   /// DebugScreen route name.
-  static const String debugScreen = 'debugRouter';
+  static const debugScreen = 'debugRouter';
 
   /// DashScreen route name.
-  static const String dashScreen = 'dashRouter';
+  static const dashScreen = 'dashRouter';
 
   /// InfoScreen route name.
-  static const String infoScreen = 'infoRouter';
+  static const infoScreen = 'infoRouter';
 
   /// LogHistoryScreen route name.
-  static const String logHistoryScreen = 'logHistoryRouter';
+  static const logHistoryScreen = 'logHistoryRouter';
 }
