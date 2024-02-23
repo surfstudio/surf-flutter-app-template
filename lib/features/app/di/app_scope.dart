@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:analytics/core/analytyc_service.dart';
 import 'package:dio/dio.dart';
@@ -10,13 +11,16 @@ import 'package:flutter_template/common/utils/analytics/firebase/firebase_analyt
 import 'package:flutter_template/common/utils/analytics/mock/mock_firebase_analytics.dart';
 import 'package:flutter_template/common/utils/default_error_handler.dart';
 import 'package:flutter_template/config/environment/environment.dart';
-import 'package:flutter_template/features/navigation/service/router.dart';
+import 'package:flutter_template/features/navigation/service/app_router.dart';
 import 'package:flutter_template/persistence/storage/theme_storage/i_theme_storage.dart';
 import 'package:flutter_template/persistence/storage/theme_storage/theme_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Scope of dependencies which need through all app's life.
 class AppScope implements IAppScope {
+  @override
+  late VoidCallback applicationRebuilder;
+
   static const _themeByDefault = ThemeMode.system;
 
   final SharedPreferences _sharedPreferences;
@@ -27,8 +31,7 @@ class AppScope implements IAppScope {
   late final IThemeService _themeService;
   late final AnalyticService _analyticsService;
 
-  @override
-  late VoidCallback applicationRebuilder;
+  late IThemeStorage _themeModeStorage;
 
   @override
   Dio get dio => _dio;
@@ -48,26 +51,25 @@ class AppScope implements IAppScope {
   @override
   AnalyticService get analyticsService => _analyticsService;
 
-  late IThemeStorage _themeModeStorage;
-
   /// Create an instance [AppScope].
   AppScope(this._sharedPreferences) {
     /// List interceptor. Fill in as needed.
     final additionalInterceptors = <Interceptor>[];
 
     _dio = _initDio(additionalInterceptors);
-    _errorHandler = DefaultErrorHandler();
+    _errorHandler = const DefaultErrorHandler();
     _router = AppRouter.instance();
     _themeModeStorage = ThemeStorage(_sharedPreferences);
     _analyticsService = AnalyticService.withStrategies({
-      // TODO(init): can be removed MockFirebaseAnalytics, added for demo analytics track
+      // TODO(init): can be removed MockFirebaseAnalytics, added for demo analytics track.
       FirebaseAnalyticStrategy(MockFirebaseAnalytics()),
     });
   }
 
   @override
   Future<void> initTheme() async {
-    final theme = await ThemeStorage(_sharedPreferences).getThemeMode() ?? _themeByDefault;
+    final theme = await ThemeStorage(_sharedPreferences).getThemeMode() ??
+        _themeByDefault;
     _themeService = ThemeServiceImpl(theme);
     _themeService.addListener(_onThemeModeChanged);
   }
@@ -75,15 +77,15 @@ class AppScope implements IAppScope {
   Dio _initDio(Iterable<Interceptor> additionalInterceptors) {
     const timeout = Duration(seconds: 30);
 
-    final dio = Dio();
+    final dioLocal = Dio();
 
-    dio.options
+    dioLocal.options
       ..baseUrl = Environment.instance().config.url
       ..connectTimeout = timeout
       ..receiveTimeout = timeout
       ..sendTimeout = timeout;
 
-    (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
+    (dioLocal.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () {
       final client = HttpClient();
       final proxyUrl = Environment.instance().config.proxyUrl;
       if (proxyUrl != null && proxyUrl.isNotEmpty) {
@@ -99,13 +101,14 @@ class AppScope implements IAppScope {
       return client;
     };
 
-    dio.interceptors.addAll(additionalInterceptors);
+    dioLocal.interceptors.addAll(additionalInterceptors);
 
     if (Environment.instance().isDebug) {
-      dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
+      dioLocal.interceptors
+          .add(LogInterceptor(requestBody: true, responseBody: true));
     }
 
-    return dio;
+    return dioLocal;
   }
 
   Future<void> _onThemeModeChanged() async {
@@ -130,12 +133,12 @@ abstract class IAppScope {
   /// A service that stores and retrieves app theme mode.
   IThemeService get themeService;
 
-  /// Init theme service with theme from storage or default value.
-  Future<void> initTheme();
-
   /// Shared preferences.
   SharedPreferences get sharedPreferences;
 
-  /// Analytics sending service
+  /// Analytics sending service.
   AnalyticService get analyticsService;
+
+  /// Init theme service with theme from storage or default value.
+  Future<void> initTheme();
 }
