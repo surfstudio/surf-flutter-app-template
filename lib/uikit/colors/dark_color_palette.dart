@@ -158,6 +158,6 @@ abstract class ColorPalette {
 
   /// Platinum
   ///
-  /// https://www.color-name.com/hex/e7e4e0
+  /// https://www.color-name.com/hex/e7e4e0.
   static const platinum = Color(0xFFE7E4E0);
 }
