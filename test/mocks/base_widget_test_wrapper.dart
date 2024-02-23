@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_template/common/service/theme/theme_service.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/l10n/app_localizations.g.dart';
-import 'package:flutter_template/uikit/colors/color_scheme.dart';
-import 'package:flutter_template/uikit/themes/theme_data.dart';
+import 'package:flutter_template/uikit/colors/app_color_scheme.dart';
+import 'package:flutter_template/uikit/themes/app_theme_data.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart' as intl;
@@ -16,12 +16,6 @@ import '../core/utils/test_widget.dart';
 
 /// Widget under test wrapper. Provides essential dependencies such as theme, color scheme, and fonts.
 class BaseWidgetTestWrapper extends StatelessWidget {
-  final Widget child;
-  final ThemeType mode;
-  late final MockStackRouter mockRouter;
-  final appScopeMock = AppScopeMock();
-  final themeServiceMock = ThemeServiceMock();
-
   BaseWidgetTestWrapper({
     required this.child,
     required this.mode,
@@ -39,14 +33,23 @@ class BaseWidgetTestWrapper extends StatelessWidget {
     }
   }
 
+  final Widget child;
+  final ThemeType mode;
+  late final MockStackRouter mockRouter;
+  final appScopeMock = AppScopeMock();
+  final themeServiceMock = ThemeServiceMock();
+
   @override
   Widget build(BuildContext context) {
     intl.Intl.systemLocale = 'ru';
     initializeDateFormatting();
+
     return materialAppWrapper(
-      theme: mode == ThemeType.dark ? AppThemeData.darkTheme : AppThemeData.lightTheme,
       localizations: AppLocalizations.localizationsDelegates,
       localeOverrides: AppLocalizations.supportedLocales,
+      theme: mode == ThemeType.dark
+          ? AppThemeData.darkTheme
+          : AppThemeData.lightTheme,
     )(
       StackRouterScope(
         controller: mockRouter,
@@ -55,8 +58,9 @@ class BaseWidgetTestWrapper extends StatelessWidget {
           providers: [
             Provider<IAppScope>(create: (_) => appScopeMock),
             Provider<AppColorScheme>(
-              create: (_) =>
-                  mode == ThemeType.dark ? AppColorScheme.dark() : AppColorScheme.light(),
+              create: (_) => mode == ThemeType.dark
+                  ? AppColorScheme.dark()
+                  : AppColorScheme.light(),
             ),
           ],
           child: Directionality(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_template/uikit/themes/theme_data.dart';
+import 'package:flutter_template/uikit/themes/app_theme_data.dart';
 
 import 'test_widget.dart';
 

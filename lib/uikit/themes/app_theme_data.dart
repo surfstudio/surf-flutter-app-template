@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_template/features/common/utils/sizes/app_sizes.dart';
 
 import 'package:flutter_template/uikit/colors/app_color_scheme.dart';
-import 'package:flutter_template/uikit/text/text_extention.dart';
+import 'package:flutter_template/uikit/text/app_text_scheme.dart';
 
 /// Class of the app themes data.
 abstract class AppThemeData {
   /// Light theme configuration.
   static final lightTheme = ThemeData(
-    extensions: [_lightColorScheme, _textTheme],
+    extensions: [_lightColorScheme, _textScheme],
     brightness: Brightness.light,
     colorScheme: ColorScheme(
       brightness: Brightness.light,
@@ -46,7 +46,7 @@ abstract class AppThemeData {
 
   /// Dark theme configuration.
   static final darkTheme = ThemeData(
-    extensions: [_darkColorScheme, _textTheme],
+    extensions: [_darkColorScheme, _textScheme],
     brightness: Brightness.dark,
     colorScheme: ColorScheme(
       brightness: Brightness.dark,
@@ -84,5 +84,5 @@ abstract class AppThemeData {
 
   static final _lightColorScheme = AppColorScheme.light();
   static final _darkColorScheme = AppColorScheme.dark();
-  static final _textTheme = AppTextTheme.base();
+  static final _textScheme = AppTextScheme.base();
 }

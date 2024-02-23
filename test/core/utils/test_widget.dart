@@ -3,8 +3,8 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/l10n/app_localizations.g.dart';
-import 'package:flutter_template/uikit/colors/color_scheme.dart';
-import 'package:flutter_template/uikit/text/text_extention.dart';
+import 'package:flutter_template/uikit/colors/app_color_scheme.dart';
+import 'package:flutter_template/uikit/text/app_text_scheme.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
@@ -44,7 +44,6 @@ void testWidget<T extends Widget>({
 }) =>
     testGoldens(
       desc ?? 'Golden for $T',
-      skip: skip,
       (tester) async {
         await loadAppFonts();
 
@@ -72,9 +71,9 @@ void testWidget<T extends Widget>({
               child: widget,
             ),
             wrapper: (child) => BaseWidgetTestWrapper(
-              child: child,
               mode: theme.type,
               router: router,
+              child: child,
             ),
           );
 
@@ -90,14 +89,15 @@ void testWidget<T extends Widget>({
                 screenState,
                 includeThemeName: !onlyOneTheme,
               ),
-              devices: deviceMatters ? null : [Device.phone],
               autoHeight: autoHeight,
+              devices: deviceMatters ? null : [Device.phone],
             );
 
             await tester.pumpWidget(Container());
           }
         }
       },
+      skip: skip,
     );
 
 /// Forms the name of the golden file from:
@@ -107,7 +107,7 @@ void testWidget<T extends Widget>({
 /// - screen state [state], if provided (e.g., `loading`, 'loading state' -> 'loading_state')
 /// - [includeThemeName] - whether to include the theme name in the file name
 ///
-/// Example value: `dark_theme.loading.load_store_screen`
+/// Example value: `dark_theme.loading.load_store_screen`.
 String _getGoldenName<T>(
   TestingTheme theme,
   String? state, {
@@ -146,6 +146,6 @@ extension ThemeDataExt on ThemeData {
   AppColorScheme get customColorScheme =>
       extension<AppColorScheme>() ?? (throw Exception('no AppColorScheme'));
 
-  AppTextTheme get customTextTheme =>
-      extension<AppTextTheme>() ?? (throw Exception('no AppTextTheme'));
+  AppTextScheme get customTextScheme =>
+      extension<AppTextScheme>() ?? (throw Exception('no AppTextScheme'));
 }

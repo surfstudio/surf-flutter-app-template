@@ -13,7 +13,7 @@ void main() {
     widgetBuilder: (_) => const DashScreen().build(wm),
     setup: (theme, _, l10n) {
       when(() => wm.colorScheme).thenReturn(theme.customColorScheme);
-      when(() => wm.textScheme).thenReturn(theme.customTextTheme);
+      when(() => wm.textScheme).thenReturn(theme.customTextScheme);
       when(() => wm.l10n).thenReturn(l10n);
     },
   );
