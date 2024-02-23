@@ -34,9 +34,7 @@ class _AppState extends State<App> {
     final configStorage = ConfigSettingsStorageImpl(_scope.sharedPreferences);
     final environment = Environment.instance();
     if (!environment.isRelease) {
-      environment
-        ..refreshConfigProxy(configStorage)
-        ..createLogHistoryStrategy();
+      environment.refreshConfigProxy(configStorage);
     }
   }
 
