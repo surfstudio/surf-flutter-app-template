@@ -3,6 +3,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 /// Register and setup third-party dependencies for app DI scope.
 class AppScopeRegister {
+  /// Create an instance [AppScopeRegister].
+  const AppScopeRegister();
+
   /// Create scope.
   Future<AppScope> createScope() async {
     final sharedPreferences = await _createSharedPreferences();
