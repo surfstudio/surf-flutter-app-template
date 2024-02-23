@@ -3,12 +3,6 @@ import 'package:flutter_template/features/{{name.snakeCase()}}/domain/repositori
 import 'package:flutter_template/common/utils/disposable_object/disposable_object.dart';
 import 'package:flutter_template/common/utils/disposable_object/i_disposable_object.dart';
 
-/// Scope dependencies of the {{name.pascalCase()}} feature
-abstract interface class I{{name.pascalCase()}}Scope implements IDisposableObject {
-  /// {{name.pascalCase()}}Repository
-  I{{name.pascalCase()}}Repository get repository;
-}
-
 /// {@template {{name.snakeCase()}}_scope.class}
 /// Implementation of [I{{name.pascalCase()}}Scope]
 /// {@endtemplate}
@@ -23,4 +17,10 @@ final class {{name.pascalCase()}}Scope extends DisposableObject implements I{{na
 
   /// {@macro {{name.snakeCase()}}_scope.class}
   {{name.pascalCase()}}Scope(this.repository);
+}
+
+/// Scope dependencies of the {{name.pascalCase()}} feature
+abstract interface class I{{name.pascalCase()}}Scope implements IDisposableObject {
+/// {{name.pascalCase()}}Repository
+I{{name.pascalCase()}}Repository get repository;
 }
