@@ -6,7 +6,7 @@ import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/l10n/app_localizations.g.dart';
 import 'package:flutter_template/persistence/storage/config_storage/config_settings_storage.dart';
-import 'package:flutter_template/uikit/themes/theme_data.dart';
+import 'package:flutter_template/uikit/themes/app_theme_data.dart';
 
 /// App widget.
 class App extends StatefulWidget {
