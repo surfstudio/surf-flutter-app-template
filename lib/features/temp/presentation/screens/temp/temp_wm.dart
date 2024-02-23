@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_template/common/mixin/theme_mixin.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
-import 'package:flutter_template/features/common/utils/mixin/theme_mixin.dart';
 import 'package:flutter_template/features/navigation/domain/entity/app_route_paths.dart';
 import 'package:flutter_template/features/navigation/service/router.dart';
 import 'package:flutter_template/features/temp/di/temp_scope.dart';
