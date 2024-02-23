@@ -10,6 +10,16 @@ import 'package:flutter_template/uikit/alerts/app_alert.dart';
 /// It is a wrapper over [TextButton] for Android and [CupertinoButton] for iOS.
 /// {@endtemplate}
 class AppAlertAction extends StatelessWidget {
+  /// {@macro app_alert_action.class}
+  const AppAlertAction({
+    required this.child,
+    required this.onPressed,
+    this.isDefaultAction = false,
+    this.isDestructiveAction = false,
+    this.style,
+    super.key,
+  });
+
   /// Action widget.
   ///
   /// Usually [Text].
@@ -27,31 +37,21 @@ class AppAlertAction extends StatelessWidget {
   /// Oonly for Android.
   final ButtonStyle? style;
 
-  /// {@macro app_alert_action.class}
-  const AppAlertAction({
-    required this.child,
-    required this.onPressed,
-    this.isDefaultAction = false,
-    this.isDestructiveAction = false,
-    this.style,
-    super.key,
-  });
-
   @override
   Widget build(BuildContext context) {
     if (Platform.isIOS) {
       return CupertinoDialogAction(
-        child: child,
         onPressed: onPressed,
         isDefaultAction: isDefaultAction,
         isDestructiveAction: isDestructiveAction,
-      );
-    } else {
-      return TextButton(
         child: child,
-        onPressed: onPressed,
-        style: style,
       );
     }
+
+    return TextButton(
+      onPressed: onPressed,
+      style: style,
+      child: child,
+    );
   }
 }
