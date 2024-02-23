@@ -21,10 +21,10 @@ packages:
     dependency: "direct main"
     description:
       name: analytics
-      sha256: "394ef00e4184034f64fbc4e52ea2261b75693e9c3d08b9a7381da65221043abf"
+      sha256: aa40517211986129ae0cd9bbf2cdb440c16429b90f2b5ebc05088a9bc9ece888
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.2"
+    version: "2.0.0"
   analyzer:
     dependency: transitive
     description:

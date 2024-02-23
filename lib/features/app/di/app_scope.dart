@@ -1,25 +1,22 @@
 import 'dart:io';
 
+import 'package:analytics/core/analytyc_service.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_template/common/service/theme/theme_service.dart';
+import 'package:flutter_template/common/service/theme/theme_service_impl.dart';
+import 'package:flutter_template/common/utils/analytics/firebase/firebase_analytic_strategy.dart';
+import 'package:flutter_template/common/utils/analytics/mock/mock_firebase_analytics.dart';
+import 'package:flutter_template/common/utils/default_error_handler.dart';
+import 'package:flutter_template/common/utils/disposable_object/i_disposable_object.dart';
+import 'package:flutter_template/common/utils/logger/debug_log_strategy.dart';
 import 'package:flutter_template/config/environment/environment.dart';
-import 'package:flutter_template/features/common/service/theme/theme_service.dart';
-import 'package:flutter_template/features/common/service/theme/theme_service_impl.dart';
-import 'package:flutter_template/features/common/utils/analytics/amplitude/amplitude_analytic_tracker.dart';
-import 'package:flutter_template/features/common/utils/analytics/firebase/firebase_analytic_tracker.dart';
-import 'package:flutter_template/features/common/utils/analytics/mock/mock_amplitude_analytics.dart';
-import 'package:flutter_template/features/common/utils/analytics/mock/mock_firebase_analytics.dart';
-import 'package:flutter_template/features/common/utils/analytics/service/analytics_service.dart';
-import 'package:flutter_template/features/common/utils/analytics/service/analytics_service_impl.dart';
 import 'package:flutter_template/features/navigation/service/router.dart';
 import 'package:flutter_template/persistence/storage/theme_storage/theme_storage.dart';
 import 'package:flutter_template/persistence/storage/theme_storage/theme_storage_impl.dart';
-import 'package:flutter_template/util/default_error_handler.dart';
-import 'package:flutter_template/util/disposable_object/i_disposable_object.dart';
-import 'package:flutter_template/util/log_strategy/debug_log_strategy.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:surf_logger/surf_logger.dart' as surf_logger;
@@ -35,7 +32,7 @@ final class AppScope implements IAppScope {
   late final AppRouter _router;
   late final IThemeModeStorage _themeModeStorage;
   late final IThemeService _themeService;
-  late final IAnalyticsService _analyticsService;
+  late final AnalyticService _analyticsService;
 
   Logger? _debugLogPrinter;
   late final surf_logger.LogWriter _logger;
@@ -59,7 +56,7 @@ final class AppScope implements IAppScope {
   SharedPreferences get sharedPreferences => _sharedPreferences;
 
   @override
-  IAnalyticsService get analyticsService => _analyticsService;
+  AnalyticService get analyticsService => _analyticsService;
 
   @override
   surf_logger.LogWriter get logger => _logger;
@@ -73,11 +70,10 @@ final class AppScope implements IAppScope {
     _errorHandler = DefaultErrorHandler();
     _router = AppRouter.instance();
     _themeModeStorage = ThemeModeStorageImpl(_sharedPreferences);
-    _analyticsService = AnalyticsServiceImpl([
-      // TODO(init): can be removed MockFirebaseAnalytics and MockAmplitudeAnalytics, added for demo analytics track
-      FirebaseAnalyticTracker(MockFirebaseAnalytics()),
-      AmplitudeAnalyticTracker(MockAmplitudeAnalytics()),
-    ]);
+    _analyticsService = AnalyticService.withStrategies({
+      // TODO(init): can be removed MockFirebaseAnalytics, added for demo analytics track
+      FirebaseAnalyticStrategy(MockFirebaseAnalytics()),
+    });
   }
 
   @override
@@ -139,7 +135,8 @@ final class AppScope implements IAppScope {
 
   Future<void> _initLogger() async {
     _logger = surf_logger.Logger.withStrategies({
-      if (!kReleaseMode) DebugLogStrategy(_debugLogPrinter = Logger(printer: PrettyPrinter(methodCount: 0))),
+      if (!kReleaseMode)
+        DebugLogStrategy(_debugLogPrinter = Logger(printer: PrettyPrinter(methodCount: 0))),
       // TODO(init-project): Initialize CrashlyticsLogStrategy.
       // CrashlyticsLogStrategy(),
     });
@@ -173,9 +170,9 @@ abstract interface class IAppScope implements IDisposableObject {
   /// Shared preferences.
   SharedPreferences get sharedPreferences;
 
-  /// Analytics sending service
-  IAnalyticsService get analyticsService;
-
   /// Surf Logger
   surf_logger.LogWriter get logger;
+
+  /// Analytics sending service
+  AnalyticService get analyticsService;
 }

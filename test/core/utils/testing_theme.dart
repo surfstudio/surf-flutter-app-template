@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_template/assets/themes/theme_data.dart';
+import 'package:flutter_template/uikit/themes/theme_data.dart';
 
 import 'test_widget.dart';
 
@@ -27,6 +27,7 @@ class TestingTheme {
       type: ThemeType.light,
     );
   }
+
   factory TestingTheme.dark() {
     return TestingTheme(
       data: AppThemeData.darkTheme,

@@ -66,5 +66,8 @@
         "type": "String"
       }
     }
-  }
+  },
+  "dashScreenNavBarItemLabel": "Dash screen",
+  "infoScreenNavBarItemLabel": "Info screen",
+  "debugScreenNavBarItemLabel": "Debug screen"
 }

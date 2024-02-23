@@ -7,7 +7,5 @@ linter:
 analyzer:
   exclude:
     - lib/**/*.g.dart
-    - lib/**/*.gr.dart
     - lib/assets/**
     - tools/bricks/**/__brick__/**
-
