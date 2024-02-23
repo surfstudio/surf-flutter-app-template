@@ -1,6 +1,6 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/features/common/utils/mixin/theme_mixin.dart';
+import 'package:flutter_template/features/common/utils/mixin/theme_wm_mixin.dart';
 import 'package:flutter_template/features/{{feature_name.snakeCase()}}/di/{{feature_name.snakeCase()}}_scope.dart';
 import 'package:flutter_template/features/{{feature_name.snakeCase()}}/presentation/screens/{{screen_name.snakeCase()}}/{{screen_name.snakeCase()}}_model.dart';
 import 'package:flutter_template/features/{{feature_name.snakeCase()}}/presentation/screens/{{screen_name.snakeCase()}}/{{screen_name.snakeCase()}}_screen.dart';
