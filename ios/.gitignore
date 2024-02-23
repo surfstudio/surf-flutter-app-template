@@ -48,3 +48,5 @@ fastlane/report.xml
 .bundle/
 Gemfile.lock
 vendor/
+
+Flutter/Flutter.podspec
