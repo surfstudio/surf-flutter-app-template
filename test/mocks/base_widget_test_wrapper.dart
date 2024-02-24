@@ -48,9 +48,7 @@ class BaseWidgetTestWrapper extends StatelessWidget {
     return materialAppWrapper(
       localizations: AppLocalizations.localizationsDelegates,
       localeOverrides: AppLocalizations.supportedLocales,
-      theme: mode == ThemeType.dark
-          ? AppThemeData.darkTheme
-          : AppThemeData.lightTheme,
+      theme: mode == ThemeType.dark ? AppThemeData.darkTheme : AppThemeData.lightTheme,
     )(
       StackRouterScope(
         controller: mockRouter,
@@ -59,9 +57,8 @@ class BaseWidgetTestWrapper extends StatelessWidget {
           providers: [
             Provider<IAppScope>(create: (_) => _appScopeMock),
             Provider<AppColorScheme>(
-              create: (_) => mode == ThemeType.dark
-                  ? AppColorScheme.dark()
-                  : AppColorScheme.light(),
+              create: (_) =>
+                  mode == ThemeType.dark ? AppColorScheme.dark() : AppColorScheme.light(),
             ),
           ],
           child: Directionality(

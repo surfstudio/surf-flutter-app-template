@@ -1,7 +1,7 @@
 import 'package:analytics/core/analytyc_service.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/common/utils/analytics/event/common/track_analytics_example.dart';
+import 'package:flutter_template/common/utils/analytics/event/common/track_analytics_example_event.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/common/utils/mixin/localization_mixin.dart';
 import 'package:flutter_template/features/common/utils/mixin/theme_wm_mixin.dart';

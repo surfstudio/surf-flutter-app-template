@@ -70,8 +70,7 @@ class AppScope implements IAppScope {
 
   @override
   Future<void> initTheme() async {
-    final theme = await ThemeStorage(_sharedPreferences).getThemeMode() ??
-        _themeByDefault;
+    final theme = await ThemeStorage(_sharedPreferences).getThemeMode() ?? _themeByDefault;
     _themeService = ThemeService(theme);
     _themeService.addListener(_onThemeModeChanged);
   }
@@ -106,8 +105,7 @@ class AppScope implements IAppScope {
     dioLocal.interceptors.addAll(additionalInterceptors);
 
     if (Environment.instance().isDebug) {
-      dioLocal.interceptors
-          .add(LogInterceptor(requestBody: true, responseBody: true));
+      dioLocal.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
     }
 
     return dioLocal;

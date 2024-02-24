@@ -6,8 +6,7 @@ import 'package:flutter_template/features/common/utils/sizes/app_sizes.dart';
 /// {@endtemplate}
 class InactiveWrapper extends StatelessWidget {
   /// {@macro inactive_wrapper.class}
-  const InactiveWrapper(
-      {required this.child, required this.inactive, super.key});
+  const InactiveWrapper({required this.child, required this.inactive, super.key});
 
   /// @nodoc.
   final Widget child;
