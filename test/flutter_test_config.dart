@@ -10,14 +10,20 @@ import 'package:golden_toolkit/golden_toolkit.dart';
 import 'core/utils/testing_theme.dart';
 
 const _tolerance = 0.18;
+const _double393 = 393.0;
+const _double851 = 851.0;
+const _double100 = 100.0;
+const _int2000 = 2000;
 
 const _devices = [
   Device.iphone11,
   Device.phone,
 
   /// some custom device.
-  Device(name: 'pixel 4a', size: Size(393, 851)),
+  Device(size: Size(_double393, _double851), name: 'pixel 4a'),
 ];
+
+typedef OnTestMain = FutureOr<void> Function();
 
 /// List of themes used for testing.
 final themesForTesting = [
@@ -25,7 +31,7 @@ final themesForTesting = [
   TestingTheme.dark(),
 ];
 
-Future<void> testExecutable(FutureOr<void> Function() testMain) {
+Future<void> testExecutable(OnTestMain testMain) {
   return GoldenToolkit.runWithConfiguration(
     () async {
       await loadAppFonts();
@@ -60,8 +66,8 @@ class CustomFileComparator extends LocalFileComparator {
     }
     if (!result.passed) {
       log(
-        'A tolerable difference of ${result.diffPercent * 100}% was found when comparing $golden.',
-        level: 2000,
+        'A tolerable difference of ${result.diffPercent * _double100}% was found when comparing $golden.',
+        level: _int2000,
       );
     }
 
