@@ -1,5 +1,7 @@
+// ignore_for_file: avoid-ignoring-return-values
 import 'dart:io';
 
+import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:surf_logger/surf_logger.dart' as surf;
 
@@ -28,7 +30,9 @@ class FileCustomOutput extends LogOutput {
 
   @override
   void output(OutputEvent event) {
-    _sink?.writeln('/// Start \n TimeStamp ${DateTime.now()}');
+    final now = DateFormat().format(DateTime.now());
+
+    _sink?.writeln('/// Start \n TimeStamp $now');
     _sink?.writeln('${event.level}\n');
     for (final line in event.lines) {
       _sink?.writeln(line);

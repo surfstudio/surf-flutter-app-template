@@ -1,9 +1,11 @@
+// ignore_for_file: avoid-non-null-assertion
+
 import 'dart:async';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_template/common/service/log_history/log_history_service_impl.dart';
-import 'package:flutter_template/common/utils/logger/log_history.dart';
+import 'package:flutter_template/common/service/log_history/log_history_service.dart';
+import 'package:flutter_template/common/utils/logger/log_history_strategy.dart';
 import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/environment/build_type.dart';
 import 'package:flutter_template/persistence/storage/config_storage/i_config_settings_storage.dart';
@@ -79,7 +81,7 @@ class Environment implements Listenable {
     if (_currentBuildType != BuildType.qa) return;
 
     if (_currentBuildType == BuildType.qa) {
-      final file = await const LogHistoryServiceImpl().logHistoryFile();
+      final file = await const LogHistoryService().logHistoryFile();
       final logger = Logger(
         printer: PrettyPrinter(lineLength: 80, noBoxingByDefault: true),
         output: FileCustomOutput(file: file),
