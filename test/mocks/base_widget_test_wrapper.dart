@@ -1,7 +1,7 @@
-// ignore_for_file: avoid_implementing_value_types
+// ignore_for_file: avoid_implementing_value_types, avoid-async-call-in-sync-function, prefer-explicit-type-arguments, avoid-dynamic
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/common/service/theme/theme_service.dart';
+import 'package:flutter_template/common/service/theme/i_theme_service.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/l10n/app_localizations.g.dart';
 import 'package:flutter_template/uikit/colors/app_color_scheme.dart';
@@ -14,6 +14,9 @@ import 'package:provider/provider.dart';
 
 import '../core/utils/test_widget.dart';
 
+final _appScopeMock = AppScopeMock();
+final _themeServiceMock = ThemeServiceMock();
+
 /// Widget under test wrapper. Provides essential dependencies such as theme, color scheme, and fonts.
 class BaseWidgetTestWrapper extends StatelessWidget {
   BaseWidgetTestWrapper({
@@ -24,8 +27,8 @@ class BaseWidgetTestWrapper extends StatelessWidget {
   }) {
     registerFallbackValue(FakePageRouteInfo());
     mockRouter = router ?? MockStackRouter();
-    when(() => appScopeMock.themeService).thenReturn(themeServiceMock);
-    when(() => themeServiceMock.currentThemeMode).thenReturn(
+    when(() => _appScopeMock.themeService).thenReturn(_themeServiceMock);
+    when(() => _themeServiceMock.currentThemeMode).thenReturn(
       mode == ThemeType.dark ? ThemeMode.dark : ThemeMode.light,
     );
     if (router == null) {
@@ -36,8 +39,6 @@ class BaseWidgetTestWrapper extends StatelessWidget {
   final Widget child;
   final ThemeType mode;
   late final MockStackRouter mockRouter;
-  final appScopeMock = AppScopeMock();
-  final themeServiceMock = ThemeServiceMock();
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +57,7 @@ class BaseWidgetTestWrapper extends StatelessWidget {
         stateHash: 0,
         child: MultiProvider(
           providers: [
-            Provider<IAppScope>(create: (_) => appScopeMock),
+            Provider<IAppScope>(create: (_) => _appScopeMock),
             Provider<AppColorScheme>(
               create: (_) => mode == ThemeType.dark
                   ? AppColorScheme.dark()
