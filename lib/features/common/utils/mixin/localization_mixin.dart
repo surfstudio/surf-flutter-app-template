@@ -1,3 +1,5 @@
+// ignore_for_file: avoid-non-null-assertion
+
 import 'package:elementary/elementary.dart';
 import 'package:flutter_template/l10n/app_localizations.g.dart';
 
