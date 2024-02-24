@@ -1,7 +1,7 @@
 // ignore_for_file: avoid-ignoring-return-values
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/common/service/theme/theme_service.dart';
+import 'package:flutter_template/common/service/theme/i_theme_service.dart';
 import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/config/urls.dart';
