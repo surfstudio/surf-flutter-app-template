@@ -1,3 +1,5 @@
+// ignore_for_file: avoid-passing-async-when-sync-expected
+
 import 'dart:async';
 import 'dart:io';
 import 'package:analytics/core/analytyc_service.dart';
@@ -5,8 +7,8 @@ import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_template/common/service/theme/i_theme_service.dart';
 import 'package:flutter_template/common/service/theme/theme_service.dart';
-import 'package:flutter_template/common/service/theme/theme_service_impl.dart';
 import 'package:flutter_template/common/utils/analytics/firebase/firebase_analytic_strategy.dart';
 import 'package:flutter_template/common/utils/analytics/mock/mock_firebase_analytics.dart';
 import 'package:flutter_template/common/utils/default_error_handler.dart';
@@ -62,7 +64,7 @@ class AppScope implements IAppScope {
     _themeModeStorage = ThemeStorage(_sharedPreferences);
     _analyticsService = AnalyticService.withStrategies({
       // TODO(init): can be removed MockFirebaseAnalytics, added for demo analytics track.
-      FirebaseAnalyticStrategy(MockFirebaseAnalytics()),
+      FirebaseAnalyticStrategy(const MockFirebaseAnalytics()),
     });
   }
 
@@ -70,7 +72,7 @@ class AppScope implements IAppScope {
   Future<void> initTheme() async {
     final theme = await ThemeStorage(_sharedPreferences).getThemeMode() ??
         _themeByDefault;
-    _themeService = ThemeServiceImpl(theme);
+    _themeService = ThemeService(theme);
     _themeService.addListener(_onThemeModeChanged);
   }
 
