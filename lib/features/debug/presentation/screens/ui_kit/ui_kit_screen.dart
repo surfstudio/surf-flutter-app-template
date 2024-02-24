@@ -1,9 +1,14 @@
+// ignore_for_file: avoid-ignoring-return-values, prefer-extracting-callbacks
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
+import 'package:flutter_template/features/common/utils/sizes/app_sizes.dart';
 import 'package:flutter_template/features/navigation/domain/entity/app_route_names.dart';
-import 'package:flutter_template/uikit/colors/color_scheme.dart';
+import 'package:flutter_template/uikit/colors/app_color_scheme.dart';
 import 'package:provider/provider.dart';
+
+const _int2 = 2;
 
 /// UI-kit screen.
 @RoutePage(name: AppRouteNames.uiKitScreen)
@@ -14,41 +19,45 @@ class UiKitScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = AppColorScheme.of(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('UI Kit'),
         actions: [
           GestureDetector(
+            onTap: context.watch<IAppScope>().themeService.switchTheme,
             behavior: HitTestBehavior.opaque,
-            onTap: context.read<IAppScope>().themeService.switchTheme,
             child: const Padding(
-              padding: EdgeInsets.all(8),
+              padding: EdgeInsets.all(AppSizes.double8),
               child: Icon(Icons.light_mode_outlined),
             ),
           ),
         ],
       ),
       body: ListView(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(AppSizes.double16),
         children: [
           TextField(
-            style: TextStyle(
-              color: colorScheme.onBackground,
-            ),
             decoration: InputDecoration(
               labelText: 'Text Field',
               labelStyle: TextStyle(color: colorScheme.textFieldLabel),
-              border: OutlineInputBorder(
-                borderSide: BorderSide(color: colorScheme.frameTextFieldSecondary),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: colorScheme.frameTextFieldSecondary),
-              ),
+              filled: true,
+              fillColor: colorScheme.background,
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: colorScheme.primary),
               ),
-              fillColor: colorScheme.background,
-              filled: true,
+              enabledBorder: OutlineInputBorder(
+                borderSide:
+                    BorderSide(color: colorScheme.frameTextFieldSecondary),
+              ),
+              // ignore: no-equal-arguments
+              border: OutlineInputBorder(
+                borderSide:
+                    BorderSide(color: colorScheme.frameTextFieldSecondary),
+              ),
+            ),
+            style: TextStyle(
+              color: colorScheme.onBackground,
             ),
           ),
           Card(
@@ -71,8 +80,8 @@ class UiKitScreen extends StatelessWidget {
               );
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: colorScheme.primary,
               foregroundColor: colorScheme.onPrimary,
+              backgroundColor: colorScheme.primary,
             ),
             child: const Text('Primary Button'),
           ),
@@ -83,8 +92,8 @@ class UiKitScreen extends StatelessWidget {
               );
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: colorScheme.secondary,
               foregroundColor: colorScheme.onSecondary,
+              backgroundColor: colorScheme.secondary,
             ),
             child: const Text('Secondary Button'),
           ),
@@ -95,8 +104,8 @@ class UiKitScreen extends StatelessWidget {
               );
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: colorScheme.backgroundTertiary,
               foregroundColor: colorScheme.onBackground,
+              backgroundColor: colorScheme.backgroundTertiary,
             ),
             child: const Text('Tertiary Button'),
           ),
@@ -107,8 +116,8 @@ class UiKitScreen extends StatelessWidget {
               );
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: colorScheme.tetradicBackground,
               foregroundColor: colorScheme.onBackground,
+              backgroundColor: colorScheme.tetradicBackground,
             ),
             child: const Text('Tetradic Button'),
           ),
@@ -119,53 +128,53 @@ class UiKitScreen extends StatelessWidget {
                   onPressed: () {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        backgroundColor: colorScheme.danger,
                         content: Text(
                           'Danger snack',
                           style: TextStyle(
                             color: colorScheme.onDanger,
                           ),
                         ),
+                        backgroundColor: colorScheme.danger,
                       ),
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: colorScheme.danger,
                     foregroundColor: colorScheme.onDanger,
+                    backgroundColor: colorScheme.danger,
                   ),
                   child: const Text('Danger snack'),
                 ),
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: AppSizes.double8),
               Expanded(
                 child: ElevatedButton(
                   onPressed: () {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        backgroundColor: colorScheme.positive,
                         content: Text(
                           'Positive snack',
                           style: TextStyle(
                             color: colorScheme.onPositive,
                           ),
                         ),
+                        backgroundColor: colorScheme.positive,
                       ),
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: colorScheme.positive,
                     foregroundColor: colorScheme.onPositive,
+                    backgroundColor: colorScheme.positive,
                   ),
                   child: const Text('Positive snack'),
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: AppSizes.double16),
           const _ColorGrid(),
         ]
             .map((e) => Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  padding: const EdgeInsets.symmetric(vertical: AppSizes.double4),
                   child: e,
                 ))
             .toList(),
@@ -180,105 +189,106 @@ class _ColorGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = AppColorScheme.of(context);
+
     return GridView.count(
-      crossAxisCount: 2,
-      shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
       padding: EdgeInsets.zero,
+      crossAxisCount: _int2,
       children: [
         _ColorCard(
-          colorName: 'Primary',
           color: colorScheme.primary,
+          colorName: 'Primary',
           textColor: colorScheme.onPrimary,
         ),
         _ColorCard(
-          colorName: 'Secondary',
           color: colorScheme.secondary,
+          colorName: 'Secondary',
           textColor: colorScheme.onSecondary,
         ),
         _ColorCard(
-          colorName: 'Surface',
           color: colorScheme.surface,
+          colorName: 'Surface',
           textColor: colorScheme.onSurface,
         ),
         _ColorCard(
-          colorName: 'Surface Secondary',
           color: colorScheme.surfaceSecondary,
+          colorName: 'Surface Secondary',
           textColor: colorScheme.onSurface,
         ),
         _ColorCard(
-          colorName: 'Background',
           color: colorScheme.background,
+          colorName: 'Background',
           textColor: colorScheme.onBackground,
         ),
         _ColorCard(
-          colorName: 'Background Secondary',
           color: colorScheme.backgroundSecondary,
+          colorName: 'Background Secondary',
           textColor: colorScheme.onBackground,
         ),
         _ColorCard(
-          colorName: 'Background Tertiary',
           color: colorScheme.backgroundTertiary,
+          colorName: 'Background Tertiary',
           textColor: colorScheme.onBackground,
         ),
         _ColorCard(
-          colorName: 'Tetradic Background',
           color: colorScheme.tetradicBackground,
+          colorName: 'Tetradic Background',
           textColor: colorScheme.onBackground,
         ),
         _ColorCard(
-          colorName: 'Danger',
           color: colorScheme.danger,
+          colorName: 'Danger',
           textColor: colorScheme.onDanger,
         ),
         _ColorCard(
-          colorName: 'Danger Secondary',
           color: colorScheme.dangerSecondary,
+          colorName: 'Danger Secondary',
           textColor: colorScheme.onDanger,
         ),
         _ColorCard(
-          colorName: 'Text Field',
           color: colorScheme.textField,
+          colorName: 'Text Field',
           textColor: Colors.black,
         ),
         _ColorCard(
-          colorName: 'Text Field Label',
           color: colorScheme.textFieldLabel,
+          colorName: 'Text Field Label',
           textColor: Colors.black,
         ),
         _ColorCard(
-          colorName: 'Text Field Helper',
           color: colorScheme.textFieldHelper,
+          colorName: 'Text Field Helper',
           textColor: Colors.black,
         ),
         _ColorCard(
-          colorName: 'Frame Text Field Secondary',
           color: colorScheme.frameTextFieldSecondary,
+          colorName: 'Frame Text Field Secondary',
           textColor: Colors.black,
         ),
         _ColorCard(
-          colorName: 'Inactive',
           color: colorScheme.inactive,
+          colorName: 'Inactive',
           textColor: Colors.black,
         ),
         _ColorCard(
-          colorName: 'Positive',
           color: colorScheme.positive,
+          colorName: 'Positive',
           textColor: colorScheme.onPositive,
         ),
         _ColorCard(
-          colorName: 'Skeleton Primary',
           color: colorScheme.skeletonPrimary,
+          colorName: 'Skeleton Primary',
           textColor: colorScheme.skeletonOnPrimary,
         ),
         _ColorCard(
-          colorName: 'Skeleton Secondary',
           color: colorScheme.skeletonSecondary,
+          colorName: 'Skeleton Secondary',
           textColor: Colors.black,
         ),
         _ColorCard(
-          colorName: 'Skeleton Tertiary',
           color: colorScheme.skeletonTertiary,
+          colorName: 'Skeleton Tertiary',
           textColor: Colors.black,
         ),
       ],
@@ -287,14 +297,15 @@ class _ColorGrid extends StatelessWidget {
 }
 
 class _ColorCard extends StatelessWidget {
-  final Color color;
-  final String colorName;
-  final Color textColor;
   const _ColorCard({
     required this.color,
     required this.colorName,
     required this.textColor,
   });
+
+  final Color color;
+  final String colorName;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -303,18 +314,16 @@ class _ColorCard extends StatelessWidget {
       child: Align(
         alignment: Alignment.bottomCenter,
         child: Padding(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.all(AppSizes.double8),
           child: ColoredBox(
             color: Colors.white,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 1),
+              padding:
+                  const EdgeInsets.symmetric(vertical: AppSizes.double2, horizontal: AppSizes.double4),
               child: Text(
                 colorName,
+                style: const TextStyle(color: Colors.black, fontSize: AppSizes.double16),
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                ),
               ),
             ),
           ),
