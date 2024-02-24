@@ -1,6 +1,6 @@
 // ignore_for_file: avoid-non-null-assertion, prefer-correct-callback-field-name
 import 'package:flutter/material.dart';
-import 'package:flutter_template/uikit/text/text_style.dart';
+import 'package:flutter_template/uikit/text/app_text_style.dart';
 
 /// App text style scheme.
 class AppTextScheme extends ThemeExtension<AppTextScheme> {
