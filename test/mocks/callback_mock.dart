@@ -1,3 +1,4 @@
+// ignore_for_file: avoid-declaring-call-method
 import 'dart:async';
 
 import 'package:mocktail/mocktail.dart';
