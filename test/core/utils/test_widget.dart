@@ -1,4 +1,4 @@
-// ignore_for_file: comment_references, depend_on_referenced_packages
+// ignore_for_file: comment_references, depend_on_referenced_packages, avoid-dynamic, avoid-ignoring-return-values, avoid-unsafe-collection-methods, avoid-nullable-interpolation, prefer-typedefs-for-callbacks
 
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
