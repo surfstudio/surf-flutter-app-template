@@ -1,3 +1,5 @@
+// ignore_for_file: avoid-ignoring-return-values
+
 import 'dart:async';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -23,19 +25,20 @@ Future<void> run() async {
   // TODO(init-project): change as needed or remove.
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   // TODO(init-project): Initialize Crashlytics.
-  // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
-  // PlatformDispatcher.instance.onError = (error, stack) {
-  //   FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
-  //
-  //   return true;
-  // };
+  /*
+   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+   PlatformDispatcher.instance.onError = (error, stack) {
+     FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
 
+     return true;
+   };
+   */
   _initLogger();
   await _runApp();
 }
 
 Future<void> _runApp() async {
-  final scopeRegister = AppScopeRegister();
+  const scopeRegister = AppScopeRegister();
   final scope = await scopeRegister.createScope();
   await scope.initTheme();
   runApp(App(scope));
@@ -43,7 +46,7 @@ Future<void> _runApp() async {
 
 void _initLogger() {
   // TODO(init-project): Initialize CrashlyticsRemoteLogStrategy.
-  // RemoteLogger.addStrategy(CrashlyticsRemoteLogStrategy());
+  /* RemoteLogger.addStrategy(CrashlyticsRemoteLogStrategy());*/
   Logger.addStrategy(DebugLogStrategy());
   Logger.addStrategy(RemoteLogStrategy());
 }
