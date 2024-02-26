@@ -101,32 +101,32 @@ class _ServerSwitchCard extends StatelessWidget {
             const Text('Сервер'),
             ValueListenableBuilder<UrlType>(
               valueListenable: urlState,
-              builder: (_, state, __) {
+              builder: (_, url, __) {
                 return Column(
                   children: <Widget>[
                     RadioListTile<UrlType>(
                       value: UrlType.test,
-                      groupValue: state,
+                      groupValue: url,
                       onChanged: onUrlChange,
                       title: Text(UrlType.test.toString()),
                       subtitle: Text(Url.testUrl),
                     ),
                     RadioListTile<UrlType>(
                       value: UrlType.prod,
-                      groupValue: state,
+                      groupValue: url,
                       onChanged: onUrlChange,
                       title: Text(UrlType.prod.toString()),
                       subtitle: Text(Url.prodUrl),
                     ),
                     RadioListTile<UrlType>(
                       value: UrlType.dev,
-                      groupValue: state,
+                      groupValue: url,
                       onChanged: onUrlChange,
                       title: Text(UrlType.dev.toString()),
                       subtitle: Text(Url.devUrl),
                     ),
                     MaterialButton(
-                      onPressed: () => onSwitchServer(state),
+                      onPressed: () => onSwitchServer(url),
                       child: const Text(
                         'Переключить',
                         style: TextStyle(fontSize: AppSizes.double16),
