@@ -4,13 +4,13 @@ import 'package:flutter_template/common/utils/disposable_object/disposable_objec
 import 'package:flutter_template/common/utils/disposable_object/i_disposable_object.dart';
 
 /// {@template {{name.snakeCase()}}_scope.class}
-/// Implementation of [I{{name.pascalCase()}}Scope]
+/// Implementation of [I{{name.pascalCase()}}Scope].
 /// {@endtemplate}
 final class {{name.pascalCase()}}Scope extends DisposableObject implements I{{name.pascalCase()}}Scope {
   @override
   late final I{{name.pascalCase()}}Repository repository;
 
-  /// Factory constructor for [I{{name.pascalCase()}}Scope]
+  /// Factory constructor for [I{{name.pascalCase()}}Scope].
   factory {{name.pascalCase()}}Scope.create() {
     return {{name.pascalCase()}}Scope(const {{name.pascalCase()}}Repository());
   }
@@ -19,8 +19,8 @@ final class {{name.pascalCase()}}Scope extends DisposableObject implements I{{na
   {{name.pascalCase()}}Scope(this.repository);
 }
 
-/// Scope dependencies of the {{name.pascalCase()}} feature
+/// Scope dependencies of the {{name.pascalCase()}} feature.
 abstract interface class I{{name.pascalCase()}}Scope implements IDisposableObject {
-/// {{name.pascalCase()}}Repository
-I{{name.pascalCase()}}Repository get repository;
+  /// {{name.pascalCase()}}Repository.
+  I{{name.pascalCase()}}Repository get repository;
 }

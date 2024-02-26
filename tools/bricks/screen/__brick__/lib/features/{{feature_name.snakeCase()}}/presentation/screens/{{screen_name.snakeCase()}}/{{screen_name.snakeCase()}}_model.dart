@@ -3,9 +3,10 @@ import 'package:flutter_template/features/{{feature_name.snakeCase()}}/presentat
 import 'package:flutter_template/features/{{feature_name.snakeCase()}}/domain/repositories/i_{{feature_name.snakeCase()}}_repository.dart';
 
 /// {@template {{screen_name.snakeCase()}}_model.class}
-/// [ElementaryModel] for [{{screen_name.pascalCase()}}Screen]
+/// [ElementaryModel] for [{{screen_name.pascalCase()}}Screen].
 /// {@endtemplate}
 final class {{screen_name.pascalCase()}}Model extends ElementaryModel {
+  // ignore: unused_field
   final I{{feature_name.pascalCase()}}Repository _repository;
 
   /// {@macro {{screen_name.snakeCase()}}_model.class}
