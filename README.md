@@ -241,7 +241,7 @@ The overview of the architecture and structure can be found here:
 Enabled:
 
 - [flutter_surf_lint_rules](https://pub.dev/packages/surf_lint_rules)
-- [dart_code_metrics](https://pub.dev/packages/dart_code_metrics) ([guide](https://wiki.surfstudio.ru/pages/viewpage.action?pageId=2408055)
+- [dart_code_metrics](https://pub.dev/packages/dart_code_metrics)
   to gathering project metrics; the project has already been configured)
 
 ## Navigation
