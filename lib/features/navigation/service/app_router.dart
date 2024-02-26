@@ -1,10 +1,6 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:elementary/elementary.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_template/features/dash/presentation/dash_flow.dart';
 import 'package:flutter_template/features/debug/presentation/debug_flow.dart';
-import 'package:flutter_template/features/debug/presentation/screens/log_history/log_history_screen.dart';
-import 'package:flutter_template/features/debug/presentation/screens/log_history/log_history_wm.dart';
 import 'package:flutter_template/features/debug/presentation/screens/ui_kit/ui_kit_screen.dart';
 import 'package:flutter_template/features/info/presentation/info_flow.dart';
 import 'package:flutter_template/features/navigation/domain/entity/app_route_paths.dart';
@@ -44,10 +40,6 @@ class AppRouter extends _$AppRouter {
               path: AppRoutePaths.debugPath,
             ),
           ],
-        ),
-        AutoRoute(
-          page: LogHistoryRouter.page,
-          path: AppRoutePaths.logHistory,
         ),
         AutoRoute(
           page: UiKitRouter.page,

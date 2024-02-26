@@ -19,13 +19,10 @@ class DebugScreen extends ElementaryWidget<IDebugScreenWidgetModel> {
       body: _Body(
         urlState: wm.urlState,
         themeState: wm.themeState,
-        onUrlChanged: wm.urlChange,
-        onSwitchServer: wm.switchServer,
-        onSetThemeMode: wm.setThemeMode,
-        onSetProxy: wm.setProxy,
-        onOpenLogsHistory: wm.openLogsHistory,
-        onOpenUiKit: wm.openUiKit,
-        onSaveExampleLog: wm.saveExampleLog,
+        urlChanged: wm.urlChange,
+        switchServer: wm.switchServer,
+        setProxy: wm.setProxy,
+        openUiKit: wm.openUiKit,
         proxyController: wm.proxyEditingController,
       ),
     );
@@ -33,16 +30,23 @@ class DebugScreen extends ElementaryWidget<IDebugScreenWidgetModel> {
 }
 
 class _Body extends StatelessWidget {
+  final ValueListenable<UrlType> urlState;
+  final ValueListenable<ThemeMode> themeState;
+  final void Function(UrlType?) urlChanged;
+  final void Function(UrlType) switchServer;
+  final void Function(ThemeMode?) setThemeMode;
+  final Function() setProxy;
+  final VoidCallback openUiKit;
+  final TextEditingController proxyController;
+
   const _Body({
     required this.urlState,
     required this.themeState,
-    required this.onUrlChanged,
-    required this.onSwitchServer,
-    required this.onSetThemeMode,
-    required this.onSetProxy,
-    required this.onOpenLogsHistory,
-    required this.onOpenUiKit,
-    required this.onSaveExampleLog,
+    required this.urlChanged,
+    required this.switchServer,
+    required this.setThemeMode,
+    required this.setProxy,
+    required this.openUiKit,
     required this.proxyController,
   });
 
@@ -59,43 +63,33 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: const EdgeInsets.all(AppSizes.double8),
-      children: <Widget>[
-        _ServerSwitchCard(
-          urlState: urlState,
-          onUrlChange: onUrlChanged,
-          onSwitchServer: onSwitchServer,
-        ),
-        _ProxyCard(
-          onSetProxy: onSetProxy,
-          proxyController: proxyController,
-        ),
-        _ThemeCard(
-          themeState: themeState,
-          onSetThemeMode: onSetThemeMode,
-        ),
-        Card(
-          child: ListTile(
-            title: const Text('To ui kit screen'),
-            onTap: onOpenUiKit,
-          ),
-        ),
-        Card(
-          child: Column(
-            children: [
-              ListTile(
-                title: const Text('Открыть логи'),
-                onTap: onOpenLogsHistory,
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            _ServerSwitchCard(
+              urlState: urlState,
+              urlChange: urlChanged,
+              switchServer: switchServer,
+            ),
+            _ProxyCard(
+              setProxy: setProxy,
+              proxyController: proxyController,
+            ),
+            _ThemeCard(
+              themeState: themeState,
+              setThemeMode: setThemeMode,
+            ),
+            Card(
+              child: ListTile(
+                onTap: openUiKit,
+                title: const Text('To ui kit screen'),
               ),
-              ListTile(
-                title: const Text('Протестировать запись в логи'),
-                onTap: onSaveExampleLog,
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }

@@ -8,7 +8,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/app/app.dart';
 import 'package:flutter_template/features/app/di/app_scope_register.dart';
-import 'package:surf_logger/surf_logger.dart';
 
 /// App launch.
 Future<void> run() async {
@@ -25,28 +24,19 @@ Future<void> run() async {
   // TODO(init-project): change as needed or remove.
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   // TODO(init-project): Initialize Crashlytics.
-  /*
-   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
-   PlatformDispatcher.instance.onError = (error, stack) {
-     FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+  // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  // PlatformDispatcher.instance.onError = (error, stack) {
+  //   FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+  //
+  //   return true;
+  // };
 
-     return true;
-   };
-   */
-  _initLogger();
   await _runApp();
 }
 
 Future<void> _runApp() async {
   const scopeRegister = AppScopeRegister();
   final scope = await scopeRegister.createScope();
-  await scope.initTheme();
+  await scope.init();
   runApp(App(scope));
-}
-
-void _initLogger() {
-  // TODO(init-project): Initialize CrashlyticsRemoteLogStrategy.
-  /* RemoteLogger.addStrategy(CrashlyticsRemoteLogStrategy());*/
-  Logger.addStrategy(DebugLogStrategy());
-  Logger.addStrategy(RemoteLogStrategy());
 }

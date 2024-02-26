@@ -9,11 +9,8 @@ import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_model.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_screen.dart';
 import 'package:flutter_template/features/navigation/service/app_router.dart';
-import 'package:flutter_template/persistence/storage/config_storage/config_settings_storage.dart';
+import 'package:flutter_template/persistence/storage/config_storage/i_config_settings_storage.dart';
 import 'package:provider/provider.dart';
-import 'package:surf_logger/surf_logger.dart';
-
-// ignore_for_file: avoid_positional_boolean_parameters
 
 /// Factory for [DebugScreenWidgetModel].
 DebugScreenWidgetModel debugScreenWidgetModelFactory(
@@ -29,7 +26,9 @@ DebugScreenWidgetModel debugScreenWidgetModelFactory(
     configStorage,
     appDependencies.themeService,
   );
+
   final router = appDependencies.router;
+
 
   return DebugScreenWidgetModel(model, router);
 }
@@ -114,17 +113,9 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugModel>
   }
 
   @override
-  void openLogsHistory() {
-    unawaited(router.push(LogHistoryRouter()));
-  }
-
-  @override
   void openUiKit() {
     unawaited(router.push(const UiKitRouter()));
   }
-
-  @override
-  Future<void> saveExampleLog() async => _saveExampleLog();
 
   void _updateAppConfig() {
     final config = model.configNotifier.value;
@@ -148,12 +139,6 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugModel>
 
   void _updateThemeMode() {
     themeState.value = model.currentThemeMode.value;
-  }
-
-  void _saveExampleLog() {
-    final error = Exception('Some exception');
-    final st = StackTrace.fromString('stackTraceString');
-    Logger.e(st.toString(), error);
   }
 
   UrlType _resolveUrlType(String currentUrl) {
@@ -188,13 +173,7 @@ abstract class IDebugScreenWidgetModel implements IWidgetModel {
   void setProxy();
 
   /// Set theme mode for app.
-  void setThemeMode(ThemeMode? themeMode);
-
-  /// Navigate to log history screen.
-  void openLogsHistory();
-
-  /// Method for save example log to log history file.
-  void saveExampleLog();
+  void setThemeMode(ThemeMode? themeMode) {}
 
   /// Navigate to ui kit screen.
   void openUiKit();

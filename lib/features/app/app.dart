@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_template/common/service/theme/i_theme_service.dart';
-import 'package:flutter_template/common/widgets/di_scope/di_scope.dart';
+import 'package:flutter_template/common/widgets/di_scope.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/l10n/app_localizations.g.dart';
-import 'package:flutter_template/persistence/storage/config_storage/config_settings_storage.dart';
+import 'package:flutter_template/persistence/storage/config_storage/config_settings_storage_impl.dart';
 import 'package:flutter_template/uikit/themes/app_theme_data.dart';
 
 /// App widget.
@@ -31,20 +31,11 @@ class _AppState extends State<App> {
     _scope = widget.appScope..applicationRebuilder = _rebuildApplication;
     _themeService = _scope.themeService;
 
+    final configStorage = ConfigSettingsStorageImpl(_scope.sharedPreferences);
     final environment = Environment.instance();
     if (!environment.isRelease) {
-      final configStorage = ConfigSettingsStorage(_scope.sharedPreferences);
-
-      environment
-        ..refreshConfigProxy(configStorage).ignore()
-        ..createLogHistoryStrategy().ignore();
+      environment.refreshConfigProxy(configStorage);
     }
-  }
-
-  @override
-  void dispose() {
-    _themeService.dispose();
-    super.dispose();
   }
 
   void _rebuildApplication() {
@@ -56,7 +47,7 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return DiScope<IAppScope>(
-      onFactory: () {
+      factory: () {
         return _scope;
       },
       key: ObjectKey(_scope),
@@ -70,7 +61,6 @@ class _AppState extends State<App> {
             theme: AppThemeData.lightTheme,
             darkTheme: AppThemeData.darkTheme,
             themeMode: _themeService.currentThemeMode,
-
             /// Localization.
             locale: _localizations.firstOrNull,
             localizationsDelegates: _localizationsDelegates,
