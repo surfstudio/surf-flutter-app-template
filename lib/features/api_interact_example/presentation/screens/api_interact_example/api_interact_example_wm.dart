@@ -1,10 +1,10 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_template/common/mixin/theme_mixin.dart';
 import 'package:flutter_template/features/api_interact_example/di/api_interact_example_scope.dart';
 import 'package:flutter_template/features/api_interact_example/presentation/screens/api_interact_example/api_interact_example_model.dart';
 import 'package:flutter_template/features/api_interact_example/presentation/screens/api_interact_example/api_interact_example_screen.dart';
-import 'package:flutter_template/features/common/utils/mixin/theme_mixin.dart';
 import 'package:flutter_template/l10n/app_localizations.g.dart';
 import 'package:flutter_template/l10n/app_localizations_x.dart';
 import 'package:provider/provider.dart';

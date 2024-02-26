@@ -1,9 +1,9 @@
 import 'package:analytics/analytics.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_template/common/mixin/theme_mixin.dart';
 import 'package:flutter_template/common/utils/analytics/event/common/track_analytics_example.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
-import 'package:flutter_template/features/common/utils/mixin/theme_mixin.dart';
 import 'package:flutter_template/features/dash/presentation/dash_model.dart';
 import 'package:flutter_template/features/dash/presentation/dash_screen.dart';
 import 'package:flutter_template/features/navigation/service/router.dart';
@@ -50,7 +50,7 @@ class DashWidgetModel extends WidgetModel<DashScreen, DashModel>
   }
 
   @override
-  void goToIpScreen() {
+  void goToApiInteractExampleScreen() {
     _router.navigate(const ApiInteractExampleRoute());
   }
 }
@@ -64,5 +64,5 @@ abstract class IDashWidgetModel with ThemeIModelMixin implements IWidgetModel {
   void trackAnalyticsExample();
 
   /// Сallback of the transition to the IP address screen
-  void goToIpScreen();
+  void goToApiInteractExampleScreen();
 }

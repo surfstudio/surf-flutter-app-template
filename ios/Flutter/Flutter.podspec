@@ -1,4 +1,4 @@
-пше#
+#
 # This podspec is NOT to be published. It is only used as a local source!
 # This is a generated file; do not edit or check into version control.
 #

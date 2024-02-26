@@ -1,6 +1,7 @@
 import 'package:analytics/core/analytyc_service.dart';
 import 'package:dio/dio.dart';
 import 'package:elementary/elementary.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/api/dio_configurator.dart';
 import 'package:flutter_template/common/service/theme/theme_service.dart';
@@ -8,14 +9,18 @@ import 'package:flutter_template/common/service/theme/theme_service_impl.dart';
 import 'package:flutter_template/common/utils/analytics/firebase/firebase_analytic_strategy.dart';
 import 'package:flutter_template/common/utils/analytics/mock/mock_firebase_analytics.dart';
 import 'package:flutter_template/common/utils/default_error_handler.dart';
+import 'package:flutter_template/common/utils/disposable_object/i_disposable_object.dart';
+import 'package:flutter_template/common/utils/logger/debug_log_strategy.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/navigation/service/router.dart';
 import 'package:flutter_template/persistence/storage/theme_storage/theme_storage.dart';
 import 'package:flutter_template/persistence/storage/theme_storage/theme_storage_impl.dart';
+import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:surf_logger/surf_logger.dart' as surf_logger;
 
 /// Scope of dependencies which need through all app's life.
-class AppScope implements IAppScope {
+final class AppScope implements IAppScope {
   static const _themeByDefault = ThemeMode.system;
 
   final SharedPreferences _sharedPreferences;
@@ -23,10 +28,14 @@ class AppScope implements IAppScope {
   late final Dio _dio;
   late final ErrorHandler _errorHandler;
   late final AppRouter _router;
+  late final IThemeModeStorage _themeModeStorage;
   late final IThemeService _themeService;
   late final AnalyticService _analyticsService;
 
   final AppDioConfigurator _dioConfigurator = AppDioConfigurator(Environment.instance());
+
+  Logger? _debugLogPrinter;
+  late final surf_logger.LogWriter _logger;
 
   @override
   late VoidCallback applicationRebuilder;
@@ -49,7 +58,8 @@ class AppScope implements IAppScope {
   @override
   AnalyticService get analyticsService => _analyticsService;
 
-  late IThemeModeStorage _themeModeStorage;
+  @override
+  surf_logger.LogWriter get logger => _logger;
 
   /// Create an instance [AppScope].
   AppScope(this._sharedPreferences) {
@@ -67,7 +77,17 @@ class AppScope implements IAppScope {
   }
 
   @override
-  Future<void> initTheme() async {
+  Future<void> init() async {
+    await _initLogger();
+    await _initTheme();
+  }
+
+  @override
+  void dispose() {
+    _disposeLogger();
+  }
+
+  Future<void> _initTheme() async {
     final theme = await ThemeModeStorageImpl(_sharedPreferences).getThemeMode() ?? _themeByDefault;
     _themeService = ThemeServiceImpl(theme);
     _themeService.addListener(_onThemeModeChanged);
@@ -76,10 +96,26 @@ class AppScope implements IAppScope {
   Future<void> _onThemeModeChanged() async {
     await _themeModeStorage.saveThemeMode(mode: _themeService.currentThemeMode);
   }
+
+  Future<void> _initLogger() async {
+    _logger = surf_logger.Logger.withStrategies({
+      if (!kReleaseMode)
+        DebugLogStrategy(_debugLogPrinter = Logger(printer: PrettyPrinter(methodCount: 0))),
+      // TODO(init-project): Initialize CrashlyticsLogStrategy.
+      // CrashlyticsLogStrategy(),
+    });
+  }
+
+  Future<void> _disposeLogger() async {
+    _debugLogPrinter?.close();
+  }
 }
 
 /// App dependencies.
-abstract class IAppScope {
+abstract interface class IAppScope implements IDisposableObject {
+  /// Init app scope
+  Future<void> init();
+
   /// Http client.
   Dio get dio;
 
@@ -95,11 +131,11 @@ abstract class IAppScope {
   /// A service that stores and retrieves app theme mode.
   IThemeService get themeService;
 
-  /// Init theme service with theme from storage or default value.
-  Future<void> initTheme();
-
   /// Shared preferences.
   SharedPreferences get sharedPreferences;
+
+  /// Surf Logger
+  surf_logger.LogWriter get logger;
 
   /// Analytics sending service
   AnalyticService get analyticsService;

@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/common/widgets/di_scope/di_scope.dart';
+import 'package:flutter_template/common/widgets/di_scope.dart';
 import 'package:flutter_template/features/api_interact_example/di/api_interact_example_scope.dart';
 import 'package:flutter_template/features/api_interact_example/presentation/screens/api_interact_example/api_interact_example_screen.dart';
 
