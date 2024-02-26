@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_template/common/service/theme/theme_service.dart';
-import 'package:flutter_template/common/widgets/di_scope/di_scope.dart';
+import 'package:flutter_template/common/widgets/di_scope.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/l10n/app_localizations.g.dart';
@@ -34,9 +34,7 @@ class _AppState extends State<App> {
     final configStorage = ConfigSettingsStorageImpl(_scope.sharedPreferences);
     final environment = Environment.instance();
     if (!environment.isRelease) {
-      environment
-        ..refreshConfigProxy(configStorage)
-        ..createLogHistoryStrategy();
+      environment.refreshConfigProxy(configStorage);
     }
   }
 

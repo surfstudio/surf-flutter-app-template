@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_template/common/widgets/conditional_wrapper.dart';
 import 'package:flutter_template/uikit/buttons/animated_pressed_scale.dart';
-import 'package:flutter_template/uikit/others/conditional_wrapper.dart';
 
 /// {@template scaled_gesture_detector.class}
 /// GestureDetector with click animation.

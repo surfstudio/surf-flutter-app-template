@@ -982,10 +982,10 @@ packages:
     dependency: "direct main"
     description:
       name: surf_logger
-      sha256: bc0253f7a78a30ad60c2db5ec0f95be886f34736392ce64de5ae940f30a42b0f
+      sha256: fdb69165290f5c4002a4cbb6c76742158c7b30c0333abd505a6fa66fe5569dcd
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.0"
+    version: "2.0.0"
   synchronized:
     dependency: transitive
     description:
