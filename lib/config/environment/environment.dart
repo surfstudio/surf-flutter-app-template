@@ -14,7 +14,7 @@ class Environment implements Listenable {
 
   ValueNotifier<AppConfig> _config;
 
-  static Environment? _instance;
+  static late Environment _instance;
 
   /// Configuration.
   AppConfig get config => _config.value;
@@ -40,7 +40,7 @@ class Environment implements Listenable {
   ) : _config = ValueNotifier<AppConfig>(config);
 
   /// Provides instance [Environment].
-  factory Environment.instance() => _instance!;
+  factory Environment.instance() => _instance;
 
   @override
   void addListener(VoidCallback listener) {
@@ -58,7 +58,7 @@ class Environment implements Listenable {
     required AppConfig config,
     FirebaseOptions? firebaseOptions,
   }) {
-    _instance ??= Environment._(
+    _instance = Environment._(
       buildType,
       config,
       firebaseOptions,

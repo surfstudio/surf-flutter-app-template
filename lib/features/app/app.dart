@@ -31,11 +31,19 @@ class _AppState extends State<App> {
     _scope = widget.appScope..applicationRebuilder = _rebuildApplication;
     _themeService = _scope.themeService;
 
-    final configStorage = ConfigSettingsStorageImpl(_scope.sharedPreferences);
     final environment = Environment.instance();
     if (!environment.isRelease) {
-      environment.refreshConfigProxy(configStorage);
+      final configStorage = ConfigSettingsStorageImpl(_scope.sharedPreferences);
+
+      environment.refreshConfigProxy(configStorage).ignore();
     }
+  }
+
+  @override
+  void dispose() {
+    _themeService.dispose();
+    _scope.dispose();
+    super.dispose();
   }
 
   void _rebuildApplication() {
@@ -47,7 +55,7 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return DiScope<IAppScope>(
-      factory: () {
+      onFactory: () {
         return _scope;
       },
       key: ObjectKey(_scope),
@@ -61,6 +69,7 @@ class _AppState extends State<App> {
             theme: AppThemeData.lightTheme,
             darkTheme: AppThemeData.darkTheme,
             themeMode: _themeService.currentThemeMode,
+
             /// Localization.
             locale: _localizations.firstOrNull,
             localizationsDelegates: _localizationsDelegates,

@@ -1,6 +1,6 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/common/mixin/theme_mixin.dart';
+import 'package:flutter_template/features/common/utils/mixin/theme_wm_mixin.dart';
 import 'package:flutter_template/features/info/presentation/screens/info/info_model.dart';
 import 'package:flutter_template/features/info/presentation/screens/info/info_screen.dart';
 
@@ -15,9 +15,7 @@ InfoWidgetModel infoScreenWmFactory(
 }
 
 /// Widget model for [InfoScreen].
-class InfoWidgetModel extends WidgetModel<InfoScreen, InfoModel>
-    with ThemeWMMixin
-    implements IInfoWidgetModel {
+class InfoWidgetModel extends WidgetModel<InfoScreen, InfoModel> with ThemeWMMixin implements IInfoWidgetModel {
   /// Create an instance [InfoWidgetModel].
   InfoWidgetModel(super._model);
 }

@@ -1,6 +1,3 @@
-// ignore_for_file: avoid-passing-async-when-sync-expected
-
-import 'dart:async';
 import 'dart:io';
 
 import 'package:analytics/core/analytyc_service.dart';
@@ -10,7 +7,7 @@ import 'package:elementary/elementary.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/common/service/theme/i_theme_service.dart';
-import 'package:flutter_template/common/service/theme/theme_service.dart';
+import 'package:flutter_template/common/service/theme/theme_service_impl.dart';
 import 'package:flutter_template/common/utils/analytics/firebase/firebase_analytic_strategy.dart';
 import 'package:flutter_template/common/utils/analytics/mock/mock_firebase_analytics.dart';
 import 'package:flutter_template/common/utils/default_error_handler.dart';
@@ -18,15 +15,17 @@ import 'package:flutter_template/common/utils/disposable_object/i_disposable_obj
 import 'package:flutter_template/common/utils/logger/debug_log_strategy.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/navigation/service/app_router.dart';
-import 'package:flutter_template/persistence/storage/theme_storage/i_theme_storage.dart';
-import 'package:flutter_template/persistence/storage/theme_storage/theme_storage.dart';
-import 'package:flutter_template/persistence/storage/theme_storage/theme_storage_impl.dart';
+import 'package:flutter_template/persistence/storage/theme_storage/i_theme_mode_storage.dart';
+import 'package:flutter_template/persistence/storage/theme_storage/theme_mode_storage_impl.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:surf_logger/surf_logger.dart' as surf_logger;
 
 /// Scope of dependencies which need through all app's life.
 final class AppScope implements IAppScope {
+  @override
+  late VoidCallback applicationRebuilder;
+
   static const _themeByDefault = ThemeMode.system;
 
   final SharedPreferences _sharedPreferences;
@@ -40,11 +39,6 @@ final class AppScope implements IAppScope {
 
   Logger? _debugLogPrinter;
   late final surf_logger.LogWriter _logger;
-
-  Logger? _debugLogPrinter;
-  late final surf_logger.LogWriter _logger;
-
-  late IThemeStorage _themeModeStorage;
 
   @override
   Dio get dio => _dio;
@@ -75,7 +69,7 @@ final class AppScope implements IAppScope {
     _dio = _initDio(additionalInterceptors);
     _errorHandler = const DefaultErrorHandler();
     _router = AppRouter.instance();
-    _themeModeStorage = ThemeStorage(_sharedPreferences);
+    _themeModeStorage = ThemeModeStorageImpl(_sharedPreferences);
     _analyticsService = AnalyticService.withStrategies({
       // TODO(init): can be removed MockFirebaseAnalytics, added for demo analytics track.
       FirebaseAnalyticStrategy(const MockFirebaseAnalytics()),
@@ -83,14 +77,14 @@ final class AppScope implements IAppScope {
   }
 
   @override
-  Future<void> init() async {
-    await _initLogger();
-    await _initTheme();
+  void dispose() {
+    _disposeLogger();
   }
 
   @override
-  void dispose() {
-    _disposeLogger();
+  Future<void> init() async {
+    _initLogger();
+    await _initTheme();
   }
 
   Future<void> _initTheme() async {
@@ -135,29 +129,24 @@ final class AppScope implements IAppScope {
     return dioLocal;
   }
 
-  Future<void> _onThemeModeChanged() async {
-    await _themeModeStorage.saveThemeMode(mode: _themeService.currentThemeMode);
+  void _onThemeModeChanged() {
+    _themeModeStorage.saveThemeMode(mode: _themeService.currentThemeMode).ignore();
   }
 
-  Future<void> _initLogger() async {
+  void _initLogger() {
     _logger = surf_logger.Logger.withStrategies({
-      if (!kReleaseMode)
-        DebugLogStrategy(_debugLogPrinter = Logger(printer: PrettyPrinter(methodCount: 0))),
+      if (!kReleaseMode) DebugLogStrategy(_debugLogPrinter = Logger(printer: PrettyPrinter(methodCount: 0))),
       // TODO(init-project): Initialize CrashlyticsLogStrategy.
-      // CrashlyticsLogStrategy(),
     });
   }
 
-  Future<void> _disposeLogger() async {
+  void _disposeLogger() {
     _debugLogPrinter?.close();
   }
 }
 
 /// App dependencies.
 abstract interface class IAppScope implements IDisposableObject {
-  /// Init app scope
-  Future<void> init();
-
   /// Http client.
   Dio get dio;
 
@@ -176,15 +165,12 @@ abstract interface class IAppScope implements IDisposableObject {
   /// Shared preferences.
   SharedPreferences get sharedPreferences;
 
-  /// Surf Logger
-  surf_logger.LogWriter get logger;
-
-  /// Surf Logger
+  /// Surf Logger.
   surf_logger.LogWriter get logger;
 
   /// Analytics sending service.
   AnalyticService get analyticsService;
 
-  /// Init theme service with theme from storage or default value.
-  Future<void> initTheme();
+  /// Init app scope.
+  Future<void> init();
 }

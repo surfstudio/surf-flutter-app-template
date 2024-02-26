@@ -315,8 +315,7 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
       textField: Color.lerp(textField, other.textField, t)!,
       textFieldLabel: Color.lerp(textFieldLabel, other.textFieldLabel, t)!,
       textFieldHelper: Color.lerp(textFieldHelper, other.textFieldHelper, t)!,
-      frameTextFieldSecondary:
-          Color.lerp(frameTextFieldSecondary, other.frameTextFieldSecondary, t)!,
+      frameTextFieldSecondary: Color.lerp(frameTextFieldSecondary, other.frameTextFieldSecondary, t)!,
       inactive: Color.lerp(inactive, other.inactive, t)!,
       positive: Color.lerp(positive, other.positive, t)!,
       onPositive: Color.lerp(onPositive, other.onPositive, t)!,

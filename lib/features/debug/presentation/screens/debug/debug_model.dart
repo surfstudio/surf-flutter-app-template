@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_template/common/service/theme/i_theme_service.dart';
 import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/environment/environment.dart';
-import 'package:flutter_template/config/urls.dart';
+import 'package:flutter_template/config/url.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_screen.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_wm.dart';
 import 'package:flutter_template/persistence/storage/config_storage/i_config_settings_storage.dart';
@@ -62,11 +62,11 @@ final class DebugModel extends ElementaryModel {
     AppConfig newConfig;
     switch (urlType) {
       case UrlType.test:
-        newConfig = configNotifier.value.copyWith(url: Urls.testUrl);
+        newConfig = configNotifier.value.copyWith(url: Url.testUrl);
       case UrlType.prod:
-        newConfig = configNotifier.value.copyWith(url: Urls.prodUrl);
+        newConfig = configNotifier.value.copyWith(url: Url.prodUrl);
       default:
-        newConfig = configNotifier.value.copyWith(url: Urls.devUrl);
+        newConfig = configNotifier.value.copyWith(url: Url.devUrl);
     }
     _refreshApp(newConfig);
   }
@@ -88,7 +88,6 @@ final class DebugModel extends ElementaryModel {
     _onApplicationRebuilder();
   }
 
-  // ignore: use_setters_to_change_properties
   Future<void> _setConfig(AppConfig newConfig) async {
     _environment.config = newConfig;
     await _environment.saveConfigProxy(_configSettingsStorage);

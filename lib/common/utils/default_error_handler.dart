@@ -1,4 +1,5 @@
 import 'package:elementary/elementary.dart';
+import 'package:flutter/foundation.dart';
 
 /// {@template default_error_handler.class}
 /// Base implementation of error handler.
@@ -10,9 +11,10 @@ class DefaultErrorHandler implements ErrorHandler {
 
   @override
   void handleError(Object error, {StackTrace? stackTrace}) {
-    // ignore: avoid_print
-    print(error);
-    // ignore: avoid_print
-    print(stackTrace);
+    if (!kDebugMode) return;
+    if (kDebugMode) {
+      print(error);
+      print(stackTrace);
+    }
   }
 }

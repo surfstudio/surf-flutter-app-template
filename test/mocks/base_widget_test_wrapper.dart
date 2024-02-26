@@ -55,10 +55,13 @@ class BaseWidgetTestWrapper extends StatelessWidget {
         stateHash: 0,
         child: MultiProvider(
           providers: [
-            Provider<IAppScope>(create: (_) => _appScopeMock),
+            Provider<IAppScope>(
+              create: (_) => _appScopeMock,
+              // ignore: dispose-providers
+              dispose: (_, value) => value.dispose(),
+            ),
             Provider<AppColorScheme>(
-              create: (_) =>
-                  mode == ThemeType.dark ? AppColorScheme.dark() : AppColorScheme.light(),
+              create: (_) => mode == ThemeType.dark ? AppColorScheme.dark() : AppColorScheme.light(),
             ),
           ],
           child: Directionality(

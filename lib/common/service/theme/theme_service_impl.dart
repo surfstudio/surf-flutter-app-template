@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_template/common/service/theme/i_theme_service.dart';
 
 /// A service that stores and retrieves app theme mode.
-class ThemeService extends IThemeService {
+class ThemeServiceImpl extends IThemeService {
   late ThemeMode _themeMode;
 
   @override
   ThemeMode get currentThemeMode => _themeMode;
 
-  /// Create an instance [ThemeService].
-  ThemeService(this._themeMode);
+  /// Create an instance [ThemeServiceImpl].
+  ThemeServiceImpl(this._themeMode);
 
   @override
   void switchTheme() {

@@ -11,20 +11,20 @@ class CrashlyticsLogStrategy extends LogStrategy {
   CrashlyticsLogStrategy(this._crashlytics);
 
   @override
-  void log(Object message) {
-    _crashlytics.log(message.toString());
+  Future<void> log(Object message) async {
+    await _crashlytics.log(message.toString());
   }
 
   @override
-  void e(Object exception, [StackTrace? stackTrace]) {
-    _crashlytics.recordError(
+  Future<void> e(Object exception, [StackTrace? stackTrace]) async {
+    await _crashlytics.recordError(
       exception,
       stackTrace,
     );
   }
 
   @override
-  void w(String message, [Exception? exception, StackTrace? stackTrace]) {
-    _crashlytics.log(message);
+  Future<void> w(String message, [Exception? exception, StackTrace? stackTrace]) async {
+    await _crashlytics.log(message);
   }
 }

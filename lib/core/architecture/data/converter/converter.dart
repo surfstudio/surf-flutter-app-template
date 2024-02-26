@@ -1,5 +1,3 @@
-// ignore_for_file: avoid-negated-conditions
-
 /// {@template converter.class}
 /// Base class for converters.
 /// {@endtemplate}
@@ -11,7 +9,7 @@ abstract base class Converter<TResult, TFrom> {
   TResult convert(TFrom from);
 
   /// Convert nullable TFrom to nullable TResult.
-  TResult? convertNullable(TFrom? from) => from != null ? convert(from) : null;
+  TResult? convertNullable(TFrom? from) => from == null ? null : convert(from);
 
   /// Convert TFrom list to TResult list.
   Iterable<TResult> convertMultiple(Iterable<TFrom> fromList) => fromList.map(convert);

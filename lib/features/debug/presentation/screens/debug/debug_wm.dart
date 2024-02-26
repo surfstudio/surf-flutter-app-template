@@ -4,12 +4,12 @@ import 'package:elementary/elementary.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/config/environment/environment.dart';
-import 'package:flutter_template/config/urls.dart';
+import 'package:flutter_template/config/url.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_model.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_screen.dart';
 import 'package:flutter_template/features/navigation/service/app_router.dart';
-import 'package:flutter_template/persistence/storage/config_storage/i_config_settings_storage.dart';
+import 'package:flutter_template/persistence/storage/config_storage/config_settings_storage_impl.dart';
 import 'package:provider/provider.dart';
 
 /// Factory for [DebugScreenWidgetModel].
@@ -17,7 +17,7 @@ DebugScreenWidgetModel debugScreenWidgetModelFactory(
   BuildContext context,
 ) {
   final appDependencies = context.read<IAppScope>();
-  final configStorage = ConfigSettingsStorage(appDependencies.sharedPreferences);
+  final configStorage = ConfigSettingsStorageImpl(appDependencies.sharedPreferences);
 
   final model = DebugModel(
     appDependencies.errorHandler,
@@ -142,8 +142,8 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugModel>
   }
 
   UrlType _resolveUrlType(String currentUrl) {
-    if (currentUrl == Urls.testUrl) return UrlType.test;
-    if (currentUrl == Urls.prodUrl) return UrlType.prod;
+    if (currentUrl == Url.testUrl) return UrlType.test;
+    if (currentUrl == Url.prodUrl) return UrlType.prod;
 
     return UrlType.dev;
   }
@@ -173,7 +173,7 @@ abstract class IDebugScreenWidgetModel implements IWidgetModel {
   void setProxy();
 
   /// Set theme mode for app.
-  void setThemeMode(ThemeMode? themeMode) {}
+  void setThemeMode(ThemeMode? themeMode);
 
   /// Navigate to ui kit screen.
   void openUiKit();

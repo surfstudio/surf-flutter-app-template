@@ -3,7 +3,7 @@ import 'package:surf_logger/surf_logger.dart' as surf_logger;
 
 /// {@template debug_log_strategy.class}
 /// Strategy for log output to console.
-/// * used for local debugging
+/// Used for local debugging.
 /// {@endtemplate}
 class DebugLogStrategy extends surf_logger.LogStrategy {
   final Logger _logger;

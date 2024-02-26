@@ -316,8 +316,7 @@ class _ColorCard extends StatelessWidget {
           child: ColoredBox(
             color: Colors.white,
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                  vertical: AppSizes.double2, horizontal: AppSizes.double4),
+              padding: const EdgeInsets.symmetric(vertical: AppSizes.double2, horizontal: AppSizes.double4),
               child: Text(
                 colorName,
                 style: const TextStyle(color: Colors.black, fontSize: AppSizes.double16),

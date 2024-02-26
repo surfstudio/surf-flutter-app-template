@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_template/common/service/theme/i_theme_service.dart';
 import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/environment/environment.dart';
-import 'package:flutter_template/config/urls.dart';
+import 'package:flutter_template/config/url.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_model.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_wm.dart';
 import 'package:flutter_template/persistence/storage/config_storage/i_config_settings_storage.dart';
@@ -27,7 +27,7 @@ void main() {
   final env = MockEnvironment();
   final configSettingsStorage = MockConfigSettingsStorage();
   final themeService = MockThemeService();
-  final config = AppConfig(url: Urls.testUrl);
+  final config = AppConfig(url: Url.testUrl);
 
   final appRebuilder = VoidCallbackMock();
 
@@ -49,8 +49,7 @@ void main() {
     () {
       const proxyMock = 'proxy';
       setUp(() {
-        when(() => env.saveConfigProxy(configSettingsStorage))
-            .thenAnswer((_) => Future<void>.value());
+        when(() => env.saveConfigProxy(configSettingsStorage)).thenAnswer((_) => Future<void>.value());
       });
 
       test(
