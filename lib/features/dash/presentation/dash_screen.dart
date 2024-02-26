@@ -27,7 +27,7 @@ class DashScreen extends ElementaryWidget<IDashWidgetModel> {
           const SizedBox(height: 46),
           _AnalyticsExample(trackAnalyticsExample: wm.trackAnalyticsExample),
           const SizedBox(height: 16),
-          _ApiInteractExampleButton(onPressed: wm.goToApiInteractExampleScreen),
+          _FeatureExampleButton(onPressed: wm.goToFeatureExampleScreen),
         ],
       ),
     );
@@ -71,16 +71,16 @@ class _AnalyticsExample extends StatelessWidget {
   }
 }
 
-class _ApiInteractExampleButton extends StatelessWidget {
+class _FeatureExampleButton extends StatelessWidget {
   final VoidCallback onPressed;
 
-  const _ApiInteractExampleButton({required this.onPressed});
+  const _FeatureExampleButton({required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return FilledButton(
       onPressed: onPressed,
-      child: const Text('Go to api interact example screen'),
+      child: const Text('Go to feature example screen'),
     );
   }
 }

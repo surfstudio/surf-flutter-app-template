@@ -24,6 +24,6 @@ abstract class AppRoutePaths {
   /// Path to logs history screen.
   static const String logHistory = '/logHistory';
 
-  /// Path to api interaction example screen.
-  static const String apiInteractExample = '/api_interact_example';
+  /// Path to feature example screen.
+  static const String featureExample = '/feature_example';
 }

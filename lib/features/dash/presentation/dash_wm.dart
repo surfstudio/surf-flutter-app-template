@@ -50,8 +50,8 @@ class DashWidgetModel extends WidgetModel<DashScreen, DashModel>
   }
 
   @override
-  void goToApiInteractExampleScreen() {
-    _router.navigate(const ApiInteractExampleRoute());
+  void goToFeatureExampleScreen() {
+    _router.navigate(const FeatureExampleRoute());
   }
 }
 
@@ -63,6 +63,6 @@ abstract class IDashWidgetModel with ThemeIModelMixin implements IWidgetModel {
   /// Sending an analytics event
   void trackAnalyticsExample();
 
-  /// Сallback of the transition to the IP address screen
-  void goToApiInteractExampleScreen();
+  /// Сallback of the transition to feature example screen
+  void goToFeatureExampleScreen();
 }

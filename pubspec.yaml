@@ -29,7 +29,6 @@ dependencies:
   shared_preferences: 2.2.2
   shimmer: 3.0.0
   surf_logger: 2.0.0
-  union_state: 0.0.1
 
 dev_dependencies:
   auto_route_generator: 7.3.2
