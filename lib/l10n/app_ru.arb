@@ -71,7 +71,7 @@
   "debugScreenNavBarItemLabel": "Debug screen",
   "@segmentApiInteractExample": {
     "---------": "---------",
-    "description": "Пример взаимодействия с API"
+    "description": "Example of interaction with API"
   },
-  "failedLoadIpMessage": "Не удалось загрузить IP-адрес"
+  "failedLoadIpMessage": "Failed to load IP address"
 }
