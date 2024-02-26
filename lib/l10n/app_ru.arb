@@ -2,47 +2,29 @@
   "@@locale": "ru",
   "@segmentCommon": {
     "---------": "---------",
-    "description": "Общие строки"
+    "description": "Общие сроки"
   },
   "positiveResponse": "Да",
-
   "@segmentExamples": {
     "---------": "---------",
     "description": "Примеры"
   },
   "examplesTitle": "Примеры",
   "examplesLocalizationTitle": "Примеры локализации",
+  "string": "Привет, {name}!",
+  "@string": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "weekDay": "{date}",
   "@weekDay": {
     "placeholders": {
       "date": {
         "type": "DateTime",
         "format": "E"
-      }
-    }
-  },
-  "thingsWithCount": "{count, plural, =1{{count} штука} few{{count} штуки} many{{count} штук} other{{count} штук}}",
-  "@thingsWithCount": {
-    "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "duration": "{duration} мин",
-  "@duration": {
-    "placeholders": {
-      "duration": {
-        "format": "int"
-      }
-    }
-  },
-  "date": "действует до {date}",
-  "@date": {
-    "placeholders": {
-      "date": {
-        "type": "DateTime",
-        "format": "yMd"
       }
     }
   },
@@ -59,15 +41,34 @@
       }
     }
   },
-  "string": "Привет, {name}!",
-  "@string": {
+  "inboxCount": "{count, plural, zero{У вас нет новых сообщений} one{У вас 1 новое ообщение} other{У вас {count} новых сообщений}}",
+  "@inboxCount": {
+    "description": "Количетво сообщений",
     "placeholders": {
-      "name": {
-        "type": "String"
-      }
+      "count": {}
     }
   },
-  "dashScreenNavBarItemLabel": "Dash screen",
-  "infoScreenNavBarItemLabel": "Info screen",
-  "debugScreenNavBarItemLabel": "Debug screen"
+  "@segmentTempScreen": {
+    "---------": "---------",
+    "description": "Temp screen"
+  },
+  "tempScreenDashNavBarItemLabel": "Dash экран",
+  "tempScreenInfoNavBarItemLabel": "Инфо экран",
+  "tempScreenDebugNavBarItemLabel": "Дебаг экран",
+  "@segmentDebugScreen": {
+    "---------": "---------",
+    "description": "Дебаг экран"
+  },
+  "debugScreenTitle": "Экран отладки",
+  "debugScreenServerSubtitle": "Сервер",
+  "debugScreenServerConnectButton": "Переключить сервер",
+  "debugScreenProxySubtitle": "Прокси",
+  "debugScreenProxyInfo": "Активирует передачу через прокси сервер.",
+  "debugScreenProxyEditTextLabel": "Введите адресс прокси сервера",
+  "debugScreenProxyConnectButton": "Подключить",
+  "debugScreenThemeSubtitle": "Тема приложения",
+  "debugScreenThemeLight": "Светлая тема",
+  "debugScreenThemeDark": "Темная темя",
+  "debugScreenThemeSystem": "Системная тема",
+  "debugScreenUikitNavigateButton": "Открыть UIKit"
 }
