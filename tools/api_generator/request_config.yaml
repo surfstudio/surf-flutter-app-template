@@ -1,0 +1,15 @@
+useNewNullableDeterminationStrategy: true
+
+templates:
+  - type: service
+    nameSuffix: Urls
+    fileExtension: dart
+    fileNameCase: snakeCase
+    templatePath: templates/urls.stencil
+    destinationPath: ../../lib/api/service/{name}
+  - type: service
+    nameSuffix: Api
+    fileExtension: dart
+    fileNameCase: snakeCase
+    templatePath: templates/retrofit_api.stencil
+    destinationPath: ../../lib/api/service/{name}

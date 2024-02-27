@@ -1,14 +1,20 @@
-import 'package:json_annotation/json_annotation.dart';
-import 'package:flutter_template/api/data/api_data_list.dart';
+// GENERATED CODE - DO NOT MODIFY BY HAND
 
-part '{{ model.name|camelCaseToSnakeCase  }}.g.dart';
+// ignore_for_file: unused_import, always_put_required_named_parameters_first, public_member_api_docs, avoid-referencing-discarded-variables, flutter_style_todos
+
+import 'package:json_annotation/json_annotation.dart';
+import 'package:flutter_template/api/data/umbrella.dart';
+
+part '{{ model.name|camelCaseToSnakeCase  }}_data.g.dart';
 {% for line in model.description|splitLines %}
 /// {{ line }}{% endfor %}
-@JsonSerializable()
+{% if model.name != "RecalculateCartRequest" and model.name != "OrderCreateRequestBody" %}@JsonSerializable(includeIfNull: false){#
+#}{% else %}@JsonSerializable(includeIfNull: true){% endif %}
 class {{ model.name }}Data {{ '{' }}{#
 	#}{% for property in model.properties %}
 	{% for line in property.description|splitLines %}
 	/// {{ line }}{% endfor %}
+	@JsonKey(name: '{{ property.name }}')
 	final {% if property.typeModel.isArray %}List<{% endif %}{#
 	#}{% if property.typeModel.name == "integer" or property.typeModel.aliasTypeName == "integer" %}int{#
     #}{% elif property.typeModel.name == "number" or property.typeModel.aliasTypeName == "number" %}double{#
@@ -18,11 +24,17 @@ class {{ model.name }}Data {{ '{' }}{#
     #}{% if property.typeModel.isArray %}>{% endif %}{#
 	#}{% if property.isNullable %}?{% endif %} {{ property.name|snakeCaseToCamelCase }};{% endfor %}
 
-	{{ model.name }}Data({
+    {% for line in model.description|splitLines %}
+    /// {{ line }}{% endfor %}
+	const {{ model.name }}Data({
 		{% for property in model.properties %}{% if property.isNullable != true %}required {% endif %}this.{{ property.name|snakeCaseToCamelCase }},{% if not forloop.last %}
 		{% endif %}{% endfor %}
 	});
 
+    {% for line in model.description|splitLines %}
+    /// {{ line }}{% endfor %}
 	factory {{ model.name }}Data.fromJson(Map<String, dynamic> json) => _${{ model.name }}DataFromJson(json);
+
+	/// To Json
 	Map<String, dynamic> toJson() => _${{ model.name }}DataToJson(this);
 }

@@ -4,15 +4,13 @@ INIT_APP_SCRIPT := $(SCRIPTS_DIR)/init_app.sh
 CLEAN_IOS_SCRIPT := $(SCRIPTS_DIR)/clean_ios.sh
 FVM_VSCODE_SCRIPT := $(SCRIPTS_DIR)/fvm_vscode.sh
 VERSION_SCRIPT := $(SCRIPTS_DIR)/version.sh
+SURFGEN_SCRIPT := $(SCRIPTS_DIR)/surfgen.sh
 CODEGEN_SCRIPT := $(SCRIPTS_DIR)/build_runner.sh
 INTL_SCRIPT := $(SCRIPTS_DIR)/intl_with_format.sh
 RESET_GOLDENS_SCRIPT := $(SCRIPTS_DIR)/reset_goldens.sh
 CHECK_COVERAGE_SCRIPT := $(SCRIPTS_DIR)/check_coverage.sh
 SPIDER_BUILD_SCRIPT := $(SCRIPTS_DIR)/spider_build.sh
 FORMAT_SCRIPT := $(SCRIPTS_DIR)/format.sh
-
-API_GENERATOR_DIR := tools/api_generator
-UMBRELLA_GEN_SCRIPT := $(API_GENERATOR_DIR)/umbrella_gen.sh
 
 # Tasks to run each script
 init_app:
@@ -26,6 +24,9 @@ fvm_vscode:
 
 version:
 	sh $(VERSION_SCRIPT)
+	
+surfgen:
+	sh $(SURFGEN_SCRIPT)
 
 codegen:
 	sh $(CODEGEN_SCRIPT)
@@ -45,8 +46,6 @@ spider_build:
 format:
 	sh $(FORMAT_SCRIPT)
 
-umbrella_gen:
-	sh $(UMBRELLA_GEN_SCRIPT)
 
 # By default, we display a message about available tasks
 all:
@@ -60,5 +59,5 @@ all:
 	@echo " - reset_goldens: Deletes all created golden tests and re-generates them."
 	@echo " - check_coverage: The script allows you to automate the process of testing the coverage of the source code of the Flutter project and generating the corresponding report."
 	@echo " - spider_build: Runs spider build, formats the code, runs golden tests."
-	@echo " - umbrella_gen: As a result of the script, an umbrella file with export instructions will be created or updated for all DTO files in a certain directory, excluding those that were generated (i.e. file names with .g.dart). The directory is set by the user."
 	@echo " - format: fvm dart format -l 100 lib test"
+	@echo " - surfgen: Generate API layer from Swagger."

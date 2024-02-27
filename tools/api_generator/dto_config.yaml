@@ -1,0 +1,15 @@
+useNewNullableDeterminationStrategy: true
+
+templates:
+  - type: model
+    fileExtension: dart
+    nameSuffix: Data
+    fileNameCase: snakeCase
+    templatePath: templates/retrofit_model.stencil
+    destinationPath: ../../lib/api/data
+  - type: enum
+    fileExtension: dart
+    nameSuffix: Data
+    fileNameCase: snakeCase
+    templatePath: templates/enum_retrofit.stencil
+    destinationPath: ../../lib/api/data
