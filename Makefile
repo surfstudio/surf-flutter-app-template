@@ -4,13 +4,16 @@ INIT_APP_SCRIPT := $(SCRIPTS_DIR)/init_app.sh
 CLEAN_IOS_SCRIPT := $(SCRIPTS_DIR)/clean_ios.sh
 FVM_VSCODE_SCRIPT := $(SCRIPTS_DIR)/fvm_vscode.sh
 VERSION_SCRIPT := $(SCRIPTS_DIR)/version.sh
+SURFGEN_SCRIPT := $(SCRIPTS_DIR)/surfgen.sh
 CODEGEN_SCRIPT := $(SCRIPTS_DIR)/build_runner.sh
 INTL_SCRIPT := $(SCRIPTS_DIR)/intl_with_format.sh
 RESET_GOLDENS_SCRIPT := $(SCRIPTS_DIR)/reset_goldens.sh
 CHECK_COVERAGE_SCRIPT := $(SCRIPTS_DIR)/check_coverage.sh
 SPIDER_BUILD_SCRIPT := $(SCRIPTS_DIR)/spider_build.sh
 FORMAT_SCRIPT := $(SCRIPTS_DIR)/format.sh
-SURFGEN_SCRIPT := $(SCRIPTS_DIR)/surfgen.sh
+API_GENERATOR_DIR := tools/api_generator
+UMBRELLA_GEN_SCRIPT := $(API_GENERATOR_DIR)/umbrella_gen.sh
+
 
 # Tasks to run each script
 init_app:
@@ -24,6 +27,9 @@ fvm_vscode:
 
 version:
 	sh $(VERSION_SCRIPT)
+
+surfgen:
+	sh $(SURFGEN_SCRIPT)
 
 codegen:
 	sh $(CODEGEN_SCRIPT)
@@ -43,8 +49,6 @@ spider_build:
 format:
 	sh $(FORMAT_SCRIPT)
 
-surfgen:
-	sh $(SURFGEN_SCRIPT)
 
 umbrella_gen:
 	sh $(UMBRELLA_GEN_SCRIPT)
