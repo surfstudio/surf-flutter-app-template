@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_template/common/mixin/localization_mixin.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/common/utils/mixin/theme_wm_mixin.dart';
@@ -9,7 +10,6 @@ import 'package:flutter_template/features/navigation/service/app_router.dart';
 import 'package:flutter_template/features/temp/di/temp_scope.dart';
 import 'package:flutter_template/features/temp/presentation/screens/temp/temp_model.dart';
 import 'package:flutter_template/features/temp/presentation/screens/temp/temp_screen.dart';
-import 'package:flutter_template/l10n/app_localizations_x.dart';
 import 'package:provider/provider.dart';
 
 /// Factory for [TempWidgetModel].
@@ -30,7 +30,7 @@ TempWidgetModel initScreenWidgetModelFactory(
 
 /// Widget model for [TempScreen].
 class TempWidgetModel extends WidgetModel<TempScreen, ITempModel>
-    with ThemeWMMixin
+    with LocalizationMixin, ThemeWMMixin
     implements ITempWidgetModel {
   late final List<BottomNavigationBarItem> _defaultNavBarItems;
 
@@ -45,7 +45,7 @@ class TempWidgetModel extends WidgetModel<TempScreen, ITempModel>
   List<PageRouteInfo> get _routes {
     final defaultRoutes = <PageRouteInfo>[const DashRouter(), const InfoRouter()];
     if (_isDebugMode) defaultRoutes.add(const DebugRouter());
-    
+
     return defaultRoutes;
   }
 
@@ -66,16 +66,16 @@ class TempWidgetModel extends WidgetModel<TempScreen, ITempModel>
     _defaultNavBarItems = [
       BottomNavigationBarItem(
         icon: const Icon(Icons.flutter_dash),
-        label: context.l10n.dashScreenNavBarItemLabel,
+        label: l10n.tempScreenDashNavBarItemLabel,
       ),
       BottomNavigationBarItem(
         icon: const Icon(Icons.info_outline),
-        label: context.l10n.infoScreenNavBarItemLabel,
+        label: l10n.tempScreenInfoNavBarItemLabel,
       ),
     ];
     _debugNavBarItem = BottomNavigationBarItem(
       icon: const Icon(Icons.bug_report_outlined),
-      label: context.l10n.debugScreenNavBarItemLabel,
+      label: l10n.tempScreenDebugNavBarItemLabel,
     );
     super.initWidgetModel();
   }
@@ -89,11 +89,11 @@ class TempWidgetModel extends WidgetModel<TempScreen, ITempModel>
   String _appBarTitle(RouteData topRoute) {
     switch (topRoute.path) {
       case AppRoutePaths.debugPath:
-        return 'Экран отладки';
+        return l10n.tempScreenDebugNavBarItemLabel;
       case AppRoutePaths.dashPath:
-        return 'Dash';
+        return l10n.tempScreenDashNavBarItemLabel;
       case AppRoutePaths.infoPath:
-        return 'Info';
+        return l10n.tempScreenInfoNavBarItemLabel;
       default:
         return '';
     }
@@ -101,7 +101,7 @@ class TempWidgetModel extends WidgetModel<TempScreen, ITempModel>
 }
 
 /// Interface for [TempWidgetModel].
-abstract class ITempWidgetModel with ThemeIModelMixin implements IWidgetModel {
+abstract class ITempWidgetModel with ILocalizationMixin, ThemeIModelMixin implements IWidgetModel {
   /// Routes for [AutoTabsRouter.tabBar].
   // ignore: avoid-dynamic
   List<PageRouteInfo<dynamic>> get routes;

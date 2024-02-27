@@ -71,7 +71,6 @@ class _AppState extends State<App> {
             themeMode: _themeService.currentThemeMode,
 
             /// Localization.
-            locale: _localizations.firstOrNull,
             localizationsDelegates: _localizationsDelegates,
             supportedLocales: _localizations,
           );
@@ -82,6 +81,7 @@ class _AppState extends State<App> {
 }
 
 const _localizations = [
+  Locale('en', 'EN'),
   Locale('ru', 'RU'),
 ];
 
