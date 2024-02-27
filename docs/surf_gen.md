@@ -18,7 +18,7 @@ In order to run code generation on an Apple Intel or Linux-based machine, you ne
 If you need to create another binary file, use the [instructions](https://github.com/surfstudio/SurfGen#installation).
 
 
-### Generation
+### Code Generation
 
 To generate it, you need to run the script:
 ```sh  
