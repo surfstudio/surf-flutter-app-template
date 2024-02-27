@@ -4,7 +4,7 @@ data_output_path=../../lib/api/data
 umbrella_file_name=umbrella.dart
 
 ### Generate swagger configuration
-for i in $(find ../../../shaverno-swagger/**/api.yaml); do
+for i in $(find ../../../flutter-template-swagger/**/api.yaml); do
   ./apple_silicon_generator generate "$i" -c dto_config.yaml -n "$(basename $(dirname "$i"))" -r
 done
 

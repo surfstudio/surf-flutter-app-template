@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ### Generate swagger configuration
-for i in $(find ../../../shaverno-swagger/**/api.yaml); do
+for i in $(find ../../../flutter-template-swagger/**/api.yaml); do
   ./apple_silicon_generator generate "$i" -c request_config.yaml -n "$(basename $(dirname "$i"))" -r
 done
 
