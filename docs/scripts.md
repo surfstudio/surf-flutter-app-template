@@ -51,13 +51,6 @@ Installing the desired version of fvm and run pub get
 
 Generate API layer from Swagger.
 
-## umbrella_gen.sh
-
-It's in the folder `tools/api_generator`
-
-As a result of the script, an "umbrella" file with export instructions will be created or updated
-for all DTO files in a certain directory, excluding those that were generated
-(i.e. file names with .g.dart). The directory is set by the user.
 
 ## build_runner.sh
 
