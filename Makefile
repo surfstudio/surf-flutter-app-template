@@ -11,6 +11,7 @@ RESET_GOLDENS_SCRIPT := $(SCRIPTS_DIR)/reset_goldens.sh
 CHECK_COVERAGE_SCRIPT := $(SCRIPTS_DIR)/check_coverage.sh
 SPIDER_BUILD_SCRIPT := $(SCRIPTS_DIR)/spider_build.sh
 FORMAT_SCRIPT := $(SCRIPTS_DIR)/format.sh
+
 API_GENERATOR_DIR := tools/api_generator
 UMBRELLA_GEN_SCRIPT := $(API_GENERATOR_DIR)/umbrella_gen.sh
 
