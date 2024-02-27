@@ -48,8 +48,8 @@ class _LocalizationExamples extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Text(context.l10n.string('Username')),
-        Text(context.l10n.thingsWithCount(1)),
-        Text(context.l10n.date(DateTime.now())),
+        Text(context.l10n.inboxCount(1)),
+        Text(context.l10n.dateAndTime(DateTime.now(), DateTime.now())),
       ],
     );
   }

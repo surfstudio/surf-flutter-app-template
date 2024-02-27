@@ -1,0 +1,78 @@
+{
+  "@@locale": "en",
+  "@segmentCommon": {
+    "---------": "---------",
+    "description": "Common lines"
+  },
+  "positiveResponse": "Yes",
+  "@segmentExamples": {
+    "---------": "---------",
+    "description": "Examples"
+  },
+  "examplesTitle": "Examples",
+  "examplesLocalizationTitle": "Localization examples",
+  "string": "Hello, {name}!",
+  "@string": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "weekDay": "{date}",
+  "@weekDay": {
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "E"
+      }
+    }
+  },
+  "dateAndTime": "{date}, {time}",
+  "@dateAndTime": {
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "MMMMd"
+      },
+      "time": {
+        "type": "DateTime",
+        "format": "jm"
+      }
+    }
+  },
+  "inboxCount": "{count, plural, zero{You have no new messages} one{You have 1 new message} other{You have {count} new messages}}",
+  "@inboxCount": {
+    "description": "New messages count on the Home screen",
+    "placeholders": {
+      "count": {}
+    }
+  },
+  "@segmentTempScreen": {
+    "---------": "---------",
+    "description": "Temp screen"
+  },
+  "tempScreenDashNavBarItemLabel": "Dash screen",
+  "tempScreenInfoNavBarItemLabel": "Info screen",
+  "tempScreenDebugNavBarItemLabel": "Debug screen",
+  "@segmentDebugScreen": {
+    "---------": "---------",
+    "description": "debug screen"
+  },
+  "debugScreenServerSubtitle": "Server",
+  "debugScreenServerConnectButton": "Change server",
+  "debugScreenProxySubtitle": "Proxy server",
+  "debugScreenProxyInfo": "Activates the transfer of traffic through a proxy server.",
+  "debugScreenProxyEditTextLabel": "Enter the proxy server address",
+  "debugScreenProxyConnectButton": "Connect proxy",
+  "debugScreenThemeSubtitle": "App theme",
+  "debugScreenThemeLight": "Light Theme",
+  "debugScreenThemeDark": "Dark Theme",
+  "debugScreenThemeSystem": "System Theme",
+  "debugScreenUikitNavigateButton": "Open UIKit",
+  "@segmentFeatureExample": {
+    "---------": "---------",
+    "description": "Example of feature"
+  },
+  "featureExampleFailedLoadIpMessage": "Failed to load IP address"
+}
