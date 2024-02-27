@@ -1,6 +1,7 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_template/common/widgets/restart_app_widget.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/config/urls.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
@@ -15,24 +16,24 @@ DebugScreenWidgetModel debugScreenWidgetModelFactory(
   BuildContext context,
 ) {
   final appDependencies = context.read<IAppScope>();
+
+  final appRestarter = context.read<AppRestarter>();
+  final appRouter = context.read<AppRouter>();
   final configStorage = ConfigSettingsStorageImpl(appDependencies.sharedPreferences);
 
   final model = DebugScreenModel(
     appDependencies.errorHandler,
     Environment.instance(),
-    appDependencies.applicationRebuilder,
+    appRestarter,
     configStorage,
     appDependencies.themeService,
   );
 
-  final router = appDependencies.router;
-
-  return DebugScreenWidgetModel(model, router);
+  return DebugScreenWidgetModel(model, appRouter);
 }
 
 /// Widget Model for [DebugScreen].
-class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
-    implements IDebugScreenWidgetModel {
+class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel> implements IDebugScreenWidgetModel {
   /// Empty string.
   static const String _emptyString = '';
 
