@@ -73,5 +73,5 @@
     "---------": "---------",
     "description": "Example of feature"
   },
-  "failedLoadIpMessage": "Failed to load IP address"
+  "featureExampleFailedLoadIpMessage": "Failed to load IP address"
 }
