@@ -3,7 +3,7 @@
 <img src="./docs/images/cover.png" height="220" />
 </p>
 
-# Overview 🐄
+# Description 🐄
 
 Welcome to the Surf Flutter Team's project template – your springboard for launching new Flutter projects with ease and efficiency. Our template encapsulates years of experience and best practices in Flutter development, providing a solid foundation for your project. Here's what's included:
 
