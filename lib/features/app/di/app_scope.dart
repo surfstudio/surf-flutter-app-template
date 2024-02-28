@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_template/common/service/theme/theme_service.dart';
 import 'package:flutter_template/common/utils/logger/i_log_writer.dart';
 import 'package:flutter_template/config/app_config.dart';
+import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/persistence/storage/theme_storage/theme_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,6 +13,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 final class AppScope implements IAppScope {
   final IThemeModeStorage _themeModeStorage;
 
+  @override
+  final Environment env;
   @override
   final AppConfig appConfig;
   @override
@@ -27,6 +30,7 @@ final class AppScope implements IAppScope {
 
   /// {@macro app_scope.class}
   const AppScope({
+    required this.env,
     required this.appConfig,
     required this.sharedPreferences,
     required this.dio,
@@ -54,6 +58,9 @@ final class AppScope implements IAppScope {
 abstract interface class IAppScope {
   /// Init app scope. All global initialization should happen here.
   Future<void> init();
+
+  /// Environment.
+  Environment get env;
 
   /// App configuration.
   AppConfig get appConfig;

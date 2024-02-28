@@ -4,7 +4,5 @@ import 'package:flutter_template/runner.dart';
 
 /// Main entry point of app.
 void main() {
-  Environment.init(buildType: BuildType.dev);
-
-  run(Environment.instance());
+  run(const Environment(buildType: BuildType.dev));
 }

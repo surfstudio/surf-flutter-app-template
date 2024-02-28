@@ -57,6 +57,7 @@ final class AppScopeRegister {
     final logger = LogWriter(surfLogger);
 
     return AppScope(
+      env: env,
       appConfig: appConfig,
       sharedPreferences: sharedPreferences,
       dio: dio,
