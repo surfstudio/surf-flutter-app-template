@@ -1,0 +1,47 @@
+name: "Publishing"
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  get_fvm_version:
+    if: github.repository == 'surfstudio/surf-flutter-app-template'
+    outputs:
+      flutter_version: ${{ steps.fvm_version.outputs.flutter }}
+    name: "Get Flutter version from FVM"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - id: fvm_version
+        uses: zoexx/github-action-json-file-properties@release
+        with:
+          file_path: ".fvmrc"
+
+  analysis:
+    needs: get_fvm_version
+    uses: surfstudio/flutter-ci-workflows/.github/workflows/analysis.yml@main
+    with:
+      flutter-version: ${{ needs.get_fvm_version.outputs.flutter_version }}
+
+  testing:
+    needs: [analysis, get_fvm_version]
+    uses: surfstudio/flutter-ci-workflows/.github/workflows/testing.yml@main
+    with:
+      flutter-version: ${{ needs.get_fvm_version.outputs.flutter_version }}
+    secrets:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+  package-publishing:
+    needs: [analysis, testing, get_fvm_version]
+    uses: surfstudio/flutter-ci-workflows/.github/workflows/publish_to_pub.yml@main
+    with:
+      flutter-version: ${{ needs.get_fvm_version.outputs.flutter_version }}
+      PANA_TOTAL: "100"
+    secrets:
+      PUB_CREDENTIAL_JSON: ${{ secrets.SURF_PUB_CREDENTIAL_JSON }}
+      PUB_OAUTH_ACCESS_TOKEN: ${{ secrets.SURF_PUB_OAUTH_ACCESS_TOKEN }}
+      PUB_OAUTH_REFRESH_TOKEN: ${{ secrets.SURF_PUB_OAUTH_REFRESH_TOKEN }}
