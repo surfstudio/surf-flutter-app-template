@@ -13,12 +13,12 @@ import 'package:provider/provider.dart';
 DashWidgetModel dashScreenWmFactory(
   BuildContext context,
 ) {
-  final scope = context.read<IAppScope>();
-  final model = DashModel();
+  final appScope = context.read<IAppScope>();
+  final model = DashModel(logWriter: appScope.logger);
 
   return DashWidgetModel(
     model: model,
-    analyticsService: scope.analyticsService,
+    analyticsService: appScope.analyticsService,
   );
 }
 

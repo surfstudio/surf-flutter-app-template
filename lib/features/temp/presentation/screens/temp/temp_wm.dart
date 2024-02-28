@@ -22,13 +22,14 @@ TempWidgetModel initScreenWidgetModelFactory(
     appScope.env,
     appScope.themeService,
     tempScope.templateRepository,
+    logWriter: appScope.logger,
   );
 
   return TempWidgetModel(model);
 }
 
 /// Widget model for [TempScreen].
-class TempWidgetModel extends WidgetModel<TempScreen, ITempModel>
+class TempWidgetModel extends WidgetModel<TempScreen, TempModel>
     with LocalizationMixin, ThemeWMMixin
     implements ITempWidgetModel {
   late final List<BottomNavigationBarItem> _defaultNavBarItems;
