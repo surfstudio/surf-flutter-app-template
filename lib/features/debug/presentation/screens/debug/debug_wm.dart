@@ -27,7 +27,8 @@ DebugScreenWidgetModel debugScreenWidgetModelFactory(BuildContext context) {
 }
 
 /// Widget Model for [DebugScreen].
-class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel> implements IDebugScreenWidgetModel {
+class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
+    implements IDebugScreenWidgetModel {
   /// Empty string.
   static const String _emptyString = '';
 

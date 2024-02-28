@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_template/config/url.dart';
 import 'package:flutter_template/features/debug/domain/entities/url_type_entity.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_wm.dart';
+import 'package:flutter_template/l10n/app_localizations_x.dart';
 
 /// Debug screens.
 class DebugScreen extends ElementaryWidget<IDebugScreenWidgetModel> {
@@ -53,6 +54,7 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Padding(
       padding: const EdgeInsets.all(8),
       child: SingleChildScrollView(
@@ -74,7 +76,7 @@ class _Body extends StatelessWidget {
             Card(
               child: ListTile(
                 onTap: openUiKit,
-                title: const Text('To ui kit screen'),
+                title: Text(l10n.debugScreenUikitNavigateButton),
               ),
             ),
           ],
@@ -97,12 +99,13 @@ class _ServerSwitchCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(8),
         child: Column(
           children: <Widget>[
-            const Text('Сервер'),
+            Text(l10n.debugScreenServerSubtitle),
             ValueListenableBuilder<UrlTypeEntity>(
               valueListenable: urlState,
               builder: (context, urlState, _) {
@@ -131,9 +134,9 @@ class _ServerSwitchCard extends StatelessWidget {
                     ),
                     MaterialButton(
                       onPressed: () => switchServer(urlState),
-                      child: const Text(
-                        'Переключить',
-                        style: TextStyle(fontSize: 16),
+                      child: Text(
+                        l10n.debugScreenServerConnectButton,
+                        style: const TextStyle(fontSize: 16),
                       ),
                     ),
                   ],
@@ -158,35 +161,36 @@ class _ProxyCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(8),
         child: Column(
           children: <Widget>[
-            const Padding(
-              padding: EdgeInsets.only(bottom: 8),
-              child: Text('Прокси-сервер'),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Text(l10n.debugScreenProxySubtitle),
             ),
-            const Padding(
-              padding: EdgeInsets.only(bottom: 8),
-              child: Text('Активирует передачу трафика через прокси сервер.'),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Text(l10n.debugScreenProxyInfo),
             ),
             Column(
               children: <Widget>[
                 TextField(
                   textInputAction: TextInputAction.done,
                   controller: proxyController,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     filled: true,
-                    border: UnderlineInputBorder(),
-                    labelText: 'Адрес прокси сервера',
+                    border: const UnderlineInputBorder(),
+                    labelText: l10n.debugScreenProxyEditTextLabel,
                   ),
                 ),
                 MaterialButton(
                   onPressed: setProxy,
-                  child: const Text(
-                    'Переключить прокси',
-                    style: TextStyle(fontSize: 16),
+                  child: Text(
+                    l10n.debugScreenProxyConnectButton,
+                    style: const TextStyle(fontSize: 16),
                   ),
                 ),
               ],
@@ -209,6 +213,7 @@ class _ThemeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(8),
@@ -217,24 +222,24 @@ class _ThemeCard extends StatelessWidget {
           builder: (context, themeState, _) {
             return Column(
               children: <Widget>[
-                const Text('Выбрать тему приложения'),
+                Text(l10n.debugScreenThemeSubtitle),
                 Column(
                   children: <Widget>[
                     RadioListTile<ThemeMode>(
                       groupValue: themeState,
-                      title: const Text('Light Theme'),
+                      title: Text(l10n.debugScreenThemeLight),
                       value: ThemeMode.light,
                       onChanged: setThemeMode,
                     ),
                     RadioListTile<ThemeMode>(
                       groupValue: themeState,
-                      title: const Text('Dark Theme'),
+                      title: Text(l10n.debugScreenThemeDark),
                       value: ThemeMode.dark,
                       onChanged: setThemeMode,
                     ),
                     RadioListTile<ThemeMode>(
                       groupValue: themeState,
-                      title: const Text('System Theme'),
+                      title: Text(l10n.debugScreenThemeSystem),
                       value: ThemeMode.system,
                       onChanged: setThemeMode,
                     ),
