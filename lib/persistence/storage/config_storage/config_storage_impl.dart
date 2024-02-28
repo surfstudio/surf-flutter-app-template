@@ -4,20 +4,43 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// Persistent storage for config settings.
 ///
 /// Based on SharedPreferences.
-class ConfigSettingsStorageImpl implements IConfigSettingsStorage {
-  static const String _proxyKey = 'proxy_url';
+class ConfigStorageImpl implements IConfigStorage {
   final SharedPreferences _prefs;
 
-  /// Create an instance [ConfigSettingsStorageImpl].
-  ConfigSettingsStorageImpl(this._prefs);
+  /// Create an instance [ConfigStorageImpl].
+  const ConfigStorageImpl(this._prefs);
 
   @override
   Future<String?> getProxyUrl() async {
-    return _prefs.getString(_proxyKey);
+    return _prefs.getString(ConfigStorageKeys.proxyUrl.keyString);
   }
 
   @override
-  Future<void> setProxyUrl({required String proxy}) async {
-    await _prefs.setString(_proxyKey, proxy);
+  Future<void> setProxyUrl({required String proxyUrl}) async {
+    await _prefs.setString(ConfigStorageKeys.proxyUrl.keyString, proxyUrl);
   }
+
+  @override
+  Future<String?> getUrlType() async {
+    return _prefs.getString(ConfigStorageKeys.urlType.keyString);
+  }
+
+  @override
+  Future<void> setUrlType({required String urlType}) {
+    return _prefs.setString(ConfigStorageKeys.urlType.keyString, urlType);
+  }
+}
+
+/// Keys for config settings storage
+enum ConfigStorageKeys {
+  /// Proxy url
+  proxyUrl('proxy_url'),
+
+  /// Url type
+  urlType('url_type');
+
+  /// String representation of the key
+  final String keyString;
+
+  const ConfigStorageKeys(this.keyString);
 }

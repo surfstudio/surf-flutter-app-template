@@ -8,15 +8,13 @@ import 'package:flutter_template/features/temp/presentation/temp_flow.dart';
 
 part 'router.gr.dart';
 
-/// When you add route with screen don't forget add imports of screen and screen_widget_model
-
+/// {@template router.class}
 /// Main point of the application navigation.
+/// {@endtemplate}
 @AutoRouterConfig(
   replaceInRouteName: 'Flow,Route',
 )
 class AppRouter extends _$AppRouter {
-  static final AppRouter _router = AppRouter._();
-
   @override
   RouteType get defaultRouteType => const RouteType.material();
 
@@ -46,9 +44,4 @@ class AppRouter extends _$AppRouter {
           path: AppRoutePaths.uiKitPath,
         ),
       ];
-
-  AppRouter._();
-
-  /// Singleton instance of [AppRouter].
-  factory AppRouter.instance() => _router;
 }
