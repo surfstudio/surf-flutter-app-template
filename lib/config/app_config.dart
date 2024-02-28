@@ -7,7 +7,7 @@ class AppConfig {
   final String? proxyUrl;
 
   /// Create an instance [AppConfig].
-  AppConfig({
+  const AppConfig({
     required this.url,
     this.proxyUrl,
   });

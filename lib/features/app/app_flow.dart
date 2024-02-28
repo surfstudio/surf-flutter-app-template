@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_template/common/widgets/di_scope.dart';
-import 'package:flutter_template/common/widgets/restart_app_widget.dart';
 import 'package:flutter_template/features/app/app.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/navigation/service/router.dart';
@@ -21,13 +20,11 @@ class AppFlow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RestartAppWidget(
-      child: DiScope<IAppScope>(
-        factory: () => appScope,
-        child: ChangeNotifierProvider<AppRouter>(
-          create: (_) => AppRouter(),
-          child: const App(),
-        ),
+    return DiScope<IAppScope>(
+      factory: (_) => appScope,
+      child: ChangeNotifierProvider<AppRouter>(
+        create: (_) => AppRouter(),
+        child: const App(),
       ),
     );
   }

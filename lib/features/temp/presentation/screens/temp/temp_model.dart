@@ -13,7 +13,7 @@ final class TempModel extends ElementaryModel implements ITempModel {
   final ITempRepository _templateRepository;
 
   @override
-  bool get isDebugMode => !_environment.isRelease;
+  bool get isDebugMode => !_environment.isProd;
 
   /// Create an instance [TempModel].
   TempModel(this._environment, this._themeService, this._templateRepository);

@@ -1,32 +1,26 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/common/widgets/restart_app_widget.dart';
-import 'package:flutter_template/config/environment/environment.dart';
-import 'package:flutter_template/config/urls.dart';
+import 'package:flutter_template/config/url.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
+import 'package:flutter_template/features/debug/di/debug_scope.dart';
+import 'package:flutter_template/features/debug/domain/entities/url_type_entity.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_model.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_screen.dart';
 import 'package:flutter_template/features/navigation/service/router.dart';
-import 'package:flutter_template/persistence/storage/config_storage/config_storage_impl.dart';
 import 'package:provider/provider.dart';
 
 /// Factory for [DebugScreenWidgetModel].
-DebugScreenWidgetModel debugScreenWidgetModelFactory(
-  BuildContext context,
-) {
-  final appDependencies = context.read<IAppScope>();
-
-  final appRestarter = context.read<AppRestarter>();
+DebugScreenWidgetModel debugScreenWidgetModelFactory(BuildContext context) {
+  final appScope = context.read<IAppScope>();
+  final debugScope = context.read<IDebugScope>();
   final appRouter = context.read<AppRouter>();
-  final configStorage = ConfigSettingsStorageImpl(appDependencies.sharedPreferences);
 
   final model = DebugScreenModel(
-    appDependencies.errorHandler,
-    Environment.instance(),
-    appRestarter,
-    configStorage,
-    appDependencies.themeService,
+    debugScope.debugRepository,
+    appScope.appConfig,
+    appScope.themeService,
+    logWriter: appScope.logger,
   );
 
   return DebugScreenWidgetModel(model, appRouter);
@@ -40,12 +34,10 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel> 
   /// Class that coordinates navigation for the whole app.
   final AppRouter router;
 
-  late final _textEditingController = TextEditingController(
-    text: model.proxyUrl,
-  );
+  late final _textEditingController = TextEditingController(text: model.proxyUrl);
 
   @override
-  late final ValueNotifier<UrlType> urlState;
+  late final ValueNotifier<UrlTypeEntity> urlState;
 
   @override
   late final ValueNotifier<ThemeMode> themeState;
@@ -68,7 +60,7 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel> 
   @override
   void initWidgetModel() {
     super.initWidgetModel();
-    urlState = ValueNotifier<UrlType>(
+    urlState = ValueNotifier<UrlTypeEntity>(
       _resolveUrlType(model.configNotifier.value.url),
     );
     themeState = ValueNotifier<ThemeMode>(model.currentThemeMode.value);
@@ -83,25 +75,32 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel> 
   }
 
   @override
-  void closeScreen() {
-    router.pop();
-  }
-
-  @override
-  void urlChange(UrlType? urlType) {
+  void urlChange(UrlTypeEntity? urlType) {
     if (urlType == null) return;
     urlState.value = urlType;
   }
 
   @override
-  void switchServer(UrlType urlType) {
-    model.switchServer(urlType);
+  Future<void> switchServer(UrlTypeEntity urlType) async {
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
+
+    await model.switchServer(urlType);
+
+    scaffoldMessenger.showSnackBar(
+      const SnackBar(content: Text('Reload the app to see applied changes')),
+    );
   }
 
   /// Change proxyUrl value.
   @override
-  void setProxy() {
-    model.setProxy(proxyEditingController.text);
+  Future<void> setProxy() async {
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
+
+    await model.setProxy(proxyEditingController.text);
+
+    scaffoldMessenger.showSnackBar(
+      const SnackBar(content: Text('Reload the app to see applied changes')),
+    );
   }
 
   @override
@@ -137,10 +136,10 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel> 
     themeState.value = model.currentThemeMode.value;
   }
 
-  UrlType _resolveUrlType(String currentUrl) {
-    if (currentUrl == Url.testUrl) return UrlType.test;
-    if (currentUrl == Url.prodUrl) return UrlType.prod;
-    return UrlType.dev;
+  UrlTypeEntity _resolveUrlType(String currentUrl) {
+    if (currentUrl == Url.qaUrl) return UrlTypeEntity.qa;
+    if (currentUrl == Url.prodUrl) return UrlTypeEntity.prod;
+    return UrlTypeEntity.dev;
   }
 }
 
@@ -149,20 +148,17 @@ abstract class IDebugScreenWidgetModel implements IWidgetModel {
   /// Text Editing Controller.
   TextEditingController get proxyEditingController;
 
-  /// Listener current state [UrlType].
-  ValueListenable<UrlType> get urlState;
+  /// Listener current state [UrlTypeEntity].
+  ValueListenable<UrlTypeEntity> get urlState;
 
   /// Listener current state [ThemeMode].
   ValueListenable<ThemeMode> get themeState;
 
-  /// Method to close the debug screens.
-  void closeScreen() {}
-
   /// Change url.
-  void urlChange(UrlType? urlType) {}
+  void urlChange(UrlTypeEntity? urlType) {}
 
   /// Switch server.
-  void switchServer(UrlType urlType) {}
+  void switchServer(UrlTypeEntity urlType) {}
 
   /// Change proxyUrl value.
   void setProxy() {}
@@ -172,16 +168,4 @@ abstract class IDebugScreenWidgetModel implements IWidgetModel {
 
   /// Navigate to ui kit screen.
   void openUiKit();
-}
-
-/// Ury type.
-enum UrlType {
-  /// Test.
-  test,
-
-  /// Prod.
-  prod,
-
-  /// Dev.
-  dev,
 }

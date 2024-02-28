@@ -1,10 +1,10 @@
 import 'package:analytics/core/analytyc_service.dart';
 import 'package:dio/dio.dart';
-import 'package:elementary/elementary.dart';
 import 'package:flutter_template/common/service/theme/theme_service.dart';
+import 'package:flutter_template/common/utils/logger/i_log_writer.dart';
+import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/persistence/storage/theme_storage/theme_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:surf_logger/surf_logger.dart' as surf_logger;
 
 /// {@template app_scope.class}
 /// Scope of dependencies which are needed through the whole app's life.
@@ -13,23 +13,23 @@ final class AppScope implements IAppScope {
   final IThemeModeStorage _themeModeStorage;
 
   @override
+  final AppConfig appConfig;
+  @override
   final SharedPreferences sharedPreferences;
   @override
   final Dio dio;
-  @override
-  final ErrorHandler errorHandler;
   @override
   final IThemeService themeService;
   @override
   final AnalyticService analyticsService;
   @override
-  final surf_logger.LogWriter logger;
+  final ILogWriter logger;
 
   /// {@macro app_scope.class}
   const AppScope({
+    required this.appConfig,
     required this.sharedPreferences,
     required this.dio,
-    required this.errorHandler,
     required this.themeService,
     required this.analyticsService,
     required this.logger,
@@ -55,11 +55,11 @@ abstract interface class IAppScope {
   /// Init app scope. All global initialization should happen here.
   Future<void> init();
 
+  /// App configuration.
+  AppConfig get appConfig;
+
   /// Http client.
   Dio get dio;
-
-  /// Interface for handle error in business logic.
-  ErrorHandler get errorHandler;
 
   /// A service that stores and retrieves app theme mode.
   IThemeService get themeService;
@@ -67,8 +67,8 @@ abstract interface class IAppScope {
   /// Shared preferences.
   SharedPreferences get sharedPreferences;
 
-  /// Surf Logger
-  surf_logger.LogWriter get logger;
+  /// Logger
+  ILogWriter get logger;
 
   /// Analytics sending service
   AnalyticService get analyticsService;

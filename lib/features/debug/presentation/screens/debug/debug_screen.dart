@@ -1,7 +1,8 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/config/urls.dart';
+import 'package:flutter_template/config/url.dart';
+import 'package:flutter_template/features/debug/domain/entities/url_type_entity.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_wm.dart';
 
 /// Debug screens.
@@ -30,10 +31,10 @@ class DebugScreen extends ElementaryWidget<IDebugScreenWidgetModel> {
 }
 
 class _Body extends StatelessWidget {
-  final ValueListenable<UrlType> urlState;
+  final ValueListenable<UrlTypeEntity> urlState;
   final ValueListenable<ThemeMode> themeState;
-  final void Function(UrlType?) urlChanged;
-  final void Function(UrlType) switchServer;
+  final void Function(UrlTypeEntity?) urlChanged;
+  final void Function(UrlTypeEntity) switchServer;
   final void Function(ThemeMode?) setThemeMode;
   final Function() setProxy;
   final VoidCallback openUiKit;
@@ -84,9 +85,9 @@ class _Body extends StatelessWidget {
 }
 
 class _ServerSwitchCard extends StatelessWidget {
-  final ValueListenable<UrlType> urlState;
-  final void Function(UrlType?) urlChange;
-  final void Function(UrlType) switchServer;
+  final ValueListenable<UrlTypeEntity> urlState;
+  final void Function(UrlTypeEntity?) urlChange;
+  final void Function(UrlTypeEntity) switchServer;
 
   const _ServerSwitchCard({
     required this.urlState,
@@ -102,30 +103,30 @@ class _ServerSwitchCard extends StatelessWidget {
         child: Column(
           children: <Widget>[
             const Text('Сервер'),
-            ValueListenableBuilder<UrlType>(
+            ValueListenableBuilder<UrlTypeEntity>(
               valueListenable: urlState,
               builder: (context, urlState, _) {
                 return Column(
                   children: <Widget>[
-                    RadioListTile<UrlType>(
+                    RadioListTile<UrlTypeEntity>(
                       groupValue: urlState,
-                      title: Text(UrlType.test.toString()),
-                      subtitle: Text(Url.testUrl),
-                      value: UrlType.test,
+                      title: Text(UrlTypeEntity.qa.toString()),
+                      subtitle: Text(Url.qaUrl),
+                      value: UrlTypeEntity.qa,
                       onChanged: urlChange,
                     ),
-                    RadioListTile<UrlType>(
+                    RadioListTile<UrlTypeEntity>(
                       groupValue: urlState,
-                      title: Text(UrlType.prod.toString()),
+                      title: Text(UrlTypeEntity.prod.toString()),
                       subtitle: Text(Url.prodUrl),
-                      value: UrlType.prod,
+                      value: UrlTypeEntity.prod,
                       onChanged: urlChange,
                     ),
-                    RadioListTile<UrlType>(
+                    RadioListTile<UrlTypeEntity>(
                       groupValue: urlState,
-                      title: Text(UrlType.dev.toString()),
+                      title: Text(UrlTypeEntity.dev.toString()),
                       subtitle: Text(Url.devUrl),
-                      value: UrlType.dev,
+                      value: UrlTypeEntity.dev,
                       onChanged: urlChange,
                     ),
                     MaterialButton(
@@ -174,9 +175,6 @@ class _ProxyCard extends StatelessWidget {
               children: <Widget>[
                 TextField(
                   textInputAction: TextInputAction.done,
-                  onSubmitted: (_) {
-                    setProxy();
-                  },
                   controller: proxyController,
                   decoration: const InputDecoration(
                     filled: true,

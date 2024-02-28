@@ -1,27 +1,16 @@
-import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/common/service/theme/theme_service.dart';
 import 'package:flutter_template/config/app_config.dart';
-import 'package:flutter_template/config/environment/environment.dart';
-import 'package:flutter_template/config/urls.dart';
+import 'package:flutter_template/core/architecture/presentation/base_model.dart';
+import 'package:flutter_template/features/debug/domain/entities/url_type_entity.dart';
+import 'package:flutter_template/features/debug/domain/repositories/i_debug_repository.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_screen.dart';
-import 'package:flutter_template/features/debug/presentation/screens/debug/debug_wm.dart';
-import 'package:flutter_template/persistence/storage/config_storage/config_storage.dart';
 
 /// Model for [DebugScreen].
-final class DebugScreenModel extends ElementaryModel {
-  /// Interface for handle error in business logic.
-  final ErrorHandler errorHandler;
-
-  /// Environment configuration.
-  final Environment _environment;
-
+final class DebugScreenModel extends BaseModel {
+  final IDebugRepository _debugRepository;
+  final AppConfig _appConfig;
   final IThemeService _themeService;
-
-  /// Callback to rebuild the whole application.
-  final VoidCallback _applicationRebuilder;
-
-  final IConfigSettingsStorage _configSettingsStorage;
 
   /// Config change Notifier.
   late ValueNotifier<AppConfig> configNotifier;
@@ -30,70 +19,41 @@ final class DebugScreenModel extends ElementaryModel {
   late ValueNotifier<ThemeMode> currentThemeMode;
 
   /// Config proxy url value.
-  String? get proxyUrl => _environment.config.proxyUrl;
+  String? get proxyUrl => _appConfig.proxyUrl;
 
   /// Create an instance [DebugScreenModel].
   DebugScreenModel(
-    this.errorHandler,
-    this._environment,
-    this._applicationRebuilder,
-    this._configSettingsStorage,
-    this._themeService,
-  ) : super(errorHandler: errorHandler);
+    this._debugRepository,
+    this._appConfig,
+    this._themeService, {
+    required super.logWriter,
+  });
 
   @override
   void init() {
-    configNotifier = ValueNotifier<AppConfig>(_environment.config);
+    configNotifier = ValueNotifier<AppConfig>(_appConfig);
     currentThemeMode = ValueNotifier<ThemeMode>(_themeService.currentThemeMode);
     _themeService.addListener(_updateTheme);
-    _environment.addListener(_environmentChangedCallback);
   }
 
   @override
   void dispose() {
-    _environment.removeListener(_environmentChangedCallback);
     _themeService.removeListener(_updateTheme);
   }
 
   /// Switch server.
-  void switchServer(UrlType urlType) {
-    AppConfig newConfig;
-    switch (urlType) {
-      case UrlType.test:
-        newConfig = configNotifier.value.copyWith(url: Url.testUrl);
-      case UrlType.prod:
-        newConfig = configNotifier.value.copyWith(url: Url.prodUrl);
-      default:
-        newConfig = configNotifier.value.copyWith(url: Url.devUrl);
-    }
-    _refreshApp(newConfig);
+  Future<void> switchServer(UrlTypeEntity urlType) async {
+    await makeCall(() => _debugRepository.setUrlType(urlType));
   }
 
   /// Change proxyUrl value.
-  void setProxy(String? proxyUrl) {
-    _refreshApp(
-      configNotifier.value.copyWith(proxyUrl: proxyUrl),
-    );
+  Future<void> setProxy(String proxyUrl) async {
+    await makeCall(() => _debugRepository.setProxyUrl(proxyUrl));
   }
 
   /// Set theme mode for app.
   void setThemeMode(ThemeMode themeMode) {
     _themeService.updateThemeMode(themeMode);
-  }
-
-  void _refreshApp(AppConfig newConfig) {
-    _setConfig(newConfig);
-    _applicationRebuilder();
-  }
-
-  // ignore: use_setters_to_change_properties
-  Future<void> _setConfig(AppConfig newConfig) async {
-    _environment.config = newConfig;
-    await _environment.saveConfigProxy(_configSettingsStorage);
-  }
-
-  void _environmentChangedCallback() {
-    configNotifier.value = _environment.config;
   }
 
   void _updateTheme() {
