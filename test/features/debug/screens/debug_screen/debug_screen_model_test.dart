@@ -1,6 +1,4 @@
 import 'package:elementary/elementary.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_template/common/service/theme/theme_service.dart';
 import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/config/urls.dart';
@@ -18,14 +16,11 @@ class MockEnvironment extends Mock implements Environment {}
 
 class MockConfigSettingsStorage extends Mock implements IConfigSettingsStorage {}
 
-class MockThemeService extends Mock implements IThemeService {}
-
 void main() {
   late DebugScreenModel model;
   final errorHandler = MockErrorHandler();
   final env = MockEnvironment();
   final configSettingsStorage = MockConfigSettingsStorage();
-  final themeService = MockThemeService();
   final config = AppConfig(url: Url.testUrl);
 
   final appRebuilder = VoidCallbackMock();
@@ -36,11 +31,9 @@ void main() {
       env,
       appRebuilder,
       configSettingsStorage,
-      themeService,
     );
 
     when(() => env.config).thenReturn(config);
-    when(() => themeService.currentThemeMode).thenReturn(ThemeMode.light);
   });
 
   group(
@@ -48,8 +41,7 @@ void main() {
     () {
       const proxyMock = 'proxy';
       setUp(() {
-        when(() => env.saveConfigProxy(configSettingsStorage))
-            .thenAnswer((_) => Future<void>.value());
+        when(() => env.saveConfigProxy(configSettingsStorage)).thenAnswer((_) => Future<void>.value());
       });
 
       test(
@@ -69,27 +61,6 @@ void main() {
             ..init()
             ..setProxy(proxyMock);
           verify(appRebuilder);
-        },
-      );
-    },
-  );
-
-  group(
-    'Theme config: ',
-    () {
-      const targetMode = ThemeMode.dark;
-      setUp(() {
-        when(() => themeService.updateThemeMode(targetMode));
-      });
-
-      test(
-        'Change theme',
-        () {
-          model
-            ..init()
-            ..setThemeMode(targetMode);
-
-          verify(() => themeService.updateThemeMode(targetMode));
         },
       );
     },

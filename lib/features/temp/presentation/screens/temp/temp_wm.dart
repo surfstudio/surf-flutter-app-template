@@ -4,26 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_template/common/mixin/localization_mixin.dart';
 import 'package:flutter_template/common/mixin/theme_mixin.dart';
 import 'package:flutter_template/config/environment/environment.dart';
-import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/navigation/domain/entity/app_route_paths.dart';
 import 'package:flutter_template/features/navigation/service/router.dart';
 import 'package:flutter_template/features/temp/di/temp_scope.dart';
 import 'package:flutter_template/features/temp/presentation/screens/temp/temp_model.dart';
 import 'package:flutter_template/features/temp/presentation/screens/temp/temp_screen.dart';
+import 'package:flutter_template/features/theme/presentation/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 /// Factory for [TempWidgetModel].
 TempWidgetModel initScreenWidgetModelFactory(
   BuildContext context,
 ) {
-  final appScope = context.read<IAppScope>();
   final tempScope = context.read<ITempScope>();
 
-  final model = TempModel(
-    Environment.instance(),
-    appScope.themeService,
-    tempScope.templateRepository,
-  );
+  final model = TempModel(Environment.instance(), tempScope.templateRepository);
 
   return TempWidgetModel(model);
 }
@@ -82,7 +77,7 @@ class TempWidgetModel extends WidgetModel<TempScreen, ITempModel>
   String appBarTitle(RouteData topRoute) => _appBarTitle(topRoute);
 
   @override
-  void switchTheme() => model.switchTheme();
+  void switchTheme() => ThemeProvider.read(context)?.switchThemeMode();
 
   String _appBarTitle(RouteData topRoute) {
     switch (topRoute.path) {

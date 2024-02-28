@@ -1,6 +1,5 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/common/service/theme/theme_service.dart';
 import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/config/urls.dart';
@@ -16,8 +15,6 @@ final class DebugScreenModel extends ElementaryModel {
   /// Environment configuration.
   final Environment _environment;
 
-  final IThemeService _themeService;
-
   /// Callback to rebuild the whole application.
   final VoidCallback _applicationRebuilder;
 
@@ -25,9 +22,6 @@ final class DebugScreenModel extends ElementaryModel {
 
   /// Config change Notifier.
   late ValueNotifier<AppConfig> configNotifier;
-
-  /// Theme mode change Notifier.
-  late ValueNotifier<ThemeMode> currentThemeMode;
 
   /// Config proxy url value.
   String? get proxyUrl => _environment.config.proxyUrl;
@@ -38,21 +32,17 @@ final class DebugScreenModel extends ElementaryModel {
     this._environment,
     this._applicationRebuilder,
     this._configSettingsStorage,
-    this._themeService,
   ) : super(errorHandler: errorHandler);
 
   @override
   void init() {
     configNotifier = ValueNotifier<AppConfig>(_environment.config);
-    currentThemeMode = ValueNotifier<ThemeMode>(_themeService.currentThemeMode);
-    _themeService.addListener(_updateTheme);
     _environment.addListener(_environmentChangedCallback);
   }
 
   @override
   void dispose() {
     _environment.removeListener(_environmentChangedCallback);
-    _themeService.removeListener(_updateTheme);
   }
 
   /// Switch server.
@@ -76,11 +66,6 @@ final class DebugScreenModel extends ElementaryModel {
     );
   }
 
-  /// Set theme mode for app.
-  void setThemeMode(ThemeMode themeMode) {
-    _themeService.updateThemeMode(themeMode);
-  }
-
   void _refreshApp(AppConfig newConfig) {
     _setConfig(newConfig);
     _applicationRebuilder();
@@ -96,7 +81,4 @@ final class DebugScreenModel extends ElementaryModel {
     configNotifier.value = _environment.config;
   }
 
-  void _updateTheme() {
-    currentThemeMode.value = _themeService.currentThemeMode;
-  }
 }

@@ -7,6 +7,7 @@ import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_model.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_screen.dart';
 import 'package:flutter_template/features/navigation/service/router.dart';
+import 'package:flutter_template/features/theme/presentation/theme_provider.dart';
 import 'package:flutter_template/persistence/storage/config_storage/config_storage_impl.dart';
 import 'package:provider/provider.dart';
 
@@ -22,7 +23,6 @@ DebugScreenWidgetModel debugScreenWidgetModelFactory(
     Environment.instance(),
     appDependencies.applicationRebuilder,
     configStorage,
-    appDependencies.themeService,
   );
 
   final router = appDependencies.router;
@@ -31,8 +31,7 @@ DebugScreenWidgetModel debugScreenWidgetModelFactory(
 }
 
 /// Widget Model for [DebugScreen].
-class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
-    implements IDebugScreenWidgetModel {
+class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel> implements IDebugScreenWidgetModel {
   /// Empty string.
   static const String _emptyString = '';
 
@@ -45,9 +44,6 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
 
   @override
   late final ValueNotifier<UrlType> urlState;
-
-  @override
-  late final ValueNotifier<ThemeMode> themeState;
 
   @override
   TextEditingController get proxyEditingController => _textEditingController;
@@ -70,9 +66,7 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
     urlState = ValueNotifier<UrlType>(
       _resolveUrlType(model.configNotifier.value.url),
     );
-    themeState = ValueNotifier<ThemeMode>(model.currentThemeMode.value);
     model.configNotifier.addListener(_updateAppConfig);
-    model.currentThemeMode.addListener(_updateThemeMode);
   }
 
   @override
@@ -106,7 +100,7 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
   @override
   void setThemeMode(ThemeMode? themeMode) {
     if (themeMode == null) return;
-    model.setThemeMode(themeMode);
+    ThemeProvider.read(context)?.setThemeMode(themeMode);
   }
 
   @override
@@ -132,10 +126,6 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
     }
   }
 
-  void _updateThemeMode() {
-    themeState.value = model.currentThemeMode.value;
-  }
-
   UrlType _resolveUrlType(String currentUrl) {
     if (currentUrl == Url.testUrl) return UrlType.test;
     if (currentUrl == Url.prodUrl) return UrlType.prod;
@@ -150,9 +140,6 @@ abstract class IDebugScreenWidgetModel implements IWidgetModel {
 
   /// Listener current state [UrlType].
   ValueListenable<UrlType> get urlState;
-
-  /// Listener current state [ThemeMode].
-  ValueListenable<ThemeMode> get themeState;
 
   /// Method to close the debug screens.
   void closeScreen() {}

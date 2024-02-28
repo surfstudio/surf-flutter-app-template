@@ -12,7 +12,6 @@ void main() {
   testWidget<DebugScreen>(
     widgetBuilder: (_) => const DebugScreen().build(wm),
     setup: (theme, mode, l10n) {
-      when(() => wm.themeState).thenReturn(ValueNotifier<ThemeMode>(mode));
       when(() => wm.proxyEditingController).thenReturn(TextEditingController());
       when(() => wm.urlState).thenReturn(
         ValueNotifier<UrlType>(UrlType.test),
