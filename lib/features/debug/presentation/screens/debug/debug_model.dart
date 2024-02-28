@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_template/common/service/theme/theme_service.dart';
 import 'package:flutter_template/config/app_config.dart';
+import 'package:flutter_template/config/url.dart';
 import 'package:flutter_template/core/architecture/presentation/base_model.dart';
-import 'package:flutter_template/features/debug/domain/entities/url_type_entity.dart';
 import 'package:flutter_template/features/debug/domain/repositories/i_debug_repository.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_screen.dart';
 
@@ -42,13 +42,13 @@ final class DebugScreenModel extends BaseModel {
   }
 
   /// Switch server.
-  Future<void> switchServer(UrlTypeEntity urlType) async {
-    await makeCall(() => _debugRepository.setUrlType(urlType));
+  Future<void> switchServer(Url url) async {
+    await makeCall(() => _debugRepository.saveUrl(url));
   }
 
   /// Change proxyUrl value.
   Future<void> setProxy(String proxyUrl) async {
-    await makeCall(() => _debugRepository.setProxyUrl(proxyUrl));
+    await makeCall(() => _debugRepository.saveProxyUrl(proxyUrl));
   }
 
   /// Set theme mode for app.

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_template/common/utils/disposable_object/disposable_object.dart';
 import 'package:flutter_template/common/utils/disposable_object/i_disposable_object.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
-import 'package:flutter_template/features/debug/data/converters/url_type_converter.dart';
+import 'package:flutter_template/features/debug/data/converters/url_converter.dart';
 import 'package:flutter_template/features/debug/data/repositories/debug_repository.dart';
 import 'package:flutter_template/features/debug/domain/repositories/i_debug_repository.dart';
 import 'package:flutter_template/persistence/storage/config_storage/config_storage_impl.dart';
@@ -28,7 +28,7 @@ final class DebugScope extends DisposableObject implements IDebugScope {
     return DebugScope(
       DebugRepository(
         configStorage: ConfigStorageImpl(appScope.sharedPreferences),
-        urlTypeConverter: const UrlTypeConverter(),
+        urlConverter: const UrlConverter(),
       ),
     );
   }

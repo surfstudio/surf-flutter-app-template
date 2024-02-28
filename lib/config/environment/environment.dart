@@ -32,9 +32,9 @@ class Environment {
 /// [BuildType] extension for default url.
 extension BuildTypeX on BuildType {
   /// Default url for build type.
-  String get defaultUrl => switch (this) {
-        BuildType.dev => Url.devUrl,
-        BuildType.qa => Url.qaUrl,
-        BuildType.prod => Url.prodUrl,
+  Url get defaultUrl => switch (this) {
+        BuildType.dev => Url.dev,
+        BuildType.qa => Url.qa,
+        BuildType.prod => Url.prod,
       };
 }

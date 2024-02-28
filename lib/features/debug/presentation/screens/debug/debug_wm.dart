@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_template/config/url.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/debug/di/debug_scope.dart';
-import 'package:flutter_template/features/debug/domain/entities/url_type_entity.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_model.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_screen.dart';
 import 'package:flutter_template/features/navigation/service/router.dart';
@@ -27,8 +26,7 @@ DebugScreenWidgetModel debugScreenWidgetModelFactory(BuildContext context) {
 }
 
 /// Widget Model for [DebugScreen].
-class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
-    implements IDebugScreenWidgetModel {
+class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel> implements IDebugScreenWidgetModel {
   /// Empty string.
   static const String _emptyString = '';
 
@@ -38,7 +36,7 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
   late final _textEditingController = TextEditingController(text: model.proxyUrl);
 
   @override
-  late final ValueNotifier<UrlTypeEntity> urlState;
+  late final ValueNotifier<Url> urlState;
 
   @override
   late final ValueNotifier<ThemeMode> themeState;
@@ -47,7 +45,7 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
   TextEditingController get proxyEditingController => _textEditingController;
 
   /// Current value url.
-  late String _currentUrl;
+  late Url _currentUrl;
 
   /// Proxy url.
   late String? _proxyUrl;
@@ -61,9 +59,7 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
   @override
   void initWidgetModel() {
     super.initWidgetModel();
-    urlState = ValueNotifier<UrlTypeEntity>(
-      _resolveUrlType(model.configNotifier.value.url),
-    );
+    urlState = ValueNotifier<Url>(model.configNotifier.value.url);
     themeState = ValueNotifier<ThemeMode>(model.currentThemeMode.value);
     model.configNotifier.addListener(_updateAppConfig);
     model.currentThemeMode.addListener(_updateThemeMode);
@@ -76,16 +72,16 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
   }
 
   @override
-  void urlChange(UrlTypeEntity? urlType) {
-    if (urlType == null) return;
-    urlState.value = urlType;
+  void urlChange(Url? url) {
+    if (url == null) return;
+    urlState.value = url;
   }
 
   @override
-  Future<void> switchServer(UrlTypeEntity urlType) async {
+  Future<void> switchServer(Url url) async {
     final scaffoldMessenger = ScaffoldMessenger.of(context);
 
-    await model.switchServer(urlType);
+    await model.switchServer(url);
 
     scaffoldMessenger.showSnackBar(
       const SnackBar(content: Text('Reload the app to see applied changes')),
@@ -119,7 +115,7 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
     final config = model.configNotifier.value;
 
     _currentUrl = config.url;
-    urlState.value = _resolveUrlType(_currentUrl);
+    urlState.value = _currentUrl;
 
     _proxyUrl = config.proxyUrl;
     if (_proxyUrl != null && _proxyUrl!.isNotEmpty) {
@@ -136,12 +132,6 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
   void _updateThemeMode() {
     themeState.value = model.currentThemeMode.value;
   }
-
-  UrlTypeEntity _resolveUrlType(String currentUrl) {
-    if (currentUrl == Url.qaUrl) return UrlTypeEntity.qa;
-    if (currentUrl == Url.prodUrl) return UrlTypeEntity.prod;
-    return UrlTypeEntity.dev;
-  }
 }
 
 /// Interface for [DebugScreenWidgetModel].
@@ -149,17 +139,17 @@ abstract class IDebugScreenWidgetModel implements IWidgetModel {
   /// Text Editing Controller.
   TextEditingController get proxyEditingController;
 
-  /// Listener current state [UrlTypeEntity].
-  ValueListenable<UrlTypeEntity> get urlState;
+  /// Listener current state [Url].
+  ValueListenable<Url> get urlState;
 
   /// Listener current state [ThemeMode].
   ValueListenable<ThemeMode> get themeState;
 
   /// Change url.
-  void urlChange(UrlTypeEntity? urlType) {}
+  void urlChange(Url? url) {}
 
   /// Switch server.
-  void switchServer(UrlTypeEntity urlType) {}
+  void switchServer(Url url) {}
 
   /// Change proxyUrl value.
   void setProxy() {}

@@ -1,17 +1,17 @@
+import 'package:flutter_template/config/url.dart';
 import 'package:flutter_template/core/architecture/domain/entity/request_operation.dart';
-import 'package:flutter_template/features/debug/domain/entities/url_type_entity.dart';
 
 /// Interface for the Debug repository
 abstract interface class IDebugRepository {
   /// Returns the current proxy url.
-  RequestOperation<String?> getProxyUrl();
+  RequestOperation<String?> proxyUrl();
 
   /// Save the current proxy url [proxyUrl].
-  RequestOperation<void> setProxyUrl(String proxyUrl);
+  RequestOperation<void> saveProxyUrl(String proxyUrl);
 
   /// Returns the current url type
-  RequestOperation<UrlTypeEntity?> getUrlType();
+  RequestOperation<Url?> url();
 
-  /// Save url type [urlType]
-  RequestOperation<void> setUrlType(UrlTypeEntity urlType);
+  /// Save url type [url]
+  RequestOperation<void> saveUrl(Url url);
 }

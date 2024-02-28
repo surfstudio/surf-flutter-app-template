@@ -3,7 +3,6 @@ import 'package:flutter_template/common/service/theme/theme_service.dart';
 import 'package:flutter_template/common/utils/logger/i_log_writer.dart';
 import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/url.dart';
-import 'package:flutter_template/features/debug/domain/entities/url_type_entity.dart';
 import 'package:flutter_template/features/debug/domain/repositories/i_debug_repository.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_model.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -22,7 +21,7 @@ void main() {
   final debugRepository = MockDebugRepository();
   final themeService = MockThemeService();
   final logWriter = MockLogWriter();
-  final config = AppConfig(url: Url.qaUrl);
+  const config = AppConfig(url: Url.qa);
 
   final appRebuilder = VoidCallbackMock();
 
@@ -47,7 +46,7 @@ void main() {
         () {
           model
             ..init()
-            ..switchServer(UrlTypeEntity.prod);
+            ..switchServer(Url.prod);
           verify(appRebuilder);
         },
       );

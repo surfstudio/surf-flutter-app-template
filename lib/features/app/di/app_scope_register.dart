@@ -12,9 +12,9 @@ import 'package:flutter_template/common/utils/logger/log_writer.dart';
 import 'package:flutter_template/common/utils/logger/strategies/debug_log_strategy.dart';
 import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/environment/environment.dart';
+import 'package:flutter_template/config/url.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
-import 'package:flutter_template/features/debug/data/converters/url_type_converter.dart';
-import 'package:flutter_template/features/debug/data/converters/url_type_to_build_type_converter.dart';
+import 'package:flutter_template/features/debug/data/converters/url_converter.dart';
 import 'package:flutter_template/persistence/storage/config_storage/config_storage_impl.dart';
 import 'package:flutter_template/persistence/storage/theme_storage/theme_storage_impl.dart';
 import 'package:logger/logger.dart';
@@ -36,7 +36,7 @@ final class AppScopeRegister {
     final interceptors = <Interceptor>[];
     final dio = _createDio(
       interceptors: interceptors,
-      url: appConfig.url,
+      url: appConfig.url.value,
       proxyUrl: appConfig.proxyUrl,
     );
 
@@ -73,26 +73,23 @@ final class AppScopeRegister {
       return AppConfig(url: env.buildType.defaultUrl);
     }
 
-    final savedUrl = await _url(env, prefs);
+    final savedUrl = await _url(prefs);
     final savedProxyUrl = await _proxyUrl(env, prefs);
 
     return AppConfig(
-      url: savedUrl,
+      url: savedUrl ?? env.buildType.defaultUrl,
       proxyUrl: savedProxyUrl,
     );
   }
 
-  Future<String> _url(Environment env, SharedPreferences prefs) async {
-    const urlTypeConverter = UrlTypeConverter();
-    const urlTypeToBuildTypeConverter = UrlTypeToBuildTypeConverter();
+  Future<Url?> _url(SharedPreferences prefs) async {
+    const urlTypeConverter = UrlConverter();
     final configStorage = ConfigStorageImpl(prefs);
 
-    final rawUrlType = await configStorage.getUrlType();
+    final rawUrl = await configStorage.getUrlType();
+    final savedUrl = urlTypeConverter.converter.convertNullable(rawUrl);
 
-    final urlType = urlTypeConverter.converter.convertNullable(rawUrlType);
-    final savedUrl = urlTypeToBuildTypeConverter.convertNullable(urlType)?.defaultUrl;
-
-    return savedUrl ?? env.buildType.defaultUrl;
+    return savedUrl;
   }
 
   Future<String?> _proxyUrl(Environment env, SharedPreferences prefs) async {
