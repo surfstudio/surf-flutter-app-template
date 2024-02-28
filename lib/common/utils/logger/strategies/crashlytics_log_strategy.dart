@@ -2,7 +2,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:surf_logger/surf_logger.dart';
 
 /// {@template crashlytics_log_strategy.class}
-/// Strategy for sending logs to Crashlytics.
+/// surf_logger strategy for sending logs to Crashlytics.
 /// {@endtemplate}
 class CrashlyticsLogStrategy extends LogStrategy {
   final FirebaseCrashlytics _crashlytics;

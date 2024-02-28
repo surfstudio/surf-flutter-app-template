@@ -6,7 +6,7 @@ class ThemeServiceImpl extends IThemeService {
   @override
   ThemeMode get currentThemeMode => _themeMode;
 
-  late ThemeMode _themeMode;
+  ThemeMode _themeMode;
 
   /// Create an instance [ThemeServiceImpl].
   ThemeServiceImpl(this._themeMode);
