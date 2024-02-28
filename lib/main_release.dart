@@ -7,7 +7,7 @@ import 'package:flutter_template/runner.dart';
 /// Main entry point of app.
 void main() {
   Environment.init(
-    buildType: BuildType.release,
+    buildType: BuildType.prod,
     config: AppConfig(
       url: Url.prodUrl,
     ),
