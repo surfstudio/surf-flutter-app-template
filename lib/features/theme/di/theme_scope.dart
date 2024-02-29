@@ -31,10 +31,4 @@ final class ThemeScope extends DisposableObject implements IThemeScope {
 
   /// {@macro theme_scope.class}
   ThemeScope(this.repository);
-
-  @override
-  void dispose() {
-    repository.dispose();
-    super.dispose();
-  }
 }

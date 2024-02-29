@@ -11,9 +11,4 @@ abstract interface class IThemeRepository {
   /// Get theme mode>
   Future<ThemeMode?> getThemeMode();
 
-  /// Stream with the current theme mode.
-  Stream<ThemeMode?> get watchThemeMode;
-
-  /// Dispose resources.
-  void dispose();
 }

@@ -7,7 +7,7 @@ import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_model.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_screen.dart';
 import 'package:flutter_template/features/navigation/service/router.dart';
-import 'package:flutter_template/features/theme/presentation/theme_notifier.dart';
+import 'package:flutter_template/features/theme/presentation/theme_wm.dart';
 import 'package:flutter_template/persistence/storage/config_storage/config_storage_impl.dart';
 import 'package:provider/provider.dart';
 
@@ -100,7 +100,7 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel> 
   @override
   void setThemeMode(ThemeMode? themeMode) {
     if (themeMode == null) return;
-    context.read<ThemeNotifier>().setThemeMode(themeMode);
+    context.read<IThemeWM>().setThemeMode(themeMode);
   }
 
   @override

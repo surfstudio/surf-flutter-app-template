@@ -1,11 +1,10 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/features/theme/presentation/theme_notifier.dart';
 import 'package:flutter_template/features/theme/presentation/theme_wm.dart';
 import 'package:provider/provider.dart';
 
 /// {@template theme_widget.class}
-/// ThemeWidget
+/// ThemeWidget is a widget that provides the [IThemeWM] to its descendants.
 /// {@endtemplate}
 class ThemeWidget extends ElementaryWidget<IThemeWM> {
   /// Child
@@ -20,9 +19,6 @@ class ThemeWidget extends ElementaryWidget<IThemeWM> {
 
   @override
   Widget build(IThemeWM wm) {
-    return ChangeNotifierProvider(
-      create: (_) => ThemeNotifier(wm: wm),
-      child: child,
-    );
+    return Provider<IThemeWM>.value(value: wm, child: child);
   }
 }

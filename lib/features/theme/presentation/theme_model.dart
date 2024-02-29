@@ -6,12 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_template/features/theme/domain/repositories/i_theme_repository.dart';
 import 'package:flutter_template/features/theme/presentation/theme_widget.dart';
 
+const _themeByDefault = ThemeMode.system;
+
 /// {@template theme_model.class}
 /// [ElementaryModel] for [ThemeWidget]
 /// {@endtemplate}
 final class ThemeModel extends ElementaryModel {
   final IThemeRepository _repository;
-  late final StreamSubscription<ThemeMode?> _themeModeSubscription;
 
   /// {@macro theme_model.class}
   ThemeModel({
@@ -25,30 +26,22 @@ final class ThemeModel extends ElementaryModel {
   ValueListenable<ThemeMode> get themeMode => _themeMode;
 
   @override
-  void init() {
-    _themeModeSubscription = _repository.watchThemeMode.listen(_themeModeListener);
-    super.init();
-  }
-
-  void _themeModeListener(ThemeMode? mode) {
-    _themeMode.value = mode ?? ThemeMode.light;
+  Future<void> init() async {
+    final themeMode = await _repository.getThemeMode();
+    _themeMode.value = themeMode ?? _themeByDefault;
   }
 
   /// Switch theme mode to the opposite.
   Future<void> switchThemeMode() async {
     final newThemeMode = _themeMode.value == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
     await _repository.setThemeMode(newThemeMode);
+    _themeMode.value = newThemeMode;
   }
 
   /// Set theme mode.
   Future<void> setThemeMode(ThemeMode newThemeMode) async {
     if (newThemeMode == _themeMode.value) return;
     await _repository.setThemeMode(newThemeMode);
-  }
-
-  @override
-  void dispose() {
-    _themeModeSubscription.cancel();
-    super.dispose();
+    _themeMode.value = newThemeMode;
   }
 }

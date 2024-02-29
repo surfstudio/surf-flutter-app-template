@@ -4,7 +4,7 @@ import 'package:flutter_template/common/widgets/di_scope.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/theme/presentation/theme_listener.dart';
-import 'package:flutter_template/features/theme/presentation/theme_notifier.dart';
+import 'package:flutter_template/features/theme/presentation/theme_wm.dart';
 import 'package:flutter_template/l10n/app_localizations.g.dart';
 import 'package:flutter_template/persistence/storage/config_storage/config_storage_impl.dart';
 import 'package:flutter_template/uikit/themes/theme_data.dart';
@@ -56,20 +56,23 @@ class _AppState extends State<App> {
         children: const [ThemeListener()],
         child: Builder(
           builder: (context) {
-            final themeMode = context.watch<ThemeNotifier>().themeMode;
+            final themeModeListenable = context.watch<IThemeWM>().themeMode;
 
-            return MaterialApp.router(
-              theme: AppThemeData.lightTheme,
-              darkTheme: AppThemeData.darkTheme,
-              themeMode: themeMode,
+            return ValueListenableBuilder(
+              valueListenable: themeModeListenable,
+              builder: (_, themeMode, __) => MaterialApp.router(
+                theme: AppThemeData.lightTheme,
+                darkTheme: AppThemeData.darkTheme,
+                themeMode: themeMode,
 
-              /// Localization.
-              localizationsDelegates: _localizationsDelegates,
-              supportedLocales: _localizations,
+                /// Localization.
+                localizationsDelegates: _localizationsDelegates,
+                supportedLocales: _localizations,
 
-              /// This is for navigation.
-              routeInformationParser: _scope.router.defaultRouteParser(),
-              routerDelegate: _scope.router.delegate(),
+                /// This is for navigation.
+                routeInformationParser: _scope.router.defaultRouteParser(),
+                routerDelegate: _scope.router.delegate(),
+              ),
             );
           },
         ),
