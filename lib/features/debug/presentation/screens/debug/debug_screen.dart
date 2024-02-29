@@ -3,8 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/config/urls.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_wm.dart';
-import 'package:flutter_template/features/theme/presentation/theme_provider.dart';
+import 'package:flutter_template/features/theme/presentation/theme_notifier.dart';
 import 'package:flutter_template/l10n/app_localizations_x.dart';
+import 'package:provider/provider.dart';
 
 /// Debug screens.
 class DebugScreen extends ElementaryWidget<IDebugScreenWidgetModel> {
@@ -207,7 +208,7 @@ class _ThemeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final themeMode = ThemeProvider.watch(context)?.themeMode;
+    final themeMode = context.watch<ThemeNotifier>().themeMode;
 
     return Card(
       child: Padding(

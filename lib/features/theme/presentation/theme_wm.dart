@@ -19,10 +19,10 @@ abstract interface class IThemeWM implements IWidgetModel {
   ValueListenable<ThemeMode> get themeMode;
 
   /// Set theme mode.
-  void setThemeMode(ThemeMode themeMode);
+  Future<void> setThemeMode(ThemeMode themeMode);
 
   /// Switch theme mode to the opposite.
-  void switchThemeMode();
+  Future<void> switchThemeMode();
 }
 
 /// {@template theme_wm.class}
@@ -36,8 +36,8 @@ final class ThemeWM extends WidgetModel<ThemeWidget, ThemeModel> implements IThe
   ValueListenable<ThemeMode> get themeMode => model.themeMode;
 
   @override
-  void setThemeMode(ThemeMode themeMode) => model.setThemeMode(themeMode);
+  Future<void> setThemeMode(ThemeMode themeMode) => model.setThemeMode(themeMode);
 
   @override
-  void switchThemeMode() => model.switchThemeMode();
+  Future<void>  switchThemeMode() => model.switchThemeMode();
 }

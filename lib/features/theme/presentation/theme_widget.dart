@@ -1,7 +1,8 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/features/theme/presentation/theme_provider.dart';
+import 'package:flutter_template/features/theme/presentation/theme_notifier.dart';
 import 'package:flutter_template/features/theme/presentation/theme_wm.dart';
+import 'package:provider/provider.dart';
 
 /// {@template theme_widget.class}
 /// ThemeWidget
@@ -12,19 +13,16 @@ class ThemeWidget extends ElementaryWidget<IThemeWM> {
 
   /// {@macro theme_widget.class}
   const ThemeWidget({
-    required this.child, super.key,
+    required this.child,
+    super.key,
     WidgetModelFactory wmFactory = defaultThemeWMFactory,
   }) : super(wmFactory);
 
   @override
   Widget build(IThemeWM wm) {
-    return ValueListenableBuilder(
-      valueListenable: wm.themeMode,
-      builder: (_, themeMode, __) => ThemeProvider(
-        child: child,
-        wm: wm,
-        themeMode: themeMode,
-      ),
+    return ChangeNotifierProvider(
+      create: (_) => ThemeNotifier(wm: wm),
+      child: child,
     );
   }
 }

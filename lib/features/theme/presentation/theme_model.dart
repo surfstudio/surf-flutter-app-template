@@ -35,15 +35,15 @@ final class ThemeModel extends ElementaryModel {
   }
 
   /// Switch theme mode to the opposite.
-  void switchThemeMode() {
+  Future<void> switchThemeMode() async {
     final newThemeMode = _themeMode.value == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
-    _repository.setThemeMode(newThemeMode);
+    await _repository.setThemeMode(newThemeMode);
   }
 
   /// Set theme mode.
-  void setThemeMode(ThemeMode newThemeMode) {
+  Future<void> setThemeMode(ThemeMode newThemeMode) async {
     if (newThemeMode == _themeMode.value) return;
-    _repository.setThemeMode(newThemeMode);
+    await _repository.setThemeMode(newThemeMode);
   }
 
   @override

@@ -3,12 +3,13 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_template/common/widgets/di_scope.dart';
 import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
-import 'package:flutter_template/features/theme/presentation/theme_flow.dart';
-import 'package:flutter_template/features/theme/presentation/theme_provider.dart';
+import 'package:flutter_template/features/theme/presentation/theme_listener.dart';
+import 'package:flutter_template/features/theme/presentation/theme_notifier.dart';
 import 'package:flutter_template/l10n/app_localizations.g.dart';
 import 'package:flutter_template/persistence/storage/config_storage/config_storage_impl.dart';
 import 'package:flutter_template/uikit/themes/theme_data.dart';
 import 'package:nested/nested.dart';
+import 'package:provider/provider.dart';
 
 /// App widget.
 class App extends StatefulWidget {
@@ -55,7 +56,7 @@ class _AppState extends State<App> {
         children: const [ThemeListener()],
         child: Builder(
           builder: (context) {
-            final themeMode = ThemeProvider.watch(context)?.themeMode;
+            final themeMode = context.watch<ThemeNotifier>().themeMode;
 
             return MaterialApp.router(
               theme: AppThemeData.lightTheme,

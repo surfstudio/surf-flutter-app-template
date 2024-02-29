@@ -6,7 +6,7 @@ import 'package:flutter_template/features/theme/data/repositories/theme_reposito
 /// This repository is used to interact with the theme mode storage.
 abstract interface class IThemeRepository {
   /// Set theme mode.
-  void setThemeMode(ThemeMode newThemeMode);
+  Future<void> setThemeMode(ThemeMode newThemeMode);
 
   /// Get theme mode>
   Future<ThemeMode?> getThemeMode();

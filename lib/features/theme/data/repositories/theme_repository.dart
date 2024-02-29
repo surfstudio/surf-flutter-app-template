@@ -29,8 +29,8 @@ final class ThemeRepository implements IThemeRepository {
   }
 
   @override
-  void setThemeMode(ThemeMode newThemeMode) {
-    _themeModeStorage.saveThemeMode(mode: newThemeMode);
+  Future<void> setThemeMode(ThemeMode newThemeMode) async {
+    await _themeModeStorage.saveThemeMode(mode: newThemeMode);
     _themeSubject.add(newThemeMode);
   }
 
