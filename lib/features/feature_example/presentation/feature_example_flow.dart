@@ -15,7 +15,7 @@ class FeatureExampleFlow extends StatelessWidget implements AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) {
     return DiScope<IFeatureExampleScope>(
-      factory: () => FeatureExampleScope.create(context),
+      factory: FeatureExampleScope.create,
       dispose: (scope) => scope.dispose(),
       child: this,
     );

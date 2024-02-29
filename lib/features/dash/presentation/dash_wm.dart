@@ -15,20 +15,19 @@ import 'package:provider/provider.dart';
 DashWidgetModel dashScreenWmFactory(
   BuildContext context,
 ) {
-  final scope = context.read<IAppScope>();
-  final model = DashModel();
+  final appScope = context.read<IAppScope>();
+  final model = DashModel(logWriter: appScope.logger);
+  final appRouter = context.read<AppRouter>();
 
   return DashWidgetModel(
     model: model,
-    analyticsService: scope.analyticsService,
-    router: scope.router,
+    analyticsService: appScope.analyticsService,
+    router: appRouter,
   );
 }
 
 /// Widget model for [DashScreen].
-class DashWidgetModel extends WidgetModel<DashScreen, DashModel>
-    with ThemeWMMixin
-    implements IDashWidgetModel {
+class DashWidgetModel extends WidgetModel<DashScreen, DashModel> with ThemeWMMixin implements IDashWidgetModel {
   final AnalyticService _analyticsService;
   final AppRouter _router;
 

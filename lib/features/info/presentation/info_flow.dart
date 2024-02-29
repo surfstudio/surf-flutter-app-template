@@ -16,7 +16,7 @@ class InfoFlow extends StatelessWidget implements AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) {
     return DiScope<IInfoScope>(
-      factory: InfoScope.create,
+      factory: (_) => InfoScope.create(),
       dispose: (scope) => scope.dispose(),
       child: this,
     );

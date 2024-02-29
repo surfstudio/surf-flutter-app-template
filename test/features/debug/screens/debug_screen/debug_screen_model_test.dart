@@ -1,45 +1,38 @@
-import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/common/service/theme/theme_service.dart';
+import 'package:flutter_template/common/utils/logger/i_log_writer.dart';
 import 'package:flutter_template/config/app_config.dart';
-import 'package:flutter_template/config/environment/environment.dart';
-import 'package:flutter_template/config/urls.dart';
+import 'package:flutter_template/config/url.dart';
+import 'package:flutter_template/features/debug/domain/repositories/i_debug_repository.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_model.dart';
-import 'package:flutter_template/features/debug/presentation/screens/debug/debug_wm.dart';
-import 'package:flutter_template/persistence/storage/config_storage/config_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../mocks/callback_mock.dart';
 
-class MockErrorHandler extends Mock implements ErrorHandler {}
-
-class MockEnvironment extends Mock implements Environment {}
-
-class MockConfigSettingsStorage extends Mock implements IConfigSettingsStorage {}
+class MockDebugRepository extends Mock implements IDebugRepository {}
 
 class MockThemeService extends Mock implements IThemeService {}
 
+class MockLogWriter extends Mock implements ILogWriter {}
+
 void main() {
   late DebugScreenModel model;
-  final errorHandler = MockErrorHandler();
-  final env = MockEnvironment();
-  final configSettingsStorage = MockConfigSettingsStorage();
+  final debugRepository = MockDebugRepository();
   final themeService = MockThemeService();
-  final config = AppConfig(url: Url.testUrl);
+  final logWriter = MockLogWriter();
+  const config = AppConfig(url: Url.qa);
 
   final appRebuilder = VoidCallbackMock();
 
   setUpAll(() {
     model = DebugScreenModel(
-      errorHandler,
-      env,
-      appRebuilder,
-      configSettingsStorage,
+      debugRepository,
+      config,
       themeService,
+      logWriter: logWriter,
     );
 
-    when(() => env.config).thenReturn(config);
     when(() => themeService.currentThemeMode).thenReturn(ThemeMode.light);
   });
 
@@ -47,17 +40,13 @@ void main() {
     'Network config: ',
     () {
       const proxyMock = 'proxy';
-      setUp(() {
-        when(() => env.saveConfigProxy(configSettingsStorage))
-            .thenAnswer((_) => Future<void>.value());
-      });
 
       test(
         'Switch server',
         () {
           model
             ..init()
-            ..switchServer(UrlType.prod);
+            ..switchServer(Url.prod);
           verify(appRebuilder);
         },
       );
