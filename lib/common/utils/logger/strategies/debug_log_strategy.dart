@@ -1,11 +1,11 @@
 import 'package:logger/logger.dart';
-import 'package:surf_logger/surf_logger.dart' as surf_logger;
+import 'package:surf_logger/surf_logger.dart' hide Logger;
 
 /// {@template debug_log_strategy.class}
-/// Strategy for log output to console.
-/// * used for local debugging
+/// surf_logger strategy for log output to console.
+/// Should be used only in debug mode.
 /// {@endtemplate}
-class DebugLogStrategy extends surf_logger.LogStrategy {
+class DebugLogStrategy extends LogStrategy {
   final Logger _logger;
 
   /// {@macro debug_log_strategy.class}

@@ -1,33 +1,28 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/config/environment/environment.dart';
-import 'package:flutter_template/config/urls.dart';
+import 'package:flutter_template/config/url.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
+import 'package:flutter_template/features/debug/di/debug_scope.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_model.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_screen.dart';
 import 'package:flutter_template/features/navigation/service/router.dart';
 import 'package:flutter_template/features/theme/presentation/theme_wm.dart';
-import 'package:flutter_template/persistence/storage/config_storage/config_storage_impl.dart';
 import 'package:provider/provider.dart';
 
 /// Factory for [DebugScreenWidgetModel].
-DebugScreenWidgetModel debugScreenWidgetModelFactory(
-  BuildContext context,
-) {
-  final appDependencies = context.read<IAppScope>();
-  final configStorage = ConfigSettingsStorageImpl(appDependencies.sharedPreferences);
+DebugScreenWidgetModel debugScreenWidgetModelFactory(BuildContext context) {
+  final appScope = context.read<IAppScope>();
+  final debugScope = context.read<IDebugScope>();
+  final appRouter = context.read<AppRouter>();
 
   final model = DebugScreenModel(
-    appDependencies.errorHandler,
-    Environment.instance(),
-    appDependencies.applicationRebuilder,
-    configStorage,
+    debugScope.debugRepository,
+    appScope.appConfig,
+    logWriter: appScope.logger,
   );
 
-  final router = appDependencies.router;
-
-  return DebugScreenWidgetModel(model, router);
+  return DebugScreenWidgetModel(model, appRouter);
 }
 
 /// Widget Model for [DebugScreen].
@@ -38,18 +33,17 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel> 
   /// Class that coordinates navigation for the whole app.
   final AppRouter router;
 
-  late final _textEditingController = TextEditingController(
-    text: model.proxyUrl,
-  );
+  late final _textEditingController = TextEditingController(text: model.proxyUrl);
 
   @override
-  late final ValueNotifier<UrlType> urlState;
+  late final ValueNotifier<Url> urlState;
+
 
   @override
   TextEditingController get proxyEditingController => _textEditingController;
 
   /// Current value url.
-  late String _currentUrl;
+  late Url _currentUrl;
 
   /// Proxy url.
   late String? _proxyUrl;
@@ -63,9 +57,7 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel> 
   @override
   void initWidgetModel() {
     super.initWidgetModel();
-    urlState = ValueNotifier<UrlType>(
-      _resolveUrlType(model.configNotifier.value.url),
-    );
+    urlState = ValueNotifier<Url>(model.configNotifier.value.url);
     model.configNotifier.addListener(_updateAppConfig);
   }
 
@@ -76,25 +68,32 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel> 
   }
 
   @override
-  void closeScreen() {
-    router.pop();
+  void urlChange(Url? url) {
+    if (url == null) return;
+    urlState.value = url;
   }
 
   @override
-  void urlChange(UrlType? urlType) {
-    if (urlType == null) return;
-    urlState.value = urlType;
-  }
+  Future<void> switchServer(Url url) async {
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
 
-  @override
-  void switchServer(UrlType urlType) {
-    model.switchServer(urlType);
+    await model.switchServer(url);
+
+    scaffoldMessenger.showSnackBar(
+      const SnackBar(content: Text('Reload the app to see applied changes')),
+    );
   }
 
   /// Change proxyUrl value.
   @override
-  void setProxy() {
-    model.setProxy(proxyEditingController.text);
+  Future<void> setProxy() async {
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
+
+    await model.setProxy(proxyEditingController.text);
+
+    scaffoldMessenger.showSnackBar(
+      const SnackBar(content: Text('Reload the app to see applied changes')),
+    );
   }
 
   @override
@@ -112,7 +111,7 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel> 
     final config = model.configNotifier.value;
 
     _currentUrl = config.url;
-    urlState.value = _resolveUrlType(_currentUrl);
+    urlState.value = _currentUrl;
 
     _proxyUrl = config.proxyUrl;
     if (_proxyUrl != null && _proxyUrl!.isNotEmpty) {
@@ -125,12 +124,6 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel> 
       proxyEditingController.text = _emptyString;
     }
   }
-
-  UrlType _resolveUrlType(String currentUrl) {
-    if (currentUrl == Url.testUrl) return UrlType.test;
-    if (currentUrl == Url.prodUrl) return UrlType.prod;
-    return UrlType.dev;
-  }
 }
 
 /// Interface for [DebugScreenWidgetModel].
@@ -138,17 +131,15 @@ abstract class IDebugScreenWidgetModel implements IWidgetModel {
   /// Text Editing Controller.
   TextEditingController get proxyEditingController;
 
-  /// Listener current state [UrlType].
-  ValueListenable<UrlType> get urlState;
+  /// Listener current state [Url].
+  ValueListenable<Url> get urlState;
 
-  /// Method to close the debug screens.
-  void closeScreen() {}
 
   /// Change url.
-  void urlChange(UrlType? urlType) {}
+  void urlChange(Url? url) {}
 
   /// Switch server.
-  void switchServer(UrlType urlType) {}
+  void switchServer(Url url) {}
 
   /// Change proxyUrl value.
   void setProxy() {}
@@ -158,16 +149,4 @@ abstract class IDebugScreenWidgetModel implements IWidgetModel {
 
   /// Navigate to ui kit screen.
   void openUiKit();
-}
-
-/// Ury type.
-enum UrlType {
-  /// Test.
-  test,
-
-  /// Prod.
-  prod,
-
-  /// Dev.
-  dev,
 }

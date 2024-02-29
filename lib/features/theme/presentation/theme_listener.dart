@@ -14,7 +14,7 @@ class ThemeListener extends SingleChildStatelessWidget {
   @override
   Widget buildWithChild(BuildContext context, Widget? child) {
     return DiScope<IThemeScope>(
-      factory: () => ThemeScope.create(context),
+      factory: ThemeScope.create,
       dispose: (scope) => scope.dispose(),
       child: ThemeWidget(child: child ?? const SizedBox.shrink()),
     );

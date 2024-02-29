@@ -6,12 +6,12 @@
 /// ```
 ///
 enum BuildType {
-  /// Debug build type.
-  debug,
+  /// dev build type.
+  dev,
 
-  /// Release build type.
-  release,
-
-  /// Qa build type.
+  /// qa build type.
   qa,
+
+  /// prod build type.
+  prod,
 }

@@ -3,7 +3,7 @@ import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:provider/provider.dart';
 
 /// Factory that returns the dependency scope.
-typedef ScopeFactory<T> = T Function();
+typedef ScopeFactory<T> = T Function(BuildContext context);
 
 /// Di container. T - return type(for example [AppScope]).
 class DiScope<T> extends StatefulWidget {
@@ -34,7 +34,7 @@ class _DiScopeState<T> extends State<DiScope<T>> {
   @override
   void initState() {
     super.initState();
-    scope = widget.factory();
+    scope = widget.factory(context);
   }
 
   @override
