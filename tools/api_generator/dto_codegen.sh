@@ -4,6 +4,7 @@ data_output_path=../../lib/api/data
 umbrella_file_name=umbrella.dart
 
 ### Generate swagger configuration
+### TODO(init-project): Replace "flutter-template-swagger" with your Swagger repository name.
 for i in $(find ../../../flutter-template-swagger/**/api.yaml); do
   ./apple_silicon_generator generate "$i" -c dto_config.yaml -n "$(basename $(dirname "$i"))" -r
 done
@@ -37,4 +38,5 @@ do
 done
 
 ### Format all generated files
+### TODO(init-project): change to your project line length and desired folders for formatting
 fvm dart format -l 100 lib packages test

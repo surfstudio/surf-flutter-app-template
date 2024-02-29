@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [ "$(basename "$PWD")" = 'script' ]; then cd ..; fi
+if [ "$(basename "$PWD")" = 'scripts' ]; then cd ..; fi
 
 cd tools/api_generator &&
   sh dto_codegen.sh &&

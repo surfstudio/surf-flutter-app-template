@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart' hide Headers;
-import 'package:retrofit/retrofit.dart';
 import 'package:flutter_template/api/data/umbrella.dart';
 import 'package:flutter_template/api/service/{{ service.name|camelCaseToSnakeCase  }}/{{ service.name|camelCaseToSnakeCase  }}_urls.dart';
+import 'package:retrofit/retrofit.dart';
 
 part '{{ service.name|camelCaseToSnakeCase  }}_api.g.dart';
 
@@ -27,7 +27,7 @@ abstract class {{ service.name }}Api {
             #}{% elif responseName == "number" %}double{#
             #}{% elif responseName == "string" %}String{#
             #}{% elif responseName == "boolean" %}bool{#
-            #}{% else %}{{ responseName }}Data{% endif %}{% endfor %}{#
+            #}{% else %}{{ responseName }}Dto{% endif %}{% endfor %}{#
     #}{% if operation.responseGenerationModel.value.isTypeArray %}>{% endif %}{#
     #}{% else %}void{% endif %}> {{ operation.httpMethod }}{% for name in path.name|split:'.' %}{% if forloop.first %}{{ name|capitalizeFirstLetter }}{% endif %}{% endfor %}({% for parameter in operation.pathParameters %}
         @Path() String {{ parameter.name|snakeCaseToCamelCase }},{% endfor %}{#
@@ -38,7 +38,7 @@ abstract class {{ service.name }}Api {
             #}{% elif parameter.typeModel.name == "number" or parameter.typeModel.aliasTypeName == "number" %}double{#
             #}{% elif parameter.typeModel.name == "string" or parameter.typeModel.aliasTypeName == "string" %}String{#
             #}{% elif parameter.typeModel.name == "boolean" or parameter.typeModel.aliasTypeName == "boolean" %}bool{#
-            #}{% else %}{{ parameter.typeModel.name }}Data{% endif %}{#
+            #}{% else %}{{ parameter.typeModel.name }}Dto{% endif %}{#
             #}{% if parameter.typeModel.isArray %}>{% endif %}{#
             #} {{ parameter.name|snakeCaseToCamelCase }},{% endfor %}
         @Body() {% if operation.requestGenerationModel.isTypeArray %}List<{% endif %}{#
@@ -46,7 +46,7 @@ abstract class {{ service.name }}Api {
             #}{% elif requestModelName == "number" %}double{#
             #}{% elif requestModelName == "string" %}String{#
             #}{% elif requestModelName == "boolean" %}bool{#
-            #}{% else %}{{ requestModelName }}Data{% endif %}{#
+            #}{% else %}{{ requestModelName }}Dto{% endif %}{#
         #}{% if operation.requestGenerationModel.isTypeArray %}>{% endif %} {{ requestModelName|lowercaseFirstLetter }}{% if operation.requestGenerationModel.isTypeArray %}s{% endif %},
     );
     {% empty %}
@@ -60,7 +60,7 @@ abstract class {{ service.name }}Api {
             #}{% elif responseName == "number" %}double{#
             #}{% elif responseName == "string" %}String{#
             #}{% elif responseName == "boolean" %}bool{#
-            #}{% else %}{{ responseName }}Data{% endif %}{% endfor %}{#
+            #}{% else %}{{ responseName }}Dto{% endif %}{% endfor %}{#
     #}{% if operation.responseGenerationModel.value.isTypeArray %}>{% endif %}{#
     #}{% else %}void{% endif %}> {{ operation.httpMethod }}{% for name in path.name|split:'.' %}{% if forloop.first %}{{ name|capitalizeFirstLetter }}{% endif %}{% endfor %}({% for parameter in operation.pathParameters %}
         @Path() String {{ parameter.name|snakeCaseToCamelCase }}{#
@@ -72,7 +72,7 @@ abstract class {{ service.name }}Api {
             #}{% elif parameter.typeModel.name == "number" or parameter.typeModel.aliasTypeName == "number" %}double{#
             #}{% elif parameter.typeModel.name == "string" or parameter.typeModel.aliasTypeName == "string" %}String{#
             #}{% elif parameter.typeModel.name == "boolean" or parameter.typeModel.aliasTypeName == "boolean" %}bool{#
-            #}{% else %}{{ parameter.typeModel.name }}Data{% endif %}{#
+            #}{% else %}{{ parameter.typeModel.name }}Dto{% endif %}{#
             #}{% if parameter.typeModel.isArray %}>{% endif %}{#
             #} {{ parameter.name|snakeCaseToCamelCase }}{#
             #},{% endfor %});

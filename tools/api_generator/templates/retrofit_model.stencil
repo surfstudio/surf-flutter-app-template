@@ -2,15 +2,15 @@
 
 // ignore_for_file: unused_import, always_put_required_named_parameters_first, public_member_api_docs, avoid-referencing-discarded-variables, flutter_style_todos
 
-import 'package:json_annotation/json_annotation.dart';
 import 'package:flutter_template/api/data/umbrella.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-part '{{ model.name|camelCaseToSnakeCase  }}_data.g.dart';
+part '{{ model.name|camelCaseToSnakeCase  }}_dto.g.dart';
 {% for line in model.description|splitLines %}
 /// {{ line }}{% endfor %}
 {% if model.name != "RecalculateCartRequest" and model.name != "OrderCreateRequestBody" %}@JsonSerializable(includeIfNull: false){#
 #}{% else %}@JsonSerializable(includeIfNull: true){% endif %}
-class {{ model.name }}Data {{ '{' }}{#
+class {{ model.name }}Dto {{ '{' }}{#
 	#}{% for property in model.properties %}
 	{% for line in property.description|splitLines %}
 	/// {{ line }}{% endfor %}
@@ -20,21 +20,21 @@ class {{ model.name }}Data {{ '{' }}{#
     #}{% elif property.typeModel.name == "number" or property.typeModel.aliasTypeName == "number" %}double{#
     #}{% elif property.typeModel.name == "string" or property.typeModel.aliasTypeName == "string" %}String{#
     #}{% elif property.typeModel.name == "boolean" or property.typeModel.aliasTypeName == "boolean" %}bool{#
-    #}{% else %}{{ property.typeModel.name }}Data{% endif %}{#
+    #}{% else %}{{ property.typeModel.name }}Dto{% endif %}{#
     #}{% if property.typeModel.isArray %}>{% endif %}{#
 	#}{% if property.isNullable %}?{% endif %} {{ property.name|snakeCaseToCamelCase }};{% endfor %}
 
     {% for line in model.description|splitLines %}
     /// {{ line }}{% endfor %}
-	const {{ model.name }}Data({
+	const {{ model.name }}Dto({
 		{% for property in model.properties %}{% if property.isNullable != true %}required {% endif %}this.{{ property.name|snakeCaseToCamelCase }},{% if not forloop.last %}
 		{% endif %}{% endfor %}
 	});
 
     {% for line in model.description|splitLines %}
     /// {{ line }}{% endfor %}
-	factory {{ model.name }}Data.fromJson(Map<String, dynamic> json) => _${{ model.name }}DataFromJson(json);
+	factory {{ model.name }}Dto.fromJson(Map<String, dynamic> json) => _${{ model.name }}DtoFromJson(json);
 
 	/// To Json
-	Map<String, dynamic> toJson() => _${{ model.name }}DataToJson(this);
+	Map<String, dynamic> toJson() => _${{ model.name }}DtoToJson(this);
 }
