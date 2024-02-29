@@ -1,5 +1,6 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_template/common/utils/extentions/value_notifier_x.dart';
 import 'package:flutter_template/core/architecture/domain/entity/result.dart';
 import 'package:flutter_template/core/architecture/presentation/base_model.dart';
 import 'package:flutter_template/features/feature_example/domain/repositories/i_feature_example_repository.dart';
@@ -25,21 +26,16 @@ final class FeatureExampleModel extends BaseModel {
 
   /// Load IP address.
   Future<void> loadIp() async {
-    _emit(const FeatureExampleStateLoading());
+    _state.emit(const FeatureExampleStateLoading());
 
     final result = await _repository.getIp();
 
     switch (result) {
       case ResultOk(:final data):
-        _emit(FeatureExampleStateLoaded(data.ip));
+        _state.emit(FeatureExampleStateLoaded(data.ip));
       case ResultFailed():
-        _emit(const FeatureExampleStateError());
+        _state.emit(const FeatureExampleStateError());
     }
-  }
-
-  // ignore: use_setters_to_change_properties
-  void _emit(FeatureExampleState state) {
-    _state.value = state;
   }
 
   @override
