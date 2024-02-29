@@ -168,7 +168,7 @@ mason make TEMPLATE_NAME # insert the template 'feature' or 'screen' instead of 
 
 ## Project scripts
 
-All scripts are located in the [scripts](scripts) folder and described [here](docs/scripts.md)).
+All scripts are located in the [scripts](scripts) folder and described [here](docs/scripts.md).
 
 ## Build
 
