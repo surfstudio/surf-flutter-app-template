@@ -200,7 +200,7 @@ Build number or versionCode, which comes after +, is added following this rule â
 The project has two flavors: `dev` and `prod`. The `dev` flavor is used by default.
 The guide to adding flavors can be found [here](docs/flavors.md).
 
-There are cases when you need to add different functionality for debug and qa mode. For example, if you need different logging or feature-toggle options. Then you need to add the qa mode to the `enum BuildType` and create a `main_qa.dart` file with the `main()` function in the `lib/` folder. For example:
+There are cases when you need to add different functionality for `dev` and `qa` mode. For example, if you need different logging or feature-toggle options. Then you can add the `qa` mode to the `enum BuildType` and create a `main_qa.dart` file with the `main()` function in the `lib/` folder. For example:
 
 ```dart 
 void main() {
