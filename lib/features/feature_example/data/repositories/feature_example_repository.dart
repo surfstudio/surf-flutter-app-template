@@ -5,7 +5,7 @@ import 'package:flutter_template/core/architecture/domain/entity/request_operati
 import 'package:flutter_template/core/architecture/domain/entity/result.dart';
 import 'package:flutter_template/features/feature_example/data/converters/ip_converter.dart';
 import 'package:flutter_template/features/feature_example/domain/entities/ip_entity.dart';
-import 'package:flutter_template/features/feature_example/domain/repositories/feature_example_repository.dart';
+import 'package:flutter_template/features/feature_example/domain/repositories/i_feature_example_repository.dart';
 
 /// {@template feature_example_repository.class}
 /// Implementation of [IFeatureExampleRepository]

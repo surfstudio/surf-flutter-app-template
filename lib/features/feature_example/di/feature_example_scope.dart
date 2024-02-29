@@ -5,7 +5,7 @@ import 'package:flutter_template/common/utils/disposable_object/i_disposable_obj
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/feature_example/data/converters/ip_converter.dart';
 import 'package:flutter_template/features/feature_example/data/repositories/feature_example_repository.dart';
-import 'package:flutter_template/features/feature_example/domain/repositories/feature_example_repository.dart';
+import 'package:flutter_template/features/feature_example/domain/repositories/i_feature_example_repository.dart';
 import 'package:provider/provider.dart';
 
 /// Scope dependencies of the FeatureExample feature
