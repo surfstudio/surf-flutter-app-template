@@ -28,7 +28,7 @@ final class FeatureExampleModel extends BaseModel {
   Future<void> loadIp() async {
     _state.emit(const FeatureExampleStateLoading());
 
-    final result = await _repository.getIp();
+    final result = await makeCall(_repository.getIp);
 
     switch (result) {
       case ResultOk(:final data):
