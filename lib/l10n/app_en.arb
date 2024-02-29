@@ -69,5 +69,6 @@
   "debugScreenThemeLight": "Light Theme",
   "debugScreenThemeDark": "Dark Theme",
   "debugScreenThemeSystem": "System Theme",
-  "debugScreenUikitNavigateButton": "Open UIKit"
+  "debugScreenUikitNavigateButton": "Open UIKit",
+  "debugScreenReloadAppMessage": "Reload the app to see applied changes"
 }

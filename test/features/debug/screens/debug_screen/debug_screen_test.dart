@@ -15,7 +15,7 @@ void main() {
     setup: (theme, mode, l10n) {
       when(() => wm.themeState).thenReturn(ValueNotifier<ThemeMode>(mode));
       when(() => wm.proxyEditingController).thenReturn(TextEditingController());
-      when(() => wm.urlState).thenReturn(
+      when(() => wm.serverUrlState).thenReturn(
         ValueNotifier<Url>(Url.qa),
       );
     },

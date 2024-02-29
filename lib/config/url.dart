@@ -5,9 +5,6 @@ enum Url {
   /// dev url
   dev('https://example.com/'),
 
-  /// qa url
-  qa('https://example.com/'),
-
   /// prod url
   prod('https://example.com/');
 

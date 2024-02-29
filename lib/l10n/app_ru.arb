@@ -70,5 +70,6 @@
   "debugScreenThemeLight": "Светлая тема",
   "debugScreenThemeDark": "Темная темя",
   "debugScreenThemeSystem": "Системная тема",
-  "debugScreenUikitNavigateButton": "Открыть UIKit"
+  "debugScreenUikitNavigateButton": "Открыть UIKit",
+  "debugScreenReloadAppMessage": "Перезагрузите приложение, чтобы увидеть примененные изменения"
 }

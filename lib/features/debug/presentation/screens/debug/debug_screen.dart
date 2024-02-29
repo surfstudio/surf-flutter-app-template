@@ -17,8 +17,7 @@ class DebugScreen extends ElementaryWidget<IDebugScreenWidgetModel> {
   Widget build(IDebugScreenWidgetModel wm) {
     return Scaffold(
       body: _Body(
-        urlState: wm.urlState,
-        themeState: wm.themeState,
+        urlState: wm.serverUrlState,
         urlChanged: wm.urlChange,
         switchServer: wm.switchServer,
         setProxy: wm.setProxy,
@@ -32,17 +31,15 @@ class DebugScreen extends ElementaryWidget<IDebugScreenWidgetModel> {
 
 class _Body extends StatelessWidget {
   final ValueListenable<Url> urlState;
-  final ValueListenable<ThemeMode> themeState;
-  final void Function(Url?) urlChanged;
-  final void Function(Url) switchServer;
-  final void Function(ThemeMode?) setThemeMode;
-  final Function() setProxy;
+  final ValueChanged<Url?> urlChanged;
+  final ValueChanged<Url> switchServer;
+  final ValueChanged<ThemeMode?> setThemeMode;
+  final VoidCallback setProxy;
   final VoidCallback openUiKit;
   final TextEditingController proxyController;
 
   const _Body({
     required this.urlState,
-    required this.themeState,
     required this.urlChanged,
     required this.switchServer,
     required this.setThemeMode,
@@ -68,10 +65,7 @@ class _Body extends StatelessWidget {
               setProxy: setProxy,
               proxyController: proxyController,
             ),
-            _ThemeCard(
-              themeState: themeState,
-              setThemeMode: setThemeMode,
-            ),
+            _ThemeCard(setThemeMode: setThemeMode),
             Card(
               child: ListTile(
                 onTap: openUiKit,
@@ -87,8 +81,8 @@ class _Body extends StatelessWidget {
 
 class _ServerSwitchCard extends StatelessWidget {
   final ValueListenable<Url> urlState;
-  final void Function(Url?) urlChange;
-  final void Function(Url) switchServer;
+  final ValueChanged<Url?> urlChange;
+  final ValueChanged<Url> switchServer;
 
   const _ServerSwitchCard({
     required this.urlState,
@@ -109,27 +103,15 @@ class _ServerSwitchCard extends StatelessWidget {
               valueListenable: urlState,
               builder: (context, urlState, _) {
                 return Column(
-                  children: <Widget>[
-                    RadioListTile<Url>(
-                      groupValue: urlState,
-                      title: Text(Url.qa.toString()),
-                      subtitle: Text(Url.qa.value),
-                      value: Url.qa,
-                      onChanged: urlChange,
-                    ),
-                    RadioListTile<Url>(
-                      groupValue: urlState,
-                      title: Text(Url.prod.toString()),
-                      subtitle: Text(Url.prod.value),
-                      value: Url.prod,
-                      onChanged: urlChange,
-                    ),
-                    RadioListTile<Url>(
-                      groupValue: urlState,
-                      title: Text(Url.dev.toString()),
-                      subtitle: Text(Url.dev.value),
-                      value: Url.dev,
-                      onChanged: urlChange,
+                  children: [
+                    ...Url.values.map(
+                      (url) => RadioListTile<Url>(
+                        groupValue: urlState,
+                        title: Text(url.toString()),
+                        subtitle: Text(url.value),
+                        value: url,
+                        onChanged: urlChange,
+                      ),
                     ),
                     MaterialButton(
                       onPressed: () => switchServer(urlState),
@@ -150,7 +132,7 @@ class _ServerSwitchCard extends StatelessWidget {
 }
 
 class _ProxyCard extends StatelessWidget {
-  final Function() setProxy;
+  final VoidCallback setProxy;
   final TextEditingController proxyController;
 
   const _ProxyCard({
@@ -202,51 +184,46 @@ class _ProxyCard extends StatelessWidget {
 }
 
 class _ThemeCard extends StatelessWidget {
-  final ValueListenable<ThemeMode> themeState;
-  final void Function(ThemeMode?) setThemeMode;
+  final ValueChanged<ThemeMode?> setThemeMode;
 
-  const _ThemeCard({
-    required this.themeState,
-    required this.setThemeMode,
-  });
+  const _ThemeCard({required this.setThemeMode});
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    // TODO(Evgenia-bit): добавится получение темы из контекста,
+    // когда ветка с рефакторингом сервиса темы будет смержена.
+    const themeMode = ThemeMode.light;
+
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(8),
-        child: ValueListenableBuilder<ThemeMode>(
-          valueListenable: themeState,
-          builder: (context, themeState, _) {
-            return Column(
+        child: Column(
+          children: <Widget>[
+            Text(l10n.debugScreenThemeSubtitle),
+            Column(
               children: <Widget>[
-                Text(l10n.debugScreenThemeSubtitle),
-                Column(
-                  children: <Widget>[
-                    RadioListTile<ThemeMode>(
-                      groupValue: themeState,
-                      title: Text(l10n.debugScreenThemeLight),
-                      value: ThemeMode.light,
-                      onChanged: setThemeMode,
-                    ),
-                    RadioListTile<ThemeMode>(
-                      groupValue: themeState,
-                      title: Text(l10n.debugScreenThemeDark),
-                      value: ThemeMode.dark,
-                      onChanged: setThemeMode,
-                    ),
-                    RadioListTile<ThemeMode>(
-                      groupValue: themeState,
-                      title: Text(l10n.debugScreenThemeSystem),
-                      value: ThemeMode.system,
-                      onChanged: setThemeMode,
-                    ),
-                  ],
+                RadioListTile<ThemeMode>(
+                  groupValue: themeMode,
+                  title: Text(l10n.debugScreenThemeLight),
+                  value: ThemeMode.light,
+                  onChanged: setThemeMode,
+                ),
+                RadioListTile<ThemeMode>(
+                  groupValue: themeMode,
+                  title: Text(l10n.debugScreenThemeDark),
+                  value: ThemeMode.dark,
+                  onChanged: setThemeMode,
+                ),
+                RadioListTile<ThemeMode>(
+                  groupValue: themeMode,
+                  title: Text(l10n.debugScreenThemeSystem),
+                  value: ThemeMode.system,
+                  onChanged: setThemeMode,
                 ),
               ],
-            );
-          },
+            ),
+          ],
         ),
       ),
     );
