@@ -109,5 +109,10 @@
   "uiKitScreenColorCardPositiveName": "Positive",
   "uiKitScreenColorCardSkeletonPrimaryName": "Skeleton Primary",
   "uiKitScreenColorCardSkeletonSecondaryName": "Skeleton Secondary",
-  "uiKitScreenColorCardSkeletonTertiaryName": "Skeleton Tertiary"
+  "uiKitScreenColorCardSkeletonTertiaryName": "Skeleton Tertiary",
+  "@segmentFeatureExample": {
+    "---------": "---------",
+    "description": "Example of feature"
+  },
+  "featureExampleFailedLoadIpMessage": "Failed to load IP address"
 }
