@@ -27,7 +27,8 @@ abstract interface class IThemeModeWM implements ThemeModeController, IWidgetMod
 /// {@template theme_wm.class}
 /// [WidgetModel] for [ThemeModeWidget].
 /// {@endtemplate}
-final class ThemeModeWM extends WidgetModel<ThemeModeWidget, ThemeModeModel> implements IThemeModeWM {
+final class ThemeModeWM extends WidgetModel<ThemeModeWidget, ThemeModeModel>
+    implements IThemeModeWM {
   /// {@macro theme_wm.class}
   ThemeModeWM(super._model);
 
