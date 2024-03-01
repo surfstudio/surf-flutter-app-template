@@ -18,7 +18,7 @@ abstract interface class IThemeScope implements IDisposableObject {
 /// {@endtemplate}
 final class ThemeScope extends DisposableObject implements IThemeScope {
   @override
-  late final IThemeRepository repository;
+  final IThemeRepository repository;
 
   /// Factory constructor for [IThemeScope]
   factory ThemeScope.create(BuildContext context) {

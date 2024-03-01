@@ -38,7 +38,6 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel> 
   @override
   late final ValueNotifier<Url> urlState;
 
-
   @override
   TextEditingController get proxyEditingController => _textEditingController;
 
@@ -133,7 +132,6 @@ abstract class IDebugScreenWidgetModel implements IWidgetModel {
 
   /// Listener current state [Url].
   ValueListenable<Url> get urlState;
-
 
   /// Change url.
   void urlChange(Url? url) {}

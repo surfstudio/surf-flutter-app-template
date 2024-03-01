@@ -10,5 +10,4 @@ abstract interface class IThemeRepository {
 
   /// Get theme mode>
   Future<ThemeMode?> getThemeMode();
-
 }

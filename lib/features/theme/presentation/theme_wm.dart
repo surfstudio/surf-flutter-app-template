@@ -39,5 +39,5 @@ final class ThemeWM extends WidgetModel<ThemeWidget, ThemeModel> implements IThe
   Future<void> setThemeMode(ThemeMode themeMode) => model.setThemeMode(themeMode);
 
   @override
-  Future<void>  switchThemeMode() => model.switchThemeMode();
+  Future<void> switchThemeMode() => model.switchThemeMode();
 }
