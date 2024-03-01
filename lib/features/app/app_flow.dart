@@ -3,7 +3,7 @@ import 'package:flutter_template/common/widgets/di_scope.dart';
 import 'package:flutter_template/features/app/app.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/navigation/service/router.dart';
-import 'package:flutter_template/features/theme/presentation/theme_listener.dart';
+import 'package:flutter_template/features/theme_mode/presentation/theme_mode_listener.dart';
 import 'package:nested/nested.dart';
 import 'package:provider/provider.dart';
 
@@ -26,7 +26,7 @@ class AppFlow extends StatelessWidget {
       children: [
         DiScope<IAppScope>(factory: (_) => appScope),
         ChangeNotifierProvider<AppRouter>(create: (_) => AppRouter()),
-        const ThemeListener(),
+        const ThemeModeListener(),
       ],
       child: const App(),
     );

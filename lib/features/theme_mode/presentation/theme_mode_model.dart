@@ -3,21 +3,22 @@ import 'dart:async';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/features/theme/domain/repositories/i_theme_repository.dart';
-import 'package:flutter_template/features/theme/presentation/theme_widget.dart';
+import 'package:flutter_template/core/architecture/presentation/base_model.dart';
+import 'package:flutter_template/features/theme_mode/domain/repositories/i_theme_mode_repository.dart';
+import 'package:flutter_template/features/theme_mode/presentation/theme_mode_widget.dart';
 
 const _themeByDefault = ThemeMode.system;
 
 /// {@template theme_model.class}
-/// [ElementaryModel] for [ThemeWidget]
+/// [ElementaryModel] for [ThemeModeWidget]
 /// {@endtemplate}
-final class ThemeModel extends ElementaryModel {
-  final IThemeRepository _repository;
+final class ThemeModeModel extends BaseModel {
+  final IThemeModeRepository _repository;
 
   /// {@macro theme_model.class}
-  ThemeModel({
-    required IThemeRepository repository,
-    super.errorHandler,
+  ThemeModeModel({
+    required IThemeModeRepository repository,
+    required super.logWriter,
   }) : _repository = repository;
 
   final ValueNotifier<ThemeMode> _themeMode = ValueNotifier(ThemeMode.light);

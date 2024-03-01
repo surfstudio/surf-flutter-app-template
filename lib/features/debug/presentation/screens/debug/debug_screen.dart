@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/config/url.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_wm.dart';
-import 'package:flutter_template/features/theme/presentation/theme_wm.dart';
+import 'package:flutter_template/features/theme_mode/presentation/theme_mode_wm.dart';
 import 'package:flutter_template/l10n/app_localizations_x.dart';
 import 'package:provider/provider.dart';
 
@@ -205,7 +205,7 @@ class _ThemeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    final themeModeListenable = context.watch<IThemeWM>().themeMode;
+    final themeModeListenable = context.watch<IThemeModeWM>().themeMode;
 
     return Card(
       child: Padding(

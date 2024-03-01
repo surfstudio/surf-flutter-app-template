@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_template/features/navigation/service/router.dart';
-import 'package:flutter_template/features/theme/presentation/theme_wm.dart';
+import 'package:flutter_template/features/theme_mode/presentation/theme_mode_wm.dart';
 import 'package:flutter_template/l10n/app_localizations.g.dart';
 import 'package:flutter_template/uikit/themes/theme_data.dart';
 import 'package:provider/provider.dart';
@@ -29,7 +29,7 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    final themeModeListenable = context.watch<IThemeWM>().themeMode;
+    final themeModeListenable = context.watch<IThemeModeWM>().themeMode;
 
     return ValueListenableBuilder(
       valueListenable: themeModeListenable,

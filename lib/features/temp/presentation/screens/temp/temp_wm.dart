@@ -9,7 +9,7 @@ import 'package:flutter_template/features/navigation/service/router.dart';
 import 'package:flutter_template/features/temp/di/temp_scope.dart';
 import 'package:flutter_template/features/temp/presentation/screens/temp/temp_model.dart';
 import 'package:flutter_template/features/temp/presentation/screens/temp/temp_screen.dart';
-import 'package:flutter_template/features/theme/presentation/theme_wm.dart';
+import 'package:flutter_template/features/theme_mode/presentation/theme_mode_wm.dart';
 import 'package:provider/provider.dart';
 
 /// Factory for [TempWidgetModel].
@@ -82,7 +82,7 @@ class TempWidgetModel extends WidgetModel<TempScreen, TempModel>
   String appBarTitle(RouteData topRoute) => _appBarTitle(topRoute);
 
   @override
-  void switchTheme() => context.read<IThemeWM>().switchThemeMode();
+  void switchTheme() => context.read<IThemeModeWM>().switchThemeMode();
 
   String _appBarTitle(RouteData topRoute) {
     switch (topRoute.path) {
