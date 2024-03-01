@@ -4,7 +4,7 @@ abstract class IConfigStorage {
   Future<String?> getProxyUrl();
 
   /// Save proxy url [proxyUrl].
-  Future<void> setProxyUrl({required String proxyUrl});
+  Future<void> setProxyUrl({String? proxyUrl});
 
   /// Returns url type.
   Future<String?> getUrlType();

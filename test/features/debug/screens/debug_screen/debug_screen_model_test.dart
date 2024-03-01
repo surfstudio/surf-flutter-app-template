@@ -1,86 +1,55 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_template/common/service/theme/theme_service.dart';
 import 'package:flutter_template/common/utils/logger/i_log_writer.dart';
 import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/url.dart';
+import 'package:flutter_template/core/architecture/domain/entity/result.dart';
 import 'package:flutter_template/features/debug/domain/repositories/i_debug_repository.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../../mocks/callback_mock.dart';
-
 class MockDebugRepository extends Mock implements IDebugRepository {}
-
-class MockThemeService extends Mock implements IThemeService {}
 
 class MockLogWriter extends Mock implements ILogWriter {}
 
 void main() {
   late DebugScreenModel model;
   final debugRepository = MockDebugRepository();
-  final themeService = MockThemeService();
   final logWriter = MockLogWriter();
-  const config = AppConfig(url: Url.qa);
-
-  final appRebuilder = VoidCallbackMock();
+  const serverUrl = Url.dev;
+  const config = AppConfig(url: serverUrl);
+  const proxyMock = 'proxy';
 
   setUpAll(() {
     model = DebugScreenModel(
-      debugRepository,
-      config,
-      themeService,
+      debugRepository: debugRepository,
+      serverUrl: config.url,
       logWriter: logWriter,
     );
 
-    when(() => themeService.currentThemeMode).thenReturn(ThemeMode.light);
+    when(() => debugRepository.saveServerUrl(serverUrl)).thenAnswer((_) => Future.value(const Result.ok(null)));
+    when(() => debugRepository.saveProxyUrl(proxyMock)).thenAnswer((_) => Future.value(const Result.ok(null)));
   });
 
-  group(
-    'Network config: ',
+  test(
+    'Server url state',
     () {
-      const proxyMock = 'proxy';
-
-      test(
-        'Switch server',
-        () {
-          model
-            ..init()
-            ..switchServer(Url.prod);
-          verify(appRebuilder);
-        },
-      );
-
-      test(
-        'Set proxy',
-        () {
-          model
-            ..init()
-            ..setProxy(proxyMock);
-          verify(appRebuilder);
-        },
-      );
+      expect(model.serverUrlState.value, serverUrl);
     },
   );
 
-  group(
-    'Theme config: ',
+  test(
+    'Save server',
     () {
-      const targetMode = ThemeMode.dark;
-      setUp(() {
-        when(() => themeService.updateThemeMode(targetMode));
-      });
+      model.saveServerUrl(serverUrl);
+      verify(() => debugRepository.saveServerUrl(serverUrl));
+    },
+  );
 
-      test(
-        'Change theme',
-        () {
-          model
-            ..init()
-            ..setThemeMode(targetMode);
-
-          verify(() => themeService.updateThemeMode(targetMode));
-        },
-      );
+  test(
+    'Save proxy',
+    () {
+      model.saveProxyUrl(proxyMock);
+      verify(() => debugRepository.saveProxyUrl(proxyMock));
     },
   );
 }

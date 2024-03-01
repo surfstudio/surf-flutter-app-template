@@ -22,9 +22,6 @@ class Environment {
   /// Is this application running in dev mode.
   bool get isDev => buildType == BuildType.dev;
 
-  /// Is this application running in qa mode.
-  bool get isQa => buildType == BuildType.qa;
-
   /// Is this application running in prod mode.
   bool get isProd => buildType == BuildType.prod;
 }
@@ -34,7 +31,6 @@ extension BuildTypeX on BuildType {
   /// Default url for build type.
   Url get defaultUrl => switch (this) {
         BuildType.dev => Url.dev,
-        BuildType.qa => Url.qa,
         BuildType.prod => Url.prod,
       };
 }

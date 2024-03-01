@@ -11,51 +11,53 @@ import 'package:flutter_template/features/navigation/service/router.dart';
 import 'package:flutter_template/l10n/app_localizations_x.dart';
 import 'package:provider/provider.dart';
 
-/// Factory for [DebugScreenWidgetModel].
-DebugScreenWidgetModel debugScreenWidgetModelFactory(BuildContext context) {
+/// Factory for [DebugScreenWM].
+DebugScreenWM debugScreenWMFactory(BuildContext context) {
   final appScope = context.read<IAppScope>();
   final debugScope = context.read<IDebugScope>();
   final appRouter = context.read<AppRouter>();
+  final appConfig = appScope.appConfig;
 
   final model = DebugScreenModel(
     debugRepository: debugScope.debugRepository,
     logWriter: appScope.logger,
-    appConfig: appScope.appConfig,
+    serverUrl: appConfig.url,
   );
 
-  return DebugScreenWidgetModel(model, appRouter);
+  return DebugScreenWM(model, router: appRouter, proxyUrl: appConfig.proxyUrl);
 }
 
-/// Interface for [DebugScreenWidgetModel].
-abstract class IDebugScreenWidgetModel with ILocalizationMixin implements IWidgetModel {
-  /// Text Editing Controller.
+/// Interface for [DebugScreenWM].
+abstract class IDebugScreenWM with ILocalizationMixin implements IWidgetModel {
+  /// Text editing controller for proxy url.
   TextEditingController get proxyEditingController;
 
-  /// Listener current state [Url].
+  /// Listener current server url state.
   ValueListenable<Url> get serverUrlState;
 
-  /// Change url.
-  void urlChange(Url? url);
+  /// Callback of clicking on the url radio button.
+  void onUrlRadioButtonPressed(Url? url);
 
-  /// Switch server.
-  void switchServer(Url url);
+  /// Сallback of pressed on the server change button.
+  void onChangeServerPressed(Url url);
 
-  /// Change proxyUrl value.
-  void setProxy();
+  /// Сallback of pressed on the connect proxy button.
+  void onConnectProxyPressed();
 
   /// Set theme mode for app.
-  void setThemeMode(ThemeMode? themeMode);
+  void onSetThemeMode(ThemeMode? themeMode);
 
   /// Navigate to ui kit screen.
   void openUiKit();
 }
 
 /// Widget Model for [DebugScreen].
-class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
+class DebugScreenWM extends WidgetModel<DebugScreen, DebugScreenModel>
     with LocalizationMixin
-    implements IDebugScreenWidgetModel {
-  /// Class that coordinates navigation for the whole app.
+    implements IDebugScreenWM {
   final AppRouter _router;
+
+  final String? _initialProxyUrl;
 
   late final TextEditingController _textEditingController;
 
@@ -68,51 +70,50 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
   TextEditingController get proxyEditingController => _textEditingController;
 
   /// Create an instance [DebugScreenModel].
-  DebugScreenWidgetModel(
-    super._model,
-    this._router,
-  );
+  DebugScreenWM(
+    super._model, {
+    required AppRouter router,
+    required String? proxyUrl,
+  })  : _router = router,
+        _initialProxyUrl = proxyUrl;
 
   @override
   void initWidgetModel() {
     super.initWidgetModel();
     _scaffoldMessenger = ScaffoldMessenger.of(context);
-    _textEditingController = TextEditingController(text: model.proxyUrlState.value);
-    model.serverUrlState.addListener(_listenServerUrlState);
-    model.proxyUrlState.addListener(_listenProxyUrlState);
+    _textEditingController = TextEditingController(text: _initialProxyUrl);
   }
 
   @override
   void dispose() {
-    model.serverUrlState.removeListener(_listenServerUrlState);
-    model.proxyUrlState.removeListener(_listenProxyUrlState);
     super.dispose();
   }
 
-  void _listenServerUrlState() => _showReloadAppSnackBar();
+  @override
+  void onUrlRadioButtonPressed(Url? url) {
+    if (url == null) return;
 
-  void _listenProxyUrlState() => _showReloadAppSnackBar();
+    model.emitServerUrlState(url);
+  }
+
+  @override
+  Future<void> onChangeServerPressed(Url url) async {
+    await model.saveServerUrl(url);
+    _showReloadAppSnackBar();
+  }
+
+  @override
+  Future<void> onConnectProxyPressed() async {
+    await model.saveProxyUrl(_textEditingController.text);
+    _showReloadAppSnackBar();
+  }
 
   void _showReloadAppSnackBar() {
     _scaffoldMessenger.showSnackBar(SnackBar(content: Text(context.l10n.debugScreenReloadAppMessage)));
   }
 
   @override
-  void urlChange(Url? url) {
-    if (url == null) return;
-    
-    // urlState.value = url;
-  }
-
-  @override
-  Future<void> switchServer(Url url) => model.switchServer(url);
-
-  /// Change proxyUrl value.
-  @override
-  Future<void> setProxy() => model.setProxy(proxyEditingController.text);
-
-  @override
-  void setThemeMode(ThemeMode? themeMode) {
+  void onSetThemeMode(ThemeMode? themeMode) {
     if (themeMode == null) return;
     // TODO(Evgenia-bit): добавится изменение темы, когда ветка с рефакторингом сервиса темы будет смержена.
   }

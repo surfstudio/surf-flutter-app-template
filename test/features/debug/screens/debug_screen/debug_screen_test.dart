@@ -6,18 +6,16 @@ import 'package:mocktail/mocktail.dart';
 
 import '../../../../core/utils/test_widget.dart';
 
-class MockDebugWM extends Mock implements IDebugScreenWidgetModel {}
+class MockDebugWM extends Mock implements IDebugScreenWM {}
 
 void main() {
   final wm = MockDebugWM();
   testWidget<DebugScreen>(
     widgetBuilder: (_) => const DebugScreen().build(wm),
     setup: (theme, mode, l10n) {
-      when(() => wm.themeState).thenReturn(ValueNotifier<ThemeMode>(mode));
       when(() => wm.proxyEditingController).thenReturn(TextEditingController());
-      when(() => wm.serverUrlState).thenReturn(
-        ValueNotifier<Url>(Url.qa),
-      );
+      when(() => wm.serverUrlState).thenReturn(ValueNotifier<Url>(Url.dev));
+      when(() => wm.l10n).thenReturn(l10n);
     },
   );
 }

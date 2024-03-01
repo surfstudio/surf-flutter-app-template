@@ -22,7 +22,7 @@ final class DebugRepository implements IDebugRepository {
         _urlConverter = urlConverter;
 
   @override
-  RequestOperation<void> saveProxyUrl(String proxyUrl) async {
+  RequestOperation<void> saveProxyUrl(String? proxyUrl) async {
     try {
       await _configStorage.setProxyUrl(proxyUrl: proxyUrl);
       return const ResultOk(null);

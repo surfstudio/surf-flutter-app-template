@@ -9,9 +9,6 @@ enum BuildType {
   /// dev build type.
   dev,
 
-  /// qa build type.
-  qa,
-
   /// prod build type.
   prod,
 }
