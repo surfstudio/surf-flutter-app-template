@@ -5,6 +5,6 @@ abstract interface class IThemeModeRepository {
   /// Set theme mode.
   Future<void> setThemeMode(ThemeMode newThemeMode);
 
-  /// Get theme mode>
-  Future<ThemeMode?> getThemeMode();
+  /// Get theme mode.
+  ThemeMode? getThemeMode();
 }

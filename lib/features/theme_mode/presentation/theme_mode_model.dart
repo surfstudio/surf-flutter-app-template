@@ -21,14 +21,15 @@ final class ThemeModeModel extends BaseModel {
     required super.logWriter,
   }) : _repository = repository;
 
-  final ValueNotifier<ThemeMode> _themeMode = ValueNotifier(ThemeMode.light);
+  final ValueNotifier<ThemeMode> _themeMode = ValueNotifier(_themeByDefault);
 
   /// Current theme mode.
   ValueListenable<ThemeMode> get themeMode => _themeMode;
 
   @override
-  Future<void> init() async {
-    final themeMode = await _repository.getThemeMode();
+  void init() {
+    super.init();
+    final themeMode = _repository.getThemeMode();
     _themeMode.value = themeMode ?? _themeByDefault;
   }
 

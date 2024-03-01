@@ -19,7 +19,7 @@ final class ThemeModeRepository implements IThemeModeRepository {
   }
 
   @override
-  Future<ThemeMode?> getThemeMode() async {
+  ThemeMode? getThemeMode() {
     return _themeModeStorage.getThemeMode();
   }
 }
