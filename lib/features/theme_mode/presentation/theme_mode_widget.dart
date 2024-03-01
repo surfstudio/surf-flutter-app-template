@@ -1,5 +1,6 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_template/features/theme_mode/presentation/theme_mode_controller.dart';
 import 'package:flutter_template/features/theme_mode/presentation/theme_mode_wm.dart';
 import 'package:provider/provider.dart';
 
@@ -19,6 +20,9 @@ class ThemeModeWidget extends ElementaryWidget<IThemeModeWM> {
 
   @override
   Widget build(IThemeModeWM wm) {
-    return Provider<IThemeModeWM>.value(value: wm, child: child);
+    return Provider<ThemeModeController>.value(
+      value: wm,
+      child: child,
+    );
   }
 }

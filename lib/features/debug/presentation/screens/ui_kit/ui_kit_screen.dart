@@ -1,9 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/features/navigation/domain/entity/app_route_names.dart';
-import 'package:flutter_template/features/theme_mode/presentation/theme_mode_wm.dart';
+import 'package:flutter_template/features/theme_mode/presentation/theme_mode_provider.dart';
 import 'package:flutter_template/uikit/colors/color_scheme.dart';
-import 'package:provider/provider.dart';
 
 /// UI-kit screen.
 @RoutePage(name: AppRouteNames.uiKitScreen)
@@ -20,7 +19,7 @@ class UiKitScreen extends StatelessWidget {
         actions: [
           GestureDetector(
             behavior: HitTestBehavior.opaque,
-            onTap: context.read<IThemeModeWM>().switchThemeMode,
+            onTap: ThemeModeProvider.of(context).switchThemeMode,
             child: const Padding(
               padding: EdgeInsets.all(8),
               child: Icon(Icons.light_mode_outlined),
