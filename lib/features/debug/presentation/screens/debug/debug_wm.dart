@@ -119,5 +119,5 @@ class DebugScreenWM extends WidgetModel<DebugScreen, DebugScreenModel>
   }
 
   @override
-  void openUiKit() => _router.push(const UiKitRouter());
+  void openUiKit() => _router.push(UiKitRouter());
 }

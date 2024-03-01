@@ -1,7 +1,10 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:elementary/elementary.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_template/features/dash/presentation/dash_flow.dart';
 import 'package:flutter_template/features/debug/presentation/debug_flow.dart';
 import 'package:flutter_template/features/debug/presentation/screens/ui_kit/ui_kit_screen.dart';
+import 'package:flutter_template/features/debug/presentation/screens/ui_kit/ui_kit_wm.dart';
 import 'package:flutter_template/features/feature_example/presentation/feature_example_flow.dart';
 import 'package:flutter_template/features/info/presentation/info_flow.dart';
 import 'package:flutter_template/features/navigation/domain/entity/app_route_paths.dart';
@@ -13,7 +16,7 @@ part 'router.gr.dart';
 /// Main point of the application navigation.
 /// {@endtemplate}
 @AutoRouterConfig(
-  replaceInRouteName: 'Flow,Route',
+  replaceInRouteName: 'Flow|Screen,Route',
 )
 class AppRouter extends _$AppRouter {
   @override
