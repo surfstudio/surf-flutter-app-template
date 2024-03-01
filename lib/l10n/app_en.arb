@@ -69,5 +69,10 @@
   "debugScreenThemeLight": "Light Theme",
   "debugScreenThemeDark": "Dark Theme",
   "debugScreenThemeSystem": "System Theme",
-  "debugScreenUikitNavigateButton": "Open UIKit"
+  "debugScreenUikitNavigateButton": "Open UIKit",
+  "@segmentFeatureExample": {
+    "---------": "---------",
+    "description": "Example of feature"
+  },
+  "featureExampleFailedLoadIpMessage": "Failed to load IP address"
 }

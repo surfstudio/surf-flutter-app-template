@@ -26,6 +26,8 @@ class DashScreen extends ElementaryWidget<IDashWidgetModel> {
           const _LocalizationExamples(),
           const SizedBox(height: 46),
           _AnalyticsExample(trackAnalyticsExample: wm.trackAnalyticsExample),
+          const SizedBox(height: 16),
+          _FeatureExampleButton(onPressed: wm.goToFeatureExampleScreen),
         ],
       ),
     );
@@ -65,6 +67,20 @@ class _AnalyticsExample extends StatelessWidget {
     return FilledButton(
       onPressed: trackAnalyticsExample,
       child: const Text('Track analytics example'),
+    );
+  }
+}
+
+class _FeatureExampleButton extends StatelessWidget {
+  final VoidCallback onPressed;
+
+  const _FeatureExampleButton({required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return FilledButton(
+      onPressed: onPressed,
+      child: const Text('Go to feature example screen'),
     );
   }
 }
