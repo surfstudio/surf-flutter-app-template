@@ -1,8 +1,0 @@
-allow_pins: true
-
-exclude:
-  - "example/**"
-
-ignore:
-  - analyzer
-  - meta
