@@ -2,6 +2,7 @@ import 'package:elementary/elementary.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/common/mixin/localization_mixin.dart';
+import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/url.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/debug/di/debug_scope.dart';
@@ -17,18 +18,23 @@ DebugScreenWM debugScreenWMFactory(BuildContext context) {
   final debugScope = context.read<IDebugScope>();
   final appRouter = context.read<AppRouter>();
   final appConfig = appScope.appConfig;
+  final scaffoldMessenger = ScaffoldMessenger.of(context);
 
   final model = DebugScreenModel(
     debugRepository: debugScope.debugRepository,
     logWriter: appScope.logger,
-    serverUrl: appConfig.url,
   );
 
-  return DebugScreenWM(model, router: appRouter, proxyUrl: appConfig.proxyUrl);
+  return DebugScreenWM(
+    model,
+    router: appRouter,
+    appConfig: appConfig,
+    scaffoldMessenger: scaffoldMessenger,
+  );
 }
 
 /// Interface for [DebugScreenWM].
-abstract class IDebugScreenWM with ILocalizationMixin implements IWidgetModel {
+abstract interface class IDebugScreenWM with ILocalizationMixin implements IWidgetModel {
   /// Text editing controller for proxy url.
   TextEditingController get proxyEditingController;
 
@@ -57,14 +63,16 @@ class DebugScreenWM extends WidgetModel<DebugScreen, DebugScreenModel>
     implements IDebugScreenWM {
   final AppRouter _router;
 
-  final String? _initialProxyUrl;
+  final AppConfig _appConfig;
+
+  final ScaffoldMessengerState _scaffoldMessenger;
 
   late final TextEditingController _textEditingController;
 
-  late final ScaffoldMessengerState _scaffoldMessenger;
+  late final ValueNotifier<Url> _serverUrlState;
 
   @override
-  ValueListenable<Url> get serverUrlState => model.serverUrlState;
+  ValueListenable<Url> get serverUrlState => _serverUrlState;
 
   @override
   TextEditingController get proxyEditingController => _textEditingController;
@@ -73,19 +81,22 @@ class DebugScreenWM extends WidgetModel<DebugScreen, DebugScreenModel>
   DebugScreenWM(
     super._model, {
     required AppRouter router,
-    required String? proxyUrl,
+    required AppConfig appConfig,
+    required ScaffoldMessengerState scaffoldMessenger,
   })  : _router = router,
-        _initialProxyUrl = proxyUrl;
+        _appConfig = appConfig,
+        _scaffoldMessenger = scaffoldMessenger;
 
   @override
   void initWidgetModel() {
     super.initWidgetModel();
-    _scaffoldMessenger = ScaffoldMessenger.of(context);
-    _textEditingController = TextEditingController(text: _initialProxyUrl);
+    _textEditingController = TextEditingController(text: _appConfig.proxyUrl);
+    _serverUrlState = ValueNotifier(_appConfig.url);
   }
 
   @override
   void dispose() {
+    _serverUrlState.dispose();
     super.dispose();
   }
 
@@ -93,7 +104,7 @@ class DebugScreenWM extends WidgetModel<DebugScreen, DebugScreenModel>
   void onUrlRadioButtonPressed(Url? url) {
     if (url == null) return;
 
-    model.emitServerUrlState(url);
+    _serverUrlState.value = url;
   }
 
   @override
@@ -119,5 +130,5 @@ class DebugScreenWM extends WidgetModel<DebugScreen, DebugScreenModel>
   }
 
   @override
-  void openUiKit() => _router.push(UiKitRouter());
+  void openUiKit() => _router.push(const UiKitRouter());
 }

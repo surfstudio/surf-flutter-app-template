@@ -1,15 +1,12 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/features/debug/presentation/screens/ui_kit/ui_kit_wm.dart';
-import 'package:flutter_template/features/navigation/domain/entity/app_route_names.dart';
 import 'package:flutter_template/l10n/app_localizations_x.dart';
 import 'package:flutter_template/uikit/colors/color_scheme.dart';
 
 /// {@template ui_kit_screen.class}
 /// UI-kit screen.
 /// {@endtemplate}
-@RoutePage(name: AppRouteNames.uiKitScreen)
 class UiKitScreen extends ElementaryWidget<IUiKitWM> {
   /// {@macro ui_kit_screen.class}
   const UiKitScreen({

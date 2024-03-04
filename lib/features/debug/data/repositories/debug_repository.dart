@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter_template/config/url.dart';
 import 'package:flutter_template/core/architecture/domain/entity/failure.dart';
 import 'package:flutter_template/core/architecture/domain/entity/request_operation.dart';
@@ -26,8 +25,6 @@ final class DebugRepository implements IDebugRepository {
     try {
       await _configStorage.setProxyUrl(proxyUrl: proxyUrl);
       return const ResultOk(null);
-    } on DioException catch (e, s) {
-      return Result.failed(Failure(original: e, trace: s));
     } on Object catch (e, s) {
       return Result.failed(Failure(original: e, trace: s));
     }
@@ -38,8 +35,6 @@ final class DebugRepository implements IDebugRepository {
     try {
       await _configStorage.setUrlType(urlType: _urlConverter.convertReverse(url));
       return const ResultOk(null);
-    } on DioException catch (e, s) {
-      return Result.failed(Failure(original: e, trace: s));
     } on Object catch (e, s) {
       return Result.failed(Failure(original: e, trace: s));
     }

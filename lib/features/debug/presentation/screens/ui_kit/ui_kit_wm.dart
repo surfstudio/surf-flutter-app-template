@@ -10,14 +10,15 @@ import 'package:provider/provider.dart';
 /// Factory for [UiKitWM].
 UiKitWM uiKitScreenWMFactory(BuildContext context) {
   final appScope = context.read<IAppScope>();
+  final scaffoldMessenger = ScaffoldMessenger.of(context);
 
   final model = UiKitModel(logWriter: appScope.logger);
 
-  return UiKitWM(model);
+  return UiKitWM(model, scaffoldMessenger: scaffoldMessenger);
 }
 
 /// Interface for [UiKitWM].
-abstract class IUiKitWM with ILocalizationMixin, ThemeIModelMixin implements IWidgetModel {
+abstract interface class IUiKitWM with ILocalizationMixin, ThemeIModelMixin implements IWidgetModel {
   /// Theme switching callback.
   void switchTheme();
 
@@ -44,16 +45,13 @@ abstract class IUiKitWM with ILocalizationMixin, ThemeIModelMixin implements IWi
 /// [WidgetModel] for [UiKitScreen].
 /// {@endtemplate}
 class UiKitWM extends WidgetModel<UiKitScreen, UiKitModel> with LocalizationMixin, ThemeWMMixin implements IUiKitWM {
-  late final ScaffoldMessengerState _scaffoldMessenger;
+  final ScaffoldMessengerState _scaffoldMessenger;
 
   /// {@macro ui_kit_widget_model.class}
-  UiKitWM(super._model);
-
-  @override
-  void initWidgetModel() {
-    _scaffoldMessenger = ScaffoldMessenger.of(context);
-    super.initWidgetModel();
-  }
+  UiKitWM(
+    super._model, {
+    required ScaffoldMessengerState scaffoldMessenger,
+  }) : _scaffoldMessenger = scaffoldMessenger;
 
   @override
   void switchTheme() => context.read<IAppScope>().themeService.switchTheme();

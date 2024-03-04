@@ -13,9 +13,7 @@ class ConfigStorageImpl implements IConfigStorage {
   const ConfigStorageImpl(this._prefs);
 
   @override
-  Future<String?> getProxyUrl() async {
-    return _prefs.getString(ConfigStorageKeys.proxyUrl.keyString);
-  }
+  String? getProxyUrl() => _prefs.getString(ConfigStorageKeys.proxyUrl.keyString);
 
   @override
   Future<void> setProxyUrl({String? proxyUrl}) async {
@@ -27,9 +25,7 @@ class ConfigStorageImpl implements IConfigStorage {
   }
 
   @override
-  Future<String?> getUrlType() async {
-    return _prefs.getString(ConfigStorageKeys.urlType.keyString);
-  }
+  String? getUrlType() => _prefs.getString(ConfigStorageKeys.urlType.keyString);
 
   @override
   Future<void> setUrlType({required String urlType}) {
