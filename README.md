@@ -69,7 +69,7 @@ The rules for branches, commits, and pull requests are the same as for a project
 
 ### Settings
 
-Project line length: 80 characters.
+Project line length: 100 characters.
 
 ### Dependencies
 
@@ -85,7 +85,7 @@ fvm flutter pub get --enforce-lockfile
 > [!IMPORTANT]
 > Change Flutter and Dart versions below and delete this alert.
 
-Flutter: ***3.16.8*** / Dart SDK: ***3.2.5***
+Flutter: ***3.19.0*** / Dart SDK: ***3.3.0***
 
 ### FVM workflow
 
@@ -129,6 +129,33 @@ Spider configuration file is located [here](spider.yaml).
 >
 > Delete this alert after initialization of the template.
 
+### Mason
+
+The project uses [mason](https://pub.dev/packages/mason) to generate code based on templates.
+To install [mason](https://pub.dev/packages/mason) you need to run the command:
+```sh
+# Install from pub.dev
+dart pub global activate mason_cli
+
+# Or
+
+# Install from  homebrew
+brew tap felangel/mason
+brew install mason
+```
+
+The project uses 2 templates - [feature](settings/bricks/feature) and [screen](settings/bricks/screen).
+In order for templates to be used, they need to be obtained from [mason.yaml](mason.yaml). Run the following command:
+```sh
+mason get
+```
+
+To generate code based on a template, you need to run the following command:
+
+```sh
+mason make TEMPLATE_NAME # insert the template 'feature' or 'screen' instead of TEMPLATE_NAME
+```
+
 ## Requirements for running the app
 
 > [!NOTE]
@@ -141,9 +168,7 @@ Spider configuration file is located [here](spider.yaml).
 
 ## Project scripts
 
-All scripts are located in the [scripts](scripts) folder and described below:
-- [fvm_vscode.sh](scripts/fvm_vscode.sh) — script for VSCode IDE configuration for working with FVM
-- [spider_build.sh](scripts/spider_build.sh) — script for assets codegen
+All scripts are located in the [scripts](scripts) folder and described [here](docs/scripts.md).
 
 ## Build
 
@@ -172,8 +197,18 @@ Build number or versionCode, which comes after +, is added following this rule �
 
 ### Flavors
 
-The project has two flavors: `dev`, `qa` and `prod`. The `dev` flavor is used by default.
+The project has two flavors: `dev` and `prod`. The `dev` flavor is used by default.
 The guide to adding flavors can be found [here](docs/flavors.md).
+
+There are cases when you need to add different functionality for `dev` and `qa` mode. For example, if you need different logging or feature-toggle options. Then you can add the `qa` mode to the `enum BuildType` and create a `main_qa.dart` file with the `main()` function in the `lib/` folder. For example:
+
+```dart 
+void main() {
+  run(const Environment(buildType: BuildType.qa));
+}
+```
+
+Then you need to add `qa` flavor ([guide](docs/flavors.md)).
 
 ### Build guides
 
@@ -216,7 +251,7 @@ The overview of the architecture and structure can be found here:
 Enabled:
 
 - [flutter_surf_lint_rules](https://pub.dev/packages/surf_lint_rules)
-- [dart_code_metrics](https://pub.dev/packages/dart_code_metrics) ([guide](https://wiki.surfstudio.ru/pages/viewpage.action?pageId=2408055)
+- [dart_code_metrics](https://pub.dev/packages/dart_code_metrics)
   to gathering project metrics; the project has already been configured)
 
 ## Navigation

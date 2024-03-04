@@ -142,7 +142,6 @@ class AppScope implements IAppScope {
   AppScope() {
     _analyticsService = AnalyticsServiceImpl([
       FirebaseAnalyticTracker(FirebaseAnalytics.instance),
-      AmplitudeAnalyticTracker(Amplitude.getInstance(instanceName: 'project')),
     ]);
   }
 }

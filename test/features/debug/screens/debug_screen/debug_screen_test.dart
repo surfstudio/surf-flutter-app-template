@@ -1,8 +1,7 @@
-import 'package:elementary_helper/elementary_helper.dart';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_template/features/debug/screens/debug_screen/debug_screen.dart';
-import 'package:flutter_template/features/debug/screens/debug_screen/debug_screen_widget_model.dart';
+import 'package:flutter_template/config/url.dart';
+import 'package:flutter_template/features/debug/presentation/screens/debug/debug_screen.dart';
+import 'package:flutter_template/features/debug/presentation/screens/debug/debug_wm.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../core/utils/test_widget.dart';
@@ -14,10 +13,9 @@ void main() {
   testWidget<DebugScreen>(
     widgetBuilder: (_) => const DebugScreen().build(wm),
     setup: (theme, mode, l10n) {
-      when(() => wm.themeState).thenReturn(StateNotifier(initValue: mode));
       when(() => wm.proxyEditingController).thenReturn(TextEditingController());
       when(() => wm.urlState).thenReturn(
-        StateNotifier(initValue: UrlType.test),
+        ValueNotifier<Url>(Url.qa),
       );
     },
   );

@@ -1,11 +1,10 @@
 // ignore_for_file: avoid_implementing_value_types
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_template/assets/colors/color_scheme.dart';
-import 'package:flutter_template/assets/themes/theme_data.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
-import 'package:flutter_template/features/common/service/theme/theme_service.dart';
+import 'package:flutter_template/l10n/app_localizations.g.dart';
+import 'package:flutter_template/uikit/colors/color_scheme.dart';
+import 'package:flutter_template/uikit/themes/theme_data.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart' as intl;
@@ -20,7 +19,6 @@ class BaseWidgetTestWrapper extends StatelessWidget {
   final ThemeType mode;
   late final MockStackRouter mockRouter;
   final appScopeMock = AppScopeMock();
-  final themeServiceMock = ThemeServiceMock();
 
   BaseWidgetTestWrapper({
     required this.child,
@@ -30,10 +28,6 @@ class BaseWidgetTestWrapper extends StatelessWidget {
   }) {
     registerFallbackValue(FakePageRouteInfo());
     mockRouter = router ?? MockStackRouter();
-    when(() => appScopeMock.themeService).thenReturn(themeServiceMock);
-    when(() => themeServiceMock.currentThemeMode).thenReturn(
-      mode == ThemeType.dark ? ThemeMode.dark : ThemeMode.light,
-    );
     if (router == null) {
       when(() => mockRouter.push(any())).thenAnswer((_) => Future.value());
     }
@@ -70,8 +64,6 @@ class BaseWidgetTestWrapper extends StatelessWidget {
 }
 
 class AppScopeMock extends Mock implements IAppScope {}
-
-class ThemeServiceMock extends Mock implements IThemeService {}
 
 class AutoRouterMock extends Mock implements StackRouter {}
 

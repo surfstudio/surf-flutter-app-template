@@ -69,7 +69,7 @@ Examples:
 
 1. According to the rules, add a new line.
 2. Make hot reload/restart.
-3. The code will be generated in the `.dart_tool/flutter_gen/gen_l10n` temporary folder.
+3. The code will be generated in the `lib/l10n` temporary folder.
 
 ## Plugins for working with localization.
 

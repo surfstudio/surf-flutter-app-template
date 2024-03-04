@@ -4,12 +4,12 @@ description: a Flutter template project for development.
 publish_to: none
 
 dependencies:
-  analytics: 1.0.2
+  analytics: 2.0.0
   auto_route: 7.8.4
+  cached_network_image: 3.3.1
   collection: 1.18.0
   dio: 5.4.0
   elementary: 3.0.0
-  elementary_helper: 1.0.1
   firebase_core: 2.24.2
   firebase_crashlytics: 3.4.9
   flutter:
@@ -17,14 +17,21 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_secure_storage: 9.0.0
+  flutter_svg: 2.0.9
+  freezed: 2.4.7
+  freezed_annotation: 2.4.1
   intl: 0.18.1
+  json_annotation: 4.8.1
   logger: 1.4.0
-  path: 1.8.3
+  nested: 1.0.0
+  path: 1.9.0
   path_provider: 2.1.2
   provider: 6.1.1
   retrofit: 4.0.3
+  rxdart: 0.27.7
   shared_preferences: 2.2.2
-  surf_logger: 1.1.0
+  shimmer: 3.0.0
+  surf_logger: 2.0.0
 
 dev_dependencies:
   auto_route_generator: 7.3.2
@@ -43,12 +50,11 @@ dev_dependencies:
 
 environment:
     sdk: '>=3.2.5 <4.0.0'
-    flutter: 3.16.8
+    flutter: 3.19.0
 
 
 flutter:
   uses-material-design: true
-  generate: true
   assets:
     - assets/fonts/
     - assets/icons/
