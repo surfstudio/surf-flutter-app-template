@@ -3,12 +3,11 @@ import 'package:flutter_template/common/service/theme/theme_service.dart';
 import 'package:flutter_template/common/utils/logger/i_log_writer.dart';
 import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/url.dart';
+import 'package:flutter_template/core/architecture/domain/entity/result.dart';
 import 'package:flutter_template/features/debug/domain/repositories/i_debug_repository.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-
-import '../../../../mocks/callback_mock.dart';
 
 class MockDebugRepository extends Mock implements IDebugRepository {}
 
@@ -23,8 +22,6 @@ void main() {
   final logWriter = MockLogWriter();
   const config = AppConfig(url: Url.qa);
 
-  final appRebuilder = VoidCallbackMock();
-
   setUpAll(() {
     model = DebugScreenModel(
       debugRepository,
@@ -33,6 +30,14 @@ void main() {
       logWriter: logWriter,
     );
 
+    registerFallbackValue(Url.prod);
+
+    when(() => debugRepository.saveUrl(any())).thenAnswer(
+      (_) => Future.value(const ResultOk(null)),
+    );
+    when(() => debugRepository.saveProxyUrl(any())).thenAnswer(
+      (_) => Future.value(const ResultOk(null)),
+    );
     when(() => themeService.currentThemeMode).thenReturn(ThemeMode.light);
   });
 
@@ -47,7 +52,7 @@ void main() {
           model
             ..init()
             ..switchServer(Url.prod);
-          verify(appRebuilder);
+          verify(() => debugRepository.saveUrl(Url.prod));
         },
       );
 
@@ -57,7 +62,7 @@ void main() {
           model
             ..init()
             ..setProxy(proxyMock);
-          verify(appRebuilder);
+          verify(() => debugRepository.saveProxyUrl(proxyMock));
         },
       );
     },
