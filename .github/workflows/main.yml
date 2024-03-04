@@ -27,20 +27,8 @@ jobs:
 
   testing:
     needs: [analysis, get_fvm_version]
-    uses: surfstudio/flutter-ci-workflows/.github/workflows/testing.yml@main
+    uses: ./.github/workflows/testing.yml
     with:
       flutter-version: ${{ needs.get_fvm_version.outputs.flutter_version }}
     secrets:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-
-  build_android_example:
-    needs: [analysis, get_fvm_version]
-    uses: surfstudio/flutter-ci-workflows/.github/workflows/build_android_example.yml@main
-    with:
-      flutter-version: ${{ needs.get_fvm_version.outputs.flutter_version }}
-
-  build_ios_example:
-    needs: [analysis, get_fvm_version]
-    uses: surfstudio/flutter-ci-workflows/.github/workflows/build_ios_example.yml@main
-    with:
-      flutter-version: ${{ needs.get_fvm_version.outputs.flutter_version }}
