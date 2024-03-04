@@ -24,7 +24,9 @@ FeatureExampleWM defaultFeatureExampleWMFactory(BuildContext context) {
 }
 
 /// Interface for [FeatureExampleWM]
-abstract interface class IFeatureExampleWM with ThemeIModelMixin, ILocalizationMixin implements IWidgetModel {
+abstract interface class IFeatureExampleWM
+    with ThemeIModelMixin, ILocalizationMixin
+    implements IWidgetModel {
   /// State of screen.
   ValueListenable<FeatureExampleState> get state;
 }

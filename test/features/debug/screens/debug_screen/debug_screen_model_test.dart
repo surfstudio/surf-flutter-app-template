@@ -1,5 +1,4 @@
 import 'package:flutter_template/common/utils/logger/i_log_writer.dart';
-import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/url.dart';
 import 'package:flutter_template/core/architecture/domain/entity/result.dart';
 import 'package:flutter_template/features/debug/domain/repositories/i_debug_repository.dart';
@@ -16,26 +15,17 @@ void main() {
   final debugRepository = MockDebugRepository();
   final logWriter = MockLogWriter();
   const serverUrl = Url.dev;
-  const config = AppConfig(url: serverUrl);
   const proxyMock = 'proxy';
 
   setUpAll(() {
     model = DebugScreenModel(
       debugRepository: debugRepository,
-      serverUrl: config.url,
       logWriter: logWriter,
     );
 
     when(() => debugRepository.saveServerUrl(serverUrl)).thenAnswer((_) => Future.value(const Result.ok(null)));
     when(() => debugRepository.saveProxyUrl(proxyMock)).thenAnswer((_) => Future.value(const Result.ok(null)));
   });
-
-  test(
-    'Server url state',
-    () {
-      expect(model.serverUrlState.value, serverUrl);
-    },
-  );
 
   test(
     'Save server',

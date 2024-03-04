@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/config/url.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_wm.dart';
+import 'package:flutter_template/features/theme_mode/presentation/widgets/theme_mode_builder.dart';
 import 'package:flutter_template/l10n/app_localizations_x.dart';
 
 /// {@template debug_screen.class}
@@ -161,9 +162,6 @@ class _ThemeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    // TODO(Evgenia-bit): добавится получение темы из контекста,
-    // когда ветка с рефакторингом сервиса темы будет смержена.
-    const themeMode = ThemeMode.light;
 
     return Card(
       child: Padding(
@@ -171,27 +169,29 @@ class _ThemeCard extends StatelessWidget {
         child: Column(
           children: <Widget>[
             Text(l10n.debugScreenThemeSubtitle),
-            Column(
-              children: <Widget>[
-                RadioListTile<ThemeMode>(
-                  groupValue: themeMode,
-                  title: Text(l10n.debugScreenThemeLight),
-                  value: ThemeMode.light,
-                  onChanged: onSetThemeMode,
-                ),
-                RadioListTile<ThemeMode>(
-                  groupValue: themeMode,
-                  title: Text(l10n.debugScreenThemeDark),
-                  value: ThemeMode.dark,
-                  onChanged: onSetThemeMode,
-                ),
-                RadioListTile<ThemeMode>(
-                  groupValue: themeMode,
-                  title: Text(l10n.debugScreenThemeSystem),
-                  value: ThemeMode.system,
-                  onChanged: onSetThemeMode,
-                ),
-              ],
+            ThemeModeBuilder(
+              builder: (_, themeMode) => Column(
+                children: <Widget>[
+                  RadioListTile<ThemeMode>(
+                    groupValue: themeMode,
+                    title: Text(l10n.debugScreenThemeLight),
+                    value: ThemeMode.light,
+                    onChanged: onSetThemeMode,
+                  ),
+                  RadioListTile<ThemeMode>(
+                    groupValue: themeMode,
+                    title: Text(l10n.debugScreenThemeDark),
+                    value: ThemeMode.dark,
+                    onChanged: onSetThemeMode,
+                  ),
+                  RadioListTile<ThemeMode>(
+                    groupValue: themeMode,
+                    title: Text(l10n.debugScreenThemeSystem),
+                    value: ThemeMode.system,
+                    onChanged: onSetThemeMode,
+                  ),
+                ],
+              ),
             ),
           ],
         ),

@@ -3,6 +3,8 @@ import 'package:flutter_template/common/widgets/di_scope.dart';
 import 'package:flutter_template/features/app/app.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/navigation/service/router.dart';
+import 'package:flutter_template/features/theme_mode/presentation/theme_mode_provider.dart';
+import 'package:nested/nested.dart';
 import 'package:provider/provider.dart';
 
 /// {@template app_flow.class}
@@ -20,12 +22,13 @@ class AppFlow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DiScope<IAppScope>(
-      factory: (_) => appScope,
-      child: ChangeNotifierProvider<AppRouter>(
-        create: (_) => AppRouter(),
-        child: const App(),
-      ),
+    return Nested(
+      children: [
+        DiScope<IAppScope>(factory: (_) => appScope),
+        ChangeNotifierProvider<AppRouter>(create: (_) => AppRouter()),
+        const ThemeModeProvider(),
+      ],
+      child: const App(),
     );
   }
 }

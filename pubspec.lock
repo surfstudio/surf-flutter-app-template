@@ -630,7 +630,7 @@ packages:
     source: hosted
     version: "1.0.3"
   nested:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: nested
       sha256: "03bac4c528c64c95c722ec99280375a6f2fc708eec17c7b3f07253b626cd2a20"
@@ -806,7 +806,7 @@ packages:
     source: hosted
     version: "8.0.6"
   rxdart:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: rxdart
       sha256: "0c7c0cedd93788d996e33041ffecda924cc54389199cde4e6a34b440f50044cb"

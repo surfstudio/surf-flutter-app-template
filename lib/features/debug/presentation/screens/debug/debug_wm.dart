@@ -9,6 +9,7 @@ import 'package:flutter_template/features/debug/di/debug_scope.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_model.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_screen.dart';
 import 'package:flutter_template/features/navigation/service/router.dart';
+import 'package:flutter_template/features/theme_mode/presentation/theme_mode_provider.dart';
 import 'package:flutter_template/l10n/app_localizations_x.dart';
 import 'package:provider/provider.dart';
 
@@ -126,7 +127,7 @@ class DebugScreenWM extends WidgetModel<DebugScreen, DebugScreenModel>
   @override
   void onSetThemeMode(ThemeMode? themeMode) {
     if (themeMode == null) return;
-    // TODO(Evgenia-bit): добавится изменение темы, когда ветка с рефакторингом сервиса темы будет смержена.
+    ThemeModeProvider.of(context).setThemeMode(themeMode);
   }
 
   @override
