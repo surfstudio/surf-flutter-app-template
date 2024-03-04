@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_template/config/url.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_screen.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_wm.dart';
 import 'package:mocktail/mocktail.dart';
@@ -15,7 +16,7 @@ void main() {
       when(() => wm.themeState).thenReturn(ValueNotifier<ThemeMode>(mode));
       when(() => wm.proxyEditingController).thenReturn(TextEditingController());
       when(() => wm.urlState).thenReturn(
-        ValueNotifier<UrlType>(UrlType.test),
+        ValueNotifier<Url>(Url.qa),
       );
     },
   );

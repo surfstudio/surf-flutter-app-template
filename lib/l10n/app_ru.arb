@@ -70,5 +70,10 @@
   "debugScreenThemeLight": "Светлая тема",
   "debugScreenThemeDark": "Темная темя",
   "debugScreenThemeSystem": "Системная тема",
-  "debugScreenUikitNavigateButton": "Открыть UIKit"
+  "debugScreenUikitNavigateButton": "Открыть UIKit",
+  "@segmentFeatureExample": {
+    "---------": "---------",
+    "description": "Пример фичи"
+  },
+  "featureExampleFailedLoadIpMessage": "Не удалось загрузить IP-адрес"
 }

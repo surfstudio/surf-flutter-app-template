@@ -168,7 +168,7 @@ mason make TEMPLATE_NAME # insert the template 'feature' or 'screen' instead of 
 
 ## Project scripts
 
-All scripts are located in the [scripts](scripts) folder and described [here](docs/scripts.md)).
+All scripts are located in the [scripts](scripts) folder and described [here](docs/scripts.md).
 
 ## Build
 
@@ -197,8 +197,18 @@ Build number or versionCode, which comes after +, is added following this rule â
 
 ### Flavors
 
-The project has two flavors: `dev`, `qa` and `prod`. The `dev` flavor is used by default.
+The project has two flavors: `dev` and `prod`. The `dev` flavor is used by default.
 The guide to adding flavors can be found [here](docs/flavors.md).
+
+There are cases when you need to add different functionality for `dev` and `qa` mode. For example, if you need different logging or feature-toggle options. Then you can add the `qa` mode to the `enum BuildType` and create a `main_qa.dart` file with the `main()` function in the `lib/` folder. For example:
+
+```dart 
+void main() {
+  run(const Environment(buildType: BuildType.qa));
+}
+```
+
+Then you need to add `qa` flavor ([guide](docs/flavors.md)).
 
 ### Build guides
 

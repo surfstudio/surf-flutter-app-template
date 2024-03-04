@@ -47,13 +47,10 @@ Runs spider build, formats the code, runs golden tests.
 
 Installing the desired version of fvm and run pub get
 
-## umbrella_gen.sh
+## surfgen.sh
 
-It's in the folder `tools/api_generator`
+Generate API layer from Swagger.
 
-As a result of the script, an "umbrella" file with export instructions will be created or updated
-for all DTO files in a certain directory, excluding those that were generated
-(i.e. file names with .g.dart). The directory is set by the user.
 
 ## build_runner.sh
 
