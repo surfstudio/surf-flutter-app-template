@@ -17,6 +17,19 @@ class DebugScreen extends ElementaryWidget<IDebugScreenWidgetModel> {
   @override
   Widget build(IDebugScreenWidgetModel wm) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Debug screen'),
+        actions: [
+          GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: wm.switchThemeMode,
+            child: const Padding(
+              padding: EdgeInsets.all(8),
+              child: Icon(Icons.light_mode_outlined),
+            ),
+          ),
+        ],
+      ),
       body: _Body(
         urlState: wm.urlState,
         urlChanged: wm.urlChange,

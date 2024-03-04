@@ -26,8 +26,7 @@ DebugScreenWidgetModel debugScreenWidgetModelFactory(BuildContext context) {
 }
 
 /// Widget Model for [DebugScreen].
-class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
-    implements IDebugScreenWidgetModel {
+class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel> implements IDebugScreenWidgetModel {
   /// Empty string.
   static const String _emptyString = '';
 
@@ -103,6 +102,9 @@ class DebugScreenWidgetModel extends WidgetModel<DebugScreen, DebugScreenModel>
   }
 
   @override
+  void switchThemeMode() => ThemeModeProvider.of(context).switchThemeMode();
+
+  @override
   void openUiKit() {
     router.push(const UiKitRouter());
   }
@@ -144,7 +146,10 @@ abstract class IDebugScreenWidgetModel implements IWidgetModel {
   void setProxy() {}
 
   /// Set theme mode for app.
-  void setThemeMode(ThemeMode? themeMode) {}
+  void setThemeMode(ThemeMode? themeMode);
+
+  /// Switch theme mode.
+  void switchThemeMode();
 
   /// Navigate to ui kit screen.
   void openUiKit();
