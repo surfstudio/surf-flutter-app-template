@@ -54,7 +54,7 @@ jobs:
         run: flutter analyze --fatal-warnings --fatal-infos .
 
       - name: Run formatter
-        run: dart format -l 100 --set-exit-if-changed lib test
+        run: dart format -l 100 --set-exit-if-changed $(find lib test -name '*.dart' -not -name '*.g.dart' -and -not -name '*.freezed.dart')
 
       - name: Run package analyzer
         uses: axel-op/dart-package-analyzer@v3
