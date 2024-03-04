@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_template/common/service/theme/theme_service.dart';
-import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/navigation/service/router.dart';
+import 'package:flutter_template/features/theme_mode/presentation/widgets/theme_mode_builder.dart';
 import 'package:flutter_template/l10n/app_localizations.g.dart';
 import 'package:flutter_template/uikit/themes/theme_data.dart';
 import 'package:provider/provider.dart';
@@ -19,28 +18,23 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  late final IAppScope _scope;
   late final AppRouter _appRouter;
-  late final IThemeService _themeService;
 
   @override
   void initState() {
     super.initState();
 
-    _scope = context.read<IAppScope>();
-    _themeService = _scope.themeService;
     _appRouter = context.read<AppRouter>();
   }
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _themeService,
-      builder: (context, child) {
+    return ThemeModeBuilder(
+      builder: (context, themeMode) {
         return MaterialApp.router(
           theme: AppThemeData.lightTheme,
           darkTheme: AppThemeData.darkTheme,
-          themeMode: _themeService.currentThemeMode,
+          themeMode: themeMode,
 
           /// Localization.
           locale: _localizations.first,

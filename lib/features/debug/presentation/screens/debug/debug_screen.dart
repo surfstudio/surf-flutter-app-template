@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/config/url.dart';
 import 'package:flutter_template/features/debug/presentation/screens/debug/debug_wm.dart';
+import 'package:flutter_template/features/theme_mode/presentation/widgets/theme_mode_builder.dart';
 import 'package:flutter_template/l10n/app_localizations_x.dart';
 
 /// Debug screens.
@@ -18,7 +19,6 @@ class DebugScreen extends ElementaryWidget<IDebugScreenWidgetModel> {
     return Scaffold(
       body: _Body(
         urlState: wm.urlState,
-        themeState: wm.themeState,
         urlChanged: wm.urlChange,
         switchServer: wm.switchServer,
         setProxy: wm.setProxy,
@@ -32,7 +32,6 @@ class DebugScreen extends ElementaryWidget<IDebugScreenWidgetModel> {
 
 class _Body extends StatelessWidget {
   final ValueListenable<Url> urlState;
-  final ValueListenable<ThemeMode> themeState;
   final void Function(Url?) urlChanged;
   final void Function(Url) switchServer;
   final void Function(ThemeMode?) setThemeMode;
@@ -42,7 +41,6 @@ class _Body extends StatelessWidget {
 
   const _Body({
     required this.urlState,
-    required this.themeState,
     required this.urlChanged,
     required this.switchServer,
     required this.setThemeMode,
@@ -68,10 +66,7 @@ class _Body extends StatelessWidget {
               setProxy: setProxy,
               proxyController: proxyController,
             ),
-            _ThemeCard(
-              themeState: themeState,
-              setThemeMode: setThemeMode,
-            ),
+            _ThemeCard(setThemeMode: setThemeMode),
             Card(
               child: ListTile(
                 onTap: openUiKit,
@@ -202,51 +197,45 @@ class _ProxyCard extends StatelessWidget {
 }
 
 class _ThemeCard extends StatelessWidget {
-  final ValueListenable<ThemeMode> themeState;
   final void Function(ThemeMode?) setThemeMode;
 
-  const _ThemeCard({
-    required this.themeState,
-    required this.setThemeMode,
-  });
+  const _ThemeCard({required this.setThemeMode});
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(8),
-        child: ValueListenableBuilder<ThemeMode>(
-          valueListenable: themeState,
-          builder: (context, themeState, _) {
-            return Column(
-              children: <Widget>[
-                Text(l10n.debugScreenThemeSubtitle),
-                Column(
-                  children: <Widget>[
-                    RadioListTile<ThemeMode>(
-                      groupValue: themeState,
-                      title: Text(l10n.debugScreenThemeLight),
-                      value: ThemeMode.light,
-                      onChanged: setThemeMode,
-                    ),
-                    RadioListTile<ThemeMode>(
-                      groupValue: themeState,
-                      title: Text(l10n.debugScreenThemeDark),
-                      value: ThemeMode.dark,
-                      onChanged: setThemeMode,
-                    ),
-                    RadioListTile<ThemeMode>(
-                      groupValue: themeState,
-                      title: Text(l10n.debugScreenThemeSystem),
-                      value: ThemeMode.system,
-                      onChanged: setThemeMode,
-                    ),
-                  ],
-                ),
-              ],
-            );
-          },
+        child: Column(
+          children: <Widget>[
+            Text(l10n.debugScreenThemeSubtitle),
+            ThemeModeBuilder(
+              builder: (_, themeMode) => Column(
+                children: <Widget>[
+                  RadioListTile<ThemeMode>(
+                    groupValue: themeMode,
+                    title: Text(l10n.debugScreenThemeLight),
+                    value: ThemeMode.light,
+                    onChanged: setThemeMode,
+                  ),
+                  RadioListTile<ThemeMode>(
+                    groupValue: themeMode,
+                    title: Text(l10n.debugScreenThemeDark),
+                    value: ThemeMode.dark,
+                    onChanged: setThemeMode,
+                  ),
+                  RadioListTile<ThemeMode>(
+                    groupValue: themeMode,
+                    title: Text(l10n.debugScreenThemeSystem),
+                    value: ThemeMode.system,
+                    onChanged: setThemeMode,
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );

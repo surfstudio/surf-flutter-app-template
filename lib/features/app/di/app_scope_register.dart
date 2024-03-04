@@ -1,9 +1,7 @@
 import 'package:analytics/core/analytyc_service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_template/api/dio_configurator.dart';
-import 'package:flutter_template/common/service/theme/theme_service_impl.dart';
 import 'package:flutter_template/common/utils/analytics/firebase/firebase_analytic_strategy.dart';
 import 'package:flutter_template/common/utils/analytics/mock/mock_firebase_analytics.dart';
 import 'package:flutter_template/common/utils/logger/log_writer.dart';
@@ -14,7 +12,6 @@ import 'package:flutter_template/config/url.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/debug/data/converters/url_converter.dart';
 import 'package:flutter_template/persistence/storage/config_storage/config_storage_impl.dart';
-import 'package:flutter_template/persistence/storage/theme_storage/theme_storage_impl.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:surf_logger/surf_logger.dart' as surf_logger;
@@ -39,10 +36,6 @@ final class AppScopeRegister {
       proxyUrl: appConfig.proxyUrl,
     );
 
-    final themeModeStorage = ThemeModeStorageImpl(sharedPreferences);
-    final theme = await themeModeStorage.getThemeMode() ?? ThemeMode.system;
-    final themeService = ThemeServiceImpl(theme);
-
     final analyticsService = AnalyticService.withStrategies({
       // TODO(init): can be removed MockFirebaseAnalytics, added for demo analytics track
       FirebaseAnalyticStrategy(MockFirebaseAnalytics()),
@@ -62,8 +55,6 @@ final class AppScopeRegister {
       dio: dio,
       analyticsService: analyticsService,
       logger: logger,
-      themeModeStorage: themeModeStorage,
-      themeService: themeService,
     );
   }
 

@@ -31,7 +31,6 @@ Future<void> run(Environment env) async {
 Future<void> _runApp(Environment env) async {
   const scopeRegister = AppScopeRegister();
   final scope = await scopeRegister.createScope(env);
-  await scope.init();
 
   runApp(AppFlow(appScope: scope));
 }
