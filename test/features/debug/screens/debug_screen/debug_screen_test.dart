@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_template/config/url.dart';
-import 'package:flutter_template/features/debug/presentation/screens/debug/debug_screen.dart';
-import 'package:flutter_template/features/debug/presentation/screens/debug/debug_wm.dart';
+import 'package:flutter_template/features/debug/presentation/debug/debug_screen.dart';
+import 'package:flutter_template/features/debug/presentation/debug/debug_wm.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../core/utils/test_widget.dart';

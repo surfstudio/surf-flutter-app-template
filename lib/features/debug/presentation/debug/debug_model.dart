@@ -1,7 +1,7 @@
 import 'package:flutter_template/config/url.dart';
 import 'package:flutter_template/core/architecture/presentation/base_model.dart';
 import 'package:flutter_template/features/debug/domain/repositories/i_debug_repository.dart';
-import 'package:flutter_template/features/debug/presentation/screens/debug/debug_screen.dart';
+import 'package:flutter_template/features/debug/presentation/debug/debug_screen.dart';
 
 /// {@template debug_model.class}
 /// Model for [DebugScreen].

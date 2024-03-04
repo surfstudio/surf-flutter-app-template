@@ -1,5 +1,5 @@
 import 'package:flutter_template/core/architecture/presentation/base_model.dart';
-import 'package:flutter_template/features/debug/presentation/screens/ui_kit/ui_kit_screen.dart';
+import 'package:flutter_template/features/debug/presentation/ui_kit/ui_kit_screen.dart';
 
 /// {@template ui_kit_model.class}
 /// Model for [UiKitScreen].

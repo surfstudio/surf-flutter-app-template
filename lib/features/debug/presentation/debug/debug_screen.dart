@@ -2,7 +2,7 @@ import 'package:elementary/elementary.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/config/url.dart';
-import 'package:flutter_template/features/debug/presentation/screens/debug/debug_wm.dart';
+import 'package:flutter_template/features/debug/presentation/debug/debug_wm.dart';
 import 'package:flutter_template/features/theme_mode/presentation/widgets/theme_mode_builder.dart';
 import 'package:flutter_template/l10n/app_localizations_x.dart';
 

@@ -1,6 +1,6 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/features/debug/presentation/screens/ui_kit/ui_kit_wm.dart';
+import 'package:flutter_template/features/debug/presentation/ui_kit/ui_kit_wm.dart';
 import 'package:flutter_template/l10n/app_localizations_x.dart';
 import 'package:flutter_template/uikit/colors/color_scheme.dart';
 

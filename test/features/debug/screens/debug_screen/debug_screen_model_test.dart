@@ -2,7 +2,7 @@ import 'package:flutter_template/common/utils/logger/i_log_writer.dart';
 import 'package:flutter_template/config/url.dart';
 import 'package:flutter_template/core/architecture/domain/entity/result.dart';
 import 'package:flutter_template/features/debug/domain/repositories/i_debug_repository.dart';
-import 'package:flutter_template/features/debug/presentation/screens/debug/debug_model.dart';
+import 'package:flutter_template/features/debug/presentation/debug/debug_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 

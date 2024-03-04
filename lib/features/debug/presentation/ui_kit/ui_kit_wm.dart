@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_template/common/mixin/localization_mixin.dart';
 import 'package:flutter_template/common/mixin/theme_mixin.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
-import 'package:flutter_template/features/debug/presentation/screens/ui_kit/ui_kit_model.dart';
-import 'package:flutter_template/features/debug/presentation/screens/ui_kit/ui_kit_screen.dart';
+import 'package:flutter_template/features/debug/presentation/ui_kit/ui_kit_model.dart';
+import 'package:flutter_template/features/debug/presentation/ui_kit/ui_kit_screen.dart';
 import 'package:flutter_template/features/theme_mode/presentation/theme_mode_provider.dart';
 import 'package:provider/provider.dart';
 
