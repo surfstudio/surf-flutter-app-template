@@ -3,18 +3,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter_template/common/utils/logger/i_log_writer.dart';
 import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/environment/environment.dart';
-import 'package:flutter_template/features/common/service/theme/theme_service.dart';
-import 'package:flutter_template/features/common/service/theme/theme_service_impl.dart';
-import 'package:flutter_template/features/common/utils/analytics/amplitude/amplitude_analytic_tracker.dart';
-import 'package:flutter_template/features/common/utils/analytics/firebase/firebase_analytic_tracker.dart';
-import 'package:flutter_template/features/common/utils/analytics/mock/mock_amplitude_analytics.dart';
-import 'package:flutter_template/features/common/utils/analytics/mock/mock_firebase_analytics.dart';
-import 'package:flutter_template/features/common/utils/analytics/service/analytics_service.dart';
-import 'package:flutter_template/features/common/utils/analytics/service/analytics_service_impl.dart';
-import 'package:flutter_template/features/navigation/service/router.dart';
-import 'package:flutter_template/persistence/storage/theme_storage/theme_storage.dart';
-import 'package:flutter_template/persistence/storage/theme_storage/theme_storage_impl.dart';
-import 'package:flutter_template/util/default_error_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// {@template app_scope.class}

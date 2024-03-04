@@ -2,10 +2,9 @@ import 'dart:async';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_template/features/common/domain/entity/operation/failure.dart';
-import 'package:flutter_template/features/common/domain/entity/operation/result.dart';
-import 'package:flutter_template/features/common/service/error_reports/i_error_reports_service.dart';
-import 'package:flutter_template/features/common/service/token_operations/i_token_operations_service.dart';
+import 'package:flutter_template/common/service/token_operations/i_token_operations_service.dart';
+import 'package:flutter_template/core/architecture/domain/entity/failure.dart';
+import 'package:flutter_template/core/architecture/domain/entity/result.dart';
 
 /// Authorization error status code.
 const unauthorisedStatusCode = 401;
@@ -16,18 +15,15 @@ const unauthorisedStatusCode = 401;
 final class AuthInterceptor extends QueuedInterceptorsWrapper {
   final Dio _dio;
   final ITokenOperationsService _tokenOperationsService;
-  final IErrorReportsService _errorReportsService;
   final AsyncCallback _onLogout;
 
   /// {@macro auth_interceptor.class}
   AuthInterceptor({
     required Dio dio,
     required ITokenOperationsService tokenOperationsService,
-    required IErrorReportsService errorReportsService,
     required AsyncCallback onLogout,
   })  : _dio = dio,
         _tokenOperationsService = tokenOperationsService,
-        _errorReportsService = errorReportsService,
         _onLogout = onLogout;
 
   @override
@@ -94,7 +90,6 @@ final class AuthInterceptor extends QueuedInterceptorsWrapper {
 
       return Result.ok(response);
     } on DioException catch (e, s) {
-      _errorReportsService.recordError(e, trace: s);
       return Result.failed(Failure(original: e, trace: s));
     }
   }

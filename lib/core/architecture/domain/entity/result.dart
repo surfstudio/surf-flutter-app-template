@@ -1,11 +1,11 @@
-import 'package:flutter_template/features/common/domain/entity/operation/failure.dart';
+import 'package:flutter_template/core/architecture/domain/entity/failure.dart';
 
 /// {@template result.class}
-/// Result
+/// Result of a function execution.
 ///
-/// [Result.ok] - Named constructor for successful Result - [ResultOk]
+/// [Result.ok] - named constructor for a successful Result - [Result].
 ///
-/// [Result.failed] - Named constructor for Result with error - [ResultFailed]
+/// [Result.failed] - named constructor for Result with error - [ResultFailed].
 /// {@endtemplate}
 sealed class Result<TData, TErr extends Failure> {
   /// {@macro result.class}
@@ -17,7 +17,7 @@ sealed class Result<TData, TErr extends Failure> {
   /// {@macro result.class}
   const factory Result.failed(TErr failure) = ResultFailed;
 
-  /// Mapping the result [ResultOk]
+  /// Conversion [ResultOk]
   Result<R, TErr> mapResult<R>(R Function(TData value) mapper) {
     return switch (this) {
       ResultOk<TData, TErr>(:final data) => Result.ok(mapper(data)),
@@ -27,8 +27,8 @@ sealed class Result<TData, TErr extends Failure> {
 }
 
 /// {@macro result.class}
-class ResultOk<TData, TErr extends Failure> extends Result<TData, TErr> {
-  /// Data
+final class ResultOk<TData, TErr extends Failure> extends Result<TData, TErr> {
+  /// Successful Result data
   final TData data;
 
   /// {@macro result.class}
@@ -36,8 +36,8 @@ class ResultOk<TData, TErr extends Failure> extends Result<TData, TErr> {
 }
 
 /// {@macro result.class}
-class ResultFailed<TData, TErr extends Failure> extends Result<TData, TErr> {
-  /// Error
+final class ResultFailed<TData, TErr extends Failure> extends Result<TData, TErr> {
+  /// Failed Result error
   final TErr failure;
 
   /// {@macro result.class}

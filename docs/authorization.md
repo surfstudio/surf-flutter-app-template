@@ -8,7 +8,7 @@ The `lib/api` folder is intended for API files.
 
 ### 2. Prepare entities and converters.
 
-A converter - `Converter` is used for data mapping. We recommend making a separate file for each converter.
+A converter - `Converter` is used for data mapping. 
 
 Example:
 ```dart
@@ -35,26 +35,12 @@ final class TokensEntityConverter extends ITokensEntityConverter {
 
 ### 3. Implement network error handling.
 
-For all repositories that make API calls, the `ApiCallerRepositoryMixin` mixin is used.
-
-Do the necessary error parsing inside the mixin. For API layer errors, the `ApiFailure`, `TimeoutFailure` 
-classes are used.
-
-```dart
-ApiFailure(
-        statusCode: statusCode,
-        message: 'This is a description of an error.',
-        original: error,
-        trace: trace,
-      )
-```
+Create network error classes and implement their mapping in repositories.
 
 ### 4. Implement AuthRepository
 
-For authorization on the project, it is proposed to use `AuthRepository`.
+The project uses AuthRepository for authorization.
 Conceptually, this class is the business logic of authentication.
-
-At the moment, only the logout method template is implemented, which is passed to the `AuthInterceptor`.
 
 ```dart
 abstract interface class IAuthRepository {
@@ -62,24 +48,6 @@ abstract interface class IAuthRepository {
   RequestOperation<void> logout();
 }
 ```
-
-```dart
-class AppScope implements IAppScope {
-  ...
-
-  _authDio = _initDio([
-  AuthInterceptor(
-  dio: _dio,
-  tokenOperationsService: _tokenOperationsService,
-  errorReportsService: _errorReportsService,
-  onLogout: _authRepository.logout,
-  ),
-  ]);
-  
-  ...
-}
-```
-
 
 Depending on the project requirements, add the necessary methods:
 * authentication state
@@ -150,33 +118,18 @@ It contains the following methods:
   If the request is successful, it returns the response. If the request fails, it logs the error and returns a failure.
 
 
-`AuthInterceptor` is fully implemented. For its dependency `TokenOperationsService`, it is necessary to customize 
-its dependency `RefreshTokensRepository`.
+`AuthInterceptor` is fully implemented. It needs to implement `ITokenOperationsService` and `IRefreshTokensRepository`.
 
 
 ### 6. RefreshTokensRepository
 
-1. Add an Api for working with authorization tokens.
-2. Add a converter for mapping data from the data layer to the domain layer. Use `Converter` 
-(see the example with the converter above in step 2).
-3. Add an api call to the `refreshTokens` method and replace the mock result.
-4. Depending on the application, add the necessary fields:
-```dart
-class AppScope implements IAppScope {
-...  
+Implement the `IRefreshTokensRepository` for interact with the api for working with authorization tokens.
 
-// TODO(anyone): needs customization for a specific project
-    _refreshTokensRepository = RefreshTokensRepository(
-      tokensStorage: _tokensStorage,
-      /// Add an Api for working with authorization tokens
-      /// Add a converter for mapping data from the data layer to the domain layer. Use `Converter`.
-    );
-```
 
 ### Classes for authorization
 
 * `AuthInterceptor` - fully implemented
 * `TokenOperationsService` - fully implemented
-* `RefreshTokensRepository` -  needs customization for a specific project
+* `RefreshTokensRepository` - needs implement for a specific project
 * `TokensStorage` - fully implemented
-* `AuthRepository` - needs customization for a specific project
+* `AuthRepository` - needs implement for a specific project

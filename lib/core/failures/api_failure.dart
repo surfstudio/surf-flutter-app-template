@@ -1,14 +1,16 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_template/features/common/domain/entity/operation/failure.dart';
+import 'package:flutter_template/core/architecture/domain/entity/failure.dart';
 
 /// {@template api_failure.class}
 /// API error.
 /// {@endtemplate}
 base class ApiFailure extends Failure<DioException> {
-  /// Error status code.
-  /// It can be either original from [DioException], or a special one parsed from the response body.
+  /// Special error status code parsed from the response body.
   /// Special status codes are described below and are checked through getters.
   final int? statusCode;
+
+  /// Original error status code from [DioException].
+  final int? responseBodyCode;
 
   /// Message
   final String? message;
@@ -18,6 +20,7 @@ base class ApiFailure extends Failure<DioException> {
     required super.original,
     required super.trace,
     this.statusCode,
+    this.responseBodyCode,
     this.message,
   });
 

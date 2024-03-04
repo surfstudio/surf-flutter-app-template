@@ -1,5 +1,5 @@
-import 'package:flutter_template/features/common/domain/entity/operation/request_operation.dart';
-import 'package:flutter_template/features/common/domain/entity/tokens/tokens_entity.dart';
+import 'package:flutter_template/core/architecture/domain/entity/request_operation.dart';
+import 'package:flutter_template/features/shared/domain/entities/tokens_entity.dart';
 
 /// {@template refresh_tokens_repository.class}
 /// Interface IRefreshTokensRepository.
