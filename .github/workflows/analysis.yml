@@ -47,6 +47,9 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Generate files
+        run: flutter pub run build_runner build
+
       - name: Run analyzer
         run: flutter analyze --fatal-warnings --fatal-infos .
 
