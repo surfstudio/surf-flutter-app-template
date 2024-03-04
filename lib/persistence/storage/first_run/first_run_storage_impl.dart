@@ -1,4 +1,4 @@
-import 'package:flutter_template/persistence/storage/first_run/i_first_run_storage.dart';
+import 'package:flutter_template/persistence/storage/first_run/first_run_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Repository for working with first app status
