@@ -23,7 +23,7 @@ jobs:
 
   analysis:
     needs: get_fvm_version
-    uses: surfstudio/flutter-ci-workflows/.github/workflows/analysis.yml@main
+    uses: ./.github/workflows/analysis.yml
     with:
       flutter-version: ${{ needs.get_fvm_version.outputs.flutter_version }}
 

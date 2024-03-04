@@ -1,0 +1,59 @@
+name: "Analysis"
+
+on:
+  workflow_call:
+    inputs:
+      flutter-version:
+        required: true
+        type: string
+
+jobs:
+  check_branch_content:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Content
+        id: check_files
+        uses: andstor/file-existence-action@v3
+        with:
+          files: "LICENSE, README.md, CHANGELOG.md, CONTRIBUTING.md"
+
+      - name: File exists
+        if: steps.check_files.outputs.files_exists == 'true'
+        run: echo Content is ok!
+
+  analysis:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Flutter with exact version
+        if: ${{ inputs.flutter-version != ''}}
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ inputs.flutter-version }}
+
+      - name: Install Flutter from Stable branch
+        if: ${{ inputs.flutter-version == ''}}
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run analyzer
+        run: flutter analyze --fatal-warnings --fatal-infos .
+
+      - name: Run formatter
+        run: dart format --set-exit-if-changed .
+
+      - name: Run package analyzer
+        uses: axel-op/dart-package-analyzer@v3
+        with:
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
