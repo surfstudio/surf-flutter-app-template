@@ -14,8 +14,7 @@ class ThemeModeProvider extends SingleChildStatelessWidget {
   const ThemeModeProvider({super.key});
 
   /// Get the [ThemeModeController] from the [BuildContext].
-  static ThemeModeController of(BuildContext context) =>
-      Provider.of<ThemeModeController>(context, listen: false);
+  static ThemeModeController of(BuildContext context) => Provider.of<ThemeModeController>(context, listen: false);
 
   @override
   Widget buildWithChild(BuildContext context, Widget? child) {

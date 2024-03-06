@@ -1,50 +1,101 @@
 import 'dart:async';
 import 'dart:developer';
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_template/common/widgets/di_scope.dart';
+import 'package:flutter_template/features/app/di/app_scope.dart';
+import 'package:flutter_template/features/theme_mode/presentation/theme_mode_controller.dart';
+import 'package:flutter_template/l10n/app_localizations.g.dart';
+import 'package:flutter_template/uikit/themes/theme_data.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:golden_toolkit/golden_toolkit.dart';
+import 'package:mocktail/mocktail.dart';
+import 'package:provider/provider.dart';
+import 'package:surf_widget_test_composer/surf_widget_test_composer.dart' as helper;
 
-import 'core/utils/testing_theme.dart';
+typedef OnTestMain = FutureOr<void> Function();
 
-const _tolerance = 0.18;
+class MockAppScope extends Mock implements IAppScope {}
 
-const _devices = [
-  Device.iphone11,
-  Device.phone,
-
-  /// some custom device.
-  Device(name: 'pixel 4a', size: Size(393, 851)),
-];
-
-/// List of themes used for testing.
-final themesForTesting = [
-  TestingTheme.light(),
-  TestingTheme.dark(),
-];
+class MockThemeModeController extends Mock implements ThemeModeController {}
 
 Future<void> testExecutable(FutureOr<void> Function() testMain) {
-  return GoldenToolkit.runWithConfiguration(
-    () async {
-      await loadAppFonts();
-      await testMain();
+  final mockAppScope = MockAppScope();
 
-      if (goldenFileComparator is LocalFileComparator) {
-        goldenFileComparator = CustomFileComparator(
-          '${(goldenFileComparator as LocalFileComparator).basedir}/goldens',
+  final themeController = MockThemeModeController();
+
+  final themes = [
+    helper.TestingTheme(
+      data: AppThemeData.darkTheme,
+      stringified: 'dark',
+      type: helper.ThemeType.dark,
+    ),
+    helper.TestingTheme(
+      data: AppThemeData.lightTheme,
+      stringified: 'light',
+      type: helper.ThemeType.light,
+    ),
+  ];
+
+  final devices = [
+    helper.TestDevice(
+      size: const Size(414, 896),
+      name: 'iphone11',
+      safeArea: const EdgeInsets.only(top: 44, bottom: 34),
+    ),
+    helper.TestDevice(
+      size: const Size(393, 851),
+      name: 'pixel 4a',
+    ),
+    helper.TestDevice(
+      size: const Size(320, 568),
+      name: 'iphone_se_1',
+    ),
+  ];
+
+  return helper.testExecutable(
+    testMain: testMain,
+    themes: themes,
+    wrapper: (child, mode, theme, localizations, locales) => helper.BaseWidgetTestWrapper(
+      childBuilder: child,
+      mode: mode,
+      themeData: theme,
+      dependencies: (widget) {
+        when(() => themeController.themeMode).thenReturn(ValueNotifier(mode.toThemeMode));
+        return DiScope<IAppScope>(
+          factory: (_) => mockAppScope,
+          child: Provider<ThemeModeController>.value(
+            value: themeController,
+            child: widget,
+          ),
         );
-      }
-    },
-    config: GoldenToolkitConfiguration(
-      defaultDevices: _devices,
-      enableRealShadows: true,
+      },
+      localizations: _localizationsDelegates,
+      localeOverrides: _localizations,
+    ),
+    backgroundColor: (theme) => theme.colorScheme.background,
+    devicesForTest: devices,
+    customComparator: CustomFileComparator(
+      '${(goldenFileComparator as LocalFileComparator).basedir}/goldens',
     ),
   );
 }
 
+const _localizations = [
+  Locale('en', 'EN'),
+  Locale('ru', 'RU'),
+];
+
+const _localizationsDelegates = [
+  AppLocalizations.delegate,
+  GlobalMaterialLocalizations.delegate,
+  GlobalWidgetsLocalizations.delegate,
+  GlobalCupertinoLocalizations.delegate,
+];
+
 class CustomFileComparator extends LocalFileComparator {
+  static const _tolerance = 0.18;
+
   CustomFileComparator(String testFile) : super(Uri.parse(testFile));
 
   @override
@@ -61,7 +112,7 @@ class CustomFileComparator extends LocalFileComparator {
     if (!result.passed) {
       log(
         'A tolerable difference of ${result.diffPercent * 100}% was found when comparing $golden.',
-        level: 2000,
+        level: 1999,
       );
     }
 
