@@ -219,6 +219,222 @@ abstract class AppLocalizations {
   /// **'Open UIKit'**
   String get debugScreenUikitNavigateButton;
 
+  /// No description provided for @debugScreenReloadAppMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Reload the app to see applied changes'**
+  String get debugScreenReloadAppMessage;
+
+  /// No description provided for @uiKitScreenTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'UI Kit'**
+  String get uiKitScreenTitle;
+
+  /// No description provided for @uiKitScreenTextFieldLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Text Field'**
+  String get uiKitScreenTextFieldLabel;
+
+  /// No description provided for @uiKitScreenCardText.
+  ///
+  /// In en, this message translates to:
+  /// **'Card'**
+  String get uiKitScreenCardText;
+
+  /// No description provided for @uiKitScreenText.
+  ///
+  /// In en, this message translates to:
+  /// **'Text'**
+  String get uiKitScreenText;
+
+  /// No description provided for @uiKitScreenPrimaryButtonText.
+  ///
+  /// In en, this message translates to:
+  /// **'Primary Button'**
+  String get uiKitScreenPrimaryButtonText;
+
+  /// No description provided for @uiKitScreenPrimaryButtonSnackText.
+  ///
+  /// In en, this message translates to:
+  /// **'Primary Button Pressed'**
+  String get uiKitScreenPrimaryButtonSnackText;
+
+  /// No description provided for @uiKitScreenSecondaryButtonText.
+  ///
+  /// In en, this message translates to:
+  /// **'Secondary Button'**
+  String get uiKitScreenSecondaryButtonText;
+
+  /// No description provided for @uiKitScreenSecondaryButtonSnackText.
+  ///
+  /// In en, this message translates to:
+  /// **'Secondary Button Pressed'**
+  String get uiKitScreenSecondaryButtonSnackText;
+
+  /// No description provided for @uiKitScreenTertiaryButtonText.
+  ///
+  /// In en, this message translates to:
+  /// **'Tertiary Button'**
+  String get uiKitScreenTertiaryButtonText;
+
+  /// No description provided for @uiKitScreenTertiaryButtonSnackText.
+  ///
+  /// In en, this message translates to:
+  /// **'Tertiary Button Pressed'**
+  String get uiKitScreenTertiaryButtonSnackText;
+
+  /// No description provided for @uiKitScreenTetradicButtonText.
+  ///
+  /// In en, this message translates to:
+  /// **'Tetradic button'**
+  String get uiKitScreenTetradicButtonText;
+
+  /// No description provided for @uiKitScreenTetradicButtonSnackText.
+  ///
+  /// In en, this message translates to:
+  /// **'Tetradic Button Pressed'**
+  String get uiKitScreenTetradicButtonSnackText;
+
+  /// No description provided for @uiKitScreenDangerSnackButtonText.
+  ///
+  /// In en, this message translates to:
+  /// **'Danger snack'**
+  String get uiKitScreenDangerSnackButtonText;
+
+  /// No description provided for @uiKitScreenDangerSnackText.
+  ///
+  /// In en, this message translates to:
+  /// **'Danger snack'**
+  String get uiKitScreenDangerSnackText;
+
+  /// No description provided for @uiKitScreenPositiveSnackButtonText.
+  ///
+  /// In en, this message translates to:
+  /// **'Positive snack'**
+  String get uiKitScreenPositiveSnackButtonText;
+
+  /// No description provided for @uiKitScreenPositiveSnackText.
+  ///
+  /// In en, this message translates to:
+  /// **'Positive snack'**
+  String get uiKitScreenPositiveSnackText;
+
+  /// No description provided for @uiKitScreenColorCardPrimaryName.
+  ///
+  /// In en, this message translates to:
+  /// **'Primary'**
+  String get uiKitScreenColorCardPrimaryName;
+
+  /// No description provided for @uiKitScreenColorCardSecondaryName.
+  ///
+  /// In en, this message translates to:
+  /// **'Secondary'**
+  String get uiKitScreenColorCardSecondaryName;
+
+  /// No description provided for @uiKitScreenColorCardSurfaceName.
+  ///
+  /// In en, this message translates to:
+  /// **'Surface'**
+  String get uiKitScreenColorCardSurfaceName;
+
+  /// No description provided for @uiKitScreenColorCardSurfaceSecondaryName.
+  ///
+  /// In en, this message translates to:
+  /// **'Surface Secondary'**
+  String get uiKitScreenColorCardSurfaceSecondaryName;
+
+  /// No description provided for @uiKitScreenColorCardBackgroundName.
+  ///
+  /// In en, this message translates to:
+  /// **'Background'**
+  String get uiKitScreenColorCardBackgroundName;
+
+  /// No description provided for @uiKitScreenColorCardBackgroundSecondaryName.
+  ///
+  /// In en, this message translates to:
+  /// **'Background Secondary'**
+  String get uiKitScreenColorCardBackgroundSecondaryName;
+
+  /// No description provided for @uiKitScreenColorCardBackgroundTertiaryName.
+  ///
+  /// In en, this message translates to:
+  /// **'Background Tertiary'**
+  String get uiKitScreenColorCardBackgroundTertiaryName;
+
+  /// No description provided for @uiKitScreenColorCardBackgroundTetradicName.
+  ///
+  /// In en, this message translates to:
+  /// **'Tetradic Background'**
+  String get uiKitScreenColorCardBackgroundTetradicName;
+
+  /// No description provided for @uiKitScreenColorCardDangerName.
+  ///
+  /// In en, this message translates to:
+  /// **'Danger'**
+  String get uiKitScreenColorCardDangerName;
+
+  /// No description provided for @uiKitScreenColorCardDangerSecondaryName.
+  ///
+  /// In en, this message translates to:
+  /// **'Danger Secondary'**
+  String get uiKitScreenColorCardDangerSecondaryName;
+
+  /// No description provided for @uiKitScreenColorCardTextFieldName.
+  ///
+  /// In en, this message translates to:
+  /// **'Text Field'**
+  String get uiKitScreenColorCardTextFieldName;
+
+  /// No description provided for @uiKitScreenColorCardTextFieldLabelName.
+  ///
+  /// In en, this message translates to:
+  /// **'Text Field Label'**
+  String get uiKitScreenColorCardTextFieldLabelName;
+
+  /// No description provided for @uiKitScreenColorCardTextFieldHelperName.
+  ///
+  /// In en, this message translates to:
+  /// **'Text Field Helper'**
+  String get uiKitScreenColorCardTextFieldHelperName;
+
+  /// No description provided for @uiKitScreenColorCardFrameTextFieldSecondaryName.
+  ///
+  /// In en, this message translates to:
+  /// **'Frame Text Field Secondary'**
+  String get uiKitScreenColorCardFrameTextFieldSecondaryName;
+
+  /// No description provided for @uiKitScreenColorCardInactiveName.
+  ///
+  /// In en, this message translates to:
+  /// **'Inactive'**
+  String get uiKitScreenColorCardInactiveName;
+
+  /// No description provided for @uiKitScreenColorCardPositiveName.
+  ///
+  /// In en, this message translates to:
+  /// **'Positive'**
+  String get uiKitScreenColorCardPositiveName;
+
+  /// No description provided for @uiKitScreenColorCardSkeletonPrimaryName.
+  ///
+  /// In en, this message translates to:
+  /// **'Skeleton Primary'**
+  String get uiKitScreenColorCardSkeletonPrimaryName;
+
+  /// No description provided for @uiKitScreenColorCardSkeletonSecondaryName.
+  ///
+  /// In en, this message translates to:
+  /// **'Skeleton Secondary'**
+  String get uiKitScreenColorCardSkeletonSecondaryName;
+
+  /// No description provided for @uiKitScreenColorCardSkeletonTertiaryName.
+  ///
+  /// In en, this message translates to:
+  /// **'Skeleton Tertiary'**
+  String get uiKitScreenColorCardSkeletonTertiaryName;
+
   /// No description provided for @featureExampleFailedLoadIpMessage.
   ///
   /// In en, this message translates to:

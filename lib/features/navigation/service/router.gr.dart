@@ -15,12 +15,6 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
-    DashRouter.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: WrappedRoute(child: const DashFlow()),
-      );
-    },
     DebugRouter.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -33,39 +27,13 @@ abstract class _$AppRouter extends RootStackRouter {
         child: WrappedRoute(child: const FeatureExampleFlow()),
       );
     },
-    InfoRouter.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: WrappedRoute(child: const InfoFlow()),
-      );
-    },
-    TempRouter.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: WrappedRoute(child: const TempFlow()),
-      );
-    },
     UiKitRouter.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const UiKitScreen(),
+        child: const UiKitFlow(),
       );
     },
   };
-}
-
-/// generated route for
-/// [DashFlow]
-class DashRouter extends PageRouteInfo<void> {
-  const DashRouter({List<PageRouteInfo>? children})
-      : super(
-          DashRouter.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'DashRouter';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -97,35 +65,7 @@ class FeatureExampleRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [InfoFlow]
-class InfoRouter extends PageRouteInfo<void> {
-  const InfoRouter({List<PageRouteInfo>? children})
-      : super(
-          InfoRouter.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'InfoRouter';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [TempFlow]
-class TempRouter extends PageRouteInfo<void> {
-  const TempRouter({List<PageRouteInfo>? children})
-      : super(
-          TempRouter.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'TempRouter';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [UiKitScreen]
+/// [UiKitFlow]
 class UiKitRouter extends PageRouteInfo<void> {
   const UiKitRouter({List<PageRouteInfo>? children})
       : super(

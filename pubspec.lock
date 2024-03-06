@@ -1002,6 +1002,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
+  surf_widget_test_composer:
+    dependency: "direct main"
+    description:
+      name: surf_widget_test_composer
+      sha256: f1886e143564363490bfa44bf7c4e8e88441bcf7ad1cfbb5102a74e94a6c91cf
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2"
   synchronized:
     dependency: transitive
     description:

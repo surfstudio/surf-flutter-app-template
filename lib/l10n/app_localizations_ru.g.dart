@@ -93,5 +93,113 @@ class AppLocalizationsRu extends AppLocalizations {
   String get debugScreenUikitNavigateButton => 'Открыть UIKit';
 
   @override
+  String get debugScreenReloadAppMessage => 'Перезагрузите приложение, чтобы увидеть примененные изменения';
+
+  @override
+  String get uiKitScreenTitle => 'UI Kit';
+
+  @override
+  String get uiKitScreenTextFieldLabel => 'Text Field';
+
+  @override
+  String get uiKitScreenCardText => 'Card';
+
+  @override
+  String get uiKitScreenText => 'Text';
+
+  @override
+  String get uiKitScreenPrimaryButtonText => 'Primary Button';
+
+  @override
+  String get uiKitScreenPrimaryButtonSnackText => 'Primary Button Pressed';
+
+  @override
+  String get uiKitScreenSecondaryButtonText => 'Secondary Button';
+
+  @override
+  String get uiKitScreenSecondaryButtonSnackText => 'Secondary Button Pressed';
+
+  @override
+  String get uiKitScreenTertiaryButtonText => 'Tertiary Button';
+
+  @override
+  String get uiKitScreenTertiaryButtonSnackText => 'Tertiary Button Pressed';
+
+  @override
+  String get uiKitScreenTetradicButtonText => 'Tetradic button';
+
+  @override
+  String get uiKitScreenTetradicButtonSnackText => 'Tetradic Button Pressed';
+
+  @override
+  String get uiKitScreenDangerSnackButtonText => 'Danger snack';
+
+  @override
+  String get uiKitScreenDangerSnackText => 'Danger snack';
+
+  @override
+  String get uiKitScreenPositiveSnackButtonText => 'Positive snack';
+
+  @override
+  String get uiKitScreenPositiveSnackText => 'Positive snack';
+
+  @override
+  String get uiKitScreenColorCardPrimaryName => 'Primary';
+
+  @override
+  String get uiKitScreenColorCardSecondaryName => 'Secondary';
+
+  @override
+  String get uiKitScreenColorCardSurfaceName => 'Surface';
+
+  @override
+  String get uiKitScreenColorCardSurfaceSecondaryName => 'Surface Secondary';
+
+  @override
+  String get uiKitScreenColorCardBackgroundName => 'Background';
+
+  @override
+  String get uiKitScreenColorCardBackgroundSecondaryName => 'Background Secondary';
+
+  @override
+  String get uiKitScreenColorCardBackgroundTertiaryName => 'Background Tertiary';
+
+  @override
+  String get uiKitScreenColorCardBackgroundTetradicName => 'Tetradic Background';
+
+  @override
+  String get uiKitScreenColorCardDangerName => 'Danger';
+
+  @override
+  String get uiKitScreenColorCardDangerSecondaryName => 'Danger Secondary';
+
+  @override
+  String get uiKitScreenColorCardTextFieldName => 'Text Field';
+
+  @override
+  String get uiKitScreenColorCardTextFieldLabelName => 'Text Field Label';
+
+  @override
+  String get uiKitScreenColorCardTextFieldHelperName => 'Text Field Helper';
+
+  @override
+  String get uiKitScreenColorCardFrameTextFieldSecondaryName => 'Frame Text Field Secondary';
+
+  @override
+  String get uiKitScreenColorCardInactiveName => 'Inactive';
+
+  @override
+  String get uiKitScreenColorCardPositiveName => 'Positive';
+
+  @override
+  String get uiKitScreenColorCardSkeletonPrimaryName => 'Skeleton Primary';
+
+  @override
+  String get uiKitScreenColorCardSkeletonSecondaryName => 'Skeleton Secondary';
+
+  @override
+  String get uiKitScreenColorCardSkeletonTertiaryName => 'Skeleton Tertiary';
+
+  @override
   String get featureExampleFailedLoadIpMessage => 'Не удалось загрузить IP-адрес';
 }
