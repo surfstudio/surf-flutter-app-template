@@ -76,7 +76,7 @@ final class AppScopeRegister {
     const urlTypeConverter = UrlConverter();
     final configStorage = ConfigStorageImpl(prefs);
 
-    final rawUrl = await configStorage.getUrlType();
+    final rawUrl = configStorage.getUrlType();
     final savedUrl = urlTypeConverter.converter.convertNullable(rawUrl);
 
     return savedUrl;

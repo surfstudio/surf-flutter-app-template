@@ -1,29 +1,31 @@
 import 'package:flutter_template/persistence/storage/config_storage/config_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// {@template config_storage_impl.class}
 /// Persistent storage for config settings.
 ///
 /// Based on SharedPreferences.
+/// {@endtemplate}
 class ConfigStorageImpl implements IConfigStorage {
   final SharedPreferences _prefs;
 
-  /// Create an instance [ConfigStorageImpl].
+  /// {@macro config_storage_impl.class}
   const ConfigStorageImpl(this._prefs);
 
   @override
-  Future<String?> getProxyUrl() async {
-    return _prefs.getString(ConfigStorageKeys.proxyUrl.keyString);
-  }
+  String? getProxyUrl() => _prefs.getString(ConfigStorageKeys.proxyUrl.keyString);
 
   @override
-  Future<void> setProxyUrl({required String proxyUrl}) async {
+  Future<void> setProxyUrl({String? proxyUrl}) async {
+    if (proxyUrl == null) {
+      await _prefs.remove(ConfigStorageKeys.proxyUrl.keyString);
+      return;
+    }
     await _prefs.setString(ConfigStorageKeys.proxyUrl.keyString, proxyUrl);
   }
 
   @override
-  Future<String?> getUrlType() async {
-    return _prefs.getString(ConfigStorageKeys.urlType.keyString);
-  }
+  String? getUrlType() => _prefs.getString(ConfigStorageKeys.urlType.keyString);
 
   @override
   Future<void> setUrlType({required String urlType}) {

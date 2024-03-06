@@ -21,30 +21,7 @@ final class DebugRepository implements IDebugRepository {
         _urlConverter = urlConverter;
 
   @override
-  RequestOperation<String?> proxyUrl() async {
-    try {
-      final proxyUrl = await _configStorage.getProxyUrl();
-      return Result.ok(proxyUrl);
-    } on Object catch (e, s) {
-      return Result.failed(Failure(original: e, trace: s));
-    }
-  }
-
-  @override
-  RequestOperation<Url?> url() async {
-    try {
-      final urlType = await _configStorage.getUrlType();
-
-      if (urlType == null) return const ResultOk(null);
-
-      return Result.ok(_urlConverter.convert(urlType));
-    } on Object catch (e, s) {
-      return Result.failed(Failure(original: e, trace: s));
-    }
-  }
-
-  @override
-  RequestOperation<void> saveProxyUrl(String proxyUrl) async {
+  RequestOperation<void> saveProxyUrl(String? proxyUrl) async {
     try {
       await _configStorage.setProxyUrl(proxyUrl: proxyUrl);
       return const ResultOk(null);
@@ -54,7 +31,7 @@ final class DebugRepository implements IDebugRepository {
   }
 
   @override
-  RequestOperation<void> saveUrl(Url url) async {
+  RequestOperation<void> saveServerUrl(Url url) async {
     try {
       await _configStorage.setUrlType(urlType: _urlConverter.convertReverse(url));
       return const ResultOk(null);
