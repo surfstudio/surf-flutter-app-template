@@ -2,91 +2,46 @@ import 'package:elementary/elementary.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/config/url.dart';
-import 'package:flutter_template/features/debug/presentation/screens/debug/debug_wm.dart';
+import 'package:flutter_template/features/debug/presentation/debug/debug_wm.dart';
 import 'package:flutter_template/features/theme_mode/presentation/widgets/theme_mode_builder.dart';
 import 'package:flutter_template/l10n/app_localizations_x.dart';
 
+/// {@template debug_screen.class}
 /// Debug screens.
-class DebugScreen extends ElementaryWidget<IDebugScreenWidgetModel> {
-  /// Create an instance [DebugScreen].
+/// {@endtemplate}
+class DebugScreen extends ElementaryWidget<IDebugScreenWM> {
+  /// {@macro debug_screen.class}
   const DebugScreen({
     Key? key,
-    WidgetModelFactory wmFactory = debugScreenWidgetModelFactory,
+    WidgetModelFactory wmFactory = debugScreenWMFactory,
   }) : super(wmFactory, key: key);
 
   @override
-  Widget build(IDebugScreenWidgetModel wm) {
+  Widget build(IDebugScreenWM wm) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Debug screen'),
-        actions: [
-          GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: wm.switchThemeMode,
-            child: const Padding(
-              padding: EdgeInsets.all(8),
-              child: Icon(Icons.light_mode_outlined),
-            ),
-          ),
-        ],
-      ),
-      body: _Body(
-        urlState: wm.urlState,
-        urlChanged: wm.urlChange,
-        switchServer: wm.switchServer,
-        setProxy: wm.setProxy,
-        openUiKit: wm.openUiKit,
-        proxyController: wm.proxyEditingController,
-        setThemeMode: wm.setThemeMode,
-      ),
-    );
-  }
-}
-
-class _Body extends StatelessWidget {
-  final ValueListenable<Url> urlState;
-  final void Function(Url?) urlChanged;
-  final void Function(Url) switchServer;
-  final void Function(ThemeMode?) setThemeMode;
-  final Function() setProxy;
-  final VoidCallback openUiKit;
-  final TextEditingController proxyController;
-
-  const _Body({
-    required this.urlState,
-    required this.urlChanged,
-    required this.switchServer,
-    required this.setThemeMode,
-    required this.setProxy,
-    required this.openUiKit,
-    required this.proxyController,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    return Padding(
-      padding: const EdgeInsets.all(8),
-      child: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            _ServerSwitchCard(
-              urlState: urlState,
-              urlChange: urlChanged,
-              switchServer: switchServer,
-            ),
-            _ProxyCard(
-              setProxy: setProxy,
-              proxyController: proxyController,
-            ),
-            _ThemeCard(setThemeMode: setThemeMode),
-            Card(
-              child: ListTile(
-                onTap: openUiKit,
-                title: Text(l10n.debugScreenUikitNavigateButton),
+      body: Padding(
+        padding: const EdgeInsets.all(8),
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              _ServerSwitchCard(
+                urlState: wm.serverUrlState,
+                onUrlRadioButtonPressed: wm.onUrlRadioButtonPressed,
+                onChangeServerPressed: wm.onChangeServerPressed,
               ),
-            ),
-          ],
+              _ProxyCard(
+                onConnectProxyPressed: wm.onConnectProxyPressed,
+                proxyController: wm.proxyEditingController,
+              ),
+              _ThemeCard(onSetThemeMode: wm.onSetThemeMode),
+              Card(
+                child: ListTile(
+                  onTap: wm.openUiKit,
+                  title: Text(wm.l10n.debugScreenUikitNavigateButton),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -95,18 +50,19 @@ class _Body extends StatelessWidget {
 
 class _ServerSwitchCard extends StatelessWidget {
   final ValueListenable<Url> urlState;
-  final void Function(Url?) urlChange;
-  final void Function(Url) switchServer;
+  final ValueChanged<Url?> onUrlRadioButtonPressed;
+  final ValueChanged<Url> onChangeServerPressed;
 
   const _ServerSwitchCard({
     required this.urlState,
-    required this.urlChange,
-    required this.switchServer,
+    required this.onUrlRadioButtonPressed,
+    required this.onChangeServerPressed,
   });
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(8),
@@ -117,30 +73,18 @@ class _ServerSwitchCard extends StatelessWidget {
               valueListenable: urlState,
               builder: (context, urlState, _) {
                 return Column(
-                  children: <Widget>[
-                    RadioListTile<Url>(
-                      groupValue: urlState,
-                      title: Text(Url.qa.toString()),
-                      subtitle: Text(Url.qa.value),
-                      value: Url.qa,
-                      onChanged: urlChange,
-                    ),
-                    RadioListTile<Url>(
-                      groupValue: urlState,
-                      title: Text(Url.prod.toString()),
-                      subtitle: Text(Url.prod.value),
-                      value: Url.prod,
-                      onChanged: urlChange,
-                    ),
-                    RadioListTile<Url>(
-                      groupValue: urlState,
-                      title: Text(Url.dev.toString()),
-                      subtitle: Text(Url.dev.value),
-                      value: Url.dev,
-                      onChanged: urlChange,
+                  children: [
+                    ...Url.values.map(
+                      (url) => RadioListTile<Url>(
+                        groupValue: urlState,
+                        title: Text(url.toString()),
+                        subtitle: Text(url.value),
+                        value: url,
+                        onChanged: onUrlRadioButtonPressed,
+                      ),
                     ),
                     MaterialButton(
-                      onPressed: () => switchServer(urlState),
+                      onPressed: () => onChangeServerPressed(urlState),
                       child: Text(
                         l10n.debugScreenServerConnectButton,
                         style: const TextStyle(fontSize: 16),
@@ -158,17 +102,18 @@ class _ServerSwitchCard extends StatelessWidget {
 }
 
 class _ProxyCard extends StatelessWidget {
-  final Function() setProxy;
+  final VoidCallback onConnectProxyPressed;
   final TextEditingController proxyController;
 
   const _ProxyCard({
-    required this.setProxy,
+    required this.onConnectProxyPressed,
     required this.proxyController,
   });
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(8),
@@ -194,7 +139,7 @@ class _ProxyCard extends StatelessWidget {
                   ),
                 ),
                 MaterialButton(
-                  onPressed: setProxy,
+                  onPressed: onConnectProxyPressed,
                   child: Text(
                     l10n.debugScreenProxyConnectButton,
                     style: const TextStyle(fontSize: 16),
@@ -210,9 +155,9 @@ class _ProxyCard extends StatelessWidget {
 }
 
 class _ThemeCard extends StatelessWidget {
-  final void Function(ThemeMode?) setThemeMode;
+  final ValueChanged<ThemeMode?> onSetThemeMode;
 
-  const _ThemeCard({required this.setThemeMode});
+  const _ThemeCard({required this.onSetThemeMode});
 
   @override
   Widget build(BuildContext context) {
@@ -231,19 +176,19 @@ class _ThemeCard extends StatelessWidget {
                     groupValue: themeMode,
                     title: Text(l10n.debugScreenThemeLight),
                     value: ThemeMode.light,
-                    onChanged: setThemeMode,
+                    onChanged: onSetThemeMode,
                   ),
                   RadioListTile<ThemeMode>(
                     groupValue: themeMode,
                     title: Text(l10n.debugScreenThemeDark),
                     value: ThemeMode.dark,
-                    onChanged: setThemeMode,
+                    onChanged: onSetThemeMode,
                   ),
                   RadioListTile<ThemeMode>(
                     groupValue: themeMode,
                     title: Text(l10n.debugScreenThemeSystem),
                     value: ThemeMode.system,
-                    onChanged: setThemeMode,
+                    onChanged: onSetThemeMode,
                   ),
                 ],
               ),

@@ -17,6 +17,7 @@ class ValueChangedMock<T> extends Mock {
   void call(T value);
 }
 
+
 /// Mock of FutureOr<R> Function(A).
 class FutureOrCallback<R, A> extends Mock {
   FutureOr<R> call(A value);

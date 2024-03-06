@@ -1,25 +1,28 @@
-import 'package:auto_route/auto_route.dart';
+import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/features/navigation/domain/entity/app_route_names.dart';
-import 'package:flutter_template/features/theme_mode/presentation/theme_mode_provider.dart';
+import 'package:flutter_template/features/debug/presentation/ui_kit/ui_kit_wm.dart';
+import 'package:flutter_template/l10n/app_localizations_x.dart';
 import 'package:flutter_template/uikit/colors/color_scheme.dart';
 
+/// {@template ui_kit_screen.class}
 /// UI-kit screen.
-@RoutePage(name: AppRouteNames.uiKitScreen)
-class UiKitScreen extends StatelessWidget {
-  /// @nodoc.
-  const UiKitScreen({super.key});
+/// {@endtemplate}
+class UiKitScreen extends ElementaryWidget<IUiKitWM> {
+  /// {@macro ui_kit_screen.class}
+  const UiKitScreen({
+    Key? key,
+    WidgetModelFactory wmFactory = uiKitScreenWMFactory,
+  }) : super(wmFactory, key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final colorScheme = AppColorScheme.of(context);
+  Widget build(IUiKitWM wm) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('UI Kit'),
+        title: Text(wm.l10n.uiKitScreenTitle),
         actions: [
           GestureDetector(
             behavior: HitTestBehavior.opaque,
-            onTap: ThemeModeProvider.of(context).switchThemeMode,
+            onTap: wm.switchTheme,
             child: const Padding(
               padding: EdgeInsets.all(8),
               child: Icon(Icons.light_mode_outlined),
@@ -32,130 +35,90 @@ class UiKitScreen extends StatelessWidget {
         children: [
           TextField(
             style: TextStyle(
-              color: colorScheme.onBackground,
+              color: wm.colorScheme.onBackground,
             ),
             decoration: InputDecoration(
-              labelText: 'Text Field',
-              labelStyle: TextStyle(color: colorScheme.textFieldLabel),
+              labelText: wm.l10n.uiKitScreenTextFieldLabel,
+              labelStyle: TextStyle(color: wm.colorScheme.textFieldLabel),
               border: OutlineInputBorder(
-                borderSide: BorderSide(color: colorScheme.frameTextFieldSecondary),
+                borderSide: BorderSide(color: wm.colorScheme.frameTextFieldSecondary),
               ),
               enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: colorScheme.frameTextFieldSecondary),
+                borderSide: BorderSide(color: wm.colorScheme.frameTextFieldSecondary),
               ),
               focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: colorScheme.primary),
+                borderSide: BorderSide(color: wm.colorScheme.primary),
               ),
-              fillColor: colorScheme.background,
+              fillColor: wm.colorScheme.background,
               filled: true,
             ),
           ),
           Card(
-            color: colorScheme.surface,
+            color: wm.colorScheme.surface,
             child: ListTile(
               title: Text(
-                'Card',
-                style: TextStyle(color: colorScheme.onSurface),
+                wm.l10n.uiKitScreenCardText,
+                style: TextStyle(color: wm.colorScheme.onSurface),
               ),
             ),
           ),
           Text(
-            'Text',
-            style: TextStyle(color: colorScheme.onBackground),
+            wm.l10n.uiKitScreenText,
+            style: TextStyle(color: wm.colorScheme.onBackground),
           ),
           ElevatedButton(
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Primary Button Pressed')),
-              );
-            },
+            onPressed: wm.onPrimaryButtonPressed,
             style: ElevatedButton.styleFrom(
-              backgroundColor: colorScheme.primary,
-              foregroundColor: colorScheme.onPrimary,
+              backgroundColor: wm.colorScheme.primary,
+              foregroundColor: wm.colorScheme.onPrimary,
             ),
-            child: const Text('Primary Button'),
+            child: Text(wm.l10n.uiKitScreenPrimaryButtonText),
           ),
           ElevatedButton(
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Secondary Button Pressed')),
-              );
-            },
+            onPressed: wm.onSecondaryButtonPressed,
             style: ElevatedButton.styleFrom(
-              backgroundColor: colorScheme.secondary,
-              foregroundColor: colorScheme.onSecondary,
+              backgroundColor: wm.colorScheme.secondary,
+              foregroundColor: wm.colorScheme.onSecondary,
             ),
-            child: const Text('Secondary Button'),
+            child: Text(wm.l10n.uiKitScreenSecondaryButtonText),
           ),
           ElevatedButton(
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Tertiary Button Pressed')),
-              );
-            },
+            onPressed: wm.onTertiaryButtonPressed,
             style: ElevatedButton.styleFrom(
-              backgroundColor: colorScheme.backgroundTertiary,
-              foregroundColor: colorScheme.onBackground,
+              backgroundColor: wm.colorScheme.backgroundTertiary,
+              foregroundColor: wm.colorScheme.onBackground,
             ),
-            child: const Text('Tertiary Button'),
+            child: Text(wm.l10n.uiKitScreenTertiaryButtonText),
           ),
           ElevatedButton(
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Tetradic Button Pressed')),
-              );
-            },
+            onPressed: wm.onTetradicButtonPressed,
             style: ElevatedButton.styleFrom(
-              backgroundColor: colorScheme.tetradicBackground,
-              foregroundColor: colorScheme.onBackground,
+              backgroundColor: wm.colorScheme.tetradicBackground,
+              foregroundColor: wm.colorScheme.onBackground,
             ),
-            child: const Text('Tetradic Button'),
+            child: Text(wm.l10n.uiKitScreenTetradicButtonText),
           ),
           Row(
             children: [
               Expanded(
                 child: ElevatedButton(
-                  onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        backgroundColor: colorScheme.danger,
-                        content: Text(
-                          'Danger snack',
-                          style: TextStyle(
-                            color: colorScheme.onDanger,
-                          ),
-                        ),
-                      ),
-                    );
-                  },
+                  onPressed: wm.onDangerSnackButtonPressed,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: colorScheme.danger,
-                    foregroundColor: colorScheme.onDanger,
+                    backgroundColor: wm.colorScheme.danger,
+                    foregroundColor: wm.colorScheme.onDanger,
                   ),
-                  child: const Text('Danger snack'),
+                  child: Text(wm.l10n.uiKitScreenDangerSnackButtonText),
                 ),
               ),
               const SizedBox(width: 8),
               Expanded(
                 child: ElevatedButton(
-                  onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        backgroundColor: colorScheme.positive,
-                        content: Text(
-                          'Positive snack',
-                          style: TextStyle(
-                            color: colorScheme.onPositive,
-                          ),
-                        ),
-                      ),
-                    );
-                  },
+                  onPressed: wm.onPositiveSnackButtonPressed,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: colorScheme.positive,
-                    foregroundColor: colorScheme.onPositive,
+                    backgroundColor: wm.colorScheme.positive,
+                    foregroundColor: wm.colorScheme.onPositive,
                   ),
-                  child: const Text('Positive snack'),
+                  child: Text(wm.l10n.uiKitScreenPositiveSnackButtonText),
                 ),
               ),
             ],
@@ -179,6 +142,8 @@ class _ColorGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = AppColorScheme.of(context);
+    final l10n = context.l10n;
+
     return GridView.count(
       crossAxisCount: 2,
       shrinkWrap: true,
@@ -186,99 +151,99 @@ class _ColorGrid extends StatelessWidget {
       padding: EdgeInsets.zero,
       children: [
         _ColorCard(
-          colorName: 'Primary',
+          colorName: l10n.uiKitScreenColorCardPrimaryName,
           color: colorScheme.primary,
           textColor: colorScheme.onPrimary,
         ),
         _ColorCard(
-          colorName: 'Secondary',
+          colorName: l10n.uiKitScreenColorCardSecondaryName,
           color: colorScheme.secondary,
           textColor: colorScheme.onSecondary,
         ),
         _ColorCard(
-          colorName: 'Surface',
+          colorName: l10n.uiKitScreenColorCardSurfaceName,
           color: colorScheme.surface,
           textColor: colorScheme.onSurface,
         ),
         _ColorCard(
-          colorName: 'Surface Secondary',
+          colorName: l10n.uiKitScreenColorCardSurfaceSecondaryName,
           color: colorScheme.surfaceSecondary,
           textColor: colorScheme.onSurface,
         ),
         _ColorCard(
-          colorName: 'Background',
+          colorName: l10n.uiKitScreenColorCardBackgroundName,
           color: colorScheme.background,
           textColor: colorScheme.onBackground,
         ),
         _ColorCard(
-          colorName: 'Background Secondary',
+          colorName: l10n.uiKitScreenColorCardBackgroundSecondaryName,
           color: colorScheme.backgroundSecondary,
           textColor: colorScheme.onBackground,
         ),
         _ColorCard(
-          colorName: 'Background Tertiary',
+          colorName: l10n.uiKitScreenColorCardBackgroundTertiaryName,
           color: colorScheme.backgroundTertiary,
           textColor: colorScheme.onBackground,
         ),
         _ColorCard(
-          colorName: 'Tetradic Background',
+          colorName: l10n.uiKitScreenColorCardBackgroundTetradicName,
           color: colorScheme.tetradicBackground,
           textColor: colorScheme.onBackground,
         ),
         _ColorCard(
-          colorName: 'Danger',
+          colorName: l10n.uiKitScreenColorCardDangerName,
           color: colorScheme.danger,
           textColor: colorScheme.onDanger,
         ),
         _ColorCard(
-          colorName: 'Danger Secondary',
+          colorName: l10n.uiKitScreenColorCardDangerSecondaryName,
           color: colorScheme.dangerSecondary,
           textColor: colorScheme.onDanger,
         ),
         _ColorCard(
-          colorName: 'Text Field',
+          colorName: l10n.uiKitScreenColorCardTextFieldName,
           color: colorScheme.textField,
-          textColor: Colors.black,
+          textColor: colorScheme.onSurface,
         ),
         _ColorCard(
-          colorName: 'Text Field Label',
+          colorName: l10n.uiKitScreenColorCardTextFieldLabelName,
           color: colorScheme.textFieldLabel,
-          textColor: Colors.black,
+          textColor: colorScheme.onSurface,
         ),
         _ColorCard(
-          colorName: 'Text Field Helper',
+          colorName: l10n.uiKitScreenColorCardTextFieldHelperName,
           color: colorScheme.textFieldHelper,
-          textColor: Colors.black,
+          textColor: colorScheme.onSurface,
         ),
         _ColorCard(
-          colorName: 'Frame Text Field Secondary',
+          colorName: l10n.uiKitScreenColorCardFrameTextFieldSecondaryName,
           color: colorScheme.frameTextFieldSecondary,
-          textColor: Colors.black,
+          textColor: colorScheme.onSurface,
         ),
         _ColorCard(
-          colorName: 'Inactive',
+          colorName: l10n.uiKitScreenColorCardInactiveName,
           color: colorScheme.inactive,
-          textColor: Colors.black,
+          textColor: colorScheme.onSurface,
         ),
         _ColorCard(
-          colorName: 'Positive',
+          colorName: l10n.uiKitScreenColorCardPositiveName,
           color: colorScheme.positive,
           textColor: colorScheme.onPositive,
         ),
         _ColorCard(
-          colorName: 'Skeleton Primary',
+          colorName: l10n.uiKitScreenColorCardSkeletonPrimaryName,
           color: colorScheme.skeletonPrimary,
           textColor: colorScheme.skeletonOnPrimary,
         ),
         _ColorCard(
-          colorName: 'Skeleton Secondary',
+          colorName: l10n.uiKitScreenColorCardSkeletonSecondaryName,
           color: colorScheme.skeletonSecondary,
-          textColor: Colors.black,
+          textColor: colorScheme.onSurface,
         ),
         _ColorCard(
-          colorName: 'Skeleton Tertiary',
+          colorName: l10n.uiKitScreenColorCardSkeletonTertiaryName,
           color: colorScheme.skeletonTertiary,
-          textColor: Colors.black,
+          textColor: colorScheme.onSurface,
         ),
       ],
     );
@@ -289,6 +254,7 @@ class _ColorCard extends StatelessWidget {
   final Color color;
   final String colorName;
   final Color textColor;
+
   const _ColorCard({
     required this.color,
     required this.colorName,
@@ -297,6 +263,8 @@ class _ColorCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = AppColorScheme.of(context);
+
     return Card(
       color: color,
       child: Align(
@@ -304,16 +272,13 @@ class _ColorCard extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8),
           child: ColoredBox(
-            color: Colors.white,
+            color: colorScheme.surface,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 1),
               child: Text(
                 colorName,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                ),
+                style: TextStyle(color: colorScheme.onSurface, fontSize: 16),
               ),
             ),
           ),
