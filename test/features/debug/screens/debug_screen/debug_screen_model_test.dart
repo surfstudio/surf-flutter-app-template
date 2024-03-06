@@ -1,9 +1,8 @@
 import 'package:flutter_template/common/utils/logger/i_log_writer.dart';
-import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/url.dart';
 import 'package:flutter_template/core/architecture/domain/entity/result.dart';
 import 'package:flutter_template/features/debug/domain/repositories/i_debug_repository.dart';
-import 'package:flutter_template/features/debug/presentation/screens/debug/debug_model.dart';
+import 'package:flutter_template/features/debug/presentation/debug/debug_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -15,41 +14,32 @@ void main() {
   late DebugScreenModel model;
   final debugRepository = MockDebugRepository();
   final logWriter = MockLogWriter();
-  const config = AppConfig(url: Url.qa);
   const serverUrl = Url.dev;
   const proxyMock = 'proxy';
 
   setUpAll(() {
     model = DebugScreenModel(
-      debugRepository,
-      config,
+      debugRepository: debugRepository,
       logWriter: logWriter,
     );
 
-    when(() => debugRepository.saveUrl(serverUrl)).thenAnswer((_) => Future.value(const Result.ok(null)));
+    when(() => debugRepository.saveServerUrl(serverUrl)).thenAnswer((_) => Future.value(const Result.ok(null)));
     when(() => debugRepository.saveProxyUrl(proxyMock)).thenAnswer((_) => Future.value(const Result.ok(null)));
   });
 
-  group(
-    'Network config: ',
+  test(
+    'Save server',
     () {
-      const proxyMock = 'proxy';
+      model.saveServerUrl(serverUrl);
+      verify(() => debugRepository.saveServerUrl(serverUrl));
+    },
+  );
 
-      test(
-        'Switch server',
-        () {
-          model.switchServer(serverUrl);
-          verify(() => debugRepository.saveUrl(serverUrl));
-        },
-      );
-
-      test(
-        'Set proxy',
-        () {
-          model.setProxy(proxyMock);
-          verify(() => debugRepository.saveProxyUrl(proxyMock));
-        },
-      );
+  test(
+    'Save proxy',
+    () {
+      model.saveProxyUrl(proxyMock);
+      verify(() => debugRepository.saveProxyUrl(proxyMock));
     },
   );
 }
