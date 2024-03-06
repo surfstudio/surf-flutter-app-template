@@ -1,16 +1,15 @@
-import 'package:flutter_template/config/environment/environment.dart';
+// TODO(init-project): Add server urls.
 
-/// Server urls.
-abstract class Url {
-  /// TRest url.
-  static String get testUrl => 'http://uinames.com/api/';
+/// Server url.
+enum Url {
+  /// Dev url.
+  dev('https://example.com/'),
 
   /// Prod url.
-  static String get prodUrl => 'https://prod.surfstudio.ru/api';
+  prod('https://example.com/');
 
-  /// Dev url.
-  static String get devUrl => 'https://localhost:9999/food/hs/ExchangeSotr';
+  /// Url value.
+  final String value;
 
-  /// Base url.
-  static String get baseUrl => Environment.instance().config.url;
+  const Url(this.value);
 }

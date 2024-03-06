@@ -6,21 +6,12 @@
 /// static const String screenPath = 'screenPath';
 /// ```
 abstract class AppRoutePaths {
-  /// Path to temp screen.
-  static const tempPath = '/temp';
-
   /// Path to debug screen.
-  static const debugPath = 'debug';
+  static const debugPath = '/debug';
 
   /// Path to ui kit screen.
   static const uiKitPath = '/ui_kit';
 
-  /// Path to dash screen.
-  static const dashPath = 'dash';
-
-  /// Path to info screen.
-  static const infoPath = 'info';
-
-  /// Path to logs history screen.
-  static const logHistory = '/logHistory';
+  /// Path to feature example screen.
+  static const featureExample = '/feature_example';
 }

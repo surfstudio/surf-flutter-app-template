@@ -1,8 +1,10 @@
+/// Endpoints for {{ service.name }}
 class {{ service.name }}Urls {
-  {{ service.name }}Urls._();
+  {% for path in service.paths %}{#
+  #}{% for operation in path.operations %}{% for line in operation.summary|splitLines %}
+  /// {{ line }}{% endfor %}{% endfor %}
+  static const String {% for name in path.name|split:'.' %}{% if forloop.first %}{{ name }}{% endif %}{% endfor %} = '{{ path.path }}';
+  {% endfor %}
 
-  {% for path in service.paths %}static const String {{ path.name }}{% if path.hasParameters %}{#
-  #}({% for parameter in path.parameters %}String {{ parameter.name }}{% if not forloop.last %}, {% endif %}{% endfor %}){#
-  #} =>{% else %} ={% endif %} '{{ path.path }}';{% if not forloop.last %}
-  {% endif %}{% endfor %}
+  const {{ service.name }}Urls._();
 }
