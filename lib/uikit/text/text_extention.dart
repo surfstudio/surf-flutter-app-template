@@ -63,5 +63,4 @@ class AppTextTheme extends ThemeExtension<AppTextTheme> {
   }
 }
 
-Never _throwThemeExceptionFromFunc(BuildContext context) =>
-    throw Exception('$AppTextTheme not found in $context');
+Never _throwThemeExceptionFromFunc(BuildContext context) => throw Exception('$AppTextTheme not found in $context');
