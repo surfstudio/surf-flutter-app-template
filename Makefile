@@ -50,7 +50,7 @@ format:
 # By default, we display a message about available tasks
 all:
 	@echo "Available tasks:"
-	@echo " - init_app: flutter clean, clean_ios, pub get, pub run build_runner, dart format -l 100"
+	@echo " - init_app: flutter clean, clean_ios, pub get, pub run build_runner, dart format -l 120"
 	@echo " - clean_ios: Clears local dependencies for iOS."
 	@echo " - fvm_vscode: The script creates (or overwrites, if it already exists) a settings file for Visual Studio Code with a specific set of FVM parameters."
 	@echo " - version: Installing the desired version of fvm and pubget"
@@ -60,4 +60,4 @@ all:
 	@echo " - reset_goldens: Deletes all created golden tests and re-generates them."
 	@echo " - check_coverage: The script allows you to automate the process of testing the coverage of the source code of the Flutter project and generating the corresponding report."
 	@echo " - spider_build: Runs spider build, formats the code, runs golden tests."
-	@echo " - format: fvm dart format -l 100 lib test"
+	@echo " - format: fvm dart format -l 120 lib test"
