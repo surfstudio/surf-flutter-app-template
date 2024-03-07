@@ -1,0 +1,9 @@
+**.freezed.dart linguist-generated=true
+lib/**/*.g.dart linguist-generated=true
+lib/**/*.gr.dart linguist-generated=true
+lib/**/*.freezed.dart linguist-generated=true
+**/__generated__/*.ast.gql.dart linguist-generated=true
+**/__generated__/*.gql.dart linguist-generated=true
+**/__generated__/*.data.gql.dart linguist-generated=true
+**/__generated__/*.req.gql.dart linguist-generated=true
+**/__generated__/*.var.gql.dart linguist-generated=true

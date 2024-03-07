@@ -1,8 +1,14 @@
 /// Persistent storage for config settings.
-abstract class IConfigSettingsStorage {
+abstract class IConfigStorage {
   /// Returns proxy url.
-  Future<String?> getProxyUrl();
+  String? getProxyUrl();
 
-  /// Save proxy url [proxy].
-  Future<void> setProxyUrl({required String proxy});
+  /// Save proxy url [proxyUrl].
+  Future<void> setProxyUrl({String? proxyUrl});
+
+  /// Returns url type.
+  String? getUrlType();
+
+  /// Save url type [urlType].
+  Future<void> setUrlType({required String urlType});
 }

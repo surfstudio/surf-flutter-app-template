@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
+import 'package:nested/nested.dart';
 import 'package:provider/provider.dart';
 
 /// Factory that returns the dependency scope.
-typedef ScopeFactory<T> = T Function();
+typedef ScopeFactory<T> = T Function(BuildContext context);
 
 /// Di container. T - return type(for example [AppScope]).
-class DiScope<T> extends StatefulWidget {
+class DiScope<T> extends SingleChildStatefulWidget {
   /// Factory that returns the dependency scope.
   final ScopeFactory<T> factory;
-
-  /// The widget below this widget in the tree.
-  final Widget child;
 
   /// The method called when disposing the widget.
   final Function(T)? dispose;
@@ -19,22 +17,22 @@ class DiScope<T> extends StatefulWidget {
   /// Create an instance [DiScope].
   const DiScope({
     required this.factory,
-    required this.child,
     this.dispose,
     super.key,
+    super.child,
   });
 
   @override
   State<DiScope<T>> createState() => _DiScopeState<T>();
 }
 
-class _DiScopeState<T> extends State<DiScope<T>> {
-  late T scope;
+class _DiScopeState<T> extends SingleChildState<DiScope<T>> {
+  late final T scope;
 
   @override
   void initState() {
     super.initState();
-    scope = widget.factory();
+    scope = widget.factory(context);
   }
 
   @override
@@ -44,10 +42,10 @@ class _DiScopeState<T> extends State<DiScope<T>> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget buildWithChild(BuildContext context, Widget? child) {
     return Provider<T>(
       create: (_) => scope,
-      child: widget.child,
+      child: child,
     );
   }
 }
