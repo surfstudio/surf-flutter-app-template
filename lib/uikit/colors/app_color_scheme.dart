@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_template/uikit/colors/dark_color_palette.dart';
 
-const _double006 = 0.06;
+const _skeletonOpacity = 0.06;
 
 /// App brand color scheme.
 ///
@@ -155,7 +155,7 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
         inactive = ColorPalette.black,
         positive = ColorPalette.greenYellow,
         onPositive = ColorPalette.chineseBlack,
-        skeletonPrimary = ColorPalette.black.withOpacity(_double006),
+        skeletonPrimary = ColorPalette.black.withOpacity(_skeletonOpacity),
         skeletonOnPrimary = ColorPalette.white,
         skeletonSecondary = ColorPalette.cultured,
         skeletonTertiary = ColorPalette.lightSilver,
@@ -186,7 +186,7 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
         inactive = DarkColorPalette.black,
         positive = DarkColorPalette.inchworm,
         onPositive = DarkColorPalette.black,
-        skeletonPrimary = DarkColorPalette.black.withOpacity(_double006),
+        skeletonPrimary = DarkColorPalette.black.withOpacity(_skeletonOpacity),
         skeletonOnPrimary = DarkColorPalette.white,
         skeletonSecondary = DarkColorPalette.raisinBlack,
         skeletonTertiary = DarkColorPalette.lightSilver,
