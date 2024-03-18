@@ -45,10 +45,10 @@ abstract interface class IDebugScreenWM with ILocalizationMixin implements IWidg
   /// Callback of clicking on the url radio button.
   void onUrlRadioButtonPressed(Url? url);
 
-  /// Сallback of pressed on the server change button.
+  /// Callback of pressed on the server change button.
   void onChangeServerPressed(Url url);
 
-  /// Сallback of pressed on the connect proxy button.
+  /// Callback of pressed on the connect proxy button.
   void onConnectProxyPressed();
 
   /// Set theme mode for app.
