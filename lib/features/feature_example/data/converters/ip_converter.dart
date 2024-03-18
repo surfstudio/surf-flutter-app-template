@@ -13,7 +13,7 @@ final class IpConverter extends IIpConverter {
   const IpConverter();
 
   @override
-  IpEntity convert(IpDto from) {
-    return IpEntity(ip: from.ip);
+  IpEntity convert(IpDto input) {
+    return IpEntity(ip: input.ip);
   }
 }
