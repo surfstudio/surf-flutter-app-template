@@ -68,12 +68,12 @@ The result of calling the repository method is processed in the `switch` in the 
                 - repositories *(interfaces)*
             - presentation
 
-              **if feature contains multiple sub-features/screens**
+              **if feature contains multiple sub-features**
 
-                - {sub_feature_name/screen_name}
-                    - {sub_feature_name/screen_name}_widget.dart
-                    - {sub_feature_name/screen_name}_wm.dart
-                    - {sub_feature_name/screen_name}_model.dart
+                - {sub_feature_name}
+                    - {sub_feature_name}_widget.dart
+                    - {sub_feature_name}_wm.dart
+                    - {sub_feature_name}_model.dart
                     - {sub_feature_name}_flow.dart
                 - widgets
 
@@ -141,12 +141,12 @@ The folder has the code of the project and consists of the following folders:
     - repositories — interfaces for repositories relevant to the feature.
   - presentation - contains:
 
-   **if feature contains multiple sub-features/screens**
+   **if feature contains multiple sub-features**
 
-    - {sub_feature_name/screen_name} - screens or sub-features relevant to the feature, with each screen or sub-feature in a separate self-titled folder containing the following in separate files:
-        - {sub_feature_name/screen_name}_widget.dart - ElementaryWidget.
-        - {sub_feature_name/screen_name}_wm.dart - WidgetModel.
-        - {sub_feature_name/screen_name}_model.dart - ElementaryModel.
+    - {sub_feature_name} - screens or sub-features relevant to the feature, with each screen or sub-feature in a separate self-titled folder containing the following in separate files:
+        - {sub_feature_name}_widget.dart - ElementaryWidget.
+        - {sub_feature_name}_wm.dart - WidgetModel.
+        - {sub_feature_name}_model.dart - ElementaryModel.
         - {sub_feature_name}_flow.dart - the entry point to the sub-feature.
     - widgets — widgets relevant to the feature.
     

@@ -25,7 +25,6 @@ final class _UrlConverter extends Converter<Url, String> {
   Url convert(String input) {
     return switch (input) {
       'dev' => Url.dev,
-      'qa' => Url.qa,
       'prod' => Url.prod,
       _ => throw ArgumentError('Unknown url type: $input'),
     };
@@ -39,7 +38,6 @@ final class _UrlReverseConverter extends Converter<String, Url> {
   String convert(Url input) {
     return switch (input) {
       Url.dev => 'dev',
-      Url.qa => 'qa',
       Url.prod => 'prod',
     };
   }
