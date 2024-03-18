@@ -77,7 +77,7 @@
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 
 # FVM cache of the selected version.
-.fvm/flutter_sdk
+.fvm/
 
 # Mason
 mason-lock.json
