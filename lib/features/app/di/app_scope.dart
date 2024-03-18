@@ -18,7 +18,6 @@ final class AppScope implements IAppScope {
   @override
   final Dio dio;
 
-  
   @override
   final AnalyticService analyticsService;
   @override
