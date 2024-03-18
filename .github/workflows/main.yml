@@ -27,7 +27,7 @@ jobs:
 
   testing:
     needs: [analysis, get_fvm_version]
-    uses: ./.github/workflows/testing.yml
+    uses: surfstudio/flutter-ci-workflows/.github/workflows/testing.yml@main
     with:
       flutter-version: ${{ needs.get_fvm_version.outputs.flutter_version }}
     secrets:
