@@ -113,7 +113,7 @@ class _ProxyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-    
+
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(8),
