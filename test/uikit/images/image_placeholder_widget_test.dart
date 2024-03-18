@@ -31,8 +31,7 @@ void main() {
           ),
         );
 
-      await tester.pumpWidgetBuilder(builder.build(),
-          surfaceSize: const Size(AppSizes.double400, AppSizes.double600));
+      await tester.pumpWidgetBuilder(builder.build(), surfaceSize: const Size(AppSizes.double400, AppSizes.double600));
 
       await screenMatchesGolden(tester, 'image_placeholder_widget');
     },

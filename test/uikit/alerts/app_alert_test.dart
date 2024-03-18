@@ -57,8 +57,7 @@ void main() {
           ),
         );
 
-      await tester.pumpWidgetBuilder(builder.build(),
-          surfaceSize: const Size(AppSizes.double400, AppSizes.double1000));
+      await tester.pumpWidgetBuilder(builder.build(), surfaceSize: const Size(AppSizes.double400, AppSizes.double1000));
 
       await screenMatchesGolden(tester, 'app_alert');
     },

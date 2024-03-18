@@ -24,7 +24,7 @@ final class DebugRepository implements IDebugRepository {
   RequestOperation<void> saveProxyUrl(String? proxyUrl) async {
     try {
       await _configStorage.setProxyUrl(proxyUrl: proxyUrl);
-      
+
       return const ResultOk(null);
     } on Object catch (error, s) {
       return Result.failed(Failure(original: error, trace: s));
@@ -35,7 +35,7 @@ final class DebugRepository implements IDebugRepository {
   RequestOperation<void> saveServerUrl(Url url) async {
     try {
       await _configStorage.setUrlType(urlType: _urlConverter.convertReverse(url));
-      
+
       return const ResultOk(null);
     } on Object catch (error, s) {
       return Result.failed(Failure(original: error, trace: s));

@@ -16,7 +16,7 @@ class FeatureExampleScreen extends ElementaryWidget<IFeatureExampleWM> {
   @override
   Widget build(IFeatureExampleWM wm) {
     const FeatureExampleStateInitial();
-    
+
     return Scaffold(
       appBar: AppBar(),
       body: Center(

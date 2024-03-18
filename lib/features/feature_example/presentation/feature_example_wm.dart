@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:elementary/elementary.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -24,9 +26,7 @@ FeatureExampleWM defaultFeatureExampleWMFactory(BuildContext context) {
 }
 
 /// Interface for [FeatureExampleWM].
-abstract interface class IFeatureExampleWM
-    with ThemeIModelMixin, ILocalizationMixin
-    implements IWidgetModel {
+abstract interface class IFeatureExampleWM with ThemeIModelMixin, ILocalizationMixin implements IWidgetModel {
   /// State of screen.
   ValueListenable<FeatureExampleState> get state;
 }
@@ -45,7 +45,7 @@ final class FeatureExampleWM extends WidgetModel<FeatureExampleScreen, FeatureEx
 
   @override
   void initWidgetModel() {
-    model.loadIp().ignore();
+    unawaited(model.loadIp());
     super.initWidgetModel();
   }
 }

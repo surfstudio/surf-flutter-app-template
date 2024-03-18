@@ -37,8 +37,7 @@ void main() {
           ),
         );
 
-      await tester.pumpWidgetBuilder(builder.build(),
-          surfaceSize: const Size(_double200, _double350));
+      await tester.pumpWidgetBuilder(builder.build(), surfaceSize: const Size(_double200, _double350));
 
       await screenMatchesGolden(tester, 'incative_wrapper');
     },

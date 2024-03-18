@@ -17,8 +17,7 @@ class FirstRunStorage implements IFirstRunStorage {
   }
 
   @override
-  Future<void> setIsFirstRun({required bool value}) =>
-      _prefs.setBool(FirstRunStorageKeys.firstRun.keyName, value);
+  Future<void> setIsFirstRun({required bool value}) => _prefs.setBool(FirstRunStorageKeys.firstRun.keyName, value);
 }
 
 /// Keys for [FirstRunStorage].
