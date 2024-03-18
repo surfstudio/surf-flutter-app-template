@@ -69,7 +69,7 @@ The rules for branches, commits, and pull requests are the same as for a project
 
 ### Settings
 
-Project line length: 100 characters.
+Project line length: 120 characters.
 
 ### Dependencies
 

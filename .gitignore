@@ -76,7 +76,6 @@
 
 # FVM cache of the selected version.
 .fvm/
-.fvm/flutter_sdk
 
 # Mason
 mason-lock.json
