@@ -22,13 +22,16 @@ dependencies:
   intl: 0.18.1
   json_annotation: 4.8.1
   logger: 1.4.0
+  nested: 1.0.0
   path: 1.9.0
   path_provider: 2.1.2
   provider: 6.1.1
   retrofit: 4.0.3
+  rxdart: 0.27.7
   shared_preferences: 2.2.2
   shimmer: 3.0.0
   surf_logger: 2.0.0
+  surf_widget_test_composer: 0.0.2
 
 dev_dependencies:
   auto_route_generator: 7.3.2

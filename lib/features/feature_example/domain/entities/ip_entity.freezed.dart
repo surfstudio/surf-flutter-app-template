@@ -25,8 +25,7 @@ mixin _$IpEntity {
 
 /// @nodoc
 abstract class $IpEntityCopyWith<$Res> {
-  factory $IpEntityCopyWith(IpEntity value, $Res Function(IpEntity) then) =
-      _$IpEntityCopyWithImpl<$Res, IpEntity>;
+  factory $IpEntityCopyWith(IpEntity value, $Res Function(IpEntity) then) = _$IpEntityCopyWithImpl<$Res, IpEntity>;
   @useResult
   $Res call({String ip});
 }
@@ -66,8 +65,7 @@ abstract class _$$IpEntityImplCopyWith<$Res> implements $IpEntityCopyWith<$Res> 
 /// @nodoc
 class __$$IpEntityImplCopyWithImpl<$Res> extends _$IpEntityCopyWithImpl<$Res, _$IpEntityImpl>
     implements _$$IpEntityImplCopyWith<$Res> {
-  __$$IpEntityImplCopyWithImpl(_$IpEntityImpl _value, $Res Function(_$IpEntityImpl) _then)
-      : super(_value, _then);
+  __$$IpEntityImplCopyWithImpl(_$IpEntityImpl _value, $Res Function(_$IpEntityImpl) _then) : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
@@ -100,9 +98,7 @@ class _$IpEntityImpl implements _IpEntity {
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$IpEntityImpl &&
-            (identical(other.ip, ip) || other.ip == ip));
+        (other.runtimeType == runtimeType && other is _$IpEntityImpl && (identical(other.ip, ip) || other.ip == ip));
   }
 
   @override
