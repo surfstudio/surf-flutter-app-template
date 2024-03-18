@@ -57,8 +57,7 @@ final class AuthInterceptor extends QueuedInterceptorsWrapper {
       case ResultOk(data: final tokens):
         await _tokenOperationsService.saveTokens(tokens);
 
-        final retryResult =
-            await _retryRequest(err.requestOptions..addAuthHeader(tokens.accessToken));
+        final retryResult = await _retryRequest(err.requestOptions..addAuthHeader(tokens.accessToken));
 
         switch (retryResult) {
           case ResultOk(data: final response):
@@ -75,8 +74,7 @@ final class AuthInterceptor extends QueuedInterceptorsWrapper {
   }
 
   // ignore: avoid-dynamic
-  Future<Result<Response<dynamic>, Failure<DioException>>> _retryRequest(
-      RequestOptions requestOptions) async {
+  Future<Result<Response<dynamic>, Failure<DioException>>> _retryRequest(RequestOptions requestOptions) async {
     try {
       final response = await _dio.request(
         requestOptions.path,

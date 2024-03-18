@@ -12,20 +12,20 @@ A converter - `Converter` is used for data mapping.
 
 Example:
 ```dart
-/// tokens_entity_converter.dart
+/// auth_tokens_storage_dto_converter.dart
 /// Converter for [TokensEntity]
-typedef ITokensEntityConverter = Converter<TokensEntity, TokensData>;
+typedef IAuthTokensStorageDtoConverter = Converter<AuthTokensStorageDto, TokensApiDto>;
 
-/// {@template tokens_entity_converter.class}
+/// {@template auth_tokens_storage_dto_converter.class}
 /// Implementation [ITokensEntityConverter]
 /// {@endtemplate}
-final class TokensEntityConverter extends ITokensEntityConverter {
-  /// {@macro tokens_entity_converter.class}
-  const TokensEntityConverter();
+final class AuthTokensStorageDtoConverter extends IAuthTokensStorageDtoConverter {
+  /// {@macro auth_tokens_storage_dto_converter.class}
+  const AuthTokensStorageDtoConverter();
 
   @override
-  TokensEntity convert(TokensData from) {
-    return TokensEntity(
+  AuthTokensStorageDto convert(TokensApiDto from) {
+    return AuthTokensStorageDto(
       accessToken: from.accessToken,
       refreshToken: from.refreshToken,
     );
@@ -129,7 +129,7 @@ Implement the `IRefreshTokensRepository` for interact with the api for working w
 ### Classes for authorization
 
 * `AuthInterceptor` - fully implemented
-* `TokenOperationsService` - fully implemented
+* `TokenOperationsService` - needs implement
 * `RefreshTokensRepository` - needs implement for a specific project
 * `TokensStorage` - fully implemented
 * `AuthRepository` - needs implement for a specific project
