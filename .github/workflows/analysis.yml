@@ -44,11 +44,11 @@ jobs:
         with:
           channel: "stable"
 
-      - name: Install dependencies
-        run: flutter pub get
-
       - name: Run formatter
         run: dart format -l 120 --set-exit-if-changed lib test
+
+      - name: Install dependencies
+        run: flutter pub get
 
       - name: Generate files
         run: dart run build_runner build --delete-conflicting-outputs
