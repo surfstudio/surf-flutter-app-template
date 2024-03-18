@@ -47,14 +47,14 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Run formatter
+        run: dart format -l 120 --set-exit-if-changed lib test
+
       - name: Generate files
         run: dart run build_runner build --delete-conflicting-outputs
 
       - name: Run analyzer
         run: flutter analyze --fatal-warnings --fatal-infos .
-
-      - name: Run formatter
-        run: dart format -l 100 --set-exit-if-changed $(find lib test -name '*.dart' -not -name '*.g.dart' -and -not -name '*.freezed.dart')
 
       - name: Run package analyzer
         uses: axel-op/dart-package-analyzer@v3
