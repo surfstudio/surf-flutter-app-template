@@ -291,4 +291,4 @@ The Basic guide for creating a native splash screen is [here](docs/splash.md).
 
 There are some additional useful guides in the [docs](docs) folder:
 - [Shared preferences](docs/shared_preferences.md)
-
+- [Authorization](docs/authorization.md)

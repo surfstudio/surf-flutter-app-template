@@ -17,6 +17,7 @@ final class AppScope implements IAppScope {
   final SharedPreferences sharedPreferences;
   @override
   final Dio dio;
+
   @override
   final AnalyticService analyticsService;
   @override
