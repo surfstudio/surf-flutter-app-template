@@ -1,8 +1,9 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_template/features/common/utils/sizes/app_sizes.dart';
 import 'package:flutter_template/features/debug/presentation/ui_kit/ui_kit_wm.dart';
 import 'package:flutter_template/l10n/app_localizations_x.dart';
-import 'package:flutter_template/uikit/colors/color_scheme.dart';
+import 'package:flutter_template/uikit/colors/app_color_scheme.dart';
 
 /// {@template ui_kit_screen.class}
 /// UI-kit screen.
@@ -16,42 +17,39 @@ class UiKitScreen extends ElementaryWidget<IUiKitWM> {
 
   @override
   Widget build(IUiKitWM wm) {
+    final onBackgroundColor = wm.colorScheme.onBackground;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(wm.l10n.uiKitScreenTitle),
         actions: [
           GestureDetector(
-            behavior: HitTestBehavior.opaque,
             onTap: wm.switchTheme,
+            behavior: HitTestBehavior.opaque,
             child: const Padding(
-              padding: EdgeInsets.all(8),
+              padding: EdgeInsets.all(AppSizes.double8),
               child: Icon(Icons.light_mode_outlined),
             ),
           ),
         ],
       ),
       body: ListView(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(AppSizes.double16),
         children: [
           TextField(
-            style: TextStyle(
-              color: wm.colorScheme.onBackground,
-            ),
             decoration: InputDecoration(
               labelText: wm.l10n.uiKitScreenTextFieldLabel,
               labelStyle: TextStyle(color: wm.colorScheme.textFieldLabel),
-              border: OutlineInputBorder(
-                borderSide: BorderSide(color: wm.colorScheme.frameTextFieldSecondary),
+              filled: true,
+              fillColor: wm.colorScheme.background,
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: wm.colorScheme.primary),
               ),
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: wm.colorScheme.frameTextFieldSecondary),
               ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: wm.colorScheme.primary),
-              ),
-              fillColor: wm.colorScheme.background,
-              filled: true,
             ),
+            style: TextStyle(color: onBackgroundColor),
           ),
           Card(
             color: wm.colorScheme.surface,
@@ -64,37 +62,37 @@ class UiKitScreen extends ElementaryWidget<IUiKitWM> {
           ),
           Text(
             wm.l10n.uiKitScreenText,
-            style: TextStyle(color: wm.colorScheme.onBackground),
+            style: TextStyle(color: onBackgroundColor),
           ),
           ElevatedButton(
             onPressed: wm.onPrimaryButtonPressed,
             style: ElevatedButton.styleFrom(
-              backgroundColor: wm.colorScheme.primary,
               foregroundColor: wm.colorScheme.onPrimary,
+              backgroundColor: wm.colorScheme.primary,
             ),
             child: Text(wm.l10n.uiKitScreenPrimaryButtonText),
           ),
           ElevatedButton(
             onPressed: wm.onSecondaryButtonPressed,
             style: ElevatedButton.styleFrom(
-              backgroundColor: wm.colorScheme.secondary,
               foregroundColor: wm.colorScheme.onSecondary,
+              backgroundColor: wm.colorScheme.secondary,
             ),
             child: Text(wm.l10n.uiKitScreenSecondaryButtonText),
           ),
           ElevatedButton(
             onPressed: wm.onTertiaryButtonPressed,
             style: ElevatedButton.styleFrom(
+              foregroundColor: onBackgroundColor,
               backgroundColor: wm.colorScheme.backgroundTertiary,
-              foregroundColor: wm.colorScheme.onBackground,
             ),
             child: Text(wm.l10n.uiKitScreenTertiaryButtonText),
           ),
           ElevatedButton(
             onPressed: wm.onTetradicButtonPressed,
             style: ElevatedButton.styleFrom(
+              foregroundColor: onBackgroundColor,
               backgroundColor: wm.colorScheme.tetradicBackground,
-              foregroundColor: wm.colorScheme.onBackground,
             ),
             child: Text(wm.l10n.uiKitScreenTetradicButtonText),
           ),
@@ -104,30 +102,30 @@ class UiKitScreen extends ElementaryWidget<IUiKitWM> {
                 child: ElevatedButton(
                   onPressed: wm.onDangerSnackButtonPressed,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: wm.colorScheme.danger,
                     foregroundColor: wm.colorScheme.onDanger,
+                    backgroundColor: wm.colorScheme.danger,
                   ),
                   child: Text(wm.l10n.uiKitScreenDangerSnackButtonText),
                 ),
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: AppSizes.double8),
               Expanded(
                 child: ElevatedButton(
                   onPressed: wm.onPositiveSnackButtonPressed,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: wm.colorScheme.positive,
                     foregroundColor: wm.colorScheme.onPositive,
+                    backgroundColor: wm.colorScheme.positive,
                   ),
                   child: Text(wm.l10n.uiKitScreenPositiveSnackButtonText),
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: AppSizes.double16),
           const _ColorGrid(),
         ]
             .map((e) => Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  padding: const EdgeInsets.symmetric(vertical: AppSizes.double4),
                   child: e,
                 ))
             .toList(),
@@ -143,106 +141,107 @@ class _ColorGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = AppColorScheme.of(context);
     final l10n = context.l10n;
+    const crossAxisCount = 2;
 
     return GridView.count(
-      crossAxisCount: 2,
-      shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
       padding: EdgeInsets.zero,
+      crossAxisCount: crossAxisCount,
       children: [
         _ColorCard(
-          colorName: l10n.uiKitScreenColorCardPrimaryName,
           color: colorScheme.primary,
+          colorName: l10n.uiKitScreenColorCardPrimaryName,
           textColor: colorScheme.onPrimary,
         ),
         _ColorCard(
-          colorName: l10n.uiKitScreenColorCardSecondaryName,
           color: colorScheme.secondary,
+          colorName: l10n.uiKitScreenColorCardSecondaryName,
           textColor: colorScheme.onSecondary,
         ),
         _ColorCard(
-          colorName: l10n.uiKitScreenColorCardSurfaceName,
           color: colorScheme.surface,
+          colorName: l10n.uiKitScreenColorCardSurfaceName,
           textColor: colorScheme.onSurface,
         ),
         _ColorCard(
-          colorName: l10n.uiKitScreenColorCardSurfaceSecondaryName,
           color: colorScheme.surfaceSecondary,
+          colorName: l10n.uiKitScreenColorCardSurfaceSecondaryName,
           textColor: colorScheme.onSurface,
         ),
         _ColorCard(
-          colorName: l10n.uiKitScreenColorCardBackgroundName,
           color: colorScheme.background,
+          colorName: l10n.uiKitScreenColorCardBackgroundName,
           textColor: colorScheme.onBackground,
         ),
         _ColorCard(
-          colorName: l10n.uiKitScreenColorCardBackgroundSecondaryName,
           color: colorScheme.backgroundSecondary,
+          colorName: l10n.uiKitScreenColorCardBackgroundSecondaryName,
           textColor: colorScheme.onBackground,
         ),
         _ColorCard(
-          colorName: l10n.uiKitScreenColorCardBackgroundTertiaryName,
           color: colorScheme.backgroundTertiary,
+          colorName: l10n.uiKitScreenColorCardBackgroundTertiaryName,
           textColor: colorScheme.onBackground,
         ),
         _ColorCard(
-          colorName: l10n.uiKitScreenColorCardBackgroundTetradicName,
           color: colorScheme.tetradicBackground,
+          colorName: l10n.uiKitScreenColorCardBackgroundTetradicName,
           textColor: colorScheme.onBackground,
         ),
         _ColorCard(
-          colorName: l10n.uiKitScreenColorCardDangerName,
           color: colorScheme.danger,
+          colorName: l10n.uiKitScreenColorCardDangerName,
           textColor: colorScheme.onDanger,
         ),
         _ColorCard(
-          colorName: l10n.uiKitScreenColorCardDangerSecondaryName,
           color: colorScheme.dangerSecondary,
+          colorName: l10n.uiKitScreenColorCardDangerSecondaryName,
           textColor: colorScheme.onDanger,
         ),
         _ColorCard(
-          colorName: l10n.uiKitScreenColorCardTextFieldName,
           color: colorScheme.textField,
+          colorName: l10n.uiKitScreenColorCardTextFieldName,
           textColor: colorScheme.onSurface,
         ),
         _ColorCard(
-          colorName: l10n.uiKitScreenColorCardTextFieldLabelName,
           color: colorScheme.textFieldLabel,
+          colorName: l10n.uiKitScreenColorCardTextFieldLabelName,
           textColor: colorScheme.onSurface,
         ),
         _ColorCard(
-          colorName: l10n.uiKitScreenColorCardTextFieldHelperName,
           color: colorScheme.textFieldHelper,
+          colorName: l10n.uiKitScreenColorCardTextFieldHelperName,
           textColor: colorScheme.onSurface,
         ),
         _ColorCard(
-          colorName: l10n.uiKitScreenColorCardFrameTextFieldSecondaryName,
           color: colorScheme.frameTextFieldSecondary,
+          colorName: l10n.uiKitScreenColorCardFrameTextFieldSecondaryName,
           textColor: colorScheme.onSurface,
         ),
         _ColorCard(
-          colorName: l10n.uiKitScreenColorCardInactiveName,
           color: colorScheme.inactive,
+          colorName: l10n.uiKitScreenColorCardInactiveName,
           textColor: colorScheme.onSurface,
         ),
         _ColorCard(
-          colorName: l10n.uiKitScreenColorCardPositiveName,
           color: colorScheme.positive,
+          colorName: l10n.uiKitScreenColorCardPositiveName,
           textColor: colorScheme.onPositive,
         ),
         _ColorCard(
-          colorName: l10n.uiKitScreenColorCardSkeletonPrimaryName,
           color: colorScheme.skeletonPrimary,
+          colorName: l10n.uiKitScreenColorCardSkeletonPrimaryName,
           textColor: colorScheme.skeletonOnPrimary,
         ),
         _ColorCard(
-          colorName: l10n.uiKitScreenColorCardSkeletonSecondaryName,
           color: colorScheme.skeletonSecondary,
+          colorName: l10n.uiKitScreenColorCardSkeletonSecondaryName,
           textColor: colorScheme.onSurface,
         ),
         _ColorCard(
-          colorName: l10n.uiKitScreenColorCardSkeletonTertiaryName,
           color: colorScheme.skeletonTertiary,
+          colorName: l10n.uiKitScreenColorCardSkeletonTertiaryName,
           textColor: colorScheme.onSurface,
         ),
       ],
@@ -251,15 +250,15 @@ class _ColorGrid extends StatelessWidget {
 }
 
 class _ColorCard extends StatelessWidget {
-  final Color color;
-  final String colorName;
-  final Color textColor;
-
   const _ColorCard({
     required this.color,
     required this.colorName,
     required this.textColor,
   });
+
+  final Color color;
+  final String colorName;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -270,15 +269,15 @@ class _ColorCard extends StatelessWidget {
       child: Align(
         alignment: Alignment.bottomCenter,
         child: Padding(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.all(AppSizes.double8),
           child: ColoredBox(
             color: colorScheme.surface,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 1),
+              padding: const EdgeInsets.symmetric(vertical: AppSizes.double1, horizontal: AppSizes.double2),
               child: Text(
                 colorName,
+                style: TextStyle(color: colorScheme.onSurface),
                 textAlign: TextAlign.center,
-                style: TextStyle(color: colorScheme.onSurface, fontSize: 16),
               ),
             ),
           ),

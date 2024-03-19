@@ -8,12 +8,6 @@ import 'package:flutter_template/features/debug/domain/repositories/i_debug_repo
 import 'package:flutter_template/persistence/storage/config_storage/config_storage_impl.dart';
 import 'package:provider/provider.dart';
 
-/// Interface for Debug DI Scope.
-abstract interface class IDebugScope implements IDisposableObject {
-  /// Debug repository
-  abstract final IDebugRepository debugRepository;
-}
-
 /// {@template debug_scope.class}
 /// Dependencies scope of Debug module.
 /// {@endtemplate}
@@ -21,7 +15,7 @@ final class DebugScope extends DisposableObject implements IDebugScope {
   @override
   final IDebugRepository debugRepository;
 
-  /// factory constructor for [DebugScope]
+  /// Factory constructor for [DebugScope].
   factory DebugScope.create(BuildContext context) {
     final appScope = context.read<IAppScope>();
 
@@ -35,4 +29,10 @@ final class DebugScope extends DisposableObject implements IDebugScope {
 
   /// {@macro debug_scope.class}
   DebugScope(this.debugRepository);
+}
+
+/// Interface for Debug DI Scope.
+abstract interface class IDebugScope implements IDisposableObject {
+  /// Debug repository.
+  abstract final IDebugRepository debugRepository;
 }

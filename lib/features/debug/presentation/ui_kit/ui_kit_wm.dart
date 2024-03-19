@@ -1,8 +1,8 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/common/mixin/localization_mixin.dart';
-import 'package:flutter_template/common/mixin/theme_mixin.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
+import 'package:flutter_template/features/common/utils/mixin/theme_wm_mixin.dart';
 import 'package:flutter_template/features/debug/presentation/ui_kit/ui_kit_model.dart';
 import 'package:flutter_template/features/debug/presentation/ui_kit/ui_kit_screen.dart';
 import 'package:flutter_template/features/theme_mode/presentation/theme_mode_provider.dart';
@@ -55,50 +55,50 @@ class UiKitWM extends WidgetModel<UiKitScreen, UiKitModel> with LocalizationMixi
   }) : _scaffoldMessenger = scaffoldMessenger;
 
   @override
-  void switchTheme() => ThemeModeProvider.of(context).switchThemeMode();
+  Future<void> switchTheme() => ThemeModeProvider.of(context).switchThemeMode();
 
   @override
   void onPrimaryButtonPressed() {
-    _scaffoldMessenger.showSnackBar(SnackBar(content: Text(l10n.uiKitScreenPrimaryButtonSnackText)));
+    final _ = _scaffoldMessenger.showSnackBar(SnackBar(content: Text(l10n.uiKitScreenPrimaryButtonSnackText)));
   }
 
   @override
   void onSecondaryButtonPressed() {
-    _scaffoldMessenger.showSnackBar(SnackBar(content: Text(l10n.uiKitScreenSecondaryButtonSnackText)));
+    final _ = _scaffoldMessenger.showSnackBar(SnackBar(content: Text(l10n.uiKitScreenSecondaryButtonSnackText)));
   }
 
   @override
   void onTetradicButtonPressed() {
-    _scaffoldMessenger.showSnackBar(SnackBar(content: Text(l10n.uiKitScreenTetradicButtonSnackText)));
+    final _ = _scaffoldMessenger.showSnackBar(SnackBar(content: Text(l10n.uiKitScreenTetradicButtonSnackText)));
   }
 
   @override
   void onTertiaryButtonPressed() {
-    _scaffoldMessenger.showSnackBar(SnackBar(content: Text(l10n.uiKitScreenTertiaryButtonSnackText)));
+    final _ = _scaffoldMessenger.showSnackBar(SnackBar(content: Text(l10n.uiKitScreenTertiaryButtonSnackText)));
   }
 
   @override
   void onDangerSnackButtonPressed() {
-    _scaffoldMessenger.showSnackBar(
+    final _ = _scaffoldMessenger.showSnackBar(
       SnackBar(
-        backgroundColor: colorScheme.danger,
         content: Text(
           l10n.uiKitScreenDangerSnackText,
           style: TextStyle(color: colorScheme.onDanger),
         ),
+        backgroundColor: colorScheme.danger,
       ),
     );
   }
 
   @override
   void onPositiveSnackButtonPressed() {
-    _scaffoldMessenger.showSnackBar(
+    final _ = _scaffoldMessenger.showSnackBar(
       SnackBar(
-        backgroundColor: colorScheme.positive,
         content: Text(
           l10n.uiKitScreenPositiveSnackText,
           style: TextStyle(color: colorScheme.onPositive),
         ),
+        backgroundColor: colorScheme.positive,
       ),
     );
   }

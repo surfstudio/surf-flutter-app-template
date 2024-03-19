@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/features/debug/presentation/debug/debug_screen.dart';
+import 'package:flutter_template/features/debug/presentation/ui_kit/ui_kit_screen.dart';
 import 'package:flutter_template/features/navigation/domain/entity/app_route_names.dart';
 
 /// {@template ui_kit_flow.class}
@@ -13,6 +13,6 @@ class UiKitFlow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const DebugScreen();
+    return const UiKitScreen();
   }
 }

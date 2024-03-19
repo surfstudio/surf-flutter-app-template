@@ -4,10 +4,10 @@ import 'package:flutter_template/core/architecture/domain/entity/request_operati
 import 'package:flutter_template/core/architecture/domain/entity/result.dart';
 import 'package:flutter_template/features/debug/data/converters/url_converter.dart';
 import 'package:flutter_template/features/debug/domain/repositories/i_debug_repository.dart';
-import 'package:flutter_template/persistence/storage/config_storage/config_storage.dart';
+import 'package:flutter_template/persistence/storage/config_storage/i_config_storage.dart';
 
 /// {@template debug_repository.class}
-/// Implementation of [IDebugRepository]
+/// Implementation of [IDebugRepository].
 /// {@endtemplate}
 final class DebugRepository implements IDebugRepository {
   final IConfigStorage _configStorage;
@@ -24,9 +24,10 @@ final class DebugRepository implements IDebugRepository {
   RequestOperation<void> saveProxyUrl(String? proxyUrl) async {
     try {
       await _configStorage.setProxyUrl(proxyUrl: proxyUrl);
+
       return const ResultOk(null);
-    } on Object catch (e, s) {
-      return Result.failed(Failure(original: e, trace: s));
+    } on Object catch (error, s) {
+      return Result.failed(Failure(original: error, trace: s));
     }
   }
 
@@ -34,9 +35,10 @@ final class DebugRepository implements IDebugRepository {
   RequestOperation<void> saveServerUrl(Url url) async {
     try {
       await _configStorage.setUrlType(urlType: _urlConverter.convertReverse(url));
+
       return const ResultOk(null);
-    } on Object catch (e, s) {
-      return Result.failed(Failure(original: e, trace: s));
+    } on Object catch (error, s) {
+      return Result.failed(Failure(original: error, trace: s));
     }
   }
 }

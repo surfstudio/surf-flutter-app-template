@@ -28,14 +28,14 @@ abstract interface class IThemeModeWM implements ThemeModeController, IWidgetMod
 /// [WidgetModel] for [ThemeModeWidget].
 /// {@endtemplate}
 final class ThemeModeWM extends WidgetModel<ThemeModeWidget, ThemeModeModel> implements IThemeModeWM {
+  @override
+  ValueListenable<ThemeMode> get themeMode => model.themeMode;
+
   /// {@macro theme_wm.class}
   ThemeModeWM(super._model);
 
   @override
-  ValueListenable<ThemeMode> get themeMode => model.themeMode;
-
-  @override
-  Future<void> setThemeMode(ThemeMode themeMode) => model.setThemeMode(themeMode);
+  Future<void> setThemeMode(ThemeMode theme) => model.setThemeMode(theme);
 
   @override
   Future<void> switchThemeMode() => model.switchThemeMode();

@@ -1,24 +1,24 @@
 import 'package:elementary/elementary.dart';
-import 'package:flutter_template/uikit/colors/color_scheme.dart';
-import 'package:flutter_template/uikit/text/text_extention.dart';
+import 'package:flutter_template/uikit/colors/app_color_scheme.dart';
+import 'package:flutter_template/uikit/text/app_text_scheme.dart';
 
 /// A mixin with [AppColorScheme].
 /// Used with [WidgetModel] subclasses.
 mixin ThemeWMMixin<W extends ElementaryWidget, M extends ElementaryModel> on WidgetModel<W, M>
     implements ThemeIModelMixin {
   late AppColorScheme _colorScheme;
-  late AppTextTheme _textScheme;
+  late AppTextScheme _textScheme;
 
   @override
   AppColorScheme get colorScheme => _colorScheme;
 
   @override
-  AppTextTheme get textScheme => _textScheme;
+  AppTextScheme get textScheme => _textScheme;
 
   @override
   void didChangeDependencies() {
     _colorScheme = AppColorScheme.of(context);
-    _textScheme = AppTextTheme.of(context);
+    _textScheme = AppTextScheme.of(context);
   }
 }
 
@@ -28,5 +28,5 @@ mixin ThemeIModelMixin implements IWidgetModel {
   AppColorScheme get colorScheme;
 
   /// App text style scheme.
-  AppTextTheme get textScheme;
+  AppTextScheme get textScheme;
 }

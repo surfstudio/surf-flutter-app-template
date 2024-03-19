@@ -1,16 +1,18 @@
+import 'dart:async';
+
 import 'package:elementary/elementary.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/common/mixin/localization_mixin.dart';
-import 'package:flutter_template/common/mixin/theme_mixin.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
+import 'package:flutter_template/features/common/utils/mixin/theme_wm_mixin.dart';
 import 'package:flutter_template/features/feature_example/di/feature_example_scope.dart';
 import 'package:flutter_template/features/feature_example/presentation/feature_example_model.dart';
 import 'package:flutter_template/features/feature_example/presentation/feature_example_screen.dart';
 import 'package:flutter_template/features/feature_example/presentation/feature_example_state.dart';
 import 'package:provider/provider.dart';
 
-/// DI factory for [FeatureExampleWM]
+/// DI factory for [FeatureExampleWM].
 FeatureExampleWM defaultFeatureExampleWMFactory(BuildContext context) {
   final appScope = context.read<IAppScope>();
   final scope = context.read<IFeatureExampleScope>();
@@ -23,27 +25,27 @@ FeatureExampleWM defaultFeatureExampleWMFactory(BuildContext context) {
   );
 }
 
-/// Interface for [FeatureExampleWM]
+/// Interface for [FeatureExampleWM].
 abstract interface class IFeatureExampleWM with ThemeIModelMixin, ILocalizationMixin implements IWidgetModel {
   /// State of screen.
   ValueListenable<FeatureExampleState> get state;
 }
 
 /// {@template feature_example_wm.class}
-/// [WidgetModel] for [FeatureExampleScreen]
+/// [WidgetModel] for [FeatureExampleScreen].
 /// {@endtemplate}
 final class FeatureExampleWM extends WidgetModel<FeatureExampleScreen, FeatureExampleModel>
     with ThemeWMMixin, LocalizationMixin
     implements IFeatureExampleWM {
+  @override
+  ValueListenable<FeatureExampleState> get state => model.state;
+
   /// {@macro feature_example_wm.class}
   FeatureExampleWM(super._model);
 
   @override
   void initWidgetModel() {
-    model.loadIp();
+    unawaited(model.loadIp());
     super.initWidgetModel();
   }
-
-  @override
-  ValueListenable<FeatureExampleState> get state => model.state;
 }

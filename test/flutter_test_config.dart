@@ -7,7 +7,7 @@ import 'package:flutter_template/common/widgets/di_scope.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/theme_mode/presentation/theme_mode_controller.dart';
 import 'package:flutter_template/l10n/app_localizations.g.dart';
-import 'package:flutter_template/uikit/themes/theme_data.dart';
+import 'package:flutter_template/uikit/themes/app_theme_data.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +19,7 @@ class MockAppScope extends Mock implements IAppScope {}
 
 class MockThemeModeController extends Mock implements ThemeModeController {}
 
-Future<void> testExecutable(FutureOr<void> Function() testMain) {
+Future<void> testExecutable(OnTestMain testMain) {
   final mockAppScope = MockAppScope();
 
   final themeController = MockThemeModeController();
@@ -39,15 +39,19 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) {
 
   final devices = [
     helper.TestDevice(
+      // ignore: double-literal-format
       size: const Size(414, 896),
       name: 'iphone11',
+      // ignore: double-literal-format
       safeArea: const EdgeInsets.only(top: 44, bottom: 34),
     ),
     helper.TestDevice(
+      // ignore: double-literal-format
       size: const Size(393, 851),
       name: 'pixel 4a',
     ),
     helper.TestDevice(
+      // ignore: double-literal-format
       size: const Size(320, 568),
       name: 'iphone_se_1',
     ),
@@ -62,8 +66,9 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) {
       themeData: theme,
       dependencies: (widget) {
         when(() => themeController.themeMode).thenReturn(ValueNotifier(mode.toThemeMode));
+
         return DiScope<IAppScope>(
-          factory: (_) => mockAppScope,
+          onFactory: (_) => mockAppScope,
           child: Provider<ThemeModeController>.value(
             value: themeController,
             child: widget,
@@ -95,6 +100,8 @@ const _localizationsDelegates = [
 
 class CustomFileComparator extends LocalFileComparator {
   static const _tolerance = 0.18;
+  static const _logLevel = 1999;
+  static const _hundredPrecent = 100;
 
   CustomFileComparator(String testFile) : super(Uri.parse(testFile));
 
@@ -111,8 +118,8 @@ class CustomFileComparator extends LocalFileComparator {
     }
     if (!result.passed) {
       log(
-        'A tolerable difference of ${result.diffPercent * 100}% was found when comparing $golden.',
-        level: 1999,
+        'A tolerable difference of ${result.diffPercent * _hundredPrecent}% was found when comparing $golden.',
+        level: _logLevel,
       );
     }
 

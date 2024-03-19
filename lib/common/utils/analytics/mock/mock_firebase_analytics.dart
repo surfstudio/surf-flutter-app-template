@@ -1,8 +1,11 @@
 import 'package:flutter/foundation.dart';
 
-// TODO(init): can be removed, added for demo analytics track
+// TODO(init): can be removed, added for demo analytics track.
 /// A temporary mock class for demonstrating the setup of analytics.
 class MockFirebaseAnalytics {
+  /// Create an instance [MockFirebaseAnalytics].
+  const MockFirebaseAnalytics();
+
   /// Sends analytics data.
   ///
   /// The [name] parameter is the event name, and the [parameters] parameter is an optional map of
@@ -11,6 +14,6 @@ class MockFirebaseAnalytics {
     required String name,
     Map<String, Object?>? parameters,
   }) {
-    debugPrint('logEvent MockFirebaseAnalytics: name: $name, parameters: $parameters');
+    debugPrint('logEvent MockFirebaseAnalytics: name: $name, parameters: ${parameters ?? 'null'}');
   }
 }

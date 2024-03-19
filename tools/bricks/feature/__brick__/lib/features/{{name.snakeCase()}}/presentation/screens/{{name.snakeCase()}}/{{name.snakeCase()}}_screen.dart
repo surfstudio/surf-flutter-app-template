@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_template/features/{{name.snakeCase()}}/presentation/screens/{{name.snakeCase()}}/{{name.snakeCase()}}_wm.dart';
 
 /// {@template {{name.snakeCase()}}_screen.class}
-/// {{name.pascalCase()}}Screen
+/// {{name.pascalCase()}}Screen.
 /// {@endtemplate}
 class {{name.pascalCase()}}Screen extends ElementaryWidget<I{{name.pascalCase()}}WM> {
   /// {@macro {{name.snakeCase()}}_screen.class}

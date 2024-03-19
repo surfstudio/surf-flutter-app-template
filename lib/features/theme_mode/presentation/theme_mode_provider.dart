@@ -14,13 +14,14 @@ class ThemeModeProvider extends SingleChildStatelessWidget {
   const ThemeModeProvider({super.key});
 
   /// Get the [ThemeModeController] from the [BuildContext].
+  // ignore: prefer-widget-private-members
   static ThemeModeController of(BuildContext context) => Provider.of<ThemeModeController>(context, listen: false);
 
   @override
   Widget buildWithChild(BuildContext context, Widget? child) {
     return DiScope<IThemeModeScope>(
-      factory: ThemeModeScope.create,
-      dispose: (scope) => scope.dispose(),
+      onFactory: ThemeModeScope.create,
+      onDispose: (scope) => scope.dispose(),
       child: ThemeModeWidget(child: child ?? const SizedBox.shrink()),
     );
   }

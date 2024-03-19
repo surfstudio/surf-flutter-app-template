@@ -9,14 +9,15 @@ typedef ThemeModeWidgetBuilder = Widget Function(BuildContext context, ThemeMode
 /// A widget that calls [builder] when the theme mode changes.
 /// {@endtemplate}
 class ThemeModeBuilder extends StatefulWidget {
-  /// ThemeModeWidgetBuilder.
-  final ThemeModeWidgetBuilder builder;
-
   /// {@macro theme_mode_builder.class}
   const ThemeModeBuilder({
     required this.builder,
     super.key,
   });
+
+  /// ThemeModeWidgetBuilder.
+  // ignore: prefer-correct-callback-field-name
+  final ThemeModeWidgetBuilder builder;
 
   @override
   State<ThemeModeBuilder> createState() => _ThemeModeBuilderState();
@@ -35,7 +36,7 @@ class _ThemeModeBuilderState extends State<ThemeModeBuilder> {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<ThemeMode>(
       valueListenable: _themeModeListenable,
-      builder: (context, themeMode, _) => widget.builder(context, themeMode),
+      builder: (builderContext, themeMode, _) => widget.builder(builderContext, themeMode),
     );
   }
 }

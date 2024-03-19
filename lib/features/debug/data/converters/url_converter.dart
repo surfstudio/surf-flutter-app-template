@@ -1,21 +1,21 @@
 import 'package:flutter_template/config/url.dart';
 import 'package:flutter_template/core/architecture/data/converter/converter.dart';
 
-/// Converter for [Url]
+/// Converter for [Url].
 typedef IUrlConverter = ConverterToAndFrom<Url, String>;
 
 /// {@template url_type_converter.class}
-/// Implementation of [IUrlConverter]
+/// Implementation of [IUrlConverter].
 /// {@endtemplate}
 final class UrlConverter extends IUrlConverter {
-  /// {@macro url_type_converter.class}
-  const UrlConverter();
-
   @override
   Converter<Url, String> get converter => const _UrlConverter();
 
   @override
   Converter<String, Url> get reverseConverter => const _UrlReverseConverter();
+
+  /// {@macro url_type_converter.class}
+  const UrlConverter();
 }
 
 final class _UrlConverter extends Converter<Url, String> {

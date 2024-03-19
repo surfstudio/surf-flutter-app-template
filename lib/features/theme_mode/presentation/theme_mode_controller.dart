@@ -7,7 +7,7 @@ abstract interface class ThemeModeController {
   ValueListenable<ThemeMode> get themeMode;
 
   /// Set theme mode.
-  Future<void> setThemeMode(ThemeMode themeMode);
+  Future<void> setThemeMode(ThemeMode theme);
 
   /// Switch theme mode to the opposite.
   Future<void> switchThemeMode();

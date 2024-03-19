@@ -1,5 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_template/config/environment/build_types.dart';
+import 'package:flutter_template/config/environment/build_type.dart';
 import 'package:flutter_template/config/url.dart';
 
 /// {@template environment.class}
@@ -13,17 +13,17 @@ class Environment {
   /// Firebase options for initialize.
   final FirebaseOptions? firebaseOptions;
 
-  /// {@macro environment.class}
-  const Environment({
-    required this.buildType,
-    this.firebaseOptions,
-  });
-
   /// Is this application running in dev mode.
   bool get isDev => buildType == BuildType.dev;
 
   /// Is this application running in prod mode.
   bool get isProd => buildType == BuildType.prod;
+
+  /// {@macro environment.class}
+  const Environment({
+    required this.buildType,
+    this.firebaseOptions,
+  });
 }
 
 /// [BuildType] extension for default url.

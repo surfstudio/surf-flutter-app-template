@@ -8,43 +8,43 @@ typedef ScopeFactory<T> = T Function(BuildContext context);
 
 /// Di container. T - return type(for example [AppScope]).
 class DiScope<T> extends SingleChildStatefulWidget {
-  /// Factory that returns the dependency scope.
-  final ScopeFactory<T> factory;
-
-  /// The method called when disposing the widget.
-  final Function(T)? dispose;
-
   /// Create an instance [DiScope].
   const DiScope({
-    required this.factory,
-    this.dispose,
+    required this.onFactory,
+    this.onDispose,
     super.key,
     super.child,
   });
+
+  /// Factory that returns the dependency scope.
+  final ScopeFactory<T> onFactory;
+
+  /// The method called when disposing the widget.
+  final ValueChanged<T>? onDispose;
 
   @override
   State<DiScope<T>> createState() => _DiScopeState<T>();
 }
 
 class _DiScopeState<T> extends SingleChildState<DiScope<T>> {
-  late final T scope;
+  late final T _scope;
 
   @override
   void initState() {
     super.initState();
-    scope = widget.factory(context);
+    _scope = widget.onFactory(context);
   }
 
   @override
   void dispose() {
-    widget.dispose?.call(scope);
+    widget.onDispose?.call(_scope);
     super.dispose();
   }
 
   @override
   Widget buildWithChild(BuildContext context, Widget? child) {
     return Provider<T>(
-      create: (_) => scope,
+      create: (_) => _scope,
       child: child,
     );
   }

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid-ignoring-return-values
+
 import 'dart:async';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -39,7 +41,8 @@ Future<void> _runApp(Environment env) async {
 void _setupCrashlytics() {
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
   PlatformDispatcher.instance.onError = (error, stack) {
-    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true).ignore();
+
     return true;
   };
 }

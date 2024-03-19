@@ -13,9 +13,9 @@ class IpDto {
   /// {@macro ip_dto.class}
   const IpDto({required this.ip});
 
-  /// @nodoc
+  /// Get DTO object from json.
   factory IpDto.fromJson(Map<String, dynamic> json) => _$IpDtoFromJson(json);
 
-  /// @nodoc
+  /// Convert a DTO object to json.
   Map<String, dynamic> toJson() => _$IpDtoToJson(this);
 }

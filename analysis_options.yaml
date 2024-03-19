@@ -9,3 +9,7 @@ analyzer:
     - lib/**/*.g.dart
     - lib/assets/**
     - tools/bricks/**/__brick__/**
+
+dart_code_metrics:
+  extends:
+    - package:surf_dcm_presets/all.yaml

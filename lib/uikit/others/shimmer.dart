@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_template/common/widgets/conditional_wrapper.dart';
-import 'package:flutter_template/uikit/colors/color_scheme.dart';
+import 'package:flutter_template/uikit/colors/app_color_scheme.dart';
 import 'package:shimmer/shimmer.dart' as shimmer;
 
 /// {@template shimmer.class}
 /// Shimmer for loading content.
 /// {@endtemplate}
 class Shimmer extends StatelessWidget {
-  /// content.
+  /// {@macro shimmer.class}
+  const Shimmer({required this.child, this.loading = true, super.key});
+
+  /// Content.
   final Widget child;
 
   /// Is the download in progress at the moment.
   final bool loading;
-
-  /// {@macro shimmer.class}
-  const Shimmer({required this.child, this.loading = true, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +22,10 @@ class Shimmer extends StatelessWidget {
 
     return ConditionalWrapper(
       condition: loading,
-      wrapper: (child) => shimmer.Shimmer.fromColors(
+      onAddWrapper: (insideChild) => shimmer.Shimmer.fromColors(
         baseColor: colorScheme.shimmer,
         highlightColor: colorScheme.background,
-        child: child,
+        child: insideChild,
       ),
       child: child,
     );

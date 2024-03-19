@@ -10,10 +10,15 @@ import 'package:flutter_template/features/theme_mode/presentation/theme_mode_wid
 const _themeByDefault = ThemeMode.system;
 
 /// {@template theme_model.class}
-/// [ElementaryModel] for [ThemeModeWidget]
+/// [ElementaryModel] for [ThemeModeWidget].
 /// {@endtemplate}
 final class ThemeModeModel extends BaseModel {
   final IThemeModeRepository _repository;
+
+  final _themeMode = ValueNotifier<ThemeMode>(_themeByDefault);
+
+  /// Current theme mode.
+  ValueListenable<ThemeMode> get themeMode => _themeMode;
 
   /// {@macro theme_model.class}
   ThemeModeModel({
@@ -21,16 +26,11 @@ final class ThemeModeModel extends BaseModel {
     required super.logWriter,
   }) : _repository = repository;
 
-  final ValueNotifier<ThemeMode> _themeMode = ValueNotifier(_themeByDefault);
-
-  /// Current theme mode.
-  ValueListenable<ThemeMode> get themeMode => _themeMode;
-
   @override
   void init() {
     super.init();
-    final themeMode = _repository.getThemeMode();
-    _themeMode.value = themeMode ?? _themeByDefault;
+    final theme = _repository.getThemeMode();
+    _themeMode.value = theme ?? _themeByDefault;
   }
 
   /// Switch theme mode to the opposite.

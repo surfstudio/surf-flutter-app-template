@@ -5,6 +5,9 @@ import 'package:flutter_template/core/architecture/domain/entity/failure.dart';
 import 'package:flutter_template/core/architecture/domain/entity/request_operation.dart';
 import 'package:flutter_template/core/architecture/domain/entity/result.dart';
 
+/// Typedef for repository method call.
+typedef RequestCall<T> = RequestOperation<T> Function();
+
 /// {@template base_model.class}
 /// Base class for all [ElementaryModel]s in the application.
 /// {@endtemplate}
@@ -17,7 +20,7 @@ abstract base class BaseModel extends ElementaryModel {
 
   /// Call repository method. All repository calls must be made through this method.
   @protected
-  RequestOperation<T> makeCall<T>(RequestOperation<T> Function() call) async {
+  RequestOperation<T> makeCall<T>(RequestCall<T> call) async {
     final result = await call();
 
     switch (result) {

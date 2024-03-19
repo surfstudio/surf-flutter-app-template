@@ -8,20 +8,14 @@ import 'package:flutter_template/features/feature_example/data/repositories/feat
 import 'package:flutter_template/features/feature_example/domain/repositories/i_feature_example_repository.dart';
 import 'package:provider/provider.dart';
 
-/// Scope dependencies of the FeatureExample feature
-abstract interface class IFeatureExampleScope implements IDisposableObject {
-  /// FeatureExampleRepository
-  IFeatureExampleRepository get repository;
-}
-
 /// {@template feature_example_scope.class}
-/// Implementation of [IFeatureExampleScope]
+/// Implementation of [IFeatureExampleScope].
 /// {@endtemplate}
 final class FeatureExampleScope extends DisposableObject implements IFeatureExampleScope {
   @override
   final IFeatureExampleRepository repository;
 
-  /// Factory constructor for [IFeatureExampleScope]
+  /// Factory constructor for [IFeatureExampleScope].
   factory FeatureExampleScope.create(BuildContext context) {
     final appScope = context.read<IAppScope>();
     const ipUrl = 'https://api.ipify.org/';
@@ -36,4 +30,10 @@ final class FeatureExampleScope extends DisposableObject implements IFeatureExam
 
   /// {@macro feature_example_scope.class}
   FeatureExampleScope(this.repository);
+}
+
+/// Scope dependencies of the FeatureExample feature.
+abstract interface class IFeatureExampleScope implements IDisposableObject {
+  /// FeatureExampleRepository.
+  IFeatureExampleRepository get repository;
 }

@@ -46,6 +46,7 @@ dev_dependencies:
   mocktail: 1.0.3
   retrofit_generator: 8.0.6
   spider: 4.2.2
+  surf_dcm_presets: 0.0.2
   surf_lint_rules: 3.0.0
 
 environment:

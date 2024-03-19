@@ -47,9 +47,9 @@ abstract interface class IAppScope {
   /// Shared preferences.
   SharedPreferences get sharedPreferences;
 
-  /// Logger
+  /// Logger.
   ILogWriter get logger;
 
-  /// Analytics sending service
+  /// Analytics sending service.
   AnalyticService get analyticsService;
 }

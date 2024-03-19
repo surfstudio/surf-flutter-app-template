@@ -8,7 +8,7 @@ import 'package:flutter_template/features/feature_example/domain/entities/ip_ent
 import 'package:flutter_template/features/feature_example/domain/repositories/i_feature_example_repository.dart';
 
 /// {@template feature_example_repository.class}
-/// Implementation of [IFeatureExampleRepository]
+/// Implementation of [IFeatureExampleRepository].
 /// {@endtemplate}
 final class FeatureExampleRepository implements IFeatureExampleRepository {
   final IpApi _ipApi;
@@ -25,11 +25,13 @@ final class FeatureExampleRepository implements IFeatureExampleRepository {
   RequestOperation<IpEntity> getIp() async {
     try {
       final result = await _ipApi.getIp();
+
       return Result.ok(_ipConverter.convert(result));
-    } on DioException catch (e, s) {
-      return Result.failed(Failure(original: e, trace: s));
-    } on Object catch (e, s) {
-      return Result.failed(Failure(original: e, trace: s));
+    } on DioException catch (error, s) {
+      return Result.failed(Failure(original: error, trace: s));
+      // ignore: avoid-identical-exception-handling-blocks
+    } on Object catch (error, s) {
+      return Result.failed(Failure(original: error, trace: s));
     }
   }
 }

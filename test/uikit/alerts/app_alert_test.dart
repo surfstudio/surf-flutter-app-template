@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_template/features/common/utils/sizes/app_sizes.dart';
 import 'package:flutter_template/uikit/alerts/app_alert.dart';
 import 'package:flutter_template/uikit/alerts/app_alert_action.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
@@ -6,12 +7,16 @@ import 'package:golden_toolkit/golden_toolkit.dart';
 void main() {
   final actions = [
     AppAlertAction(
+      onPressed: () {
+        debugPrint('AppAlertAction Cancel');
+      },
       child: const Text('Cancel'),
-      onPressed: () {},
     ),
     AppAlertAction(
+      onPressed: () {
+        debugPrint('AppAlertAction Ok');
+      },
       child: const Text('Ok'),
-      onPressed: () {},
     ),
   ];
 
@@ -24,35 +29,35 @@ void main() {
         ..addScenario(
           'With title, content and actions',
           AppAlert(
+            actions: actions,
             title: const Text('App alert'),
             content: const Text('App alert content'),
-            actions: actions,
           ),
         )
         ..addScenario(
           'Without title',
           AppAlert(
-            content: const Text('App alert content'),
             actions: actions,
+            content: const Text('App alert content'),
           ),
         )
         ..addScenario(
           'Without content',
           AppAlert(
-            title: const Text('App alert'),
             actions: actions,
+            title: const Text('App alert'),
           ),
         )
         ..addScenario(
           'Without actions',
           const AppAlert(
+            actions: [],
             title: Text('App alert'),
             content: Text('App alert content'),
-            actions: [],
           ),
         );
 
-      await tester.pumpWidgetBuilder(builder.build(), surfaceSize: const Size(400, 1000));
+      await tester.pumpWidgetBuilder(builder.build(), surfaceSize: const Size(AppSizes.double400, AppSizes.double1000));
 
       await screenMatchesGolden(tester, 'app_alert');
     },

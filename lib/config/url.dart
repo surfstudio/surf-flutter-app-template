@@ -1,14 +1,14 @@
-// TODO(init-project): add server urls
+// TODO(init-project): Add server urls.
 
-/// Server url
+/// Server url.
 enum Url {
-  /// dev url
+  /// Dev url.
   dev('https://example.com/'),
 
-  /// prod url
+  /// Prod url.
   prod('https://example.com/');
 
-  /// Url value
+  /// Url value.
   final String value;
 
   const Url(this.value);

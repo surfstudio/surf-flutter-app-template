@@ -4,7 +4,7 @@ import 'package:retrofit/retrofit.dart';
 
 part 'ip_api.g.dart';
 
-/// API for ip
+/// API for ip.
 @RestApi()
 abstract class IpApi {
   /// API creation factory using [Dio].

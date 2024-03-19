@@ -4,26 +4,20 @@ import 'package:flutter_template/common/utils/disposable_object/i_disposable_obj
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/theme_mode/data/repositories/theme_mode_repository.dart';
 import 'package:flutter_template/features/theme_mode/domain/repositories/i_theme_mode_repository.dart';
-import 'package:flutter_template/persistence/storage/theme_storage/theme_storage_impl.dart';
+import 'package:flutter_template/persistence/storage/theme_storage/theme_mode_storage.dart';
 import 'package:provider/provider.dart';
 
-/// Scope dependencies of the Theme feature
-abstract interface class IThemeModeScope implements IDisposableObject {
-  /// ThemeRepository
-  IThemeModeRepository get repository;
-}
-
 /// {@template theme_scope.class}
-/// Implementation of [IThemeModeScope]
+/// Implementation of [IThemeModeScope].
 /// {@endtemplate}
 final class ThemeModeScope extends DisposableObject implements IThemeModeScope {
   @override
   final IThemeModeRepository repository;
 
-  /// Factory constructor for [IThemeModeScope]
+  /// Factory constructor for [IThemeModeScope].
   factory ThemeModeScope.create(BuildContext context) {
     final appScope = context.read<IAppScope>();
-    final storage = ThemeModeStorageImpl(appScope.sharedPreferences);
+    final storage = ThemeModeStorage(appScope.sharedPreferences);
     final repository = ThemeModeRepository(themeModeStorage: storage);
 
     return ThemeModeScope(repository);
@@ -31,4 +25,10 @@ final class ThemeModeScope extends DisposableObject implements IThemeModeScope {
 
   /// {@macro theme_scope.class}
   ThemeModeScope(this.repository);
+}
+
+/// Scope dependencies of the Theme feature.
+abstract interface class IThemeModeScope implements IDisposableObject {
+  /// ThemeRepository.
+  IThemeModeRepository get repository;
 }

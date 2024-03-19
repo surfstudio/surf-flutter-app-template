@@ -11,14 +11,14 @@ class MockDebugRepository extends Mock implements IDebugRepository {}
 class MockLogWriter extends Mock implements ILogWriter {}
 
 void main() {
-  late DebugScreenModel model;
+  late DebugModel model;
   final debugRepository = MockDebugRepository();
   final logWriter = MockLogWriter();
   const serverUrl = Url.dev;
   const proxyMock = 'proxy';
 
   setUpAll(() {
-    model = DebugScreenModel(
+    model = DebugModel(
       debugRepository: debugRepository,
       logWriter: logWriter,
     );
@@ -29,17 +29,17 @@ void main() {
 
   test(
     'Save server',
-    () {
-      model.saveServerUrl(serverUrl);
-      verify(() => debugRepository.saveServerUrl(serverUrl));
+    () async {
+      await model.saveServerUrl(serverUrl);
+      final _ = verify(() => debugRepository.saveServerUrl(serverUrl));
     },
   );
 
   test(
     'Save proxy',
-    () {
-      model.saveProxyUrl(proxyMock);
-      verify(() => debugRepository.saveProxyUrl(proxyMock));
+    () async {
+      await model.saveProxyUrl(proxyMock);
+      final _ = verify(() => debugRepository.saveProxyUrl(proxyMock));
     },
   );
 }

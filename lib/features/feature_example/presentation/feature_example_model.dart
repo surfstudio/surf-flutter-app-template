@@ -8,10 +8,15 @@ import 'package:flutter_template/features/feature_example/presentation/feature_e
 import 'package:flutter_template/features/feature_example/presentation/feature_example_state.dart';
 
 /// {@template feature_example_model.class}
-/// [ElementaryModel] for [FeatureExampleScreen]
+/// [ElementaryModel] for [FeatureExampleScreen].
 /// {@endtemplate}
 final class FeatureExampleModel extends BaseModel {
   final IFeatureExampleRepository _repository;
+
+  final _state = ValueNotifier<FeatureExampleState>(const FeatureExampleStateInitial());
+
+  /// State of screen.
+  ValueListenable<FeatureExampleState> get state => _state;
 
   /// {@macro feature_example_model.class}
   FeatureExampleModel({
@@ -19,10 +24,11 @@ final class FeatureExampleModel extends BaseModel {
     required super.logWriter,
   }) : _repository = repository;
 
-  final _state = ValueNotifier<FeatureExampleState>(const FeatureExampleStateInitial());
-
-  /// State of screen.
-  ValueListenable<FeatureExampleState> get state => _state;
+  @override
+  void dispose() {
+    _state.dispose();
+    super.dispose();
+  }
 
   /// Load IP address.
   Future<void> loadIp() async {
@@ -36,11 +42,5 @@ final class FeatureExampleModel extends BaseModel {
       case ResultFailed():
         _state.emit(const FeatureExampleStateError());
     }
-  }
-
-  @override
-  void dispose() {
-    _state.dispose();
-    super.dispose();
   }
 }

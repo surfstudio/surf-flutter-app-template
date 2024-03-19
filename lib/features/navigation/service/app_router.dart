@@ -4,7 +4,7 @@ import 'package:flutter_template/features/debug/presentation/ui_kit/ui_kit_flow.
 import 'package:flutter_template/features/feature_example/presentation/feature_example_flow.dart';
 import 'package:flutter_template/features/navigation/domain/entity/app_route_paths.dart';
 
-part 'router.gr.dart';
+part 'app_router.gr.dart';
 
 /// {@template router.class}
 /// Main point of the application navigation.
@@ -19,17 +19,17 @@ class AppRouter extends _$AppRouter {
   @override
   List<AutoRoute> get routes => [
         AutoRoute(
-          initial: true,
           page: DebugRouter.page,
           path: AppRoutePaths.debugPath,
+          initial: true,
         ),
         AutoRoute(
           page: UiKitRouter.page,
           path: AppRoutePaths.uiKitPath,
         ),
         AutoRoute(
-          path: AppRoutePaths.featureExample,
           page: FeatureExampleRoute.page,
+          path: AppRoutePaths.featureExample,
         ),
       ];
 }

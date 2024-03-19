@@ -7,11 +7,11 @@
 /// ```
 abstract class AppRoutePaths {
   /// Path to debug screen.
-  static const String debugPath = '/debug';
+  static const debugPath = '/debug';
 
   /// Path to ui kit screen.
-  static const String uiKitPath = '/ui_kit';
+  static const uiKitPath = '/ui_kit';
 
   /// Path to feature example screen.
-  static const String featureExample = '/feature_example';
+  static const featureExample = '/feature_example';
 }

@@ -1,4 +1,4 @@
-import 'package:flutter_template/persistence/storage/config_storage/config_storage.dart';
+import 'package:flutter_template/persistence/storage/config_storage/i_config_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// {@template config_storage_impl.class}
@@ -16,12 +16,10 @@ class ConfigStorageImpl implements IConfigStorage {
   String? getProxyUrl() => _prefs.getString(ConfigStorageKeys.proxyUrl.keyString);
 
   @override
-  Future<void> setProxyUrl({String? proxyUrl}) async {
-    if (proxyUrl == null) {
-      await _prefs.remove(ConfigStorageKeys.proxyUrl.keyString);
-      return;
-    }
-    await _prefs.setString(ConfigStorageKeys.proxyUrl.keyString, proxyUrl);
+  Future<void> setProxyUrl({String? proxyUrl}) {
+    return proxyUrl == null
+        ? _prefs.remove(ConfigStorageKeys.proxyUrl.keyString)
+        : _prefs.setString(ConfigStorageKeys.proxyUrl.keyString, proxyUrl);
   }
 
   @override
@@ -33,15 +31,15 @@ class ConfigStorageImpl implements IConfigStorage {
   }
 }
 
-/// Keys for config settings storage
+/// Keys for config settings storage.
 enum ConfigStorageKeys {
-  /// Proxy url
+  /// Proxy url.
   proxyUrl('proxy_url'),
 
-  /// Url type
+  /// Url type.
   urlType('url_type');
 
-  /// String representation of the key
+  /// String representation of the key.
   final String keyString;
 
   const ConfigStorageKeys(this.keyString);
