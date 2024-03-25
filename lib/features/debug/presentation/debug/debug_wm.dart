@@ -8,7 +8,7 @@ import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/debug/di/debug_scope.dart';
 import 'package:flutter_template/features/debug/presentation/debug/debug_model.dart';
 import 'package:flutter_template/features/debug/presentation/debug/debug_screen.dart';
-import 'package:flutter_template/features/navigation/service/app_router.dart';
+import 'package:flutter_template/features/navigation/app_router.dart';
 import 'package:flutter_template/features/theme_mode/presentation/theme_mode_provider.dart';
 import 'package:flutter_template/l10n/app_localizations_x.dart';
 import 'package:provider/provider.dart';
@@ -125,7 +125,7 @@ class DebugScreenWM extends WidgetModel<DebugScreen, DebugModel> with Localizati
   }
 
   @override
-  Future<void> openUiKit() => _router.push(const UiKitRouter());
+  Future<void> openUiKit() => _router.push(const UiKitRoute());
 
   void _showReloadAppSnackBar() {
     final _ = _scaffoldMessenger.showSnackBar(SnackBar(content: Text(context.l10n.debugScreenReloadAppMessage)));

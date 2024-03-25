@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_template/common/widgets/di_scope.dart';
 import 'package:flutter_template/features/debug/di/debug_scope.dart';
 import 'package:flutter_template/features/debug/presentation/debug/debug_screen.dart';
-import 'package:flutter_template/features/navigation/domain/entity/app_route_names.dart';
 
 /// {@template debug_flow.class}
 /// Entry of debug feature.
 /// {@endtemplate}
-@RoutePage(name: AppRouteNames.debugScreen)
+@RoutePage()
 class DebugFlow extends StatelessWidget implements AutoRouteWrapper {
   /// {@macro debug_flow.class}
   const DebugFlow({super.key});

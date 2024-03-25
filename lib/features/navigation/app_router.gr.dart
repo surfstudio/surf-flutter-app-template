@@ -15,7 +15,7 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
-    DebugRouter.name: (routeData) {
+    DebugRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: WrappedRoute(child: const DebugFlow()),
@@ -27,7 +27,7 @@ abstract class _$AppRouter extends RootStackRouter {
         child: WrappedRoute(child: const FeatureExampleFlow()),
       );
     },
-    UiKitRouter.name: (routeData) {
+    UiKitRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const UiKitFlow(),
@@ -38,14 +38,14 @@ abstract class _$AppRouter extends RootStackRouter {
 
 /// generated route for
 /// [DebugFlow]
-class DebugRouter extends PageRouteInfo<void> {
-  const DebugRouter({List<PageRouteInfo>? children})
+class DebugRoute extends PageRouteInfo<void> {
+  const DebugRoute({List<PageRouteInfo>? children})
       : super(
-          DebugRouter.name,
+          DebugRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'DebugRouter';
+  static const String name = 'DebugRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -66,14 +66,14 @@ class FeatureExampleRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [UiKitFlow]
-class UiKitRouter extends PageRouteInfo<void> {
-  const UiKitRouter({List<PageRouteInfo>? children})
+class UiKitRoute extends PageRouteInfo<void> {
+  const UiKitRoute({List<PageRouteInfo>? children})
       : super(
-          UiKitRouter.name,
+          UiKitRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'UiKitRouter';
+  static const String name = 'UiKitRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
