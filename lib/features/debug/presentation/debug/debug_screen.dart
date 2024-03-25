@@ -56,7 +56,7 @@ class _ServerSwitchCard extends StatelessWidget {
 
   final ValueListenable<Url> urlState;
   final ValueChanged<Url?> onUrlRadioButtonPressed;
-  final ValueChanged<Url> onChangeServerPressed;
+  final VoidCallback onChangeServerPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -70,20 +70,20 @@ class _ServerSwitchCard extends StatelessWidget {
             Text(l10n.debugScreenServerSubtitle),
             ValueListenableBuilder<Url>(
               valueListenable: urlState,
-              builder: (_, url, __) {
+              builder: (_, selectedUrl, __) {
                 return Column(
                   children: [
                     ...Url.values.map(
-                      (u) => RadioListTile<Url>(
+                      (url) => RadioListTile<Url>(
                         value: url,
-                        groupValue: url,
+                        groupValue: selectedUrl,
                         onChanged: onUrlRadioButtonPressed,
                         title: Text(url.toString()),
                         subtitle: Text(url.value),
                       ),
                     ),
                     MaterialButton(
-                      onPressed: () => onChangeServerPressed(url),
+                      onPressed: onChangeServerPressed,
                       child: Text(
                         l10n.debugScreenServerConnectButton,
                         style: const TextStyle(fontSize: AppSizes.double16),

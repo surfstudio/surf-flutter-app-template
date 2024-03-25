@@ -46,7 +46,7 @@ abstract interface class IDebugScreenWM with ILocalizationMixin implements IWidg
   void onUrlRadioButtonPressed(Url? url);
 
   /// Callback of pressed on the server change button.
-  void onChangeServerPressed(Url url);
+  void onChangeServerPressed();
 
   /// Callback of pressed on the connect proxy button.
   void onConnectProxyPressed();
@@ -107,8 +107,8 @@ class DebugScreenWM extends WidgetModel<DebugScreen, DebugModel> with Localizati
   }
 
   @override
-  Future<void> onChangeServerPressed(Url url) async {
-    await model.saveServerUrl(url);
+  Future<void> onChangeServerPressed() async {
+    await model.saveServerUrl(_serverUrlState.value);
     _showReloadAppSnackBar();
   }
 
