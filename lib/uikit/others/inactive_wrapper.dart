@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_template/features/common/utils/sizes/app_sizes.dart';
+import 'package:flutter_template/uikit/app_sizes.dart';
 
 /// {@template inactive_wrapper.class}
 /// A wrapper for displaying inactive elements.

@@ -1,8 +1,8 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/features/common/utils/sizes/app_sizes.dart';
 import 'package:flutter_template/features/debug/presentation/ui_kit/ui_kit_wm.dart';
 import 'package:flutter_template/l10n/app_localizations_x.dart';
+import 'package:flutter_template/uikit/app_sizes.dart';
 import 'package:flutter_template/uikit/colors/app_color_scheme.dart';
 
 /// {@template ui_kit_screen.class}
