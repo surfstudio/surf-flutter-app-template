@@ -1,6 +1,6 @@
 // ignore_for_file: avoid-non-null-assertion, prefer-correct-callback-field-name
 import 'package:flutter/material.dart';
-import 'package:flutter_template/uikit/colors/dark_color_palette.dart';
+import 'package:flutter_template/uikit/colors/color_palette.dart';
 
 const _skeletonOpacity = 0.06;
 
