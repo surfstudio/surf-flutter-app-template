@@ -38,7 +38,7 @@ extension AlsoX<T extends Object?> on T {
   /// Additionally executes a closure and returns the value itself.
   T also(Closure<void, T> closure) {
     closure(this);
-    
+
     return this;
   }
 }
