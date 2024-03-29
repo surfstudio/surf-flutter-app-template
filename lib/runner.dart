@@ -22,9 +22,8 @@ Future<void> run(Environment env) async {
   }
 
   // TODO(init-project): Initialize Crashlytics.
-  // _setupCrashlytics();
 
-  // TODO(init-project): change as needed or remove.
+  // TODO(init-project): Change as needed or remove.
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   await _runApp(env);

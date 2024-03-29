@@ -3,19 +3,19 @@ import 'package:flutter_template/persistence/storage/tokens_storage/data/auth_to
 import 'package:flutter_template/persistence/storage/tokens_storage/i_tokens_storage.dart';
 
 /// {@template tokens_storage.class}
-/// Implementation [ITokensStorage]
+/// Implementation [ITokensStorage].
 /// {@endtemplate}
 final class TokensStorage implements ITokensStorage {
   final FlutterSecureStorage _secureStorage;
-
-  /// {@macro tokens_storage.class}
-  const TokensStorage(this._secureStorage);
 
   @override
   Future<String?> get accessToken => _secureStorage.read(key: TokensStorageKeys.accessToken.keyName);
 
   @override
   Future<String?> get refreshToken => _secureStorage.read(key: TokensStorageKeys.refreshToken.keyName);
+
+  /// {@macro tokens_storage.class}
+  const TokensStorage(this._secureStorage);
 
   @override
   Future<void> saveTokens(AuthTokensStorageDto tokens) async {
@@ -31,15 +31,15 @@ final class TokensStorage implements ITokensStorage {
   }
 }
 
-/// Keys for [TokensStorage]
+/// Keys for [TokensStorage].
 enum TokensStorageKeys {
-  /// @nodoc
+  /// Access token.
   accessToken('app_access_token'),
 
-  /// @nodoc
+  /// Refresh token.
   refreshToken('app_refresh_token');
 
-  /// Key name
+  /// Key name.
   final String keyName;
 
   const TokensStorageKeys(this.keyName);

@@ -12,7 +12,7 @@ base class ApiFailure extends Failure<DioException> {
   /// Original error status code from [DioException].
   final int? responseBodyCode;
 
-  /// Message
+  /// Message.
   final String? message;
 
   /// {@macro api_failure.class}
@@ -24,13 +24,13 @@ base class ApiFailure extends Failure<DioException> {
     this.message,
   });
 
-  // TODO(anyone): add getters for special status codes
+  // TODO(anyone): Add getters for special status codes.
   /// Sample: ExpiredToken - refresh token has expired
-  // bool get isExpiredRefreshToken => statusCode == 102;
+  /// bool get isExpiredRefreshToken => statusCode == 102
 }
 
 /// {@template timeout_failure.class}
-/// TimeoutException
+/// TimeoutException.
 /// {@endtemplate}
 final class TimeoutFailure extends ApiFailure {
   /// {@macro timeout_failure.class}

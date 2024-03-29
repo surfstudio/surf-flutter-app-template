@@ -59,17 +59,14 @@ final class AuthInterceptor extends QueuedInterceptorsWrapper {
 
         final retryResult = await _retryRequest(err.requestOptions..addAuthHeader(tokens.accessToken));
 
-        switch (retryResult) {
-          case ResultOk(data: final response):
-            return handler.resolve(response);
-          case ResultFailed(:final failure):
-            return super.onError(failure.original, handler);
-        }
+        return _handleRetryResult(retryResult, handler);
+
       case ResultFailed(:final failure):
         await _onLogout();
         final originalException = failure.original;
         final dioException = originalException is DioException ? originalException : null;
-        return dioException != null ? handler.reject(dioException) : null;
+
+        return dioException == null ? null : handler.reject(dioException);
     }
   }
 
@@ -82,13 +79,26 @@ final class AuthInterceptor extends QueuedInterceptorsWrapper {
         queryParameters: requestOptions.queryParameters,
         cancelToken: requestOptions.cancelToken,
         options: requestOptions.toOptions(),
-        onReceiveProgress: requestOptions.onReceiveProgress,
         onSendProgress: requestOptions.onSendProgress,
+        onReceiveProgress: requestOptions.onReceiveProgress,
       );
 
       return Result.ok(response);
-    } on DioException catch (e, s) {
-      return Result.failed(Failure(original: e, trace: s));
+    } on DioException catch (error, s) {
+      return Result.failed(Failure(original: error, trace: s));
+    }
+  }
+
+  void _handleRetryResult(
+    // ignore: avoid-dynamic
+    Result<Response<dynamic>, Failure<DioException>> retryResult,
+    ErrorInterceptorHandler handler,
+  ) {
+    switch (retryResult) {
+      case ResultOk(data: final response):
+        return handler.resolve(response);
+      case ResultFailed(:final failure):
+        return super.onError(failure.original, handler);
     }
   }
 }

@@ -5,15 +5,15 @@ import 'package:flutter_template/persistence/storage/tokens_storage/data/auth_to
 /// Interface IRefreshTokensRepository.
 /// {@endtemplate}
 abstract interface class IRefreshTokensRepository {
-  /// Refresh Tokens
+  /// Refresh Tokens.
   RequestOperation<AuthTokensStorageDto> refreshTokens(String refreshToken);
 
-  /// Initialize repository
+  /// Initialize repository.
   RequestOperation<void> saveTokens(AuthTokensStorageDto tokens);
 
-  /// Get Access Token from storage
+  /// Get Access Token from storage.
   RequestOperation<String?> getAccessToken();
 
-  /// Get Refresh Token from storage
+  /// Get Refresh Token from storage.
   RequestOperation<String?> getRefreshToken();
 }
