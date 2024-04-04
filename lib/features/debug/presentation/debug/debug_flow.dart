@@ -15,7 +15,7 @@ class DebugFlow extends StatelessWidget implements AutoRouteWrapper {
   @override
   Widget wrappedRoute(BuildContext context) {
     return DiScope<IDebugScope>(
-      onFactory: DebugScope.create,
+      factory: DebugScope.create,
       onDispose: (scope) => scope.dispose(),
       child: this,
     );

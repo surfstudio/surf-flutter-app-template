@@ -24,7 +24,7 @@ class AppFlow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Nested(
       children: [
-        DiScope<IAppScope>(onFactory: (_) => appScope),
+        DiScope<IAppScope>(factory: (_) => appScope),
         ChangeNotifierProvider<AppRouter>(create: (_) => AppRouter()),
         const ThemeModeProvider(),
       ],
