@@ -1,9 +1,7 @@
-name: Publishing
+name: On pull request
 
 on:
-  push:
-    tags:
-      - v*
+  pull_request:
 
 jobs:
   get_flutter_version:
@@ -24,13 +22,3 @@ jobs:
     secrets:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
-  package-publishing:
-    needs: [analysis, testing, get_flutter_version]
-    uses: surfstudio/flutter-ci-workflows/.github/workflows/publish_to_pub.yml@main
-    with:
-      FLUTTER_VERSION: ${{ needs.get_flutter_version.outputs.FLUTTER_VERSION }}
-      PANA_TOTAL: "100"
-    secrets:
-      PUB_CREDENTIAL_JSON: ${{ secrets.SURF_PUB_CREDENTIAL_JSON }}
-      PUB_OAUTH_ACCESS_TOKEN: ${{ secrets.SURF_PUB_OAUTH_ACCESS_TOKEN }}
-      PUB_OAUTH_REFRESH_TOKEN: ${{ secrets.SURF_PUB_OAUTH_REFRESH_TOKEN }}

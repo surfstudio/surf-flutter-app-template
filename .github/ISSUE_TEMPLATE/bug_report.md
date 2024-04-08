@@ -26,6 +26,7 @@ labels: bug
 -->
 
 ## Details
+
 Flutter version: <!--android/ios/web/desktop-->
 
 Dart version: <!--android/ios/web/desktop-->
@@ -50,6 +51,7 @@ What did you try to solve the problem?
 -->
 
 ## Checklist for self-check
+
 - [ ] Added expected and actual behavior.
 - [ ] Added video or screenshot of bug.
 - [ ] Added isolated way to reproduce the bug.

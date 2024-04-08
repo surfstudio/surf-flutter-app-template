@@ -1,0 +1,24 @@
+name: Add comment to Pyrus task on issue close
+
+on:
+  issues:
+    types:
+      - closed
+
+jobs:
+  get_pyrus_task_id:
+    name: Get Pyrus task ID from special comment in issue
+    uses: surfstudio/flutter-ci-workflows/.github/workflows/get_pyrus_task_id_from_issue_or_pr_comment.yml@main
+    with:
+      ISSUE_NUMBER: ${{ github.event.issue.number }}
+
+  add_comment_to_pyrus_task:
+    name: Add comment to Pyrus task
+    needs: get_pyrus_task_id
+    uses: surfstudio/flutter-ci-workflows/.github/workflows/add_comment_to_pyrus_task.yml@main
+    with:
+      PYRUS_TASK_ID: ${{ needs.get_pyrus_task_id.outputs.PYRUS_TASK_ID }}
+      COMMENT_TEXT: The issue is closed.
+    secrets:
+      LOGIN: ${{ secrets.PYRUS_BOT_LOGIN }}
+      SECURITY_KEY: ${{ secrets.PYRUS_BOT_SECRET_KEY }}

@@ -9,9 +9,6 @@ labels: enhancement
 
     Provide thoughtful commentary *and code samples* on what this feature means for your product. What will it allow you to do that you can't do today? How will it make current workarounds straightforward? What potential bugs and edge cases does it help to avoid? etc. Please keep it product-centric.
 -->
-## Specify package name
-<!--Write the name of the package where you have problems-->
-
 ## What is the new or updated feature that you are suggesting?
 <!--A clear and concise description of what you want to happen.-->
 

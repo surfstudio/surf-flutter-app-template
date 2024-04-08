@@ -1,0 +1,34 @@
+name: Create Pyrus task from new PR
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+
+jobs:
+  get_package_name:
+    uses: surfstudio/flutter-ci-workflows/.github/workflows/get_package_name.yml@main
+
+  create_pyrus_task:
+    name: Create Pyrus task from pull request
+    needs: get_package_name
+    uses: surfstudio/flutter-ci-workflows/.github/workflows/create_pyrus_task_from_issue_or_pr.yml@main
+    with:
+      TYPE: Pull request
+      PACKAGE_NAME: ${{ needs.get_package_name.outputs.package_name }}
+      TITLE: ${{ github.event.pull_request.title }}
+      LINK: ${{ github.event.pull_request.html_url }}
+    secrets:
+      LOGIN: ${{ secrets.PYRUS_BOT_LOGIN }}
+      SECURITY_KEY: ${{ secrets.PYRUS_BOT_SECRET_KEY }}
+
+  add_pyrus_task_link:
+    name: Add Pyrus task link
+    needs: create_pyrus_task
+    uses: surfstudio/flutter-ci-workflows/.github/workflows/add_comment_to_issue_or_pr.yml@main
+    with:
+      ISSUE_NUMBER: ${{ github.event.pull_request.number }}
+      # Don't change the comment link, because the Pyrus task ID is searched by the link text
+      COMMENT_TEXT: "[Link to Pyrus task](https://pyrus.com/t#id${{ needs.create_pyrus_task.outputs.TASK_ID }})"
+      REACTIONS: rocket
