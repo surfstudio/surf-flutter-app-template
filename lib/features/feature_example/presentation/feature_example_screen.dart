@@ -1,7 +1,7 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/features/feature_example/presentation/feature_example_state.dart';
 import 'package:flutter_template/features/feature_example/presentation/feature_example_wm.dart';
+import 'package:union_state/union_state.dart';
 
 /// {@template feature_example_screen.class}
 /// FeatureExampleScreen.
@@ -15,19 +15,14 @@ class FeatureExampleScreen extends ElementaryWidget<IFeatureExampleWM> {
 
   @override
   Widget build(IFeatureExampleWM wm) {
-    const FeatureExampleStateInitial();
-
     return Scaffold(
       appBar: AppBar(),
       body: Center(
-        child: ValueListenableBuilder<FeatureExampleState>(
-          valueListenable: wm.state,
-          builder: (_, state, __) => switch (state) {
-            FeatureExampleStateInitial _ => const SizedBox.shrink(),
-            FeatureExampleStateLoading _ => const CircularProgressIndicator(),
-            FeatureExampleStateLoaded(:final ip) => Text(ip),
-            FeatureExampleStateError _ => Text(wm.l10n.featureExampleFailedLoadIpMessage),
-          },
+        child: UnionStateListenableBuilder(
+          unionStateListenable: wm.state,
+          builder: (_, data) => Text(data.ip),
+          loadingBuilder: (_, __) => const CircularProgressIndicator(),
+          failureBuilder: (_, __, ___) => Text(wm.l10n.featureExampleFailedLoadIpMessage),
         ),
       ),
     );
