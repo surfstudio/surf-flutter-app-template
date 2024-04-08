@@ -13,16 +13,6 @@ To use Firebase in your project, you need to do the following:
 
 3. Create project at [Firebase Console](https://console.firebase.google.com/).
 
-4. Configure app for desired platform.
-
-### Android
-
-[Actual offical guide.](https://firebase.google.com/docs/android/setup)
-
-#### Add Firebase using the Firebase console
-
-- Create a Firebase project.
-
 - In the [Firebase console](https://console.firebase.google.com), click Add project. To add Firebase resources to an existing Google Cloud project, enter its project name or select it from the dropdown menu. To create a new project, enter the desired project name. You can also optionally edit the project ID displayed below the project name.
 
 - If prompted, review and accept the [Firebase terms](https://firebase.google.com/terms).
@@ -32,6 +22,12 @@ To use Firebase in your project, you need to do the following:
 - (Optional) Set up Google Analytics for your project, which enables you to have an optimal experience using any of the Firebase products. Either select an existing [Google Analytics account](https://support.google.com/analytics/answer/1009618?ref_topic=3544906&authuser=0#zippy=%2Cin-this-article) or to create a new account. If you create a new account, select your [Analytics reporting location](https://firebase.google.com/docs/projects/locations), then accept the data sharing settings and Google Analytics terms for your project. You can always set up Google Analytics later in the [Integrations](https://console.firebase.google.com/project/_/settings/integrations) tab of your settings Project settings.
 
 - Click Create project (or Add Firebase, if you're using an existing Google Cloud project).
+
+4. Configure app for desired platform.
+
+### Android
+
+[Actual offical guide.](https://firebase.google.com/docs/android/setup)
 
 - In the center of the project overview page, click the Android icon (plat_android) or Add app to launch the setup workflow.
 
@@ -92,6 +88,14 @@ dependencies {
 ### [iOS](https://firebase.google.com/docs/ios/setup)
 
 ### [Web](https://firebase.google.com/docs/web/setup)
+
+- In the center of the project overview page, click the Web icon (web_android) or Add app to launch the setup workflow.
+
+- Enter your app's name in the app nickname field.
+
+- Select 'Use a ```<script>``` tag'.
+
+- Copy and paste these scripts into the bottom of your ```<body>``` tag, but before you use any Firebase services.
 
 5. Pass generated `DefaultFirebaseOptions` to `Environment` in entry point of your app:
 
