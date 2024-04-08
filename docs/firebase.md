@@ -5,6 +5,7 @@
 To use Firebase in your project, you need to do the following:
 
 1. If you haven't already, install [Firebase CLI](https://firebase.google.com/docs/cli).
+
 2. Log in to Firebase CLI with your Google account:
 
    ```sh
@@ -29,7 +30,7 @@ To use Firebase in your project, you need to do the following:
 
 [Actual offical guide.](https://firebase.google.com/docs/android/setup)
 
-- In the center of the project overview page, click the Android icon (plat_android) or Add app to launch the setup workflow.
+- In the center of the project overview page, click the Android icon or Add app to launch the setup workflow.
 
 - Enter your app's package name in the Android package name field. The current package name can be found in your module (app-level) Gradle file, usually android/app/build.gradle, defaultConfig section (example package name: com.yourcompany.yourproject).
 
@@ -85,11 +86,41 @@ dependencies {
 }
 ```
 
-### [iOS](https://firebase.google.com/docs/ios/setup)
+### iOS
 
-### [Web](https://firebase.google.com/docs/web/setup)
+[Actual offical guide.](https://firebase.google.com/docs/ios/setup)
 
-- In the center of the project overview page, click the Web icon (web_android) or Add app to launch the setup workflow.
+- In the center of the project overview page, click the Ios icon or Add app to launch the setup workflow.
+
+- Enter your app's bundle ID in the bundle ID field. A bundle ID uniquely identifies an application in Apple's ecosystem. Find your bundle ID: open your project in Xcode, select the top-level app in the project navigator, then select the General tab. The value of the Bundle Identifier field is the bundle ID (for example, com.yourcompany.yourproject). Be aware that the bundle ID value is case-sensitive, and it cannot be changed for this Firebase app after it's registered with your Firebase project.
+
+- (Optional) Enter other app information: App nickname and App Store ID.
+
+- Click Register app.
+
+- Click Download GoogleService-Info.plist to obtain your Firebase Apple platforms config file (GoogleService-Info.plist).
+
+- Add the file to the project using Xcode (adding manually via the filesystem won't link the file to the project). Using Xcode, open the project's ios/{projectName}.xcworkspace file. Right click Runner from the left-hand side project navigation within Xcode and select "Add files", select the GoogleService-Info.plist file you downloaded, and ensure the "Copy items if needed" checkbox is enabled.
+
+- Move generated ios/firebase_app_id_file.json to ios/Firebase/{flavor_name} folder - e.g. ios/Firebase/dev/firebase_app_id_file.json.
+
+Move generated ios/Runner/GoogleService-Info.plist to ios/Firebase/{flavor_name} folder - e.g. ios/Firebase/dev/GoogleService-Info.plist.
+
+- The Firebase Emulator Suite uses un-encrypted networking connections in order to enable fast, uncomplicated setup. However iOS by default requires encrypted networking connections. If you would like to use any part of the Firebase Emulator Suite to emulate firebase services on your local machine during development, you must allow your iOS app to connect to local network services over insecure connections. To allow insecure connections, we recommend adding the NSAllowsLocalNetworking key to the NSAppTransportSecurity dictionary in your application's plist file. Add these keys to your ```ios/Runner/Info.plist``` file:
+
+```plist
+<key>NSAppTransportSecurity</key>
+<dict>
+    <key>NSAllowsLocalNetworking</key>
+    <true/>
+</dict>
+```
+
+### Web
+
+[Actual offical guide.](https://firebase.google.com/docs/web/setup)
+
+- In the center of the project overview page, click the Web icon or Add app to launch the setup workflow.
 
 - Enter your app's name in the app nickname field.
 
@@ -97,22 +128,62 @@ dependencies {
 
 - Copy and paste these scripts into the bottom of your ```<body>``` tag, but before you use any Firebase services.
 
-5. Pass generated `DefaultFirebaseOptions` to `Environment` in entry point of your app:
+5. Create function inside firebase_options_dev.dart  inside lib/main/enviroment that provides FirebaseOptions based on the current platform. For example, it can be implemented like this.
 
-   ```dart
-    /// Main entry point of app.
-    void main() {
-      Environment.init(
-        buildType: BuildType.debug,
-        config: AppConfig(
-          url: Url.testUrl,
-        ),
-       firebaseOptions: DefaultFirebaseOptions.currentPlatform,
-      );
+```dart
+/// Global function that provides [FirebaseOptions] based on the platform.
+FirebaseOptions firebaseOptions() {
+  if (kIsWeb) {
+    return const FirebaseOptions(
+        /// Values from firebaseConfig from web/index.html.
+        apiKey: 'api',
+        authDomain: 'authDomain',
+        projectId: 'projectId',
+        storageBucket: 'storageBucket',
+        messagingSenderId: 'messagingSenderId',
+        appId: 'appId',
+        measurementId: 'measurementId');
+  }
 
-      run();
-    }
-   ```
+  return switch (defaultTargetPlatform) {
+    /// Values from android/app/google-services.json.
+    TargetPlatform.android => const FirebaseOptions(
+        apiKey: 'apiKey',
+        appId: 'appId',
+        messagingSenderId: 'messagingSenderId',
+        projectId: 'projectId',
+        storageBucket: 'storageBucket',
+      ),
+    /// Values from ios/Firebase/dev/GoogleService-Info.plist.
+    TargetPlatform.iOS => const FirebaseOptions(
+        apiKey: 'apiKey',
+        appId: 'appId',
+        messagingSenderId: 'messagingSenderId',
+        projectId: 'projectId',
+        storageBucket: 'storageBucket',
+        iosBundleId: 'iosBundleId',
+      ),
+    _ => throw Exception('Not supported platform')
+  };
+}
+```
+
+6. Add this function call to ```firebaseOptions``` param of ```Environment.init```.
+
+```dart
+ /// Main entry point of app.
+ void main() {
+   Environment.init(
+     buildType: BuildType.debug,
+     config: AppConfig(
+       url: Url.testUrl,
+     ),
+    firebaseOptions: firebaseOptions(),
+   );
+
+   run();
+ }
+```
 
 > [!WARNING]
 > Make sure that you use correct Firebase options for current entry point (e.g. `firebase_options_dev.dart` for `lib/main.dart` and `firebase_options.dart` for `lib/main_release.dart`).
