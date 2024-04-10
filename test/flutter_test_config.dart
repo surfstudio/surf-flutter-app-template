@@ -68,7 +68,7 @@ Future<void> testExecutable(OnTestMain testMain) {
         when(() => themeController.themeMode).thenReturn(ValueNotifier(mode.toThemeMode));
 
         return DiScope<IAppScope>(
-          onFactory: (_) => mockAppScope,
+          factory: (_) => mockAppScope,
           child: Provider<ThemeModeController>.value(
             value: themeController,
             child: widget,

@@ -1,32 +1,33 @@
 {
     "configurations": [
         {
-            "name": "Run debug",
+            "name": "dev",
             "request": "launch",
             "args": [
                 "--flavor",
                 "dev"
             ],
-            "type": "dart"
-        },
-        {
-            "name": "Run profile",
-            "request": "launch",
             "type": "dart",
-            "args": [
-                "--flavor",
-                "dev"
-            ],
-            "flutterMode": "profile"
+            "program": "lib/main_dev.dart"
         },
         {
-            "name": "Run all Tests",
+            "name": "prod",
+            "request": "launch",
+            "args": [
+                "--flavor",
+                "prod"
+            ],
+            "type": "dart",
+            "program": "lib/main_prod.dart"
+        },
+        {
+            "name": "Flutter tests",
             "type": "dart",
             "request": "launch",
             "program": "./test/"
         },
         {
-            "name": "Golden",
+            "name": "Flutter Goldens",
             "request": "launch",
             "type": "dart",
             "codeLens": {

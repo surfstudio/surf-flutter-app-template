@@ -33,14 +33,16 @@ A project initialization template adopted at [Surf](https://surf.dev).
 
 Do the following to initialize a project:
 
-1. Specify the name of the application [here](#application-name).
+1. Specify the name of the application [here](#enter-app-name-here).
 2. Search for `flutter_template` and replace it with the name of your project where needed.
 3. Configure Firebase with the [guide](docs/firebase.md).
 4. Initialize `FirebaseCrashlytics` (you can find that in `TODO(init-project)`).
 5. Install a needed Flutter version with FVM using the command:
+
     ```sh
     fvm use <flutter_version>
     ```
+
     If FVM is not installed, check [FVM workflow](#fvm-workflow).
 6. Specify the Flutter version used in the project [here](#flutter-and-dart-fvm-versions-of-the-project).
 7. Setup labels for issues and pull requests in the repository settings according to the [list](docs/workflow_in_repository.md#list-of-labels-for-pr-and-issues).
@@ -63,6 +65,7 @@ The rules for branches, commits, and pull requests are the same as for a project
 
 > [!NOTE]
 > Add here basic information about the project, such as:
+>
 > - a couple words what the project is about
 > - briefly, what technologies are used (BLoC, Riverpod, something specific, etc.)
 > - link to Confluence space with all project documentation
@@ -74,6 +77,7 @@ Project line length: 120 characters.
 ### Dependencies
 
 Run this command to get up-to-date versions of dependencies:
+
 ```sh
 fvm flutter pub get --enforce-lockfile
 ```
@@ -93,11 +97,13 @@ The project uses [FVM](https://fvm.app/) for Flutter version management.
 Installation and IDE configuration for working with FVM are described [here](https://fvm.app/docs/getting_started/installation/) and [here](https://fvm.app/docs/getting_started/configuration).
 
 For installation the project version of Flutter, run the command:
+
 ```sh
 fvm install
 ```
 
 For VSCode IDE you can also run the script [`fvm_vscode.sh`](scripts/fvm_vscode.sh):
+
 ```sh
 sh scripts/fvm_vscode.sh
 ```
@@ -107,6 +113,7 @@ You need to use `fvm flutter ...` everywhere instead of just `flutter ...` when 
 ## Code generation
 
 Basic command for code generation:
+
 ```sh
 fvm flutter pub run build_runner build --delete-conflicting-outputs
 ```
@@ -114,8 +121,10 @@ fvm flutter pub run build_runner build --delete-conflicting-outputs
 ### Assets codegen
 
 You can easily add assets to your project by following these steps:
+
 1. Add asset to your assets folder (make sure you specify this folder in `asset` section of your [pubspec.yaml](pubspec.yaml))
 2. Run script [`spider_build.sh`](scripts/spider_build.sh):
+
    ```shell
    sh scripts/spider_build.sh
    ```
@@ -124,6 +133,7 @@ Spider configuration file is located [here](spider.yaml).
 
 > [!NOTE]
 > Add relevant information such as:
+>
 > - API models and services generation (basic info about SurfGen is [here](docs/surf_gen.md))
 > - generating something else that is necessary for work or project launch
 >
@@ -133,6 +143,7 @@ Spider configuration file is located [here](spider.yaml).
 
 The project uses [mason](https://pub.dev/packages/mason) to generate code based on templates.
 To install [mason](https://pub.dev/packages/mason) you need to run the command:
+
 ```sh
 # Install from pub.dev
 dart pub global activate mason_cli
@@ -146,6 +157,7 @@ brew install mason
 
 The project uses 2 templates - [feature](settings/bricks/feature) and [screen](settings/bricks/screen).
 In order for templates to be used, they need to be obtained from [mason.yaml](mason.yaml). Run the following command:
+
 ```sh
 mason get
 ```
@@ -160,10 +172,11 @@ mason make TEMPLATE_NAME # insert the template 'feature' or 'screen' instead of 
 
 > [!NOTE]
 > Add relevant information such as:
+>
 > - VPN settings for development
 > - test/development accounts
 >
-> Or just put "No". 
+> Or just put "No".
 > Delete this alert, but don't delete this section.
 
 ## Project scripts
@@ -176,7 +189,7 @@ All scripts are located in the [scripts](scripts) folder and described [here](do
 
 > [!NOTE]
 > Explain here a versioning system used in the project.
-> 
+>
 > Delete this alert after initialization of the template.
 
 For example, you can use this approach:
@@ -189,7 +202,7 @@ Given the version number MAJOR.MINOR.PATCH, the following should be incremented:
 
 Build number or versionCode, which comes after +, is added following this rule — combine all the values of the application version and add a place for version counting.
 
-```
+```text
 3.11.29+31129000 // first build for the date November 29, 2023
 3.11.29+31129001 // second build for the date November 29, 2023
 4.01.03+30103001 // second build for the date January 3, 2024
@@ -202,7 +215,7 @@ The guide to adding flavors can be found [here](docs/flavors.md).
 
 There are cases when you need to add different functionality for `dev` and `qa` mode. For example, if you need different logging or feature-toggle options. Then you can add the `qa` mode to the `enum BuildType` and create a `main_qa.dart` file with the `main()` function in the `lib/` folder. For example:
 
-```dart 
+```dart
 void main() {
   run(const Environment(buildType: BuildType.qa));
 }
@@ -214,7 +227,7 @@ Then you need to add `qa` flavor ([guide](docs/flavors.md)).
 
 > [!NOTE]
 > Add here guides for building the app or skip this section.
-> 
+>
 > Delete this alert, but don't delete this section.
 
 ### App Signature, Certs and secrets
@@ -227,12 +240,13 @@ iOS certs and profiles should be saved here: `ios/certs`. But don't store them i
 
 > [!NOTE]
 > Add problems and possible solutions here as you work with the project.
-> 
+>
 > Delete this alert, but don't delete this section.
 
 ## Workflow in a repository
 
 The workflow includes the following:
+
 - [Branching in a repository](docs/workflow_in_repository.md#branching-in-a-repository)
 - [Commits](docs/workflow_in_repository.md#commits)
 - [Pull requests](docs/workflow_in_repository.md#pull-requests)
@@ -243,6 +257,7 @@ The workflow includes the following:
 ## Architecture and project structure
 
 The overview of the architecture and structure can be found here:
+
 - [Architecture](docs/architecture_and_project_structure.md#architecture)
 - [Project structure](docs/architecture_and_project_structure.md#project-structure)
 
@@ -256,8 +271,8 @@ Enabled:
 
 ## Navigation
 
-Navigation is centered around the [AutoRoute](https://pub.dev/packages/auto_route) package. 
-We use a class called AppRouter for global navigation around an app and StackRouter for nested navigation. 
+Navigation is centered around the [AutoRoute](https://pub.dev/packages/auto_route) package.
+We use a class called AppRouter for global navigation around an app and StackRouter for nested navigation.
 
 Despite the fact that StackRouter could be referred to directly through the context in WidgetModel, it should be passed explicitly to the WidgetModel constructor. With StackRouter used in the context, an effective navigation stack can be obtained and managed in this router. AppRouter, in turn, is stored in the AppScope dependencies and recovered from there.
 
@@ -290,5 +305,6 @@ The Basic guide for creating a native splash screen is [here](docs/splash.md).
 ## Additional useful practices
 
 There are some additional useful guides in the [docs](docs) folder:
+
 - [Shared preferences](docs/shared_preferences.md)
 - [Authorization](docs/authorization.md)

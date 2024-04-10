@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_template/assets/resources.dart';
-import 'package:flutter_template/features/common/utils/sizes/app_sizes.dart';
+import 'package:flutter_template/uikit/app_sizes.dart';
 import 'package:flutter_template/uikit/images/image_placeholder_widget.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 

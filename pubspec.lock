@@ -477,6 +477,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.1"
+  fresh:
+    dependency: transitive
+    description:
+      name: fresh
+      sha256: d0adae5799932b7aed7f17bed05862f994e4f592e9de9f8a9a513377b773fe50
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.2"
+  fresh_dio:
+    dependency: "direct main"
+    description:
+      name: fresh_dio
+      sha256: "0edbaff18a3b4b159d09ad39831def89e88b91406356c14498c540c50df5de6d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.1"
   frontend_server_client:
     dependency: transitive
     description:
@@ -1114,6 +1130,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.2"
+  union_state:
+    dependency: "direct main"
+    description:
+      name: union_state
+      sha256: "029728cbe4b3f65fad9ffe3d73b9fbff10e7a2844aff176053ee93f883b19225"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.1"
   universal_io:
     dependency: transitive
     description:

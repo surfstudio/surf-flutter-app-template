@@ -18,7 +18,7 @@ class {{name.pascalCase()}}Flow extends StatelessWidget implements AutoRouteWrap
     const repository = {{name.pascalCase()}}Repository();
 
     return DiScope<I{{name.pascalCase()}}Scope>(
-      onFactory: () => {{name.pascalCase()}}Scope(repository),
+      factory: (context) => {{name.pascalCase()}}Scope(repository),
       onDispose: (scope) => scope.dispose(),
       child: this,
     );

@@ -7,9 +7,6 @@ labels: documentation
     Thank you for contributing to our project!
     This template is only for documentation update reports, otherwise please use another template.
 -->
-## Specify package name
-<!--Write the name of the package where you have problems-->
-
 ## Describe what scenario you think is uncovered by the existing examples / articles
 <!--A clear and concise description of the problem that you want explained.-->
 

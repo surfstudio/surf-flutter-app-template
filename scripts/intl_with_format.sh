@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-fvm flutter pub run intl_utils:generate && fvm flutter format -l 120 lib/generated
+fvm flutter gen-l10n
+fvm dart format -l 120 lib/l10n
