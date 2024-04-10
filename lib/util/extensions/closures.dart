@@ -1,41 +1,49 @@
 // ignore_for_file: prefer-match-file-name
 
-/// Let extension
+/// The closure that is passed as a parameter to extension methods.
+typedef Closure<R, T> = R Function(T it);
+
+/// Let extension.
 extension LetX<T extends Object> on T {
-  /// Executes a closure, where the argument is the value itself
-  R let<R>(R Function(T it) closure) {
+  /// Executes a closure, where the argument is the value itself.
+  R let<R>(Closure<R, T> closure) {
     return closure(this);
   }
 
-  /// Executes a closure, where the argument is the value itself
-  R? run<R>(R? Function(T it) closure) {
+  /// Executes a closure, where the argument is the value itself.
+  R? run<R>(Closure<R?, T> closure) {
     return closure(this);
   }
 }
 
-/// Let nullable extension
+/// Let nullable extension.
 extension LetNullableX<T extends Object> on T? {
-  /// Executes a closure on a nullable value, where the argument is the value itself
-  R? let<R>(R Function(T it) closure) {
-    return this != null ? closure(this!) : null;
+  /// Executes a closure on a nullable value, where the argument is the value itself.
+  R? let<R>(Closure<R, T> closure) {
+    final object = this;
+
+    return object == null ? null : closure(object);
   }
 
-  /// Executes a closure on a nullable value, where the argument is the value itself
-  R? run<R>(R? Function(T it) closure) {
-    return this != null ? closure(this!) : null;
+  /// Executes a closure on a nullable value, where the argument is the value itself.
+  R? run<R>(Closure<R?, T> closure) {
+    final object = this;
+
+    return object == null ? null : closure(object);
   }
 }
 
-/// Also extension
+/// Also extension.
 extension AlsoX<T extends Object?> on T {
-  /// Additionally executes a closure and returns the value itself
-  T also(void Function(T it) closure) {
+  /// Additionally executes a closure and returns the value itself.
+  T also(Closure<void, T> closure) {
     closure(this);
+
     return this;
   }
 }
 
-/// Repeat extension
+/// Repeat extension.
 extension RepeatX<T extends Object?> on T {
   /// Returns a Iterable<T> containing this object repeated [times] times.
   Iterable<T> repeat(int times) {
