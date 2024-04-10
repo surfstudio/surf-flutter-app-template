@@ -8,7 +8,7 @@ import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/debug/di/debug_scope.dart';
 import 'package:flutter_template/features/debug/presentation/debug/debug_model.dart';
 import 'package:flutter_template/features/debug/presentation/debug/debug_screen.dart';
-import 'package:flutter_template/features/navigation/service/app_router.dart';
+import 'package:flutter_template/features/navigation/app_router.dart';
 import 'package:flutter_template/features/theme_mode/presentation/theme_mode_provider.dart';
 import 'package:flutter_template/l10n/app_localizations_x.dart';
 import 'package:provider/provider.dart';
@@ -46,7 +46,7 @@ abstract interface class IDebugScreenWM with ILocalizationMixin implements IWidg
   void onUrlRadioButtonPressed(Url? url);
 
   /// Callback of pressed on the server change button.
-  void onChangeServerPressed(Url url);
+  void onChangeServerPressed();
 
   /// Callback of pressed on the connect proxy button.
   void onConnectProxyPressed();
@@ -107,8 +107,8 @@ class DebugScreenWM extends WidgetModel<DebugScreen, DebugModel> with Localizati
   }
 
   @override
-  Future<void> onChangeServerPressed(Url url) async {
-    await model.saveServerUrl(url);
+  Future<void> onChangeServerPressed() async {
+    await model.saveServerUrl(_serverUrlState.value);
     _showReloadAppSnackBar();
   }
 
@@ -125,7 +125,7 @@ class DebugScreenWM extends WidgetModel<DebugScreen, DebugModel> with Localizati
   }
 
   @override
-  Future<void> openUiKit() => _router.push(const UiKitRouter());
+  Future<void> openUiKit() => _router.push(const UiKitRoute());
 
   void _showReloadAppSnackBar() {
     final _ = _scaffoldMessenger.showSnackBar(SnackBar(content: Text(context.l10n.debugScreenReloadAppMessage)));

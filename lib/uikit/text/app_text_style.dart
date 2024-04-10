@@ -1,7 +1,7 @@
 //ignore_for_file: public_member_api_docs
 
 import 'package:flutter/material.dart';
-import 'package:flutter_template/features/common/utils/sizes/app_sizes.dart';
+import 'package:flutter_template/uikit/app_sizes.dart';
 
 const _double57 = 57.0;
 const _double45 = 45.0;

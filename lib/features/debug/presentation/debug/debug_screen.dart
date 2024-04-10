@@ -2,10 +2,10 @@ import 'package:elementary/elementary.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/config/url.dart';
-import 'package:flutter_template/features/common/utils/sizes/app_sizes.dart';
 import 'package:flutter_template/features/debug/presentation/debug/debug_wm.dart';
 import 'package:flutter_template/features/theme_mode/presentation/widgets/theme_mode_builder.dart';
 import 'package:flutter_template/l10n/app_localizations_x.dart';
+import 'package:flutter_template/uikit/app_sizes.dart';
 
 /// {@template debug_screen.class}
 /// Debug screens.
@@ -56,7 +56,7 @@ class _ServerSwitchCard extends StatelessWidget {
 
   final ValueListenable<Url> urlState;
   final ValueChanged<Url?> onUrlRadioButtonPressed;
-  final ValueChanged<Url> onChangeServerPressed;
+  final VoidCallback onChangeServerPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -70,20 +70,20 @@ class _ServerSwitchCard extends StatelessWidget {
             Text(l10n.debugScreenServerSubtitle),
             ValueListenableBuilder<Url>(
               valueListenable: urlState,
-              builder: (_, url, __) {
+              builder: (_, selectedUrl, __) {
                 return Column(
                   children: [
                     ...Url.values.map(
-                      (u) => RadioListTile<Url>(
+                      (url) => RadioListTile<Url>(
                         value: url,
-                        groupValue: url,
+                        groupValue: selectedUrl,
                         onChanged: onUrlRadioButtonPressed,
                         title: Text(url.toString()),
                         subtitle: Text(url.value),
                       ),
                     ),
                     MaterialButton(
-                      onPressed: () => onChangeServerPressed(url),
+                      onPressed: onChangeServerPressed,
                       child: Text(
                         l10n.debugScreenServerConnectButton,
                         style: const TextStyle(fontSize: AppSizes.double16),

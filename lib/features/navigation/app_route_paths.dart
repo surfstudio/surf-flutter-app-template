@@ -1,9 +1,9 @@
-/// List of all the paths that are used to navigate in temp feature.
+/// List of all the paths that are used in navigation.
 ///
 /// Have to been filled with the entries like this:
 /// ```dart
 /// /// Path description.
-/// static const String screenPath = 'screenPath';
+/// static const String flowPath = 'flowPath';
 /// ```
 abstract class AppRoutePaths {
   /// Path to debug screen.

@@ -20,7 +20,7 @@ class ThemeModeProvider extends SingleChildStatelessWidget {
   @override
   Widget buildWithChild(BuildContext context, Widget? child) {
     return DiScope<IThemeModeScope>(
-      onFactory: ThemeModeScope.create,
+      factory: ThemeModeScope.create,
       onDispose: (scope) => scope.dispose(),
       child: ThemeModeWidget(child: child ?? const SizedBox.shrink()),
     );

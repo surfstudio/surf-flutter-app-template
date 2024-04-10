@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_template/features/common/utils/sizes/app_sizes.dart';
 import 'package:flutter_template/uikit/alerts/app_alert.dart';
 import 'package:flutter_template/uikit/alerts/app_alert_action.dart';
+import 'package:flutter_template/uikit/app_sizes.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 
 void main() {
