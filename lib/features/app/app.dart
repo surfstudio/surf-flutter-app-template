@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easy_dialogs/flutter_easy_dialogs.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_template/features/navigation/app_router.dart';
+import 'package:flutter_template/features/snack_queue/presentation/snack_queue_provider.dart';
 import 'package:flutter_template/features/theme_mode/presentation/widgets/theme_mode_builder.dart';
 import 'package:flutter_template/l10n/app_localizations.g.dart';
 import 'package:flutter_template/uikit/themes/app_theme_data.dart';
+import 'package:nested/nested.dart';
 import 'package:provider/provider.dart';
 
 /// {@template app.class}
@@ -44,6 +47,28 @@ class _AppState extends State<App> {
           theme: AppThemeData.lightTheme,
           darkTheme: AppThemeData.darkTheme,
           themeMode: themeMode,
+
+          /// For snack and dialogs
+          builder: (builderContext, widget) {
+            final mediaQueryData = MediaQuery.of(builderContext);
+            final easyDialogsBuilder = FlutterEasyDialogs.builder();
+
+            return Nested(
+              children: const [
+                SnackQueueProvider(),
+              ],
+              child: MediaQuery(
+                data: mediaQueryData.copyWith(textScaler: TextScaler.noScaling),
+                child: Overlay(
+                  initialEntries: [
+                    OverlayEntry(
+                      builder: (overlayContext) => easyDialogsBuilder(overlayContext, widget),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
 
           /// Localization.
           locale: _localizations.firstOrNull,
