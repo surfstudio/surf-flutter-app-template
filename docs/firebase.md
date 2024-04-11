@@ -40,51 +40,23 @@ To use Firebase in your project, you need to do the following:
 
 - Download and then add the Firebase Android configuration file (google-services.json) to your app. Click Download google-services.json to obtain your Firebase Android config file. Move your config file into the module (app-level) root directory of your app.
 
-- In your root-level (project-level) Gradle file (```<project>/build.gradle```), add the Google services plugin as a dependency:
+- Prepare instance of FirebaseOptions. For Android you should provide at least required parameters. It can look like this:
 
-```gradle
-plugins {
-  id 'com.android.application' version '7.3.0' apply false
-  // ...
-
-  // Add the dependency for the Google services Gradle plugin
-  id 'com.google.gms.google-services' version '4.4.1' apply false
-}
+```dart
+FirebaseOptions(
+    apiKey: 'apiKey',
+    appId: 'appId',
+    messagingSenderId: 'senderId',
+    projectId: 'projectId',
+    storageBucket: 'OptionalStorageBucket',
+  );
 ```
 
-- In your module (app-level) Gradle file (```<project>/<app-module>/build.gradle```), add the Google services plugin:
-
-```gradle
-plugins {
-  id 'com.android.application'
-
-  // Add the Google services Gradle plugin
-  id 'com.google.gms.google-services'
-  // ...
-}
-```
-
-- In your module (app-level) Gradle file (```<project>/<app-module>/build.gradle```), add the dependencies for the Firebase products that you want to use in your app. We recommend using the Firebase Android BoM to control library versioning.
-
-```gradle
-dependencies {
-  // ...
-
-  // Import the Firebase BoM
-  implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
-
-  // When using the BoM, you don't specify versions in Firebase library dependencies
-
-  // Add the dependency for the Firebase SDK for Google Analytics
-  implementation("com.google.firebase:firebase-analytics")
-
-  // TODO: Add the dependencies for any other Firebase products you want to use
-  // See https://firebase.google.com/docs/android/setup#available-libraries
-  // For example, add the dependencies for Firebase Authentication and Cloud Firestore
-  implementation("com.google.firebase:firebase-auth")
-  implementation("com.google.firebase:firebase-firestore")
-}
-```
+1. apiKey can be found inside google-services.json file in client.api_key.current_key.
+2. appId can be found inside google-services.json file in client.client_info.mobilesdk_app_id.
+3. messagingSenderId can be found in your Firebase Console Project Settings, Cloud Messanging Tab.
+4. projectId can be found inside google-services.json file in project_info.project_id.
+5. (Optional) storageBucket can be found inside google-services.json file in project_info.storage_bucket.
 
 ### iOS
 
