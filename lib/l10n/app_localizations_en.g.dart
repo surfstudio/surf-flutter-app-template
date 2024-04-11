@@ -132,6 +132,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get uiKitScreenTetradicButtonSnackText => 'Tetradic Button Pressed';
 
   @override
+  String get uiKitScreenSnackFromScaffoldMessengerText => 'Snack from ScaffoldMessenger';
+
+  @override
+  String get uiKitScreenSnackFromSnackQueueText => 'Snack from Snack Queue';
+
+  @override
   String get uiKitScreenDangerSnackButtonText => 'Danger snack';
 
   @override
