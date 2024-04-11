@@ -50,15 +50,13 @@ FirebaseOptions(
   );
 ```
 
-1. apiKey can be found inside google-services.json file in client.api_key.current_key.
-2. appId can be found inside google-services.json file in client.client_info.mobilesdk_app_id.
-3. messagingSenderId can be found in your Firebase Console Project Settings, Cloud Messanging Tab.
-4. projectId can be found inside google-services.json file in project_info.project_id.
-5. (Optional) storageBucket can be found inside google-services.json file in project_info.storage_bucket.
+  1. apiKey can be found inside google-services.json file in client.api_key.current_key.
+  2. appId can be found inside google-services.json file in client.client_info.mobilesdk_app_id.
+  3. messagingSenderId can be found in your Firebase Console Project Settings, Cloud Messanging Tab.
+  4. projectId can be found inside google-services.json file in project_info.project_id.
+  5. (Optional) storageBucket can be found inside google-services.json file in project_info.storage_bucket.
 
 ### iOS
-
-[Actual offical guide.](https://firebase.google.com/docs/ios/setup)
 
 - In the center of the project overview page, click the Ios icon or Add app to launch the setup workflow.
 
@@ -72,10 +70,6 @@ FirebaseOptions(
 
 - Add the file to the project using Xcode (adding manually via the filesystem won't link the file to the project). Using Xcode, open the project's ios/{projectName}.xcworkspace file. Right click Runner from the left-hand side project navigation within Xcode and select "Add files", select the GoogleService-Info.plist file you downloaded, and ensure the "Copy items if needed" checkbox is enabled.
 
-- Move generated ios/firebase_app_id_file.json to ios/Firebase/{flavor_name} folder - e.g. ios/Firebase/dev/firebase_app_id_file.json.
-
-Move generated ios/Runner/GoogleService-Info.plist to ios/Firebase/{flavor_name} folder - e.g. ios/Firebase/dev/GoogleService-Info.plist.
-
 - The Firebase Emulator Suite uses un-encrypted networking connections in order to enable fast, uncomplicated setup. However iOS by default requires encrypted networking connections. If you would like to use any part of the Firebase Emulator Suite to emulate firebase services on your local machine during development, you must allow your iOS app to connect to local network services over insecure connections. To allow insecure connections, we recommend adding the NSAllowsLocalNetworking key to the NSAppTransportSecurity dictionary in your application's plist file. Add these keys to your ```ios/Runner/Info.plist``` file:
 
 ```plist
@@ -86,37 +80,33 @@ Move generated ios/Runner/GoogleService-Info.plist to ios/Firebase/{flavor_name}
 </dict>
 ```
 
-### Web
+- Prepare instance of FirebaseOptions. For iOS you should provide at least required parameters and iosBundleId. It can look like this:
 
-[Actual offical guide.](https://firebase.google.com/docs/web/setup)
+```dart
+FirebaseOptions(
+    apiKey: 'apiKey',
+    appId: 'appId',
+    messagingSenderId: 'senderId',
+    projectId: 'projectId',
+    iosBundleId: 'iosBundleId',
+    storageBucket: 'OptionalStorageBucket',
+  );
+```
 
-- In the center of the project overview page, click the Web icon or Add app to launch the setup workflow.
-
-- Enter your app's name in the app nickname field.
-
-- Select 'Use a ```<script>``` tag'.
-
-- Copy and paste these scripts into the bottom of your ```<body>``` tag, but before you use any Firebase services.
+  1. apiKey can be found inside GoogleServices-Info.plist file by key API_KEY.
+  2. appId can be found inside GoogleServices-Info.plist file by key GOOGLE_APP_ID.
+  3. messagingSenderId can be found inside GoogleServices-Info.plist file by key GCM_SENDER_ID.
+  4. projectId can be found inside GoogleServices-Info.plist file by key PROJECT_ID.
+  5. iosBundleId can be found inside GoogleServices-Info.plist file by key BUNDLE_ID.
+  6. (Optional) storageBucket can be found inside GoogleServices-Info.plist file by key STORAGE_BUCKET.
 
 5. Create function inside firebase_options_dev.dart  inside lib/main/enviroment that provides FirebaseOptions based on the current platform. For example, it can be implemented like this.
 
 ```dart
 /// Global function that provides [FirebaseOptions] based on the platform.
 FirebaseOptions firebaseOptions() {
-  if (kIsWeb) {
-    return const FirebaseOptions(
-        /// Values from firebaseConfig from web/index.html.
-        apiKey: 'api',
-        authDomain: 'authDomain',
-        projectId: 'projectId',
-        storageBucket: 'storageBucket',
-        messagingSenderId: 'messagingSenderId',
-        appId: 'appId',
-        measurementId: 'measurementId');
-  }
-
   return switch (defaultTargetPlatform) {
-    /// Values from android/app/google-services.json.
+    /// Instance from Android setup step.
     TargetPlatform.android => const FirebaseOptions(
         apiKey: 'apiKey',
         appId: 'appId',
@@ -124,7 +114,7 @@ FirebaseOptions firebaseOptions() {
         projectId: 'projectId',
         storageBucket: 'storageBucket',
       ),
-    /// Values from ios/Firebase/dev/GoogleService-Info.plist.
+    /// Instance from iOS setup step.
     TargetPlatform.iOS => const FirebaseOptions(
         apiKey: 'apiKey',
         appId: 'appId',
