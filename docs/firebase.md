@@ -87,6 +87,8 @@ More details are described in [this guide](https://firebase.google.com/docs/cras
 
 FlutterFire has been archived, so you can face some problems to setup Firebase in your projects using CLI. So that's why you can try manual setup.
 
+- Follow first four steps in guide above, then return here.
+
 ### Android
 
 - Go to Firebase Console, open your project. In the center of the project overview page, click the Android icon or Add app to launch the setup workflow.
