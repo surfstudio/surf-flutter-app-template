@@ -28,8 +28,6 @@ To use Firebase in your project, you need to do the following:
 
 ### Android
 
-[Actual offical guide.](https://firebase.google.com/docs/android/setup)
-
 - In the center of the project overview page, click the Android icon or Add app to launch the setup workflow.
 
 - Enter your app's package name in the Android package name field. The current package name can be found in your module (app-level) Gradle file, usually android/app/build.gradle, defaultConfig section (example package name: com.yourcompany.yourproject).
