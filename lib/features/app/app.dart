@@ -48,7 +48,7 @@ class _AppState extends State<App> {
           darkTheme: AppThemeData.darkTheme,
           themeMode: themeMode,
 
-          /// For snack and dialogs
+          /// For snack and dialogs.
           builder: (builderContext, widget) {
             final mediaQueryData = MediaQuery.of(builderContext);
             final easyDialogsBuilder = FlutterEasyDialogs.builder();
