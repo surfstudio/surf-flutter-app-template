@@ -5,30 +5,91 @@
 To use Firebase in your project, you need to do the following:
 
 1. If you haven't already, install [Firebase CLI](https://firebase.google.com/docs/cli).
-
 2. Log in to Firebase CLI with your Google account:
 
    ```sh
    firebase login
    ```
 
-3. Create project at [Firebase Console](https://console.firebase.google.com/).
+3. If you haven't already, activate the FlutterFire CLI plugin:
 
-- In the [Firebase console](https://console.firebase.google.com), click Add project. To add Firebase resources to an existing Google Cloud project, enter its project name or select it from the dropdown menu. To create a new project, enter the desired project name. You can also optionally edit the project ID displayed below the project name.
+   ```sh
+   dart pub global activate flutterfire_cli
+   ```
 
-- If prompted, review and accept the [Firebase terms](https://firebase.google.com/terms).
+4. Create project at [Firebase Console](https://console.firebase.google.com/).
 
-- Click Continue.
+    - In the [Firebase console](https://console.firebase.google.com), click Add project. To add Firebase resources to an existing Google Cloud project, enter its project name or select it from the dropdown menu. To create a new project, enter the desired project name. You can also optionally edit the project ID displayed below the project name.
 
-- (Optional) Set up Google Analytics for your project, which enables you to have an optimal experience using any of the Firebase products. Either select an existing [Google Analytics account](https://support.google.com/analytics/answer/1009618?ref_topic=3544906&authuser=0#zippy=%2Cin-this-article) or to create a new account. If you create a new account, select your [Analytics reporting location](https://firebase.google.com/docs/projects/locations), then accept the data sharing settings and Google Analytics terms for your project. You can always set up Google Analytics later in the [Integrations](https://console.firebase.google.com/project/_/settings/integrations) tab of your settings Project settings.
+    - If prompted, review and accept the [Firebase terms](https://firebase.google.com/terms).
 
-- Click Create project (or Add Firebase, if you're using an existing Google Cloud project).
+    - Click Continue.
 
-4. Configure app for desired platform.
+    - (Optional) Set up Google Analytics for your project, which enables you to have an optimal experience using any of the Firebase products. Either select an existing [Google Analytics account](https://support.google.com/analytics/answer/1009618?ref_topic=3544906&authuser=0#zippy=%2Cin-this-article) or to create a new account. If you create a new account, select your [Analytics reporting location](https://firebase.google.com/docs/projects/locations), then accept the data sharing settings and Google Analytics terms for your project. You can always set up Google Analytics later in the [Integrations](https://console.firebase.google.com/project/_/settings/integrations) tab of your settings Project settings.
+
+    - Click Create project (or Add Firebase, if you're using an existing Google Cloud project).
+
+5. Execute command to create a new project for certain flavor (e.g. dev flavor) in Firebase or select existing and specify supported platforms:
+
+   ```sh
+    flutterfire configure \
+      -p name_or_id_of_your_project \
+      -o lib/config/firebase/firebase_options_dev.dart \
+      --platforms android,ios \
+      -i your.ios.bundleId.dev \
+      -a your.android.package.name.dev
+    ```
+
+   params description:
+    - `-p` - name or id of your Firebase project;
+    - `-o` - path to file where Firebase options will be generated;
+    - `--platforms` - platforms for which Firebase options will be generated;
+    - `-i` - iOS bundle identifier;
+    - `-a` - Android package name.
+
+    As a result, you will get `firebase_options_dev.dart` file with Firebase options for dev flavor and created apps in Firebase project.
+
+6. Move generated `ios/firebase_app_id_file.json` to `ios/Firebase/{flavor_name}` folder - e.g. `ios/Firebase/dev/firebase_app_id_file.json`.
+7. Move generated `ios/Runner/GoogleService-Info.plist` to `ios/Firebase/{flavor_name}` folder - e.g. `ios/Firebase/dev/GoogleService-Info.plist`.
+8. Pass generated `DefaultFirebaseOptions` to `Environment` in entry point of your app:
+
+   ```dart
+    /// Main entry point of app.
+    void main() {
+      Environment.init(
+        buildType: BuildType.debug,
+        config: AppConfig(
+          url: Url.testUrl,
+        ),
+       firebaseOptions: DefaultFirebaseOptions.currentPlatform,
+      );
+
+      run();
+    }
+   ```
+
+> [!WARNING]
+> Make sure that you use correct Firebase options for current entry point (e.g. `firebase_options_dev.dart` for `lib/main.dart` and `firebase_options.dart` for `lib/main_release.dart`).
+
+## Readable crash reports in the Crashlytics dashboard
+
+To set up uploading dsym to firebase on iOS, you need to follow steps 6 and 7 from the instructions above for each flavor.
+
+To download dsym to Android you need to call the command
+
+```sh
+firebase crashlytics:symbols:upload --app=FIREBASE_APP_ID PATH/TO/symbols
+```
+
+More details are described in [this guide](https://firebase.google.com/docs/crashlytics/get-deobfuscated-reports?platform=flutter) outlines what the automation does and provides first steps to debug your project setup.
+
+## Manual setup
+
+FlutterFire has been archived, so you can face some problems to setup Firebase in your projects using CLI. So that's why you can try manual setup.
 
 ### Android
 
-- In the center of the project overview page, click the Android icon or Add app to launch the setup workflow.
+- Go to Firebase Console, open your project. In the center of the project overview page, click the Android icon or Add app to launch the setup workflow.
 
 - Enter your app's package name in the Android package name field. The current package name can be found in your module (app-level) Gradle file, usually android/app/build.gradle, defaultConfig section (example package name: com.yourcompany.yourproject).
 
@@ -58,7 +119,7 @@ FirebaseOptions(
 
 ### iOS
 
-- In the center of the project overview page, click the Ios icon or Add app to launch the setup workflow.
+- Go to Firebase Console, open your project. In the center of the project overview page, click the Ios icon or Add app to launch the setup workflow.
 
 - Enter your app's bundle ID in the bundle ID field. A bundle ID uniquely identifies an application in Apple's ecosystem. Find your bundle ID: open your project in Xcode, select the top-level app in the project navigator, then select the General tab. The value of the Bundle Identifier field is the bundle ID (for example, com.yourcompany.yourproject). Be aware that the bundle ID value is case-sensitive, and it cannot be changed for this Firebase app after it's registered with your Firebase project.
 
@@ -100,7 +161,7 @@ FirebaseOptions(
   5. iosBundleId can be found inside GoogleServices-Info.plist file by key BUNDLE_ID.
   6. (Optional) storageBucket can be found inside GoogleServices-Info.plist file by key STORAGE_BUCKET.
 
-5. Create function inside firebase_options_dev.dart  inside lib/main/enviroment that provides FirebaseOptions based on the current platform. For example, it can be implemented like this.
+- Create function inside firebase_options_dev.dart  inside lib/main/enviroment that provides FirebaseOptions based on the current platform. For example, it can be implemented like this.
 
 ```dart
 /// Global function that provides [FirebaseOptions] based on the platform.
@@ -128,7 +189,7 @@ FirebaseOptions firebaseOptions() {
 }
 ```
 
-6. Add this function call to ```firebaseOptions``` param of ```Environment.init```.
+- Add this function call to ```firebaseOptions``` param of ```Environment.init```.
 
 ```dart
  /// Main entry point of app.
@@ -144,18 +205,3 @@ FirebaseOptions firebaseOptions() {
    run();
  }
 ```
-
-> [!WARNING]
-> Make sure that you use correct Firebase options for current entry point (e.g. `firebase_options_dev.dart` for `lib/main.dart` and `firebase_options.dart` for `lib/main_release.dart`).
-
-## Readable crash reports in the Crashlytics dashboard
-
-To set up uploading dsym to firebase on iOS, you need to follow steps 6 and 7 from the instructions above for each flavor.
-
-To download dsym to Android you need to call the command
-
-```sh
-firebase crashlytics:symbols:upload --app=FIREBASE_APP_ID PATH/TO/symbols
-```
-
-More details are described in [this guide](https://firebase.google.com/docs/crashlytics/get-deobfuscated-reports?platform=flutter) outlines what the automation does and provides first steps to debug your project setup.
