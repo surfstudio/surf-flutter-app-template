@@ -82,3 +82,7 @@ mason-lock.json
 .mason
 tools/bricks/**/hooks/build
 tools/bricks/**/*.dill
+
+# Deploy related.
+.crashlytics
+secrets.yaml
