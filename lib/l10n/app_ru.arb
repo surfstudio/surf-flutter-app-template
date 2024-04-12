@@ -43,7 +43,7 @@
   },
   "inboxCount": "{count, plural, zero{У вас нет новых сообщений} one{У вас 1 новое ообщение} other{У вас {count} новых сообщений}}",
   "@inboxCount": {
-    "description": "Количетво сообщений",
+    "description": "Количество сообщений",
     "placeholders": {
       "count": {}
     }
@@ -64,7 +64,7 @@
   "debugScreenServerConnectButton": "Переключить сервер",
   "debugScreenProxySubtitle": "Прокси",
   "debugScreenProxyInfo": "Активирует передачу через прокси сервер.",
-  "debugScreenProxyEditTextLabel": "Введите адресс прокси сервера",
+  "debugScreenProxyEditTextLabel": "Введите адрес прокси сервера",
   "debugScreenProxyConnectButton": "Подключить",
   "debugScreenThemeSubtitle": "Тема приложения",
   "debugScreenThemeLight": "Светлая тема",
@@ -113,7 +113,21 @@
   "uiKitScreenColorCardSkeletonTertiaryName": "Skeleton Tertiary",
   "@segmentFeatureExample": {
     "---------": "---------",
-    "description": "Пример фичи"
+    "description": "Feature example"
   },
-  "featureExampleFailedLoadIpMessage": "Не удалось загрузить IP-адрес"
+  "featureExampleFailedLoadIpMessage": "Failed to load IP address",
+  "@segmentPermissionExample": {
+    "---------": "---------",
+    "description": "Permission Example"
+  },
+  "permissionExampleLocation": "Location",
+  "permissionExampleNotification": "Notification",
+  "permissionExampleOpenSettingsButton": "Open Settings",
+  "permissionExampleCloseButton": "Close",
+  "permissionExampleRequestPermissionsTitle": "Request permissions",
+  "permissionExampleLocationPositiveText": "Access to geolocation is allowed",
+  "permissionExampleLocationNegativeText": "Access to geolocation is denied",
+  "permissionExampleNotificationPositiveText": "Push notifications are allowed",
+  "permissionExampleNotificationNegativeText": "Push notifications are denied",
+  "permissionExampleForeverText": " forever"
 }

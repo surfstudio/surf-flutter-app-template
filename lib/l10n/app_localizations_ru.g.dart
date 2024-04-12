@@ -72,7 +72,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get debugScreenProxyInfo => 'Активирует передачу через прокси сервер.';
 
   @override
-  String get debugScreenProxyEditTextLabel => 'Введите адресс прокси сервера';
+  String get debugScreenProxyEditTextLabel => 'Введите адрес прокси сервера';
 
   @override
   String get debugScreenProxyConnectButton => 'Подключить';
@@ -201,5 +201,35 @@ class AppLocalizationsRu extends AppLocalizations {
   String get uiKitScreenColorCardSkeletonTertiaryName => 'Skeleton Tertiary';
 
   @override
-  String get featureExampleFailedLoadIpMessage => 'Не удалось загрузить IP-адрес';
+  String get featureExampleFailedLoadIpMessage => 'Failed to load IP address';
+
+  @override
+  String get permissionExampleLocation => 'Location';
+
+  @override
+  String get permissionExampleNotification => 'Notification';
+
+  @override
+  String get permissionExampleOpenSettingsButton => 'Open Settings';
+
+  @override
+  String get permissionExampleCloseButton => 'Close';
+
+  @override
+  String get permissionExampleRequestPermissionsTitle => 'Request permissions';
+
+  @override
+  String get permissionExampleLocationPositiveText => 'Access to geolocation is allowed';
+
+  @override
+  String get permissionExampleLocationNegativeText => 'Access to geolocation is denied';
+
+  @override
+  String get permissionExampleNotificationPositiveText => 'Push notifications are allowed';
+
+  @override
+  String get permissionExampleNotificationNegativeText => 'Push notifications are denied';
+
+  @override
+  String get permissionExampleForeverText => ' forever';
 }
