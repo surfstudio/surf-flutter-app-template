@@ -21,7 +21,7 @@ class TextInputFormatters {
       });
 
   /// The formatting mask of the phone number.
-  static MaskTextInputFormatter phoneMaskFormatter({String? initialText}) => MaskTextInputFormatter(
+  static MaskTextInputFormatter ruPhoneMaskFormatter({String? initialText}) => MaskTextInputFormatter(
         mask: '+7 ### ###-##-##',
         filter: {
           '#': RegExp('[0-9]'),
