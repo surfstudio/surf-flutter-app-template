@@ -4,6 +4,7 @@ import 'package:flutter_template/features/debug/presentation/ui_kit/ui_kit_wm.da
 import 'package:flutter_template/l10n/app_localizations_x.dart';
 import 'package:flutter_template/uikit/app_sizes.dart';
 import 'package:flutter_template/uikit/colors/app_color_scheme.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 /// {@template ui_kit_screen.class}
 /// UI-kit screen.
@@ -36,6 +37,32 @@ class UiKitScreen extends ElementaryWidget<IUiKitWM> {
       body: ListView(
         padding: const EdgeInsets.all(AppSizes.double16),
         children: [
+          Row(
+            children: [
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () => wm.onPermissionLocationButtonPressed(Permission.location),
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: wm.colorScheme.onDanger,
+                    backgroundColor: wm.colorScheme.dangerSecondary,
+                  ),
+                  child: Text(wm.l10n.permissionExampleLocation),
+                ),
+              ),
+              const SizedBox(width: AppSizes.double8),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () => wm.onPermissionNotificationButtonPressed(Permission.notification),
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: wm.colorScheme.onDanger,
+                    backgroundColor: wm.colorScheme.dangerSecondary,
+                  ),
+                  child: Text(wm.l10n.permissionExampleNotification),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: AppSizes.double16),
           TextField(
             decoration: InputDecoration(
               labelText: wm.l10n.uiKitScreenTextFieldLabel,

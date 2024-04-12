@@ -2,10 +2,13 @@ import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/common/mixin/localization_mixin.dart';
 import 'package:flutter_template/common/mixin/theme_wm_mixin.dart';
+import 'package:flutter_template/core/architecture/domain/entity/result.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/debug/presentation/ui_kit/ui_kit_model.dart';
 import 'package:flutter_template/features/debug/presentation/ui_kit/ui_kit_screen.dart';
+import 'package:flutter_template/features/shared/domain/entities/failure/permission_failure.dart';
 import 'package:flutter_template/features/theme_mode/presentation/theme_mode_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 /// Factory for [UiKitWM].
@@ -13,7 +16,10 @@ UiKitWM uiKitScreenWMFactory(BuildContext context) {
   final appScope = context.read<IAppScope>();
   final scaffoldMessenger = ScaffoldMessenger.of(context);
 
-  final model = UiKitModel(logWriter: appScope.logger);
+  final model = UiKitModel(
+    logWriter: appScope.logger,
+    permissionHandlerRepository: appScope.permissionHandlerRepository,
+  );
 
   return UiKitWM(model, scaffoldMessenger: scaffoldMessenger);
 }
@@ -40,6 +46,12 @@ abstract interface class IUiKitWM with ILocalizationMixin, ThemeIModelMixin impl
 
   /// Callback of pressing the positive snack button.
   void onPositiveSnackButtonPressed();
+
+  /// Callback of pressing the Permission Location button.
+  void onPermissionLocationButtonPressed(Permission permission);
+
+  /// Callback of pressing the Permission Notification button.
+  void onPermissionNotificationButtonPressed(Permission permission);
 }
 
 /// {@template ui_kit_widget_model.class}
@@ -100,6 +112,82 @@ class UiKitWM extends WidgetModel<UiKitScreen, UiKitModel> with LocalizationMixi
         ),
         backgroundColor: colorScheme.positive,
       ),
+    );
+  }
+
+  @override
+  Future<void> onPermissionLocationButtonPressed(Permission permission) async {
+    await _checkPermission(permission);
+  }
+
+  @override
+  Future<void> onPermissionNotificationButtonPressed(Permission permission) async {
+    await _checkPermission(permission);
+  }
+
+  Future<void> _checkPermission(Permission permission) async {
+    final isLocation = permission == Permission.location;
+    final textLocationPositive = l10n.permissionExampleLocationPositiveText;
+    final textLocationNegative = l10n.permissionExampleLocationNegativeText;
+    final textNotificationPositive = l10n.permissionExampleNotificationPositiveText;
+    final textNotificationNegative = l10n.permissionExampleNotificationNegativeText;
+
+    final result = await model.checkPermission(permission);
+    switch (result) {
+      case ResultOk():
+        final _ = _scaffoldMessenger.showSnackBar(
+          SnackBar(
+            content: Text(
+              isLocation ? textLocationPositive : textNotificationPositive,
+              style: TextStyle(color: colorScheme.onPositive),
+            ),
+            backgroundColor: colorScheme.positive,
+          ),
+        );
+      case ResultFailed(:final failure):
+        final isDeniedForever = failure is PermissionDeniedForever;
+
+        if (isDeniedForever) {
+          _showDialogFromRequestPermission();
+        }
+
+        final _ = _scaffoldMessenger.showSnackBar(
+          SnackBar(
+            content: Text(
+              isLocation
+                  ? '$textLocationNegative${isDeniedForever ? l10n.permissionExampleForeverText : ''}'
+                  : '$textNotificationNegative${isDeniedForever ? l10n.permissionExampleForeverText : ''}',
+              style: TextStyle(color: colorScheme.onDanger),
+            ),
+            backgroundColor: colorScheme.danger,
+          ),
+        );
+    }
+  }
+
+  void _showDialogFromRequestPermission() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return AlertDialog(
+          actions: [
+            OutlinedButton(
+              onPressed: () async {
+                await openAppSettings();
+              },
+              child: Text(l10n.permissionExampleOpenSettingsButton),
+            ),
+            OutlinedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(l10n.permissionExampleCloseButton),
+            ),
+          ],
+          title: Text(l10n.permissionExampleRequestPermissionsTitle),
+        );
+      },
     );
   }
 }
