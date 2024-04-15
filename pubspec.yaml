@@ -24,6 +24,7 @@ dependencies:
   intl: 0.18.1
   json_annotation: 4.8.1
   logger: 1.4.0
+  mask_text_input_formatter: 2.9.0
   nested: 1.0.0
   path: 1.9.0
   path_provider: 2.1.2
