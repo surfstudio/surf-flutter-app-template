@@ -15,7 +15,7 @@ final class UiKitModel extends BaseModel {
     required IPermissionHandlerRepository permissionHandlerRepository,
   }) : _permissionHandlerRepository = permissionHandlerRepository;
 
-  ///
+  /// Checks the status of a specific permission.
   Future<PermissionResult> checkPermission(Permission permission) =>
       _permissionHandlerRepository.checkPermission(permission);
 }
