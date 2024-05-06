@@ -1,4 +1,4 @@
-import 'package:flutter_template/features/snack_queue/domain/entities/snack_message_type.dart';
+import 'package:flutter_template/features/snack_queue/presentation/snack_message_type.dart';
 
 /// The controller for displaying snacks.
 /// Will be available to descendants.

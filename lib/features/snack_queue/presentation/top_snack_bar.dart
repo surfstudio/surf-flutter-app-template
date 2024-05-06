@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_template/features/snack_queue/domain/entities/snack_message_type.dart';
+import 'package:flutter_template/features/snack_queue/presentation/snack_message_type.dart';
 
 /// Display information for the snack.
 @immutable

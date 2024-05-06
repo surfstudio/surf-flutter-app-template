@@ -5,7 +5,7 @@ import 'package:flutter_template/common/mixin/theme_wm_mixin.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/debug/presentation/ui_kit/ui_kit_model.dart';
 import 'package:flutter_template/features/debug/presentation/ui_kit/ui_kit_screen.dart';
-import 'package:flutter_template/features/snack_queue/domain/entities/snack_message_type.dart';
+import 'package:flutter_template/features/snack_queue/presentation/snack_message_type.dart';
 import 'package:flutter_template/features/snack_queue/presentation/snack_queue_controller.dart';
 import 'package:flutter_template/features/snack_queue/presentation/snack_queue_provider.dart';
 import 'package:flutter_template/features/theme_mode/presentation/theme_mode_provider.dart';

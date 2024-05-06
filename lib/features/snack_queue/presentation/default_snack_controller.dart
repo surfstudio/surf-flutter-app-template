@@ -1,23 +1,26 @@
 // ignore_for_file: no-equal-arguments
 import 'package:flutter/material.dart';
 import 'package:flutter_easy_dialogs/flutter_easy_dialogs.dart';
-import 'package:flutter_template/features/snack_queue/domain/entities/snack_message_type.dart';
+import 'package:flutter_template/features/snack_queue/presentation/snack_message_type.dart';
 import 'package:flutter_template/uikit/app_sizes.dart';
 import 'package:flutter_template/uikit/colors/app_color_scheme.dart';
 import 'package:flutter_template/uikit/text/app_text_scheme.dart';
 
 /// Default controller for displaying messages.
 class DefaultSnackController {
-  /// A context is needed to access the theme.
-  final BuildContext context;
-
   /// Create an instance [DefaultSnackController].
-  const DefaultSnackController.from(this.context);
+  const DefaultSnackController({
+    this.animationConfiguration = const EasyDialogAnimationConfiguration.bounded(),
+  });
+
+  /// Animation configuration.
+  final EasyDialogAnimationConfiguration animationConfiguration;
 
   /// Show the message.
   Future<void> showSnack({
     required SnackMessageType messageType,
     required String message,
+    required BuildContext context,
     Duration? autoHideDuration,
   }) {
     final colorScheme = AppColorScheme.of(context);
@@ -59,6 +62,7 @@ class DefaultSnackController {
           ),
         ),
         autoHideDuration: autoHideDuration,
+        animationConfiguration: animationConfiguration,
       ).swipe(
         direction: DismissDirection.up,
         willDismiss: () => true,

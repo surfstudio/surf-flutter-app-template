@@ -5,12 +5,12 @@ import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/navigation/app_router.dart';
-import 'package:flutter_template/features/snack_queue/controllers/default_snack_controller.dart';
-import 'package:flutter_template/features/snack_queue/domain/entities/snack_message_type.dart';
-import 'package:flutter_template/features/snack_queue/domain/entities/top_snack_bar.dart';
+import 'package:flutter_template/features/snack_queue/presentation/default_snack_controller.dart';
+import 'package:flutter_template/features/snack_queue/presentation/snack_message_type.dart';
 import 'package:flutter_template/features/snack_queue/presentation/snack_queue_controller.dart';
 import 'package:flutter_template/features/snack_queue/presentation/snack_queue_model.dart';
 import 'package:flutter_template/features/snack_queue/presentation/snack_queue_widget.dart';
+import 'package:flutter_template/features/snack_queue/presentation/top_snack_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -27,7 +27,7 @@ SnackQueueWM defaultSnackQueueWMFactory(BuildContext context) {
   return SnackQueueWM(
     SnackQueueModel(logWriter: appScope.logger),
     router,
-    DefaultSnackController.from(context),
+    const DefaultSnackController(),
   );
 }
 
@@ -174,6 +174,7 @@ final class SnackQueueWM extends WidgetModel<SnackQueueWidget, SnackQueueModel> 
       messageType: snackBar.messageType,
       message: snackBar.message,
       autoHideDuration: autoHideDuration,
+      context: context,
     );
   }
 }
