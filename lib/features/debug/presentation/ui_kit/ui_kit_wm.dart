@@ -13,9 +13,7 @@ UiKitWM uiKitScreenWMFactory(BuildContext context) {
   final appScope = context.read<IAppScope>();
   final scaffoldMessenger = ScaffoldMessenger.of(context);
 
-  final model = UiKitModel(
-    logWriter: appScope.logger,
-  );
+  final model = UiKitModel(logWriter: appScope.logger);
 
   return UiKitWM(model, scaffoldMessenger: scaffoldMessenger);
 }

@@ -24,7 +24,7 @@ final class AppScope implements IAppScope {
   final ILogWriter logger;
 
   /// {@macro app_scope.class}
-  AppScope({
+  const AppScope({
     required this.env,
     required this.appConfig,
     required this.sharedPreferences,
