@@ -114,19 +114,5 @@
     "---------": "---------",
     "description": "Example of feature"
   },
-  "featureExampleFailedLoadIpMessage": "Failed to load IP address",
-  "@segmentPermissionExample": {
-    "---------": "---------",
-    "description": "Permission Example"
-  },
-  "permissionExampleLocation": "Location",
-  "permissionExampleNotification": "Notification",
-  "permissionExampleOpenSettingsButton": "Open Settings",
-  "permissionExampleCloseButton": "Close",
-  "permissionExampleRequestPermissionsTitle": "Request permissions",
-  "permissionExampleLocationPositiveText": "Access to geolocation is allowed",
-  "permissionExampleLocationNegativeText": "Access to geolocation is denied",
-  "permissionExampleNotificationPositiveText": "Push notifications are allowed",
-  "permissionExampleNotificationNegativeText": "Push notifications are denied",
-  "permissionExampleForeverText": " forever"
+  "featureExampleFailedLoadIpMessage": "Failed to load IP address"
 }

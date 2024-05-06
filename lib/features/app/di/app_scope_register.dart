@@ -11,7 +11,6 @@ import 'package:flutter_template/config/environment/environment.dart';
 import 'package:flutter_template/config/url.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/debug/data/converters/url_converter.dart';
-import 'package:flutter_template/features/shared/data/repositories/permission_handler_repository.dart';
 import 'package:flutter_template/persistence/storage/config_storage/config_storage_impl.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -48,8 +47,6 @@ final class AppScopeRegister {
     });
     final logger = LogWriter(surfLogger);
 
-    final permissionHandlerRepository = PermissionHandlerRepository();
-
     return AppScope(
       env: env,
       appConfig: appConfig,
@@ -57,7 +54,6 @@ final class AppScopeRegister {
       dio: dio,
       analyticsService: analyticsService,
       logger: logger,
-      permissionHandlerRepository: permissionHandlerRepository,
     );
   }
 

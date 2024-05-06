@@ -202,34 +202,4 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get featureExampleFailedLoadIpMessage => 'Failed to load IP address';
-
-  @override
-  String get permissionExampleLocation => 'Location';
-
-  @override
-  String get permissionExampleNotification => 'Notification';
-
-  @override
-  String get permissionExampleOpenSettingsButton => 'Open Settings';
-
-  @override
-  String get permissionExampleCloseButton => 'Close';
-
-  @override
-  String get permissionExampleRequestPermissionsTitle => 'Request permissions';
-
-  @override
-  String get permissionExampleLocationPositiveText => 'Access to geolocation is allowed';
-
-  @override
-  String get permissionExampleLocationNegativeText => 'Access to geolocation is denied';
-
-  @override
-  String get permissionExampleNotificationPositiveText => 'Push notifications are allowed';
-
-  @override
-  String get permissionExampleNotificationNegativeText => 'Push notifications are denied';
-
-  @override
-  String get permissionExampleForeverText => ' forever';
 }

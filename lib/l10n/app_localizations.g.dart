@@ -88,7 +88,10 @@ abstract class AppLocalizations {
   ];
 
   /// A list of this localizations delegate's supported locales.
-  static const List<Locale> supportedLocales = <Locale>[Locale('en'), Locale('ru')];
+  static const List<Locale> supportedLocales = <Locale>[
+    Locale('en'),
+    Locale('ru')
+  ];
 
   /// No description provided for @positiveResponse.
   ///
@@ -437,66 +440,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed to load IP address'**
   String get featureExampleFailedLoadIpMessage;
-
-  /// No description provided for @permissionExampleLocation.
-  ///
-  /// In en, this message translates to:
-  /// **'Location'**
-  String get permissionExampleLocation;
-
-  /// No description provided for @permissionExampleNotification.
-  ///
-  /// In en, this message translates to:
-  /// **'Notification'**
-  String get permissionExampleNotification;
-
-  /// No description provided for @permissionExampleOpenSettingsButton.
-  ///
-  /// In en, this message translates to:
-  /// **'Open Settings'**
-  String get permissionExampleOpenSettingsButton;
-
-  /// No description provided for @permissionExampleCloseButton.
-  ///
-  /// In en, this message translates to:
-  /// **'Close'**
-  String get permissionExampleCloseButton;
-
-  /// No description provided for @permissionExampleRequestPermissionsTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Request permissions'**
-  String get permissionExampleRequestPermissionsTitle;
-
-  /// No description provided for @permissionExampleLocationPositiveText.
-  ///
-  /// In en, this message translates to:
-  /// **'Access to geolocation is allowed'**
-  String get permissionExampleLocationPositiveText;
-
-  /// No description provided for @permissionExampleLocationNegativeText.
-  ///
-  /// In en, this message translates to:
-  /// **'Access to geolocation is denied'**
-  String get permissionExampleLocationNegativeText;
-
-  /// No description provided for @permissionExampleNotificationPositiveText.
-  ///
-  /// In en, this message translates to:
-  /// **'Push notifications are allowed'**
-  String get permissionExampleNotificationPositiveText;
-
-  /// No description provided for @permissionExampleNotificationNegativeText.
-  ///
-  /// In en, this message translates to:
-  /// **'Push notifications are denied'**
-  String get permissionExampleNotificationNegativeText;
-
-  /// No description provided for @permissionExampleForeverText.
-  ///
-  /// In en, this message translates to:
-  /// **' forever'**
-  String get permissionExampleForeverText;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
@@ -515,16 +458,18 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
+
+
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'en':
-      return AppLocalizationsEn();
-    case 'ru':
-      return AppLocalizationsRu();
+    case 'en': return AppLocalizationsEn();
+    case 'ru': return AppLocalizationsRu();
   }
 
-  throw FlutterError('AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
-      'an issue with the localizations generation tool. Please file an issue '
-      'on GitHub with a reproducible sample app and the gen-l10n configuration '
-      'that was used.');
+  throw FlutterError(
+    'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+    'an issue with the localizations generation tool. Please file an issue '
+    'on GitHub with a reproducible sample app and the gen-l10n configuration '
+    'that was used.'
+  );
 }

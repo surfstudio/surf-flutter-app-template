@@ -3,7 +3,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter_template/common/utils/logger/i_log_writer.dart';
 import 'package:flutter_template/config/app_config.dart';
 import 'package:flutter_template/config/environment/environment.dart';
-import 'package:flutter_template/features/shared/domain/repositories/i_permission_handler_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// {@template app_scope.class}
@@ -24,9 +23,6 @@ final class AppScope implements IAppScope {
   @override
   final ILogWriter logger;
 
-  @override
-  final IPermissionHandlerRepository permissionHandlerRepository;
-
   /// {@macro app_scope.class}
   AppScope({
     required this.env,
@@ -35,7 +31,6 @@ final class AppScope implements IAppScope {
     required this.dio,
     required this.analyticsService,
     required this.logger,
-    required this.permissionHandlerRepository,
   });
 }
 
@@ -58,7 +53,4 @@ abstract interface class IAppScope {
 
   /// Analytics sending service.
   AnalyticService get analyticsService;
-
-  /// Permission handler repository.
-  IPermissionHandlerRepository get permissionHandlerRepository;
 }

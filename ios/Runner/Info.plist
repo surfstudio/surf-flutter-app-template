@@ -36,10 +36,6 @@
 		</dict>
 		<key>LSRequiresIPhoneOS</key>
 		<true/>
-		<key>NSLocationAlwaysUsageDescription</key>
-        	<string>This way we can identify the places of interest closest to you</string>
-        	<key>NSLocationWhenInUseUsageDescription</key>
-        	<string>This way we can identify the places of interest closest to you</string>
 		<key>UILaunchStoryboardName</key>
 		<string>LaunchScreen</string>
 		<key>UIMainStoryboardFile</key>
