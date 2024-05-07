@@ -17,6 +17,7 @@ class DefaultSnackController {
     required String message,
     required BuildContext context,
     required EasyDialogDecoration dialogDecoration,
+    required EasyDialogAnimationConfiguration animationConfiguration,
     Duration? autoHideDuration,
   }) {
     final colorScheme = AppColorScheme.of(context);
@@ -59,6 +60,7 @@ class DefaultSnackController {
           ),
         ),
         autoHideDuration: autoHideDuration,
+        animationConfiguration: animationConfiguration,
       ).swipe(
         direction: DismissDirection.up,
         willDismiss: () => true,

@@ -91,13 +91,14 @@ final class SnackQueueWM extends WidgetModel<SnackQueueWidget, SnackQueueModel>
     String message, {
     required SnackMessageType messageType,
     EasyDialogDecoration? dialogDecoration,
+    EasyDialogAnimationConfiguration? animationConfiguration,
   }) {
     _addToQueue(
       TopSnackBar(
-        message: message,
-        messageType: messageType,
-        dialogDecoration: dialogDecoration,
-      ),
+          message: message,
+          messageType: messageType,
+          dialogDecoration: dialogDecoration,
+          animationConfiguration: animationConfiguration),
     );
   }
 
@@ -179,6 +180,7 @@ final class SnackQueueWM extends WidgetModel<SnackQueueWidget, SnackQueueModel>
       messageType: snackBar.messageType,
       message: snackBar.message,
       dialogDecoration: snackBar.dialogDecoration,
+      animationConfiguration: snackBar.animationConfiguration,
       autoHideDuration: autoHideDuration,
       context: context,
     );

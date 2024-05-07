@@ -1,6 +1,5 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easy_dialogs/flutter_easy_dialogs.dart';
 import 'package:flutter_template/common/mixin/localization_mixin.dart';
 import 'package:flutter_template/common/mixin/theme_wm_mixin.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
@@ -134,12 +133,6 @@ class UiKitWM extends WidgetModel<UiKitScreen, UiKitModel>
     _snackQueueController.addSnack(
       l10n.uiKitScreenDangerSnackText,
       messageType: SnackMessageType.error,
-      dialogDecoration: const EasyDialogDecoration.combine(
-        [
-          EasyDialogAnimation.fade(),
-          EasyDialogAnimation.expansion(),
-        ],
-      ),
     );
   }
 
@@ -148,12 +141,6 @@ class UiKitWM extends WidgetModel<UiKitScreen, UiKitModel>
     _snackQueueController.addSnack(
       l10n.uiKitScreenPositiveSnackText,
       messageType: SnackMessageType.success,
-      dialogDecoration: const EasyDialogDecoration.combine(
-        [
-          EasyDialogAnimation.fade(),
-          EasyDialogAnimation.expansion(),
-        ],
-      ),
     );
   }
 }

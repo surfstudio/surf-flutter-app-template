@@ -9,6 +9,7 @@ abstract interface class SnackQueueController {
     String message, {
     required SnackMessageType messageType,
     EasyDialogDecoration? dialogDecoration,
+    EasyDialogAnimationConfiguration? animationConfiguration,
   });
 
   /// Clears the snack queue from potential displays that were queued before [closeTime].
