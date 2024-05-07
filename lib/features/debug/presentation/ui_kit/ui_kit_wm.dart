@@ -27,9 +27,7 @@ UiKitWM uiKitScreenWMFactory(BuildContext context) {
 }
 
 /// Interface for [UiKitWM].
-abstract interface class IUiKitWM
-    with ILocalizationMixin, ThemeIModelMixin
-    implements IWidgetModel {
+abstract interface class IUiKitWM with ILocalizationMixin, ThemeIModelMixin implements IWidgetModel {
   /// Theme switching callback.
   void switchTheme();
 
@@ -61,9 +59,7 @@ abstract interface class IUiKitWM
 /// {@template ui_kit_widget_model.class}
 /// [WidgetModel] for [UiKitScreen].
 /// {@endtemplate}
-class UiKitWM extends WidgetModel<UiKitScreen, UiKitModel>
-    with LocalizationMixin, ThemeWMMixin
-    implements IUiKitWM {
+class UiKitWM extends WidgetModel<UiKitScreen, UiKitModel> with LocalizationMixin, ThemeWMMixin implements IUiKitWM {
   final ScaffoldMessengerState _scaffoldMessenger;
   final SnackQueueController _snackQueueController;
 
@@ -80,26 +76,22 @@ class UiKitWM extends WidgetModel<UiKitScreen, UiKitModel>
 
   @override
   void onPrimaryButtonPressed() {
-    final _ = _scaffoldMessenger
-        .showSnackBar(SnackBar(content: Text(l10n.uiKitScreenPrimaryButtonSnackText)));
+    final _ = _scaffoldMessenger.showSnackBar(SnackBar(content: Text(l10n.uiKitScreenPrimaryButtonSnackText)));
   }
 
   @override
   void onSecondaryButtonPressed() {
-    final _ = _scaffoldMessenger
-        .showSnackBar(SnackBar(content: Text(l10n.uiKitScreenSecondaryButtonSnackText)));
+    final _ = _scaffoldMessenger.showSnackBar(SnackBar(content: Text(l10n.uiKitScreenSecondaryButtonSnackText)));
   }
 
   @override
   void onTetradicButtonPressed() {
-    final _ = _scaffoldMessenger
-        .showSnackBar(SnackBar(content: Text(l10n.uiKitScreenTetradicButtonSnackText)));
+    final _ = _scaffoldMessenger.showSnackBar(SnackBar(content: Text(l10n.uiKitScreenTetradicButtonSnackText)));
   }
 
   @override
   void onTertiaryButtonPressed() {
-    final _ = _scaffoldMessenger
-        .showSnackBar(SnackBar(content: Text(l10n.uiKitScreenTertiaryButtonSnackText)));
+    final _ = _scaffoldMessenger.showSnackBar(SnackBar(content: Text(l10n.uiKitScreenTertiaryButtonSnackText)));
   }
 
   @override

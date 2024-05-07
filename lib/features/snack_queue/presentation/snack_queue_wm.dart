@@ -38,8 +38,7 @@ abstract interface class ISnackQueueWM implements SnackQueueController, IWidgetM
 /// {@template snack_provider_wm.class}
 /// [WidgetModel] for [SnackQueueWidget].
 /// {@endtemplate}
-final class SnackQueueWM extends WidgetModel<SnackQueueWidget, SnackQueueModel>
-    implements ISnackQueueWM {
+final class SnackQueueWM extends WidgetModel<SnackQueueWidget, SnackQueueModel> implements ISnackQueueWM {
   /// Controller for displaying dialogs.
   final DefaultSnackController _snackController;
 
@@ -174,8 +173,7 @@ final class SnackQueueWM extends WidgetModel<SnackQueueWidget, SnackQueueModel>
     _hasOpenedSnack = true;
 
     /// If the snack is an error, then we do not hide it automatically.
-    final autoHideDuration =
-        snackBar.messageType == SnackMessageType.error ? null : _topSnackDuration;
+    final autoHideDuration = snackBar.messageType == SnackMessageType.error ? null : _topSnackDuration;
     await _snackController.showSnack(
       messageType: snackBar.messageType,
       message: snackBar.message,
