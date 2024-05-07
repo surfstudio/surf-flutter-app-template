@@ -1,3 +1,4 @@
+import 'package:flutter_easy_dialogs/flutter_easy_dialogs.dart';
 import 'package:flutter_template/features/snack_queue/presentation/snack_message_type.dart';
 
 /// The controller for displaying snacks.
@@ -7,6 +8,7 @@ abstract interface class SnackQueueController {
   void addSnack(
     String message, {
     required SnackMessageType messageType,
+    EasyDialogDecoration? dialogDecoration,
   });
 
   /// Clears the snack queue from potential displays that were queued before [closeTime].

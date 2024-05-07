@@ -1,5 +1,6 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easy_dialogs/flutter_easy_dialogs.dart';
 import 'package:flutter_template/common/mixin/localization_mixin.dart';
 import 'package:flutter_template/common/mixin/theme_wm_mixin.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
@@ -27,7 +28,9 @@ UiKitWM uiKitScreenWMFactory(BuildContext context) {
 }
 
 /// Interface for [UiKitWM].
-abstract interface class IUiKitWM with ILocalizationMixin, ThemeIModelMixin implements IWidgetModel {
+abstract interface class IUiKitWM
+    with ILocalizationMixin, ThemeIModelMixin
+    implements IWidgetModel {
   /// Theme switching callback.
   void switchTheme();
 
@@ -59,7 +62,9 @@ abstract interface class IUiKitWM with ILocalizationMixin, ThemeIModelMixin impl
 /// {@template ui_kit_widget_model.class}
 /// [WidgetModel] for [UiKitScreen].
 /// {@endtemplate}
-class UiKitWM extends WidgetModel<UiKitScreen, UiKitModel> with LocalizationMixin, ThemeWMMixin implements IUiKitWM {
+class UiKitWM extends WidgetModel<UiKitScreen, UiKitModel>
+    with LocalizationMixin, ThemeWMMixin
+    implements IUiKitWM {
   final ScaffoldMessengerState _scaffoldMessenger;
   final SnackQueueController _snackQueueController;
 
@@ -76,22 +81,26 @@ class UiKitWM extends WidgetModel<UiKitScreen, UiKitModel> with LocalizationMixi
 
   @override
   void onPrimaryButtonPressed() {
-    final _ = _scaffoldMessenger.showSnackBar(SnackBar(content: Text(l10n.uiKitScreenPrimaryButtonSnackText)));
+    final _ = _scaffoldMessenger
+        .showSnackBar(SnackBar(content: Text(l10n.uiKitScreenPrimaryButtonSnackText)));
   }
 
   @override
   void onSecondaryButtonPressed() {
-    final _ = _scaffoldMessenger.showSnackBar(SnackBar(content: Text(l10n.uiKitScreenSecondaryButtonSnackText)));
+    final _ = _scaffoldMessenger
+        .showSnackBar(SnackBar(content: Text(l10n.uiKitScreenSecondaryButtonSnackText)));
   }
 
   @override
   void onTetradicButtonPressed() {
-    final _ = _scaffoldMessenger.showSnackBar(SnackBar(content: Text(l10n.uiKitScreenTetradicButtonSnackText)));
+    final _ = _scaffoldMessenger
+        .showSnackBar(SnackBar(content: Text(l10n.uiKitScreenTetradicButtonSnackText)));
   }
 
   @override
   void onTertiaryButtonPressed() {
-    final _ = _scaffoldMessenger.showSnackBar(SnackBar(content: Text(l10n.uiKitScreenTertiaryButtonSnackText)));
+    final _ = _scaffoldMessenger
+        .showSnackBar(SnackBar(content: Text(l10n.uiKitScreenTertiaryButtonSnackText)));
   }
 
   @override
@@ -125,6 +134,12 @@ class UiKitWM extends WidgetModel<UiKitScreen, UiKitModel> with LocalizationMixi
     _snackQueueController.addSnack(
       l10n.uiKitScreenDangerSnackText,
       messageType: SnackMessageType.error,
+      dialogDecoration: const EasyDialogDecoration.combine(
+        [
+          EasyDialogAnimation.fade(),
+          EasyDialogAnimation.expansion(),
+        ],
+      ),
     );
   }
 
@@ -133,6 +148,12 @@ class UiKitWM extends WidgetModel<UiKitScreen, UiKitModel> with LocalizationMixi
     _snackQueueController.addSnack(
       l10n.uiKitScreenPositiveSnackText,
       messageType: SnackMessageType.success,
+      dialogDecoration: const EasyDialogDecoration.combine(
+        [
+          EasyDialogAnimation.fade(),
+          EasyDialogAnimation.expansion(),
+        ],
+      ),
     );
   }
 }

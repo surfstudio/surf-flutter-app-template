@@ -3,6 +3,7 @@ import 'dart:collection';
 
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easy_dialogs/flutter_easy_dialogs.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/navigation/app_router.dart';
 import 'package:flutter_template/features/snack_queue/presentation/default_snack_controller.dart';
@@ -37,7 +38,8 @@ abstract interface class ISnackQueueWM implements SnackQueueController, IWidgetM
 /// {@template snack_provider_wm.class}
 /// [WidgetModel] for [SnackQueueWidget].
 /// {@endtemplate}
-final class SnackQueueWM extends WidgetModel<SnackQueueWidget, SnackQueueModel> implements ISnackQueueWM {
+final class SnackQueueWM extends WidgetModel<SnackQueueWidget, SnackQueueModel>
+    implements ISnackQueueWM {
   /// Controller for displaying dialogs.
   final DefaultSnackController _snackController;
 
@@ -88,11 +90,13 @@ final class SnackQueueWM extends WidgetModel<SnackQueueWidget, SnackQueueModel> 
   void addSnack(
     String message, {
     required SnackMessageType messageType,
+    EasyDialogDecoration? dialogDecoration,
   }) {
     _addToQueue(
       TopSnackBar(
         message: message,
         messageType: messageType,
+        dialogDecoration: dialogDecoration,
       ),
     );
   }
@@ -169,10 +173,12 @@ final class SnackQueueWM extends WidgetModel<SnackQueueWidget, SnackQueueModel> 
     _hasOpenedSnack = true;
 
     /// If the snack is an error, then we do not hide it automatically.
-    final autoHideDuration = snackBar.messageType == SnackMessageType.error ? null : _topSnackDuration;
+    final autoHideDuration =
+        snackBar.messageType == SnackMessageType.error ? null : _topSnackDuration;
     await _snackController.showSnack(
       messageType: snackBar.messageType,
       message: snackBar.message,
+      dialogDecoration: snackBar.dialogDecoration,
       autoHideDuration: autoHideDuration,
       context: context,
     );

@@ -9,18 +9,14 @@ import 'package:flutter_template/uikit/text/app_text_scheme.dart';
 /// Default controller for displaying messages.
 class DefaultSnackController {
   /// Create an instance [DefaultSnackController].
-  const DefaultSnackController({
-    this.animationConfiguration = const EasyDialogAnimationConfiguration.bounded(),
-  });
-
-  /// Animation configuration.
-  final EasyDialogAnimationConfiguration animationConfiguration;
+  const DefaultSnackController();
 
   /// Show the message.
   Future<void> showSnack({
     required SnackMessageType messageType,
     required String message,
     required BuildContext context,
+    required EasyDialogDecoration dialogDecoration,
     Duration? autoHideDuration,
   }) {
     final colorScheme = AppColorScheme.of(context);
@@ -28,6 +24,7 @@ class DefaultSnackController {
 
     return FlutterEasyDialogs.show(
       EasyDialog.positioned(
+        decoration: dialogDecoration,
         content: SizedBox(
           width: double.infinity,
           child: DecoratedBox(
@@ -62,7 +59,6 @@ class DefaultSnackController {
           ),
         ),
         autoHideDuration: autoHideDuration,
-        animationConfiguration: animationConfiguration,
       ).swipe(
         direction: DismissDirection.up,
         willDismiss: () => true,
