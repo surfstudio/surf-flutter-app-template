@@ -22,7 +22,7 @@ class DefaultSnackController {
   }) {
     final colorScheme = AppColorScheme.of(context);
     final textScheme = AppTextScheme.of(context);
-    final topPadding = MediaQuery.of(context).padding.top;
+    final topPadding = MediaQuery.of(context).viewPadding.top;
     return FlutterEasyDialogs.show(
       EasyDialog.positioned(
         decoration: dialogDecoration,
@@ -40,7 +40,7 @@ class DefaultSnackController {
             child: Padding(
               padding: EdgeInsets.fromLTRB(
                 AppSizes.double16,
-                topPadding + AppSizes.double16,
+                topPadding + AppSizes.double8,
                 AppSizes.double16,
                 AppSizes.double16,
               ),
