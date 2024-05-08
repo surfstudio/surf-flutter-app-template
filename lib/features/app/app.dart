@@ -49,6 +49,10 @@ class _AppState extends State<App> {
           locale: _localizations.firstOrNull,
           localizationsDelegates: _localizationsDelegates,
           supportedLocales: _localizations,
+          // TODO(init): Uncomment it or delete if you don't need it.
+          // builder: (context, child) {
+          //   return DownByMaintenanceWidget(child: child!);
+          // },
         );
       },
     );
