@@ -294,6 +294,18 @@ abstract class AppLocalizations {
   /// **'Tetradic Button Pressed'**
   String get uiKitScreenTetradicButtonSnackText;
 
+  /// No description provided for @uiKitScreenSnackFromScaffoldMessengerText.
+  ///
+  /// In en, this message translates to:
+  /// **'Snack from ScaffoldMessenger'**
+  String get uiKitScreenSnackFromScaffoldMessengerText;
+
+  /// No description provided for @uiKitScreenSnackFromSnackQueueText.
+  ///
+  /// In en, this message translates to:
+  /// **'Snack from Snack Queue'**
+  String get uiKitScreenSnackFromSnackQueueText;
+
   /// No description provided for @uiKitScreenDangerSnackButtonText.
   ///
   /// In en, this message translates to:

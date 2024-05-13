@@ -87,6 +87,8 @@
   "uiKitScreenTertiaryButtonSnackText": "Tertiary Button Pressed",
   "uiKitScreenTetradicButtonText": "Tetradic button",
   "uiKitScreenTetradicButtonSnackText": "Tetradic Button Pressed",
+  "uiKitScreenSnackFromScaffoldMessengerText": "Snack from ScaffoldMessenger",
+  "uiKitScreenSnackFromSnackQueueText": "Snack from Snack Queue",
   "uiKitScreenDangerSnackButtonText": "Danger snack",
   "uiKitScreenDangerSnackText": "Danger snack",
   "uiKitScreenPositiveSnackButtonText": "Positive snack",

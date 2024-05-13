@@ -96,6 +96,9 @@ class UiKitScreen extends ElementaryWidget<IUiKitWM> {
             ),
             child: Text(wm.l10n.uiKitScreenTetradicButtonText),
           ),
+          const SizedBox(width: AppSizes.double8),
+          Text(wm.l10n.uiKitScreenSnackFromScaffoldMessengerText),
+          const SizedBox(width: AppSizes.double8),
           Row(
             children: [
               Expanded(
@@ -112,6 +115,34 @@ class UiKitScreen extends ElementaryWidget<IUiKitWM> {
               Expanded(
                 child: ElevatedButton(
                   onPressed: wm.onPositiveSnackButtonPressed,
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: wm.colorScheme.onPositive,
+                    backgroundColor: wm.colorScheme.positive,
+                  ),
+                  child: Text(wm.l10n.uiKitScreenPositiveSnackButtonText),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(width: AppSizes.double8),
+          Text(wm.l10n.uiKitScreenSnackFromSnackQueueText),
+          const SizedBox(width: AppSizes.double8),
+          Row(
+            children: [
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: wm.onDangerSnackQueueButtonPressed,
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: wm.colorScheme.onDanger,
+                    backgroundColor: wm.colorScheme.danger,
+                  ),
+                  child: Text(wm.l10n.uiKitScreenDangerSnackButtonText),
+                ),
+              ),
+              const SizedBox(width: AppSizes.double8),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: wm.onPositiveSnackQueueButtonPressed,
                   style: ElevatedButton.styleFrom(
                     foregroundColor: wm.colorScheme.onPositive,
                     backgroundColor: wm.colorScheme.positive,
