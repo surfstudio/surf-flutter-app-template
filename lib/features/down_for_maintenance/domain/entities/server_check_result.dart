@@ -1,4 +1,3 @@
-
 /// Server check result enum.
 enum ServerCheckResult {
   /// Server works normally.
