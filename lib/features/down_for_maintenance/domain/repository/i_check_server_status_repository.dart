@@ -1,10 +1,9 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_template/features/down_for_maintenance/domain/entities/server_check_result.dart';
 
 /// Interface for checking server status.
-abstract interface class ICheckServerStatusService {
+abstract interface class ICheckServerStatusRepository {
   /// Current state of server.
-  ValueListenable<ServerCheckResult> get serverStatus;
+  Stream<ServerCheckResult> get serverStatus;
 
   /// Method that initiate check of current server status.
   void initImmediateCheck();

@@ -1,6 +1,6 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/features/down_for_maintenance/domain/entities/check_result.dart';
+import 'package:flutter_template/features/down_for_maintenance/domain/entities/server_check_result.dart';
 import 'package:flutter_template/features/down_for_maintenance/presentation/down_for_maintenance_wm.dart';
 
 /// Widget that shows child widget if server works normally or shows placeholder if server is down.

@@ -1,41 +1,28 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_template/features/down_for_maintenance/data/services/mock_check_server_status_service.dart';
-import 'package:flutter_template/features/down_for_maintenance/domain/entities/check_result.dart';
-import 'package:flutter_template/features/down_for_maintenance/domain/services/check_server_status_service.dart';
+import 'package:flutter_template/features/down_for_maintenance/data/repository/mock_check_server_status_repository.dart';
+import 'package:flutter_template/features/down_for_maintenance/domain/entities/server_check_result.dart';
+import 'package:flutter_template/features/down_for_maintenance/presentation/down_for_maintenance_model.dart';
 import 'package:flutter_template/features/down_for_maintenance/presentation/down_for_maintenance_widget.dart';
 
 /// Factory that creates DownForMaintenanceWM.
 DownForMaintenanceWM defaultDownForMaintenanceWMFactory(BuildContext context) {
-  return DownForMaintenanceWM(MockCheckServerStatusService());
+  return DownForMaintenanceWM(DownForMaintenanceModel(MockCheckServerStatusRepository()));
 }
 
 /// WidgetModel for DownForMaintenanceWidget.
-class DownForMaintenanceWM extends WidgetModel<DownForMaintenanceWidget, _StubModel> implements IDownForMaintenanceWM {
-  final ICheckServerStatusService _checkServerStatusService;
-
+class DownForMaintenanceWM extends WidgetModel<DownForMaintenanceWidget, DownForMaintenanceModel>
+    implements IDownForMaintenanceWM {
   @override
-  ValueListenable<ServerCheckResult> get currentResult => _checkServerStatusService.serverStatus;
+  ValueListenable<ServerCheckResult> get currentResult => model.serverCheckResult;
 
   /// @nodoc
-  DownForMaintenanceWM(this._checkServerStatusService) : super(_StubModel());
-
-  @override
-  void initWidgetModel() {
-    _checkServerStatusService.configurate();
-    super.initWidgetModel();
-  }
-
-  @override
-  void dispose() {
-    _checkServerStatusService.dispose();
-    super.dispose();
-  }
+  DownForMaintenanceWM(super._model);
 
   @override
   void onCheckCurrentStatusPressed() {
-    _checkServerStatusService.initImmediateCheck();
+    model.initImmediateCheck();
   }
 }
 
@@ -47,5 +34,3 @@ abstract interface class IDownForMaintenanceWM implements IWidgetModel {
   /// Callback that initiate check of current server status.
   void onCheckCurrentStatusPressed();
 }
-
-class _StubModel extends ElementaryModel {}

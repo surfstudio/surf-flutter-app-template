@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easy_dialogs/flutter_easy_dialogs.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_template/features/down_for_maintenance/presentation/down_for_maintenance_widget.dart';
 import 'package:flutter_template/features/navigation/app_router.dart';
 import 'package:flutter_template/features/snack_queue/presentation/snack_queue_provider.dart';
 import 'package:flutter_template/features/theme_mode/presentation/widgets/theme_mode_builder.dart';
@@ -53,7 +54,7 @@ class _AppState extends State<App> {
             final mediaQueryData = MediaQuery.of(builderContext);
             final easyDialogsBuilder = FlutterEasyDialogs.builder();
 
-            return Nested(
+            final child = Nested(
               children: const [
                 SnackQueueProvider(),
               ],
@@ -68,16 +69,17 @@ class _AppState extends State<App> {
                 ),
               ),
             );
+
+            // TODO(init): Uncomment it or delete if you don't need it.
+            return DownForMaintenanceWidget(child: child);
+
+            // return child;
           },
 
           /// Localization.
           locale: _localizations.firstOrNull,
           localizationsDelegates: _localizationsDelegates,
           supportedLocales: _localizations,
-          // TODO(init): Uncomment it or delete if you don't need it.
-          // builder: (context, child) {
-          //   return DownByMaintenanceWidget(child: child!);
-          // },
         );
       },
     );

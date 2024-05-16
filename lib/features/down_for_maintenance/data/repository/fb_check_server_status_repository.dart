@@ -1,11 +1,11 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter_template/features/down_for_maintenance/domain/entities/check_result.dart';
-import 'package:flutter_template/features/down_for_maintenance/domain/services/check_server_status_service.dart';
+import 'package:flutter_template/features/down_for_maintenance/domain/entities/server_check_result.dart';
+import 'package:flutter_template/features/down_for_maintenance/domain/repository/i_check_server_status_repository.dart';
+import 'package:rxdart/rxdart.dart';
 
-/// Implementation of [ICheckServerStatusService] that uses Firebase Remote Config to check server status.
-class FirebaseCheckServerStatusService implements ICheckServerStatusService {
+/// Implementation of [ICheckServerStatusRepository] that uses Firebase Remote Config to check server status.
+class FirebaseCheckServerStatusRepository implements ICheckServerStatusRepository {
   @override
-  final ValueNotifier<ServerCheckResult> serverStatus = ValueNotifier(ServerCheckResult.processing);
+  final BehaviorSubject<ServerCheckResult> serverStatus = BehaviorSubject.seeded(ServerCheckResult.processing);
 
   @override
   Future<void> configurate() async {
@@ -33,5 +33,7 @@ class FirebaseCheckServerStatusService implements ICheckServerStatusService {
   }
 
   @override
-  void dispose() {}
+  void dispose() {
+    serverStatus.close();
+  }
 }
