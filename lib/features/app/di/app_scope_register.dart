@@ -47,6 +47,14 @@ final class AppScopeRegister {
     });
     final logger = LogWriter(surfLogger);
 
+    // TODO(init-project): In order to use Down For Maintenance feature you have to:
+    // - create implementation of [ICheckServerStatusRepository] here
+    // - call [ICheckServerStatusRepository.configure] and await for it
+    // - call [ICheckServerStatusRepository.initImmediateCheck]
+    // - add it to AppScope
+    // - add DownForMaintenanceWidget in builder of MaterialApp in app.dart
+    // Otherwise just delete this.
+
     return AppScope(
       env: env,
       appConfig: appConfig,
