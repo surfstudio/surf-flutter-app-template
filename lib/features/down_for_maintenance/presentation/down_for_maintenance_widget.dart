@@ -1,22 +1,22 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/features/down_by_maintenance/domain/entities/check_result.dart';
-import 'package:flutter_template/features/down_by_maintenance/presentation/down_by_maintenance_wm.dart';
+import 'package:flutter_template/features/down_for_maintenance/domain/entities/check_result.dart';
+import 'package:flutter_template/features/down_for_maintenance/presentation/down_for_maintenance_wm.dart';
 
 /// Widget that shows child widget if server works normally or shows placeholder if server is down.
-class DownByMaintenanceWidget extends ElementaryWidget<IDownByMaintenanceWM> {
+class DownForMaintenanceWidget extends ElementaryWidget<IDownForMaintenanceWM> {
   /// Child widget that will be shown if server works normally. Usually it is whole application, but
   /// you also can use it for some part of application (e.g. some feature).
   final Widget child;
 
   /// @nodoc
-  const DownByMaintenanceWidget({
+  const DownForMaintenanceWidget({
     required this.child,
     super.key,
-  }) : super(createDownByMaintenanceWM);
+  }) : super(defaultDownForMaintenanceWMFactory);
 
   @override
-  Widget build(IDownByMaintenanceWM wm) {
+  Widget build(IDownForMaintenanceWM wm) {
     return ValueListenableBuilder(
       valueListenable: wm.currentResult,
       builder: (_, status, __) => switch (status) {

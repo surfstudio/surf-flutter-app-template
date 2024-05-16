@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter_template/features/down_by_maintenance/domain/entities/check_result.dart';
-import 'package:flutter_template/features/down_by_maintenance/domain/services/check_server_status_service.dart';
+import 'package:flutter_template/features/down_for_maintenance/domain/entities/check_result.dart';
+import 'package:flutter_template/features/down_for_maintenance/domain/services/check_server_status_service.dart';
 
 /// Implementation of [ICheckServerStatusService] that uses Firebase Remote Config to check server status.
 class FirebaseCheckServerStatusService implements ICheckServerStatusService {
