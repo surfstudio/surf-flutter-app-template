@@ -72,7 +72,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get debugScreenProxyInfo => 'Активирует передачу через прокси сервер.';
 
   @override
-  String get debugScreenProxyEditTextLabel => 'Введите адресс прокси сервера';
+  String get debugScreenProxyEditTextLabel => 'Введите адрес прокси сервера';
 
   @override
   String get debugScreenProxyConnectButton => 'Подключить';
@@ -130,6 +130,12 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get uiKitScreenTetradicButtonSnackText => 'Tetradic Button Pressed';
+
+  @override
+  String get uiKitScreenSnackFromScaffoldMessengerText => 'Snack from ScaffoldMessenger';
+
+  @override
+  String get uiKitScreenSnackFromSnackQueueText => 'Snack from Snack Queue';
 
   @override
   String get uiKitScreenDangerSnackButtonText => 'Danger snack';
@@ -201,5 +207,5 @@ class AppLocalizationsRu extends AppLocalizations {
   String get uiKitScreenColorCardSkeletonTertiaryName => 'Skeleton Tertiary';
 
   @override
-  String get featureExampleFailedLoadIpMessage => 'Не удалось загрузить IP-адрес';
+  String get featureExampleFailedLoadIpMessage => 'Failed to load IP address';
 }

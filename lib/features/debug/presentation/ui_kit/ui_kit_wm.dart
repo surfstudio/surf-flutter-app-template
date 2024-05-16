@@ -5,6 +5,9 @@ import 'package:flutter_template/common/mixin/theme_wm_mixin.dart';
 import 'package:flutter_template/features/app/di/app_scope.dart';
 import 'package:flutter_template/features/debug/presentation/ui_kit/ui_kit_model.dart';
 import 'package:flutter_template/features/debug/presentation/ui_kit/ui_kit_screen.dart';
+import 'package:flutter_template/features/snack_queue/presentation/snack_message_type.dart';
+import 'package:flutter_template/features/snack_queue/presentation/snack_queue_controller.dart';
+import 'package:flutter_template/features/snack_queue/presentation/snack_queue_provider.dart';
 import 'package:flutter_template/features/theme_mode/presentation/theme_mode_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -12,10 +15,15 @@ import 'package:provider/provider.dart';
 UiKitWM uiKitScreenWMFactory(BuildContext context) {
   final appScope = context.read<IAppScope>();
   final scaffoldMessenger = ScaffoldMessenger.of(context);
+  final snackQueueController = SnackQueueProvider.of(context);
 
   final model = UiKitModel(logWriter: appScope.logger);
 
-  return UiKitWM(model, scaffoldMessenger: scaffoldMessenger);
+  return UiKitWM(
+    model,
+    scaffoldMessenger: scaffoldMessenger,
+    snackQueueController: snackQueueController,
+  );
 }
 
 /// Interface for [UiKitWM].
@@ -40,6 +48,12 @@ abstract interface class IUiKitWM with ILocalizationMixin, ThemeIModelMixin impl
 
   /// Callback of pressing the positive snack button.
   void onPositiveSnackButtonPressed();
+
+  /// Callback of pressing the danger snack button.
+  void onDangerSnackQueueButtonPressed();
+
+  /// Callback of pressing the positive snack button.
+  void onPositiveSnackQueueButtonPressed();
 }
 
 /// {@template ui_kit_widget_model.class}
@@ -47,12 +61,15 @@ abstract interface class IUiKitWM with ILocalizationMixin, ThemeIModelMixin impl
 /// {@endtemplate}
 class UiKitWM extends WidgetModel<UiKitScreen, UiKitModel> with LocalizationMixin, ThemeWMMixin implements IUiKitWM {
   final ScaffoldMessengerState _scaffoldMessenger;
+  final SnackQueueController _snackQueueController;
 
   /// {@macro ui_kit_widget_model.class}
   UiKitWM(
     super._model, {
     required ScaffoldMessengerState scaffoldMessenger,
-  }) : _scaffoldMessenger = scaffoldMessenger;
+    required SnackQueueController snackQueueController,
+  })  : _scaffoldMessenger = scaffoldMessenger,
+        _snackQueueController = snackQueueController;
 
   @override
   Future<void> switchTheme() => ThemeModeProvider.of(context).switchThemeMode();
@@ -100,6 +117,22 @@ class UiKitWM extends WidgetModel<UiKitScreen, UiKitModel> with LocalizationMixi
         ),
         backgroundColor: colorScheme.positive,
       ),
+    );
+  }
+
+  @override
+  void onDangerSnackQueueButtonPressed() {
+    _snackQueueController.addSnack(
+      l10n.uiKitScreenDangerSnackText,
+      messageType: SnackMessageType.error,
+    );
+  }
+
+  @override
+  void onPositiveSnackQueueButtonPressed() {
+    _snackQueueController.addSnack(
+      l10n.uiKitScreenPositiveSnackText,
+      messageType: SnackMessageType.success,
     );
   }
 }
