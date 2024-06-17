@@ -60,26 +60,6 @@ abstract class ColorPalette {
   /// https://www.color-name.com/hex/B5CCAE.
   static const lightGreen = Color(0xFFB5CCAE);
 
-  /// Dark Green
-  ///
-  /// https://www.color-name.com/hex/84A58F.
-  static const darkGreen = Color(0xFF84A58F);
-
-  /// Light Violet
-  ///
-  /// https://www.color-name.com/hex/74305B.
-  static const lightViolet = Color(0xFF74305B);
-
-  /// Violet
-  ///
-  /// https://www.color-name.com/hex/4A194E.
-  static const violet = Color(0xFF4A194E);
-
-  /// Green
-  ///
-  /// https://www.color-name.com/hex/83C000.
-  static const appleGreen = Color(0xFF83C000);
-
   /// Platinum
   ///
   /// https://www.color-name.com/hex/e7e4e0.
@@ -130,26 +110,6 @@ abstract class DarkColorPalette {
   ///
   /// https://www.color-name.com/hex/9CD29C.
   static const etonBlue = Color(0xFF9CD29C);
-
-  /// Russian Green
-  ///
-  /// https://www.color-name.com/hex/628B6E.
-  static const russianGreen = Color(0xFF628B6E);
-
-  /// Plum
-  ///
-  /// https://www.color-name.com/hex/9E478B.
-  static const plum = Color(0xFF9E478B);
-
-  /// Brown Chocolate
-  ///
-  /// https://www.color-name.com/hex/561E43.
-  static const brownChocolate = Color(0xFF561E43);
-
-  /// Vivid Lime Green
-  ///
-  /// https://www.color-name.com/hex/9ECF00.
-  static const vividLimeGreen = Color(0xFF9ECF00);
 
   /// White
   ///
