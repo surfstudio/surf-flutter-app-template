@@ -12,7 +12,7 @@ const _skeletonOpacity = 0.06;
 /// Use case:
 ///
 /// ```dart
-/// final colorScheme = CyberdomColorScheme.of(context);
+/// final colorScheme = AppColorScheme.of(context);
 ///
 /// return Container(color: colorScheme.primary);
 /// ```
