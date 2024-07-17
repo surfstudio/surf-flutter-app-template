@@ -19,7 +19,6 @@ dependencies:
     sdk: flutter
   flutter_secure_storage: 9.0.0
   flutter_svg: 2.0.9
-  freezed: 2.4.7
   freezed_annotation: 2.4.1
   fresh_dio: 0.4.1
   intl: 0.18.1
@@ -36,6 +35,7 @@ dependencies:
   shimmer: 3.0.0
   surf_logger: 2.0.0
   surf_widget_test_composer: 0.0.2
+  theme_tailor_annotation: 3.0.1
   union_state: 0.0.1
 
 dev_dependencies:
@@ -46,6 +46,7 @@ dev_dependencies:
   flutter_native_splash: 2.3.9
   flutter_test:
     sdk: flutter
+  freezed: 2.4.7
   golden_toolkit: 0.15.0
   json_serializable: 6.7.1
   mocktail: 1.0.3
@@ -53,6 +54,7 @@ dev_dependencies:
   spider: 4.2.2
   surf_dcm_presets: 0.0.2
   surf_lint_rules: 3.0.0
+  theme_tailor: 3.0.1
 
 environment:
     sdk: '>=3.2.5 <4.0.0'

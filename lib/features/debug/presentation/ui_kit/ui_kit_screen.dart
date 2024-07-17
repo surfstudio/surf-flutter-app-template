@@ -170,7 +170,7 @@ class _ColorGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = AppColorScheme.of(context);
+    final colorScheme = context.appColorScheme;
     final l10n = context.l10n;
     const crossAxisCount = 2;
 
@@ -293,7 +293,7 @@ class _ColorCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = AppColorScheme.of(context);
+    final colorScheme = context.appColorScheme;
 
     return Card(
       color: color,
