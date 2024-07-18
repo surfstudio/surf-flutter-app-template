@@ -22,7 +22,7 @@ dependencies:
   freezed: 2.4.7
   freezed_annotation: 2.4.1
   fresh_dio: 0.4.1
-  intl: 0.18.1
+  intl:
   json_annotation: 4.8.1
   logger: 1.4.0
   mask_text_input_formatter: 2.9.0
