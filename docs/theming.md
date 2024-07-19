@@ -8,15 +8,17 @@ By raw resources, we mean raw colors, fonts or assets.
 For example:
 
 ```dart
+part of 'app_color_scheme.dart';
+
 abstract class ColorPalette {
-    static const egyptianBlue = Color(0xFF1245AA);
-    static const venetianRed = Color(0xFFCC1512);
+    static const _egyptianBlue = Color(0xFF1245AA);
+    static const _venetianRed = Color(0xFFCC1512);
     // etc...
 }
 ```
 
 > [!WARNING]
-> You **should not** use these colors directly in your application. Use it in `ThemeData` or `ThemeExtension` instead.
+> You **should not** use these colors directly in your application. Use it in `ThemeExtension` instead.
 
 ## ThemeData
 
@@ -45,6 +47,8 @@ Read more [here](https://api.flutter.dev/flutter/material/ThemeData-class.html).
 Meanwhile `ThemeData` defines theme only for material widgets, `ThemeExtension` allows you to define theme with custom fields for your custom widgets.
 
 ```dart
+part 'color_palette.dart';
+
 @immutable
 class AppColorScheme extends ThemeExtension<AppColorScheme> {
   final Color primary;
@@ -54,17 +58,17 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
   // etc...
 
   AppColorScheme.light()
-      : primary = LightColorPalette.someColor,
-      : onPrimary = LightColorPalette.otherColor,
-      : dangerBg = LightColorPalette.someRed,
-      : dangerFg = LightColorPalette.white,
+      : primary = LightColorPalette._someColor,
+      : onPrimary = LightColorPalette._otherColor,
+      : dangerBg = LightColorPalette._someRed,
+      : dangerFg = LightColorPalette._white,
   // etc.
 
   AppColorScheme.dark()
-      : primary = DarkColorPalette.someColor,
-      : onPrimary = DarkColorPalette.otherColor,
-      : dangerBg = DarkColorPalette.someRed,
-      : dangerFg = DarkColorPalette.white,
+      : primary = DarkColorPalette._someColor,
+      : onPrimary = DarkColorPalette._otherColor,
+      : dangerBg = DarkColorPalette._someRed,
+      : dangerFg = DarkColorPalette._white,
   // etc.
 
   const AppColorScheme._({

@@ -1,6 +1,7 @@
 // ignore_for_file: avoid-non-null-assertion, prefer-correct-callback-field-name
 import 'package:flutter/material.dart';
-import 'package:flutter_template/uikit/colors/color_palette.dart';
+
+part 'color_palette.dart';
 
 const _skeletonOpacity = 0.06;
 
@@ -11,7 +12,7 @@ const _skeletonOpacity = 0.06;
 /// Use case:
 ///
 /// ```dart
-/// final colorScheme = CyberdomColorScheme.of(context);
+/// final colorScheme = AppColorScheme.of(context);
 ///
 /// return Container(color: colorScheme.primary);
 /// ```
@@ -133,65 +134,65 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
 
   /// Base light theme version.
   AppColorScheme.light()
-      : primary = ColorPalette.purple,
-        onPrimary = ColorPalette.white,
-        secondary = ColorPalette.greenYellow,
-        onSecondary = ColorPalette.chineseBlack,
-        surface = ColorPalette.white,
-        surfaceSecondary = ColorPalette.cultured,
-        onSurface = ColorPalette.chineseBlack,
-        background = ColorPalette.cultured,
-        backgroundSecondary = ColorPalette.darkScarlet,
-        backgroundTertiary = ColorPalette.cultured,
-        onBackground = ColorPalette.chineseBlack,
-        onBackgroundSecondary = ColorPalette.white,
-        danger = ColorPalette.folly,
-        dangerSecondary = ColorPalette.vividRaspberry,
-        onDanger = ColorPalette.white,
-        textField = ColorPalette.chineseBlack,
-        textFieldLabel = ColorPalette.black,
-        textFieldHelper = ColorPalette.black,
-        frameTextFieldSecondary = ColorPalette.chineseBlack,
-        inactive = ColorPalette.black,
-        positive = ColorPalette.greenYellow,
-        onPositive = ColorPalette.chineseBlack,
-        skeletonPrimary = ColorPalette.black.withOpacity(_skeletonOpacity),
-        skeletonOnPrimary = ColorPalette.white,
-        skeletonSecondary = ColorPalette.cultured,
-        skeletonTertiary = ColorPalette.lightSilver,
-        tetradicBackground = ColorPalette.lightGreen,
-        shimmer = ColorPalette.platinum;
+      : primary = ColorPalette._purple,
+        onPrimary = ColorPalette._white,
+        secondary = ColorPalette._greenYellow,
+        onSecondary = ColorPalette._chineseBlack,
+        surface = ColorPalette._white,
+        surfaceSecondary = ColorPalette._cultured,
+        onSurface = ColorPalette._chineseBlack,
+        background = ColorPalette._cultured,
+        backgroundSecondary = ColorPalette._darkScarlet,
+        backgroundTertiary = ColorPalette._cultured,
+        onBackground = ColorPalette._chineseBlack,
+        onBackgroundSecondary = ColorPalette._white,
+        danger = ColorPalette._folly,
+        dangerSecondary = ColorPalette._vividRaspberry,
+        onDanger = ColorPalette._white,
+        textField = ColorPalette._chineseBlack,
+        textFieldLabel = ColorPalette._black,
+        textFieldHelper = ColorPalette._black,
+        frameTextFieldSecondary = ColorPalette._chineseBlack,
+        inactive = ColorPalette._black,
+        positive = ColorPalette._greenYellow,
+        onPositive = ColorPalette._chineseBlack,
+        skeletonPrimary = ColorPalette._black.withOpacity(_skeletonOpacity),
+        skeletonOnPrimary = ColorPalette._white,
+        skeletonSecondary = ColorPalette._cultured,
+        skeletonTertiary = ColorPalette._lightSilver,
+        tetradicBackground = ColorPalette._lightGreen,
+        shimmer = ColorPalette._platinum;
 
   /// Base dark theme version.
   AppColorScheme.dark()
-      : primary = DarkColorPalette.hanPurple,
-        onPrimary = DarkColorPalette.white,
-        secondary = DarkColorPalette.inchworm,
-        onSecondary = DarkColorPalette.black,
-        surface = DarkColorPalette.raisinBlack,
-        surfaceSecondary = DarkColorPalette.raisinBlack,
-        onSurface = DarkColorPalette.white,
-        background = DarkColorPalette.raisinBlack,
-        backgroundSecondary = DarkColorPalette.maroon,
-        backgroundTertiary = DarkColorPalette.raisinBlack,
-        onBackground = DarkColorPalette.white,
-        onBackgroundSecondary = DarkColorPalette.white,
-        danger = DarkColorPalette.brinkPink,
-        dangerSecondary = DarkColorPalette.cyclamen,
-        onDanger = DarkColorPalette.white,
-        textField = DarkColorPalette.lightSilver,
-        textFieldLabel = DarkColorPalette.white,
-        textFieldHelper = DarkColorPalette.black,
-        frameTextFieldSecondary = DarkColorPalette.lightSilver,
-        inactive = DarkColorPalette.black,
-        positive = DarkColorPalette.inchworm,
-        onPositive = DarkColorPalette.black,
-        skeletonPrimary = DarkColorPalette.black.withOpacity(_skeletonOpacity),
-        skeletonOnPrimary = DarkColorPalette.white,
-        skeletonSecondary = DarkColorPalette.raisinBlack,
-        skeletonTertiary = DarkColorPalette.lightSilver,
-        tetradicBackground = DarkColorPalette.etonBlue,
-        shimmer = ColorPalette.platinum;
+      : primary = DarkColorPalette._hanPurple,
+        onPrimary = DarkColorPalette._white,
+        secondary = DarkColorPalette._inchworm,
+        onSecondary = DarkColorPalette._black,
+        surface = DarkColorPalette._raisinBlack,
+        surfaceSecondary = DarkColorPalette._raisinBlack,
+        onSurface = DarkColorPalette._white,
+        background = DarkColorPalette._raisinBlack,
+        backgroundSecondary = DarkColorPalette._maroon,
+        backgroundTertiary = DarkColorPalette._raisinBlack,
+        onBackground = DarkColorPalette._white,
+        onBackgroundSecondary = DarkColorPalette._white,
+        danger = DarkColorPalette._brinkPink,
+        dangerSecondary = DarkColorPalette._cyclamen,
+        onDanger = DarkColorPalette._white,
+        textField = DarkColorPalette._lightSilver,
+        textFieldLabel = DarkColorPalette._white,
+        textFieldHelper = DarkColorPalette._black,
+        frameTextFieldSecondary = DarkColorPalette._lightSilver,
+        inactive = DarkColorPalette._black,
+        positive = DarkColorPalette._inchworm,
+        onPositive = DarkColorPalette._black,
+        skeletonPrimary = DarkColorPalette._black.withOpacity(_skeletonOpacity),
+        skeletonOnPrimary = DarkColorPalette._white,
+        skeletonSecondary = DarkColorPalette._raisinBlack,
+        skeletonTertiary = DarkColorPalette._lightSilver,
+        tetradicBackground = DarkColorPalette._etonBlue,
+        shimmer = ColorPalette._platinum;
 
   const AppColorScheme._({
     required this.primary,
