@@ -18,7 +18,7 @@ class Shimmer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = AppColorScheme.of(context);
+    final colorScheme = context.appColorScheme;
 
     return ConditionalWrapper(
       condition: loading,

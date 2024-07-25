@@ -1,6 +1,8 @@
 // ignore_for_file: avoid-non-null-assertion, prefer-correct-callback-field-name
 import 'package:flutter/material.dart';
-import 'package:flutter_template/uikit/colors/color_palette.dart';
+import 'package:theme_tailor_annotation/theme_tailor_annotation.dart';
+
+part 'app_color_scheme.tailor.dart';
 
 const _skeletonOpacity = 0.06;
 
@@ -16,13 +18,16 @@ const _skeletonOpacity = 0.06;
 /// return Container(color: colorScheme.primary);
 /// ```
 @immutable
-class AppColorScheme extends ThemeExtension<AppColorScheme> {
+@TailorMixin(themeGetter: ThemeGetter.onBuildContext)
+class AppColorScheme extends ThemeExtension<AppColorScheme> with _$AppColorSchemeTailorMixin {
   /// Base branding color for the app.
   ///
   /// Can be used as an accent color for buttons, switches, labels, icons, etc.
+  @override
   final Color primary;
 
   /// The color of the text on [primary].
+  @override
   final Color onPrimary;
 
   /// Secondary branding color for the app.
@@ -30,50 +35,61 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
   /// Can be used as an accent color for buttons, switches, labels, icons, etc.
   ///
   /// Complements [primary] color.
+  @override
   final Color secondary;
 
   /// The color of the text on [secondary].
+  @override
   final Color onSecondary;
 
   /// Surface color.
   ///
   /// Usually, the background color of cards, alerts, dialogs, bottom sheets, etc
   /// is considered a surface.
+  @override
   final Color surface;
 
   /// Secondary surface color.
   ///
   /// Usually, the background color of cards, alerts, dialogs, bottom sheets, etc
   /// is considered a surface.
+  @override
   final Color surfaceSecondary;
 
   /// The color of the text on [surface].
+  @override
   final Color onSurface;
 
   /// Background color.
   ///
   /// Usually refers to the general background of the screen.
+  @override
   final Color background;
 
   /// Secondary background color.
   ///
   /// Usually refers to the general background of the screen.
+  @override
   final Color backgroundSecondary;
 
   /// Tertiary background color.
   ///
   /// Usually refers to the general background of the screen.
+  @override
   final Color backgroundTertiary;
 
   /// Tetradic background color.
   ///
   /// Usually refers to the general background of the screen.
+  @override
   final Color tetradicBackground;
 
   /// The color of the text on [background].
+  @override
   final Color onBackground;
 
   /// The color of the text on [background]. Muted version.
+  @override
   final Color onBackgroundSecondary;
 
   /// Color of danger.
@@ -81,6 +97,7 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
   /// Commonly used to display errors.
   ///
   /// Can be used as an accent color for text/background of an error message/destructive button.
+  @override
   final Color danger;
 
   /// Secondary color of danger.
@@ -88,112 +105,65 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
   /// Commonly used to display errors.
   ///
   /// Can be used as an accent color for text/background of an error message/destructive button.
+  @override
   final Color dangerSecondary;
 
   /// The color of the text on [danger].
+  @override
   final Color onDanger;
 
   /// Color of text in text field.
+  @override
   final Color textField;
 
   /// Color of label in text field.
+  @override
   final Color textFieldLabel;
 
   /// Color of helper text in text field.
+  @override
   final Color textFieldHelper;
 
   /// Color of border and cursor in text field.
+  @override
   final Color frameTextFieldSecondary;
 
   /// Color of inactive elements.
+  @override
   final Color inactive;
 
   /// Positive color.
   ///
   /// Typically used for informational success messages.
+  @override
   final Color positive;
 
   /// The color of the text on [positive].
+  @override
   final Color onPositive;
 
   /// Primary skeleton color.
+  @override
   final Color skeletonPrimary;
 
   /// The color of the text on [skeletonPrimary].
+  @override
   final Color skeletonOnPrimary;
 
   /// Secondary skeleton color.
+  @override
   final Color skeletonSecondary;
 
   /// Tertiary skeleton color.
+  @override
   final Color skeletonTertiary;
 
   /// The color of the shimmer.
+  @override
   final Color shimmer;
 
-  /// Base light theme version.
-  AppColorScheme.light()
-      : primary = ColorPalette.purple,
-        onPrimary = ColorPalette.white,
-        secondary = ColorPalette.greenYellow,
-        onSecondary = ColorPalette.chineseBlack,
-        surface = ColorPalette.white,
-        surfaceSecondary = ColorPalette.cultured,
-        onSurface = ColorPalette.chineseBlack,
-        background = ColorPalette.cultured,
-        backgroundSecondary = ColorPalette.darkScarlet,
-        backgroundTertiary = ColorPalette.cultured,
-        onBackground = ColorPalette.chineseBlack,
-        onBackgroundSecondary = ColorPalette.white,
-        danger = ColorPalette.folly,
-        dangerSecondary = ColorPalette.vividRaspberry,
-        onDanger = ColorPalette.white,
-        textField = ColorPalette.chineseBlack,
-        textFieldLabel = ColorPalette.black,
-        textFieldHelper = ColorPalette.black,
-        frameTextFieldSecondary = ColorPalette.chineseBlack,
-        inactive = ColorPalette.black,
-        positive = ColorPalette.greenYellow,
-        onPositive = ColorPalette.chineseBlack,
-        skeletonPrimary = ColorPalette.black.withOpacity(_skeletonOpacity),
-        skeletonOnPrimary = ColorPalette.white,
-        skeletonSecondary = ColorPalette.cultured,
-        skeletonTertiary = ColorPalette.lightSilver,
-        tetradicBackground = ColorPalette.lightGreen,
-        shimmer = ColorPalette.platinum;
-
-  /// Base dark theme version.
-  AppColorScheme.dark()
-      : primary = DarkColorPalette.hanPurple,
-        onPrimary = DarkColorPalette.white,
-        secondary = DarkColorPalette.inchworm,
-        onSecondary = DarkColorPalette.black,
-        surface = DarkColorPalette.raisinBlack,
-        surfaceSecondary = DarkColorPalette.raisinBlack,
-        onSurface = DarkColorPalette.white,
-        background = DarkColorPalette.raisinBlack,
-        backgroundSecondary = DarkColorPalette.maroon,
-        backgroundTertiary = DarkColorPalette.raisinBlack,
-        onBackground = DarkColorPalette.white,
-        onBackgroundSecondary = DarkColorPalette.white,
-        danger = DarkColorPalette.brinkPink,
-        dangerSecondary = DarkColorPalette.cyclamen,
-        onDanger = DarkColorPalette.white,
-        textField = DarkColorPalette.lightSilver,
-        textFieldLabel = DarkColorPalette.white,
-        textFieldHelper = DarkColorPalette.black,
-        frameTextFieldSecondary = DarkColorPalette.lightSilver,
-        inactive = DarkColorPalette.black,
-        positive = DarkColorPalette.inchworm,
-        onPositive = DarkColorPalette.black,
-        skeletonPrimary = DarkColorPalette.black.withOpacity(_skeletonOpacity),
-        skeletonOnPrimary = DarkColorPalette.white,
-        skeletonSecondary = DarkColorPalette.raisinBlack,
-        skeletonTertiary = DarkColorPalette.lightSilver,
-        tetradicBackground = DarkColorPalette.etonBlue,
-        shimmer = ColorPalette.platinum;
-
-  const AppColorScheme._({
+  /// @nodoc
+  const AppColorScheme({
     required this.primary,
     required this.onPrimary,
     required this.secondary,
@@ -224,110 +194,65 @@ class AppColorScheme extends ThemeExtension<AppColorScheme> {
     required this.shimmer,
   });
 
-  @override
-  ThemeExtension<AppColorScheme> copyWith({
-    Color? primary,
-    Color? onPrimary,
-    Color? secondary,
-    Color? onSecondary,
-    Color? surface,
-    Color? surfaceSecondary,
-    Color? onSurface,
-    Color? background,
-    Color? backgroundSecondary,
-    Color? backgroundTertiary,
-    Color? onBackground,
-    Color? onBackgroundSecondary,
-    Color? danger,
-    Color? dangerSecondary,
-    Color? onDanger,
-    Color? textField,
-    Color? textFieldLabel,
-    Color? textFieldHelper,
-    Color? frameTextFieldSecondary,
-    Color? inactive,
-    Color? positive,
-    Color? onPositive,
-    Color? skeletonPrimary,
-    Color? skeletonOnPrimary,
-    Color? skeletonSecondary,
-    Color? skeletonTertiary,
-    Color? tetradicBackground,
-    Color? shimmer,
-  }) {
-    return AppColorScheme._(
-      primary: primary ?? this.primary,
-      onPrimary: onPrimary ?? this.onPrimary,
-      secondary: secondary ?? this.secondary,
-      onSecondary: onSecondary ?? this.onSecondary,
-      surface: surface ?? this.surface,
-      surfaceSecondary: surfaceSecondary ?? this.surfaceSecondary,
-      onSurface: onSurface ?? this.onSurface,
-      background: background ?? this.background,
-      backgroundSecondary: backgroundSecondary ?? this.backgroundSecondary,
-      backgroundTertiary: backgroundTertiary ?? this.backgroundTertiary,
-      onBackground: onBackground ?? this.onBackground,
-      onBackgroundSecondary: onBackgroundSecondary ?? this.onBackgroundSecondary,
-      danger: danger ?? this.danger,
-      dangerSecondary: dangerSecondary ?? this.dangerSecondary,
-      onDanger: onDanger ?? this.onDanger,
-      textField: textField ?? this.textField,
-      textFieldLabel: textFieldLabel ?? this.textFieldLabel,
-      textFieldHelper: textFieldHelper ?? this.textFieldHelper,
-      frameTextFieldSecondary: frameTextFieldSecondary ?? this.frameTextFieldSecondary,
-      inactive: inactive ?? this.inactive,
-      positive: positive ?? this.positive,
-      onPositive: onPositive ?? this.onPositive,
-      skeletonPrimary: skeletonPrimary ?? this.skeletonPrimary,
-      skeletonOnPrimary: skeletonOnPrimary ?? this.skeletonOnPrimary,
-      skeletonSecondary: skeletonSecondary ?? this.skeletonSecondary,
-      skeletonTertiary: skeletonTertiary ?? this.skeletonTertiary,
-      tetradicBackground: tetradicBackground ?? this.tetradicBackground,
-      shimmer: shimmer ?? this.shimmer,
-    );
-  }
+  /// Base light theme version.
+  AppColorScheme.light()
+      : primary = const Color(0xFF9824F2),
+        onPrimary = const Color(0xFFFFFFFF),
+        secondary = const Color(0xFFBEFF3D),
+        onSecondary = const Color(0xFF171717),
+        surface = const Color(0xFFFFFFFF),
+        surfaceSecondary = const Color(0xFFF6F6F6),
+        onSurface = const Color(0xFF171717),
+        background = const Color(0xFFF6F6F6),
+        backgroundSecondary = const Color(0xFF7B0008),
+        backgroundTertiary = const Color(0xFFF6F6F6),
+        onBackground = const Color(0xFF171717),
+        onBackgroundSecondary = const Color(0xFFFFFFFF),
+        danger = const Color(0xFFFF004D),
+        dangerSecondary = const Color(0xFFFF176B),
+        onDanger = const Color(0xFFFFFFFF),
+        textField = const Color(0xFF171717),
+        textFieldLabel = const Color(0xFF000000),
+        textFieldHelper = const Color(0xFF000000),
+        frameTextFieldSecondary = const Color(0xFF171717),
+        inactive = const Color(0xFF000000),
+        positive = const Color(0xFFBEFF3D),
+        onPositive = const Color(0xFF171717),
+        skeletonPrimary = Colors.black.withOpacity(_skeletonOpacity),
+        skeletonOnPrimary = const Color(0xFFFFFFFF),
+        skeletonSecondary = const Color(0xFFF6F6F6),
+        skeletonTertiary = const Color(0xFFD6D6D6),
+        tetradicBackground = const Color(0xFFB5CCAE),
+        shimmer = const Color(0xFFE7E4E0);
 
-  @override
-  ThemeExtension<AppColorScheme> lerp(
-    ThemeExtension<AppColorScheme>? other,
-    double t,
-  ) {
-    if (other is! AppColorScheme) {
-      return this;
-    }
-
-    return AppColorScheme._(
-      primary: Color.lerp(primary, other.primary, t)!,
-      onPrimary: Color.lerp(onPrimary, other.onPrimary, t)!,
-      secondary: Color.lerp(secondary, other.secondary, t)!,
-      onSecondary: Color.lerp(onSecondary, other.onSecondary, t)!,
-      surface: Color.lerp(surface, other.surface, t)!,
-      surfaceSecondary: Color.lerp(surfaceSecondary, other.surfaceSecondary, t)!,
-      onSurface: Color.lerp(onSurface, other.onSurface, t)!,
-      background: Color.lerp(background, other.background, t)!,
-      backgroundSecondary: Color.lerp(backgroundSecondary, other.backgroundSecondary, t)!,
-      backgroundTertiary: Color.lerp(backgroundTertiary, other.backgroundTertiary, t)!,
-      onBackground: Color.lerp(onBackground, other.onBackground, t)!,
-      onBackgroundSecondary: Color.lerp(onBackgroundSecondary, other.onBackgroundSecondary, t)!,
-      danger: Color.lerp(danger, other.danger, t)!,
-      dangerSecondary: Color.lerp(dangerSecondary, other.dangerSecondary, t)!,
-      onDanger: Color.lerp(onDanger, other.onDanger, t)!,
-      textField: Color.lerp(textField, other.textField, t)!,
-      textFieldLabel: Color.lerp(textFieldLabel, other.textFieldLabel, t)!,
-      textFieldHelper: Color.lerp(textFieldHelper, other.textFieldHelper, t)!,
-      frameTextFieldSecondary: Color.lerp(frameTextFieldSecondary, other.frameTextFieldSecondary, t)!,
-      inactive: Color.lerp(inactive, other.inactive, t)!,
-      positive: Color.lerp(positive, other.positive, t)!,
-      onPositive: Color.lerp(onPositive, other.onPositive, t)!,
-      skeletonPrimary: Color.lerp(skeletonPrimary, other.skeletonPrimary, t)!,
-      skeletonOnPrimary: Color.lerp(skeletonOnPrimary, other.skeletonOnPrimary, t)!,
-      skeletonSecondary: Color.lerp(skeletonSecondary, other.skeletonSecondary, t)!,
-      skeletonTertiary: Color.lerp(skeletonTertiary, other.skeletonTertiary, t)!,
-      tetradicBackground: Color.lerp(tetradicBackground, other.tetradicBackground, t)!,
-      shimmer: Color.lerp(shimmer, other.shimmer, t)!,
-    );
-  }
-
-  /// Returns [AppColorScheme] from [context].
-  static AppColorScheme of(BuildContext context) => Theme.of(context).extension<AppColorScheme>()!;
+  /// Base dark theme version.
+  AppColorScheme.dark()
+      : primary = const Color(0xFF6D38FF),
+        onPrimary = const Color(0xFFFFFFFF),
+        secondary = const Color(0xFFC6FF57),
+        onSecondary = const Color(0xFF000000),
+        surface = const Color(0xFF222222),
+        surfaceSecondary = const Color(0xFF222222),
+        onSurface = const Color(0xFFFFFFFF),
+        background = const Color(0xFF222222),
+        backgroundSecondary = const Color(0xFF7B0008),
+        backgroundTertiary = const Color(0xFF222222),
+        onBackground = const Color(0xFFFFFFFF),
+        onBackgroundSecondary = const Color(0xFFFFFFFF),
+        danger = const Color(0xFFFF607D),
+        dangerSecondary = const Color(0xFFFF79A8),
+        onDanger = const Color(0xFFFFFFFF),
+        textField = const Color(0xFFD6D6D6),
+        textFieldLabel = const Color(0xFFFFFFFF),
+        textFieldHelper = const Color(0xFF000000),
+        frameTextFieldSecondary = const Color(0xFFD6D6D6),
+        inactive = const Color(0xFF000000),
+        positive = const Color(0xFFC6FF57),
+        onPositive = const Color(0xFF000000),
+        skeletonPrimary = Colors.black.withOpacity(_skeletonOpacity),
+        skeletonOnPrimary = const Color(0xFFFFFFFF),
+        skeletonSecondary = const Color(0xFF222222),
+        skeletonTertiary = const Color(0xFFD6D6D6),
+        tetradicBackground = const Color(0xFF9CD29C),
+        shimmer = const Color(0xFFE7E4E0);
 }

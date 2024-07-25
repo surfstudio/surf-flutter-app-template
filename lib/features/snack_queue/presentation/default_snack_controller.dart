@@ -20,8 +20,8 @@ class DefaultSnackController {
     required EasyDialogAnimationConfiguration animationConfiguration,
     Duration? autoHideDuration,
   }) {
-    final colorScheme = AppColorScheme.of(context);
-    final textScheme = AppTextScheme.of(context);
+    final colorScheme = context.appColorScheme;
+    final textScheme = context.appTextScheme;
     final topPadding = MediaQuery.of(context).viewPadding.top;
     return FlutterEasyDialogs.show(
       EasyDialog.positioned(

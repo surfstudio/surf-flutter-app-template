@@ -18,8 +18,8 @@ mixin ThemeWMMixin<W extends ElementaryWidget, M extends ElementaryModel> on Wid
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _colorScheme = AppColorScheme.of(context);
-    _textScheme = AppTextScheme.of(context);
+    _colorScheme = context.appColorScheme;
+    _textScheme = context.appTextScheme;
   }
 }
 
